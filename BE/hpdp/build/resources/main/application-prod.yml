@@ -1,6 +1,0 @@
-#spring default setting
-spring:
-  datasource:
-#    url: jdbc:mysql://localhost:3306/hpdp?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true
-#    username: ssafy
-#    password: ssafy
