@@ -1,0 +1,24 @@
+@import "Style";
+
+.topbar {
+  h1 {
+    font-family: $GamjaFlower;
+    text-align: start;
+    padding-left: 3vw;
+    margin: 1vh 0 1vh 0;
+  }
+  border-bottom: 1px solid $black;
+}
+
+input {
+  display: block;
+  margin: 10vh auto 10vh auto;
+}
+
+#loginbtn {
+  background-color: $hotPink;
+  border-radius: 30px;
+  width: 80%;
+  height: 4vh;
+  color: $white;
+}
