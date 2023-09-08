@@ -1,11 +1,9 @@
-import React from 'react';
-
 const LogInPage = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return (
+    <div id="loginPage">
+      <div className="topbar"></div>
+    </div>
+  );
 };
 
 export default LogInPage;
