@@ -1,3 +1,4 @@
+import LogInPage from "./pages/LogInPage";
 import "./styles/css/App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -7,7 +8,7 @@ function App() {
       <Router>
         <Routes>
           {/* <Route path="/" Component={??Page}></Route> */}
-          <Route></Route>
+          <Route path="/login" Component={LogInPage}></Route>
           <Route></Route>
           <Route></Route>
           <Route></Route>
