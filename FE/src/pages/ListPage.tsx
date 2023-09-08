@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FundingListPage = () => {
+const ListPage = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const FundingListPage = () => {
     );
 };
 
-export default FundingListPage;
+export default ListPage;
