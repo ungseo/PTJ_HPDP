@@ -1,6 +1,6 @@
 import React from 'react';
 import HomeBanner from '../components/HomeBanner';
-import FundingCard from '../components/FundingCard';
+import FundingCardList from '../components/FundingCardList';
 
 const HomePage = () => {
     return (
@@ -8,12 +8,12 @@ const HomePage = () => {
             <p>한푼두푼</p>
             <HomeBanner/>
             <div>
-                펀딩추천1
-                <FundingCard/>
+                <h3>펀딩추천1</h3>
+                <FundingCardList/>
             </div>
             <div>
-                펀딩추천2
-                <FundingCard/>
+                <h3>펀딩추천2</h3>
+                <FundingCardList/>
             </div>            
         </div>
     );
