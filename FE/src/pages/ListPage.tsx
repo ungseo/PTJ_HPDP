@@ -1,9 +1,7 @@
+import React from "react";
+
 const ListPage = () => {
-  return (
-    <div>
-      <h1>ListPage</h1>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default ListPage;
