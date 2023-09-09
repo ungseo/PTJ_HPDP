@@ -1,6 +1,12 @@
+// App.tsx
+
 import "./styles/css/App.css";
-import HomePage from "./pages/HomePage";
 import { Routes, Route } from 'react-router-dom'
+import NavigationBar from "./components/NavigationBar";
+import HomePage from "./pages/HomePage";
+import ListPage from "./pages/ListPage";
+import NotificationPage from "./pages/NotificationPage";
+import ProfilePage from "./pages/ProfilePage";
 import LogInPage from "./pages/LogInPage";
 
 function App() {
@@ -8,13 +14,13 @@ function App() {
     <div className="App">
       <Routes>
         {/* <Route path="/" Component={??Page}></Route> */}
-        <Route path="/login" Component={LogInPage}></Route>
         <Route path="/" Component={HomePage}></Route>
-        <Route></Route>
-        <Route></Route>
-        <Route></Route>
-        <Route></Route>
+        <Route path="/list" Component={ListPage}></Route>
+        <Route path="/notification" Component={NotificationPage}></Route>
+        <Route path="/profile" Component={ProfilePage}></Route>
+        <Route path="/login" Component={LogInPage}></Route>
       </Routes>
+      <NavigationBar></NavigationBar>
     </div>
   );
 }
