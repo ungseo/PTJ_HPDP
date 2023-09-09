@@ -1,10 +1,16 @@
 @import "Style";
 
-input {
-  display: block;
-  margin: 10vh auto 10vh auto;
-}
-
-button {
-  background-color: $hotPink;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5vh;
+  .htag {
+    margin-right: auto;
+    margin-left: 10%;
+  }
+  .inputbox {
+    height: 3vh;
+    width: 80%;
+  }
 }

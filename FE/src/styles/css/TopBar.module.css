@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "GamjaFlower";
+  src: url("../fonts/GamjaFlower-Regular.ttf") format("truetype");
+}
+.logoTopbar {
+  display: flex;
+  height: 10vh;
+  border-bottom: 1px solid #000000;
+}
+.logoTopbar .logoName {
+  font-family: "GamjaFlower";
+  color: #000000;
+}
+
+.optionTopbar {
+  display: flex;
+  height: 10vh;
+  border-bottom: 1px solid #000000;
+  justify-content: space-between;
+  align-items: center;
+}
+.optionTopbar .leftCpnt {
+  display: flex;
+  align-items: center;
+}
+.optionTopbar .leftCpnt .backBtn {
+  background-image: url("/public/buttons/backButton.png");
+  width: 1.5vw;
+  height: 3.5vh;
+  background-size: cover;
+  background-color: #ffffff;
+  border: none;
+}
+.optionTopbar .searchBtn {
+  width: 10%;
+  height: 45%;
+  background-image: url("/public/buttons/searchButton.png");
+  background-size: 70%;
+  background-position: center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  padding: 3px;
+  margin-right: 5px;
+}
+
+/*# sourceMappingURL=TopBar.module.css.map */

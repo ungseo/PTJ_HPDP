@@ -2,27 +2,19 @@
   font-family: "GamjaFlower";
   src: url("../fonts/GamjaFlower-Regular.ttf") format("truetype");
 }
-.topbar {
-  border-bottom: 1px solid #000000;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5vh;
 }
-.topbar h1 {
-  font-family: "GamjaFlower";
-  text-align: start;
-  padding-left: 3vw;
-  margin: 1vh 0 1vh 0;
+.wrapper .htag {
+  margin-right: auto;
+  margin-left: 10%;
 }
-
-input {
-  display: block;
-  margin: 10vh auto 10vh auto;
-}
-
-#loginbtn {
-  background-color: #fb788e;
-  border-radius: 30px;
+.wrapper .inputbox {
   width: 80%;
-  height: 4vh;
-  color: #ffffff;
+  height: 3vh;
 }
 
 /*# sourceMappingURL=LoginPage.module.css.map */

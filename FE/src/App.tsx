@@ -8,6 +8,7 @@ import ListPage from "./pages/ListPage";
 import NotificationPage from "./pages/NotificationPage";
 import ProfilePage from "./pages/ProfilePage";
 import LogInPage from "./pages/LogInPage";
+import SignUpPage from "./pages/SignUpPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/notification" Component={NotificationPage}></Route>
         <Route path="/profile" Component={ProfilePage}></Route>
         <Route path="/login" Component={LogInPage}></Route>
+        <Route path="/signup" Component={SignUpPage}></Route>
       </Routes>
       <NavigationBar></NavigationBar>
     </div>

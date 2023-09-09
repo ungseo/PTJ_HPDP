@@ -2,13 +2,19 @@
   font-family: "GamjaFlower";
   src: url("../fonts/GamjaFlower-Regular.ttf") format("truetype");
 }
-input {
-  display: block;
-  margin: 10vh auto 10vh auto;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5vh;
 }
-
-button {
-  background-color: #fb788e;
+.wrapper .htag {
+  margin-right: auto;
+  margin-left: 10%;
+}
+.wrapper .inputbox {
+  height: 3vh;
+  width: 80%;
 }
 
 /*# sourceMappingURL=SignUpPage.module.css.map */
