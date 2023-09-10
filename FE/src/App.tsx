@@ -9,6 +9,8 @@ import NotificationPage from "./pages/NotificationPage";
 import ProfilePage from "./pages/ProfilePage";
 import LogInPage from "./pages/LogInPage";
 import SignUpPage from "./pages/SignUpPage";
+import SearchResultPage from "./pages/SearchResultPage";
+import PageNotFound404 from "./pages/PageNotFound404";
 
 function App() {
   return (
@@ -21,6 +23,9 @@ function App() {
         <Route path="/profile" Component={ProfilePage}></Route>
         <Route path="/login" Component={LogInPage}></Route>
         <Route path="/signup" Component={SignUpPage}></Route>
+        <Route path="/search/:keyword" Component={SearchResultPage}></Route>
+        <Route path="/search/:keyword" Component={SearchResultPage}></Route>
+        <Route path="*" Component={PageNotFound404}></Route>
       </Routes>
       <NavigationBar></NavigationBar>
     </div>

@@ -2,8 +2,11 @@
 
 .logoTopbar {
   display: flex;
-  height: 10vh;
+  height: 8vh;
   border-bottom: 1px solid $black;
+  position: sticky;
+  top: 0;
+  z-index: 5;
   .logoName {
     font-family: $GamjaFlower;
     color: $black;
@@ -12,16 +15,19 @@
 
 .optionTopbar {
   display: flex;
-  height: 10vh;
+  height: 8vh;
   border-bottom: 1px solid $black;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 5;
   .leftCpnt {
     display: flex;
     align-items: center;
     .backBtn {
       background-image: url("/public/buttons/backButton.png");
-      width: 1.5vw;
+      width: 2vw;
       height: 3.5vh;
       background-size: cover;
       background-color: $white;
@@ -31,13 +37,7 @@
   .searchBtn {
     width: 10%;
     height: 45%;
-    background-image: url("/public/buttons/searchButton.png");
-    background-size: 70%;
-    background-position: center;
-    background-color: transparent;
-    background-repeat: no-repeat;
     border: none;
     padding: 3px;
-    margin-right: 5px;
   }
 }

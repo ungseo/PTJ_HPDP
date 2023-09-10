@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import style from "../../styles/css/TopBar.module.css";
-
+import SearchButton from "./SearchButton";
+import { useSelector } from "react-redux";
+import styleInterface from "../../interface/styleInterface";
 const LogoTopbar = () => {
   return (
     <div className={style.logoTopbar}>
@@ -11,20 +13,24 @@ const LogoTopbar = () => {
 };
 
 const OptionTopbar = ({ text }: { text: string }) => {
+  const isFocused = useSelector((state: any) => state.ui.focusOnSearchButton);
   const navigate = useNavigate();
   const goBackHandler = () => {
     navigate(-1);
   };
-  const goSearchHandler = () => {
-    navigate("/search");
-  };
+  const styled: styleInterface = isFocused ? { visibility: "hidden" } : {};
+  console.log(isFocused);
+
   return (
     <div className={style.optionTopbar}>
-      <div className={style.leftCpnt}>
+      <div className={style.leftCpnt} style={styled}>
         <button className={style.backBtn} onClick={goBackHandler}></button>
         <h2>{text}</h2>
       </div>
-      <button className={style.searchBtn} onClick={goSearchHandler}></button>
+      {/* <button className={style.searchBtn} onClick={goSearchHandler}></button>*/}
+      <div className={style.searchBtn}>
+        <SearchButton />
+      </div>
     </div>
   );
 };
