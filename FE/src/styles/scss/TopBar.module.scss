@@ -2,20 +2,24 @@
 
 .logoTopbar {
   display: flex;
-  height: 8vh;
+  height: 7vh;
   border-bottom: 1px solid $black;
   position: sticky;
   top: 0;
   z-index: 5;
+  .logo {
+    padding: 0.5em;
+  }
   .logoName {
     font-family: $GamjaFlower;
     color: $black;
+    margin: auto 0 auto;
   }
 }
 
 .optionTopbar {
   display: flex;
-  height: 8vh;
+  height: 7vh;
   border-bottom: 1px solid $black;
   justify-content: space-between;
   align-items: center;
@@ -27,17 +31,21 @@
     align-items: center;
     .backBtn {
       background-image: url("/public/buttons/backButton.png");
-      width: 2vw;
-      height: 3.5vh;
+      width: 1.5rem;
+      height: 1.5rem;
       background-size: cover;
       background-color: $white;
       border: none;
     }
   }
   .searchBtn {
-    width: 10%;
-    height: 45%;
+    width: 2rem;
+    height: 2rem;
     border: none;
     padding: 3px;
+    background-color: transparent;
+    background-image: url("/public/buttons/searchButton.png");
+    background-size: cover;
+    margin-right: 1rem;
   }
 }

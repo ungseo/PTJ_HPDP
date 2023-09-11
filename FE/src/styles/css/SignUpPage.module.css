@@ -5,17 +5,9 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 5vh;
 }
-.wrapper .htag {
-  margin-right: auto;
-  margin-left: 10%;
-}
-.wrapper .inputbox {
-  border: solid 1px black;
-  height: 3vh;
-  width: 80%;
+.wrapper .header {
+  text-align: start;
 }
 
 /*# sourceMappingURL=SignUpPage.module.css.map */

@@ -10,8 +10,8 @@ export default interface ButtonInterface {
 
 export interface InputInterface {
   id?: string;
+  type: string;
   value?: string;
-  placeholder?: string;
   onChange?: any;
   styles?: styleInterface;
   labelTitle: string | "";

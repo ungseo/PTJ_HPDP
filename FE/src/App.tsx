@@ -13,7 +13,7 @@ import SearchResultPage from "./pages/SearchResultPage";
 import PageNotFound404 from "./pages/PageNotFound404";
 import FundingDetailPage from "./pages/FundingDetailPage";
 import CompanyDetailPage from "./pages/CompanyDetailPage";
-
+import SearchPage from "./pages/SearchPage";
 function App() {
   return (
     <div className="App">
@@ -25,11 +25,12 @@ function App() {
         <Route path="/profile" Component={ProfilePage}></Route>
         <Route path="/login" Component={LogInPage}></Route>
         <Route path="/signup" Component={SignUpPage}></Route>
-        <Route path="/search/:keyword" Component={SearchResultPage}></Route>
+        <Route path="/search" Component={SearchPage}></Route>
         <Route path="/search/:keyword" Component={SearchResultPage}></Route>
         <Route path="*" Component={PageNotFound404}></Route>
         <Route path="/fundingdetail" Component={FundingDetailPage}></Route>
-        <Route path="/companydetail" Component={CompanyDetailPage}></Route>      </Routes>
+        <Route path="/companydetail" Component={CompanyDetailPage}></Route>{" "}
+      </Routes>
       <NavigationBar></NavigationBar>
     </div>
   );

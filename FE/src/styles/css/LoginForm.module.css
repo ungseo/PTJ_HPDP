@@ -1,0 +1,25 @@
+@font-face {
+  font-family: "GamjaFlower";
+  src: url("../fonts/GamjaFlower-Regular.ttf") format("truetype");
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form a {
+  margin: 0 0 2em auto;
+  color: #000000;
+  text-decoration: none;
+}
+.form a:hover {
+  color: #031888;
+}
+.form .Link {
+  font-size: 0.8em;
+  margin: 1em auto;
+  color: #000000;
+  text-decoration: underline;
+}
+
+/*# sourceMappingURL=LoginForm.module.css.map */

@@ -5,14 +5,12 @@
 .formControl {
   position: relative;
   margin: 1.25em 0;
-  width: 15rem;
-  border: solid 1px black;
+  width: 100%;
 }
-
 .formControl .inputBox {
   border: 0;
   border-bottom: 2px solid #333;
-  padding: 15px 0;
+  padding: 0.5em 0;
   display: block;
   font-size: 1.2em;
   font-family: "Muli", sans-serif;
@@ -20,29 +18,23 @@
   transition: 0.1s ease-in;
   border-radius: 0;
 }
-
-.formControl .inputBox:focus,
-.formControl .inputBox:valid {
+.formControl .inputBox:focus, .formControl .inputBox:valid {
   border-bottom-color: darksalmon;
   outline: none;
 }
-
-.formControl .inputBox:focus + .label .span,
-.formControl .inputBox:valid + .label .span {
+.formControl .inputBox:focus + .label .span, .formControl .inputBox:valid + .label .span {
   color: darksalmon;
   transform: translateY(-30px);
 }
-
 .formControl .label {
   position: absolute;
-  top: 0.9em;
+  top: 1em;
   left: 0;
 }
-
 .formControl .label .span {
   display: inline-block;
-  font-size: 1.2em;
-  min-width: 0.4em;
+  font-size: 1em;
+  min-width: 0.3em;
   transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 

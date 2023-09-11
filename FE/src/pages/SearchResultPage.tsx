@@ -1,6 +1,5 @@
 import CustomizedTabs from "../components/CustomizedTabs";
 import { OptionTopbar } from "../components/common/TopBar";
-import SearchButton from "../components/common/SearchButton";
 import { useParams } from "react-router";
 import FundingList from "../components/FundingList";
 import CompanyList from "../components/CompanyList";

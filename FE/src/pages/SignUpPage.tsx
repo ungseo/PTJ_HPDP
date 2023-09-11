@@ -1,28 +1,17 @@
-import { OptionTopbar } from "../components/common/TopBar";
-import DefaultButton from "../components/common/Buttons";
-import AnimationLabelInput from "../components/common/Inputs";
+import { LogoTopbar, OptionTopbar } from "../components/common/TopBar";
+import SignUpForm from "../components/signup/SignUpForm";
 import style from "../styles/css/SignUpPage.module.css";
 const SignUpPage = () => {
+  const onSubmit = (event: any) => {
+    event.preventDefault();
+    alert("회원가입 핸들러");
+  };
   return (
     <div>
-      <OptionTopbar text="뒤로가기" />
+      <LogoTopbar />
       <div className={style.wrapper}>
-        <h1 className={style.htag}>회원가입</h1>
-        <input className={style.inputbox} type="text" placeholder="id" />
-        <input className={style.inputbox} type="text" placeholder="name" />
-        <input className={style.inputbox} type="text" placeholder="password" />
-        <input className={style.inputbox} type="text" placeholder="pssword2" />
-        <input className={style.inputbox} type="text" placeholder="email" />
-        <input
-          className={style.inputbox}
-          type="text"
-          placeholder="phone number"
-        />
-        <AnimationLabelInput labelTitle={"Email"} />
-        <DefaultButton
-          text={"회원가입"}
-          styles={{ width: "80%", height: "70%" }}
-        />
+        <h1 className={style.header}>회원가입</h1>
+        <SignUpForm onSubmit={onSubmit} />
       </div>
     </div>
   );

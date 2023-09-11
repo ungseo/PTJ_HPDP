@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../scss/Style.scss","../scss/SignUpPage.module.scss"],"names":[],"mappings":"AAEA;EACE;EACA;;ACFF;EACE;EACA;EACA;EACA;;AACA;EACE;EACA;;AAEF;EACE;EACA;EACA","file":"SignUpPage.module.css"}
+{"version":3,"sourceRoot":"","sources":["../scss/Style.scss","../scss/SignUpPage.module.scss"],"names":[],"mappings":"AAEA;EACE;EACA;;ACFF;EACE;EACA;;AACA;EACE","file":"SignUpPage.module.css"}
