@@ -20,4 +20,5 @@ const DefaultButton = ({
     </button>
   );
 };
+
 export default DefaultButton;
