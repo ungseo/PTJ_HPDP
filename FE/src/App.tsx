@@ -12,6 +12,7 @@ import SignUpPage from "./pages/SignUpPage";
 import SearchResultPage from "./pages/SearchResultPage";
 import PageNotFound404 from "./pages/PageNotFound404";
 import FundingDetailPage from "./pages/FundingDetailPage";
+import CompanyDetailPage from "./pages/CompanyDetailPage";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         <Route path="/search/:keyword" Component={SearchResultPage}></Route>
         <Route path="*" Component={PageNotFound404}></Route>
         <Route path="/fundingdetail" Component={FundingDetailPage}></Route>
-      </Routes>
+        <Route path="/companydetail" Component={CompanyDetailPage}></Route>      </Routes>
       <NavigationBar></NavigationBar>
     </div>
   );
