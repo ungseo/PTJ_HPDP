@@ -1,0 +1,44 @@
+@import "Style";
+
+.formControl {
+  position: relative;
+  margin: 1.25em 0;
+  width: 15rem;
+  border: solid 1px black;
+}
+.formControl .inputBox {
+  border: 0;
+  border-bottom: 2px solid #333;
+  padding: 15px 0;
+  display: block;
+  font-size: 1.2em;
+  font-family: "Muli", sans-serif;
+  width: 100%;
+  transition: 0.1s ease-in;
+  border-radius: 0;
+}
+
+.formControl .inputBox:focus,
+.formControl .inputBox:valid {
+  border-bottom-color: darksalmon;
+  outline: none;
+}
+
+.formControl .inputBox:focus + .label .span,
+.formControl .inputBox:valid + .label .span {
+  color: darksalmon;
+  transform: translateY(-30px);
+}
+
+.formControl .label {
+  position: absolute;
+  top: 0.9em;
+  left: 0;
+}
+
+.formControl .label .span {
+  display: inline-block;
+  font-size: 1.2em;
+  min-width: 0.4em;
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}

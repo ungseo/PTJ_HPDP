@@ -1,5 +1,6 @@
 import { OptionTopbar } from "../components/common/TopBar";
 import DefaultButton from "../components/common/Buttons";
+import AnimationLabelInput from "../components/common/Inputs";
 import style from "../styles/css/SignUpPage.module.css";
 const SignUpPage = () => {
   return (
@@ -17,6 +18,7 @@ const SignUpPage = () => {
           type="text"
           placeholder="phone number"
         />
+        <AnimationLabelInput labelTitle={"Email"} />
         <DefaultButton
           text={"회원가입"}
           styles={{ width: "80%", height: "70%" }}
