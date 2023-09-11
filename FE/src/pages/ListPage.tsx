@@ -11,6 +11,7 @@ const ListPage = () => {
 
   return (
     <div>
+      한푼두푼
       <CustomizedTabs tabProps={tabProps} />
     </div>
   )
