@@ -10,6 +10,7 @@ import ProfilePage from "./pages/ProfilePage";
 import LogInPage from "./pages/LogInPage";
 import SignUpPage from "./pages/SignUpPage";
 import FundingDetailPage from "./pages/FundingDetailPage";
+import CompanyDetailPage from "./pages/CompanyDetailPage";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
         <Route path="/login" Component={LogInPage}></Route>
         <Route path="/signup" Component={SignUpPage}></Route>
         <Route path="/fundingdetail" Component={FundingDetailPage}></Route>
-      </Routes>
+        <Route path="/companydetail" Component={CompanyDetailPage}></Route>      </Routes>
       <NavigationBar></NavigationBar>
     </div>
   );
