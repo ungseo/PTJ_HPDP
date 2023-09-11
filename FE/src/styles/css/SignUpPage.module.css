@@ -13,6 +13,7 @@
   margin-left: 10%;
 }
 .wrapper .inputbox {
+  border: solid 1px black;
   height: 3vh;
   width: 80%;
 }

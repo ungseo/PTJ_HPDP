@@ -1,0 +1,16 @@
+.total {
+  display: flex;
+  margin: 2rem;
+}
+
+.leftimg {
+  height: 10vw;
+  width: 10vw;
+  background-color: gray;
+}
+
+.rightcontent {
+  margin: 1rem;
+}
+
+/*# sourceMappingURL=FundingItem.module.css.map */
