@@ -4,10 +4,19 @@ server:
 
 ---
 # logging
+#logging:
+#  level:
+#    org.hibernate: debug
+#    com.stn.hpdp: debug
+
 logging:
   level:
-    org.hibernate: debug
-    com.stn.hpdp: debug
+    root: info
+    org:
+      springframework:
+        boot : info
+        security : DEBUG
+        web : info
 
 ---
 #spring default setting
@@ -22,6 +31,7 @@ spring:
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
+    defer-datasource-initialization : true
     hibernate:
       ddl-auto: create
     properties:
@@ -42,5 +52,6 @@ management:
 
   sql:
     init:
-      mode: never
+      mode: always
+      data-locations: classpath:/data.sql
 
