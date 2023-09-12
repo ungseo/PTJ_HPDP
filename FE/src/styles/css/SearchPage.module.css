@@ -1,9 +1,0 @@
-@font-face {
-  font-family: "GamjaFlower";
-  src: url("../fonts/GamjaFlower-Regular.ttf") format("truetype");
-}
-#searchPage h1 {
-  text-align: start;
-}
-
-/*# sourceMappingURL=SearchPage.module.css.map */
