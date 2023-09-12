@@ -1,0 +1,10 @@
+@import "Style";
+
+.profileItemList {
+  .item {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: solid 1px lightgray;
+  }
+}

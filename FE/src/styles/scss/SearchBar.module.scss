@@ -1,0 +1,21 @@
+@import "Style";
+
+.searchBar {
+  position: relative;
+  margin-top: 2rem;
+
+  .input {
+    height: 3em;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    background-color: lightgray;
+    padding: 0;
+  }
+  .img {
+    position: absolute;
+    top: 0.5em;
+    right: 2rem;
+    width: 2rem;
+  }
+}

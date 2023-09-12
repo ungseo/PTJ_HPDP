@@ -2,9 +2,6 @@ import { LogoTopbar } from "../components/common/TopBar";
 import style from "../styles/css/LoginPage.module.css";
 import LoginForm from "../components/login/LoginForm";
 const LogInPage = () => {
-  const loginHandler = () => {
-    alert("Login 핸들러");
-  };
   return (
     <div className="loginPage">
       <LogoTopbar />

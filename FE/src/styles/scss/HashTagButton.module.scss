@@ -1,0 +1,11 @@
+@import "Style";
+
+.button {
+  height: 3em;
+  background-color: $sinhanBlue;
+  color: $white;
+  border-radius: 30px;
+  border: none;
+  margin: 0.5em 1em;
+  padding: 0.5em;
+}
