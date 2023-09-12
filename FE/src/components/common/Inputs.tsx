@@ -1,12 +1,37 @@
-import InputInterface from "../../interface/commonInterface";
+import { InputInterface } from "../../interface/commonInterface";
+import style from "../../styles/css/Inputs.module.css";
 
-const DefaultInputs = ({
+const AnimationLabelInput = ({
   value,
-  placeholder,
   onChange,
   id,
+  styles,
+  labelTitle,
+  type,
 }: InputInterface) => {
-  return <input type="text" />;
+  return (
+    <div className={style.formControl} style={styles}>
+      <input
+        className={style.inputBox}
+        type={type}
+        value={value}
+        onChange={onChange}
+        id={id}
+        required
+      />
+      <label className={style.label}>
+        {labelTitle.split("").map((letter, idx) => (
+          <span
+            className={style.span}
+            key={idx}
+            style={{ transitionDelay: `${idx * 50}ms` }}
+          >
+            {letter}
+          </span>
+        ))}
+      </label>
+    </div>
+  );
 };
 
-export default DefaultInputs;
+export default AnimationLabelInput;

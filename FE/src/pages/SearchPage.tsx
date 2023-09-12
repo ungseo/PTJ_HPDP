@@ -1,11 +1,6 @@
-import React from 'react';
-
+import style from "../styles/css/SearchPage.module.css";
 const SearchPage = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return <div id={style.searchPage}></div>;
 };
 
 export default SearchPage;

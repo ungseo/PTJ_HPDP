@@ -3,14 +3,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 5vh;
-  .htag {
-    margin-right: auto;
-    margin-left: 10%;
-  }
-  .inputbox {
-    width: 80%;
-    height: 3vh;
+  .header {
+    text-align: start;
   }
 }

@@ -1,7 +1,3 @@
-# Gradle
-.idea/**/gradle.xml
-.idea/**/libraries
-
 ### Intellij made it ###
 HELP.md
 .gradle
@@ -9,6 +5,21 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### Spring Boot ###
+**/application-env.yml
 
 ### IntelliJ IDEA ###
 .idea
@@ -21,6 +32,14 @@ out/
 
 # IntelliJ
 out/
+
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+
+### Intellij ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
 .idea/**/workspace.xml
@@ -44,27 +63,6 @@ out/
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
-# SonarLint plugin
-.idea/sonarlint/
-
-### log files ###
-**/*.gz
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
-### local ###
-**/src/main/resources/application-env.yml
-
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -75,13 +73,5 @@ bin/
 ### VS Code ###
 .vscode/
 
-### macOS Patch ###
-# iCloud generated files
-*.icloud
-
-### macOS ###
-# General
-.DS_Store
-.AppleDouble
-.LSOverride
-
+### log files ###
+**/*.gz
