@@ -1,0 +1,23 @@
+@import "Style";
+
+.mywallet {
+  background-color: $pastelPink;
+  border-radius: 15px;
+  padding: 1em;
+  p {
+    margin: 0;
+  }
+  .title {
+    text-align: start;
+    font-size: 1.5em;
+  }
+  .point {
+    text-align: end;
+    font-size: 3em;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+}
