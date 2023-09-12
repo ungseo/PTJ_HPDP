@@ -7,6 +7,7 @@ const DefaultButton = ({
   onClick,
   id,
   styles,
+  type,
 }: ButtonInterface) => {
   return (
     <button
@@ -15,6 +16,7 @@ const DefaultButton = ({
       onClick={onClick}
       disabled={disabled}
       style={styles}
+      type={type}
     >
       {text}
     </button>

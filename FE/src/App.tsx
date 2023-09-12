@@ -1,6 +1,6 @@
 // App.tsx
 
-import "./styles/css/App.css";
+import style from "./styles/css/App.module.css";
 import { Routes, Route } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import HomePage from "./pages/HomePage";
@@ -16,7 +16,7 @@ import CompanyDetailPage from "./pages/CompanyDetailPage";
 import SearchPage from "./pages/SearchPage";
 function App() {
   return (
-    <div className="App">
+    <div className={style.App}>
       <Routes>
         {/* <Route path="/" Component={??Page}></Route> */}
         <Route path="/" Component={HomePage}></Route>
@@ -31,7 +31,10 @@ function App() {
         <Route path="/fundingdetail" Component={FundingDetailPage}></Route>
         <Route path="/companydetail" Component={CompanyDetailPage}></Route>{" "}
       </Routes>
-      <NavigationBar></NavigationBar>
+      <div className={style.blank}></div>
+      <div className={style.navBar}>
+        <NavigationBar />
+      </div>
     </div>
   );
 }

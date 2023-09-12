@@ -1,15 +1,15 @@
-import * as React from 'react';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import FolderIcon from '@mui/icons-material/Folder';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import * as React from "react";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import FolderIcon from "@mui/icons-material/Folder";
+import RestoreIcon from "@mui/icons-material/Restore";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function NavigationBar() {
-  const [value, setValue] = React.useState('home');
+  const [value, setValue] = React.useState("home");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -18,17 +18,13 @@ export default function NavigationBar() {
   const navigate = useNavigate();
 
   return (
-    <BottomNavigation
-      sx={{ width: 500 }}
-      value={value}
-      onChange={handleChange}
-    >
+    <BottomNavigation value={value} onChange={handleChange}>
       <BottomNavigationAction
         label="Home"
         value="home"
         icon={<RestoreIcon />}
         onClick={() => {
-            navigate("/")
+          navigate("/");
         }}
       />
       <BottomNavigationAction
@@ -36,7 +32,7 @@ export default function NavigationBar() {
         value="list"
         icon={<FavoriteIcon />}
         onClick={() => {
-            navigate("/list")
+          navigate("/list");
         }}
       />
       <BottomNavigationAction
@@ -44,7 +40,7 @@ export default function NavigationBar() {
         value="notification"
         icon={<LocationOnIcon />}
         onClick={() => {
-            navigate("/notification")
+          navigate("/notification");
         }}
       />
       <BottomNavigationAction
@@ -52,7 +48,7 @@ export default function NavigationBar() {
         value="profile"
         icon={<FolderIcon />}
         onClick={() => {
-            navigate("/profile")
+          navigate("/profile");
         }}
       />
     </BottomNavigation>
