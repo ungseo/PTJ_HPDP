@@ -4,11 +4,6 @@ server:
 
 ---
 # logging
-#logging:
-#  level:
-#    org.hibernate: debug
-#    com.stn.hpdp: debug
-
 logging:
   level:
     root: info
@@ -33,7 +28,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     defer-datasource-initialization : true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         show_sql: true

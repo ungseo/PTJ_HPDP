@@ -46,8 +46,8 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/h2-console/**"
-                ,"/favicon.ico"
+        return (web) -> web.ignoring().antMatchers(
+                "/favicon.ico"
                 ,"/error");
     }
 
@@ -76,11 +76,8 @@ public class SecurityConfig {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/members/signIn").permitAll()
-                .antMatchers("/api/members/authenticate").permitAll()
-                .antMatchers("/api/members/signUp").permitAll()
-                .antMatchers("/api/members/signOut").permitAll()
-
+//                .antMatchers("/api/*").permitAll()
+                .antMatchers("/api/members/*").permitAll()
                 .anyRequest().authenticated()
 
                 .and()

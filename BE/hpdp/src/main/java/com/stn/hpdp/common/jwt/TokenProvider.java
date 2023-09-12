@@ -1,5 +1,6 @@
 package com.stn.hpdp.common.jwt;
 
+import com.stn.hpdp.common.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -20,6 +21,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
+
+import static com.stn.hpdp.common.exception.ErrorCode.NOT_LOGIN_UNAUTHORIZED;
+import static com.stn.hpdp.common.exception.ErrorCode.TOKEN_BAD_REQUEST;
 
 @Component
 @Slf4j

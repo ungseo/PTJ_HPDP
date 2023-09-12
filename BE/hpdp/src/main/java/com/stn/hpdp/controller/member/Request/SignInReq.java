@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SingInReq {
+public class SignInReq {
     @NotNull
     @Size(min = 3, max = 50)
     private String loginId;
