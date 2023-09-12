@@ -1,9 +1,54 @@
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+
+### Intellij made it ###
 HELP.md
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# IntelliJ
+out/
+
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# AWS User-specific
+.idea/**/aws.xml
+
+# Generated files
+.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# SonarLint plugin
+.idea/sonarlint/
+
+### log files ###
+**/*.gz
 
 ### STS ###
 .apt_generated
@@ -20,15 +65,6 @@ bin/
 ### local ###
 **/src/main/resources/application-env.yml
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -38,4 +74,14 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### macOS Patch ###
+# iCloud generated files
+*.icloud
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
 
