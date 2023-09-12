@@ -6,6 +6,7 @@ export default interface ButtonInterface {
   onClick?: any;
   id?: string;
   styles?: styleInterface;
+  type?: "button" | "reset" | "submit" | undefined;
 }
 
 export interface InputInterface {

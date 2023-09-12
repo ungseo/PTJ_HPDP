@@ -9,6 +9,7 @@
   position: sticky;
   top: 0;
   z-index: 5;
+  background-color: #ffffff;
 }
 .logoTopbar .logo {
   padding: 0.5em;
@@ -28,6 +29,7 @@
   position: sticky;
   top: 0;
   z-index: 5;
+  background-color: #ffffff;
 }
 .optionTopbar .leftCpnt {
   display: flex;

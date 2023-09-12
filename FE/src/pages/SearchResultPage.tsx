@@ -5,13 +5,14 @@ import FundingList from "../components/FundingList";
 import CompanyList from "../components/CompanyList";
 const SearchResultPage = () => {
   const { keyword } = useParams();
+  console.log(keyword);
   const tabProps = {
     후원: <FundingList />,
     기업: <CompanyList />,
   };
   return (
     <div id="searchResultPage">
-      <OptionTopbar text="" />
+      <OptionTopbar text={`검색결과: ${keyword}`} />
       <CustomizedTabs tabProps={tabProps} />
     </div>
   );

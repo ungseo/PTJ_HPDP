@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../scss/Style.scss"],"names":[],"mappings":"AAEA;EACE;EACA","file":"SearchPage.module.css"}
+{"version":3,"sourceRoot":"","sources":["../scss/Style.scss","../scss/SearchPage.module.scss"],"names":[],"mappings":"AAEA;EACE;EACA;;ACDA;EACE","file":"SearchPage.module.css"}
