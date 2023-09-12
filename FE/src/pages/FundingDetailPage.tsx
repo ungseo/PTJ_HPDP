@@ -2,10 +2,11 @@ import React, { useState } from "react";
 
 import CustomizedTabs from '../components/CustomizedTabs';
 
-import FundingIntroduce from '../components/FundingIntroduce';
-import FundingSituation from '../components/FundingSituation';
-import BottomSheet from "../components/BottomSheet";
-import FundingComplete from "../components/FundingComplete";
+import FundingIntroduce from '../components/fundingdetail/FundingIntroduce';
+import FundingSituation from '../components/fundingdetail/FundingSituation';
+import BottomSheet from "../components/fundingdetail/BottomSheet";
+import FundingComplete from "../components/fundingdetail/FundingComplete";
+import FundingDetailTop from "../components/fundingdetail/FundingDetailTop";
 
 import DefaultButtons from "../components/common/Buttons";
 
@@ -20,26 +21,24 @@ const FundingDetailPage = () => {
         '소식': <FundingSituation />
       }
 
-      const FundingHandler = () => {
-        if(isBottomSheetOpen){
-            setIsBottomSheetOpen(false);
-            setIsFundingCompleteOpen(true);
+    const FundingHandler = () => {
+      if(isBottomSheetOpen){
+        setIsBottomSheetOpen(false);
+        setIsFundingCompleteOpen(true);
 
-            setTimeout(() => {
-                setIsFundingCompleteOpen(false);
-            }, 2000);
+        setTimeout(() => {
+          setIsFundingCompleteOpen(false);
+          }, 2000);
         }
-        else{
-            setIsBottomSheetOpen(true);
+      else{
+        setIsBottomSheetOpen(true);
         }
     };
 
     
     return (
         <>
-        <div style={{height:"15rem", backgroundColor:"pink"}}>
-            회사프로필 이미지, 회사이름 (배경은 이미지)
-        </div>
+        <FundingDetailTop />
         <CustomizedTabs tabProps={tabProps} /> 
         {isBottomSheetOpen && 
             <BottomSheet 

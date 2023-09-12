@@ -1,0 +1,42 @@
+.total {
+    height: 30vh;
+    background-color: #f37878;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+}
+
+.upsection{
+    display: flex;
+    align-items: center;
+}
+
+.upimg{
+    height: 2rem;
+    width: 2rem;
+    background-color: #969696;
+    border-radius: 50px;
+    margin-top: 0;
+}
+
+.companyname{
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+.downsection{
+    display: flex;
+
+}
+
+.fundingtitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
