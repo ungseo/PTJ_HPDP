@@ -10,7 +10,7 @@ const LogInPage = () => {
         <h1 className={style.header}>로그인</h1>
         <LoginForm />
       </div>
-      <AscendingNumber num={"1832029"} />
+      <AscendingNumber num={550112313424624626} />
     </div>
   );
 };
