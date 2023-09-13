@@ -17,7 +17,7 @@ import SearchPage from "./pages/SearchPage";
 import ProfileEditPage from "./pages/ProfileEditPage";
 function App() {
   return (
-    <div className={style.App}>
+    <div id="app-root" className={style.App}>
       <Routes>
         {/* <Route path="/" Component={??Page}></Route> */}
         <Route path="/" Component={HomePage}></Route>

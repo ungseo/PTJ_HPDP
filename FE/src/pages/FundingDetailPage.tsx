@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import CustomizedTabs from "../components/CustomizedTabs";
 import FundingIntroduce from "../components/fundingdetail/FundingIntroduce";
@@ -14,11 +14,20 @@ const FundingDetailPage = () => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
   const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
-
+  
   const tabProps = {
     소개: <FundingIntroduce />,
     소식: <FundingSituation />,
   };
+
+
+  useEffect(() => {
+    if (isFundingCompleteOpen) {
+      document.body.classList.add(style.bodyWithModalOpen);
+    } else {
+      document.body.classList.remove(style.bodyWithModalOpen);
+    }
+  }, [isFundingCompleteOpen]);
 
   const FundingHandler = () => {
     if (isBottomSheetOpen) {
@@ -38,20 +47,22 @@ const FundingDetailPage = () => {
       <FundingDetailTop />
       <CustomizedTabs tabProps={tabProps} />
       {isBottomSheetOpen && (
+        <>
+        <div className={style.bottomsheetarea}></div>
         <BottomSheet
           setIsBottomSheetOpen={setIsBottomSheetOpen}
           handleDonationAmount={setDonationAmount}
         />
+        </>
       )}
       {isFundingCompleteOpen && (
-        <FundingComplete donationAmount={donationAmount} />
+        <>
+          <div className={style.modalBackground}></div>
+          <FundingComplete donationAmount={donationAmount} />
+        </>
       )}
 
       <div className={style.fixedButton}>
-        {/* <DefaultButtons
-            text="후원하기"
-            onClick={FundingHandler}
-          /> */}
         <div className={style.fundingBtn} onClick={FundingHandler}>
           후원하기
         </div>
