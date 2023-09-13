@@ -3,12 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const uiSlice = createSlice({
   name: "ui",
   initialState: {
-    focusOnSearchButton: false,
+    isEditPage: false,
   },
   reducers: {
     //함수 작성
-    searchButtonFocusedToggler(state) {
-      state.focusOnSearchButton = !state.focusOnSearchButton;
+    notInEditPage(state) {
+      state.isEditPage = false;
+    },
+    inEditPage(state) {
+      state.isEditPage = true;
     },
   },
 });
