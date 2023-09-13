@@ -4,8 +4,8 @@ const userSlice = createSlice({
   name: "ui",
   initialState: {
     isLogined: true,
-    userId: "",
-    token: "",
+    userId: "1",
+    token: "asdfadsfadfasfsafa",
   },
   reducers: {
     //함수 작성

@@ -14,6 +14,7 @@ import PageNotFound404 from "./pages/PageNotFound404";
 import FundingDetailPage from "./pages/FundingDetailPage";
 import CompanyDetailPage from "./pages/CompanyDetailPage";
 import SearchPage from "./pages/SearchPage";
+import ProfileEditPage from "./pages/ProfileEditPage";
 function App() {
   return (
     <div className={style.App}>
@@ -29,7 +30,8 @@ function App() {
         <Route path="/search/:keyword" Component={SearchResultPage}></Route>
         <Route path="*" Component={PageNotFound404}></Route>
         <Route path="/fundingdetail" Component={FundingDetailPage}></Route>
-        <Route path="/companydetail" Component={CompanyDetailPage}></Route>{" "}
+        <Route path="/companydetail" Component={CompanyDetailPage}></Route>
+        <Route path="/profile/edit/:userid" Component={ProfileEditPage}></Route>
       </Routes>
       <div className={style.blank}></div>
       <div className={style.navBar}>

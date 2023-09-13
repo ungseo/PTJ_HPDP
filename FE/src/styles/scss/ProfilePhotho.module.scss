@@ -1,8 +1,22 @@
 .profilePhoto {
   margin: 2rem 0;
-  .img {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 9999px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .photoWrapper {
+    width: auto;
+    position: relative;
+    .img {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 9999px;
+      background-color: lightgray;
+    }
+  }
+  .p {
+    display: flex;
+    align-items: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
 }
