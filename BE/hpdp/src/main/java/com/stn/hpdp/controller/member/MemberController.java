@@ -43,18 +43,16 @@ public class MemberController {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
-
-
     @PostMapping("/test-redirect")
     public void testRedirect(HttpServletResponse response) throws IOException {
         response.sendRedirect("/api/members");
     }
 
     @PostMapping // 회원 가입
-    public ApiResponse<Object> signup(@RequestBody SignUpReq signUpReq) {
+    public ApiResponse<Object> signUp(@RequestBody SignUpReq signUpReq) {
         log.info(logCurrent(getClassName(), getMethodName(), START));
         log.info(logCurrent(getClassName(), getMethodName(), END));
-        return ApiResponse.ok(memberService.signup(signUpReq));
+        return ApiResponse.ok(memberService.signUp(signUpReq));
     }
 
     @PostMapping("/login")
@@ -77,13 +75,13 @@ public class MemberController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('USER','ADMIN')") // 모든 권한이 조회 가능
-    public ApiResponse<Object> getMyUserInfo(HttpServletRequest request) {
-        return ApiResponse.ok(memberService.getMyUserWithAuthorities());
+    public ApiResponse<Object> getMemberInfo(HttpServletRequest request) {
+        return ApiResponse.ok(memberService.findMyUserWithAuthorities());
     }
 
     @GetMapping("/{memberId}")
     @PreAuthorize("hasAnyRole('ADMIN')") // admin 권한만 memberId 조회 가능
-    public ApiResponse<Object> getUserInfo(@PathVariable String memberId) {
-        return ApiResponse.ok(memberService.getUserWithAuthorities(memberId));
+    public ApiResponse<Object> getAllMemberInfo(@PathVariable String memberId) {
+        return ApiResponse.ok(memberService.findUserWithAuthorities(memberId));
     }
 }

@@ -3,6 +3,7 @@ package com.stn.hpdp.service.member;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.util.SecurityUtil;
 import com.stn.hpdp.controller.member.Request.SignUpReq;
+import com.stn.hpdp.controller.member.Response.SignInRes;
 import com.stn.hpdp.controller.member.Response.SignUpRes;
 import com.stn.hpdp.model.entity.Authority;
 import com.stn.hpdp.model.entity.Member;
@@ -27,14 +28,19 @@ public class MemberService {
     }
 
     @Transactional
-    public SignUpRes signup(SignUpReq signUpReq) {
+    public SignUpRes signUp(SignUpReq signUpReq) {
         if (memberRepository.findOneWithAuthoritiesByLoginId(signUpReq.getLoginId()).orElse(null) != null) {
             throw new CustomException(USER_ALREADY_EXIST);
         }
-
         Authority authority = Authority.builder()
                 .authorityName("ROLE_USER")
                 .build();
+
+        if(signUpReq.getRole() == 1) { // 관리자 권한 생성
+            authority = Authority.builder()
+                    .authorityName("ROLE_ADMIN")
+                    .build();
+        }
 
         Member member = Member.builder()
                 .loginId(signUpReq.getLoginId())
@@ -45,24 +51,16 @@ public class MemberService {
                 .phoneNumber(signUpReq.getPhoneNumber())
                 .address(signUpReq.getAddress())
                 .build();
-
-//        return memberRepository.save(member);
         return SignUpRes.from(memberRepository.save(member));
     }
 
     @Transactional(readOnly = true)
-    public Optional<Member> getUserWithAuthorities(String loginId) {
-        return memberRepository.findOneWithAuthoritiesByLoginId(loginId);
+    public SignInRes findUserWithAuthorities(String loginId) {
+        return SignInRes.from(memberRepository.findOneWithAuthoritiesByLoginId(loginId).orElse(null));
     }
-//    public SignUpReq getUserWithAuthorities(String loginId) {
-//        return SignUpReq.from(memberRepository.findOneWithAuthoritiesByLoginId(loginId).orElse(null));
-//    }
 
     @Transactional(readOnly = true)
-    public Optional<Member> getMyUserWithAuthorities() {
-        return SecurityUtil.getCurrentUsername().flatMap(memberRepository::findOneWithAuthoritiesByLoginId);
+    public SignInRes findMyUserWithAuthorities() {
+        return SignInRes.from(SecurityUtil.getCurrentUsername().flatMap(memberRepository::findOneWithAuthoritiesByLoginId).orElse(null));
     }
-//    public SignUpReq getMyUserWithAuthorities() {
-//        return SignUpReq.from(SecurityUtil.getCurrentUsername().flatMap(memberRepository::findOneWithAuthoritiesByLoginId).orElse(null));
-//    }
 }

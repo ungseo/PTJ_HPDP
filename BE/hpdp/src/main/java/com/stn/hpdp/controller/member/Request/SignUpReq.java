@@ -1,14 +1,11 @@
 package com.stn.hpdp.controller.member.Request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.stn.hpdp.controller.member.Response.AuthorityRes;
-import com.stn.hpdp.model.entity.Member;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Data
 @Getter
@@ -38,18 +35,6 @@ public class SignUpReq {
 
     private String address;
 
-//    private Set<AuthorityRes> authorityDtoSet;
-//
-//    public static SignUpReq from(Member member) {
-//        if(member == null) return null;
-//
-//        return SignUpReq.builder()
-//                .loginId(member.getLoginId())
-//                .name(member.getName())
-//                .authorityDtoSet(member.getAuthorities().stream()
-//                        .map(authority -> AuthorityRes.builder().authorityName(authority.getAuthorityName()).build())
-//                        .collect(Collectors.toSet()))
-//                .build();
-//    }
-
+    @ColumnDefault("0")
+    private int role;
 }
