@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
 import CustomizedTabs from "../components/CustomizedTabs";
-
 import FundingIntroduce from "../components/fundingdetail/FundingIntroduce";
 import FundingSituation from "../components/fundingdetail/FundingSituation";
 import BottomSheet from "../components/fundingdetail/BottomSheet";
 import FundingComplete from "../components/fundingdetail/FundingComplete";
 import FundingDetailTop from "../components/fundingdetail/FundingDetailTop";
 
-import DefaultButtons from "../components/common/Buttons";
+// import DefaultButtons from "../components/common/Buttons";
+import style from "../styles/css/FundingDetailPage.module.css";
 
 const FundingDetailPage = () => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
@@ -34,7 +34,7 @@ const FundingDetailPage = () => {
   };
 
   return (
-    <>
+    <div className={style.fundingdetailpage}>
       <FundingDetailTop />
       <CustomizedTabs tabProps={tabProps} />
       {isBottomSheetOpen && (
@@ -46,12 +46,17 @@ const FundingDetailPage = () => {
       {isFundingCompleteOpen && (
         <FundingComplete donationAmount={donationAmount} />
       )}
-      <DefaultButtons
-        text="후원하기"
-        onClick={FundingHandler}
-        styles={{ width: "80%", height: "70%" }}
-      />
-    </>
+
+      <div className={style.fixedButton}>
+        {/* <DefaultButtons
+            text="후원하기"
+            onClick={FundingHandler}
+          /> */}
+        <div className={style.fundingBtn} onClick={FundingHandler}>
+          후원하기
+        </div>
+      </div>
+    </div>
   );
 };
 

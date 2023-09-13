@@ -1,0 +1,27 @@
+@import "Style";
+
+.fundingdetail {
+  width: 100%;
+  z-index: 0;
+}
+
+.fixedButton {
+  position: fixed;
+  bottom: 4rem;
+  width: 100%;
+  height: 2rem;
+  max-width: 500px;
+
+  .fundingBtn {
+    background-color: $hotPink;
+    height: 2rem;
+    width: 80%;
+    border-radius: 30px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    z-index: 3;
+  }
+}
