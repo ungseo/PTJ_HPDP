@@ -1,0 +1,43 @@
+.total {
+    display: flex;
+  }
+
+  .backimg {
+    height: 10vw;
+    width: 100%;
+    background-color: red;
+  }
+
+    .topdiv {
+        height: 7.5vw;
+        display: flex;
+        background-color: aqua;
+    }
+
+        .topimg {
+            height: 7.5vw;
+            width: 7.5vw;
+            background-color: bisque;
+            margin: 0 2rem;
+        }
+
+        .topcontent {
+            text-align: start;
+        }
+
+    .botdiv {
+        height: 2.5vw;
+        display: flex;
+        background-color: aquamarine;
+    }
+
+        .botimg {
+            height: 2.5vw;
+            width: 7.5vw;
+            background-color: blueviolet;
+            margin: 0 2rem;
+        }
+
+        .botcontent {
+            text-align: start;
+        }
