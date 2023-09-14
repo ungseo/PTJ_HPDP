@@ -1,14 +1,22 @@
 .total {
   display: flex;
-  margin: 2rem;
+  margin-bottom: 1rem;
 }
 
 .leftimg {
-  height: 10vw;
-  width: 10vw;
+  width: 100%;
+  aspect-ratio: 1/1;
+  height: auto;
+  border-radius: 1rem;
   background-color: gray;
 }
 
 .rightcontent {
-  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 1rem;
+}
+.upcontent {
+  text-align: left;
 }
