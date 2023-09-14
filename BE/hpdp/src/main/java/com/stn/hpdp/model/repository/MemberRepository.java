@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    @EntityGraph(attributePaths = "authorities") // Eager 조회
-    Optional<Member> findOneWithAuthoritiesByLoginId(String loginId);
+    Optional<Member> findByLoginId(String loginId);
+    boolean existsByLoginId(String loginId);
 }

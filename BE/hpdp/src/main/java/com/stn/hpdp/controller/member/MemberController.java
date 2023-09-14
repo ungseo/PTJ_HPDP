@@ -1,87 +1,92 @@
 package com.stn.hpdp.controller.member;
 
 import com.stn.hpdp.common.ApiResponse;
-import com.stn.hpdp.common.jwt.JwtFilter;
-import com.stn.hpdp.common.jwt.TokenProvider;
+import com.stn.hpdp.common.exception.CustomException;
+import com.stn.hpdp.common.jwt.JwtTokenProvider;
+import com.stn.hpdp.controller.member.Request.ReissueReq;
 import com.stn.hpdp.controller.member.Request.SignInReq;
 import com.stn.hpdp.controller.member.Request.SignUpReq;
-import com.stn.hpdp.controller.member.Response.TokenRes;
 import com.stn.hpdp.service.member.MemberService;
 import io.swagger.annotations.Api;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.stn.hpdp.common.exception.ErrorCode.INVALID_FIELDS_REQUEST;
 import static com.stn.hpdp.common.util.LogCurrent.*;
 import static com.stn.hpdp.common.util.LogCurrent.END;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 
-@RestController
-@RequestMapping("/api/members")
-@Api
 @Slf4j
+@Api
+@RequiredArgsConstructor
+@RequestMapping("/api/members")
+@RestController
 public class MemberController {
+    private final JwtTokenProvider jwtTokenProvider;
     private final MemberService memberService;
-    private final TokenProvider tokenProvider;
-    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+//    @PostMapping("/test-redirect")
+//    public void testRedirect(HttpServletResponse response) throws IOException {
+//        response.sendRedirect("/api/members");
+//    }
 
-    public MemberController(MemberService memberService, TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
-        this.memberService = memberService;
-        this.tokenProvider = tokenProvider;
-        this.authenticationManagerBuilder = authenticationManagerBuilder;
-    }
-    @PostMapping("/test-redirect")
-    public void testRedirect(HttpServletResponse response) throws IOException {
-        response.sendRedirect("/api/members");
-    }
-
-    @PostMapping // 회원 가입
-    public ApiResponse<Object> signUp(@RequestBody SignUpReq signUpReq) {
-        log.info(logCurrent(getClassName(), getMethodName(), START));
-        log.info(logCurrent(getClassName(), getMethodName(), END));
-        return ApiResponse.ok(memberService.signUp(signUpReq));
+    @PostMapping
+    public ApiResponse<Object> signUp(@Validated @RequestBody SignUpReq signUpReq, Errors errors) {
+        // validation check
+        if (errors.hasErrors()) {
+            throw new CustomException(INVALID_FIELDS_REQUEST);
+        }
+        return memberService.signUp(signUpReq);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenRes> authorize(@RequestBody SignInReq singInReq) {
+    public ApiResponse<Object> login(@Validated @RequestBody SignInReq signInReq, HttpServletResponse response, Errors errors) {
+        // validation check
+        if (errors.hasErrors()) {
+            throw new CustomException(INVALID_FIELDS_REQUEST);
+        }
+        return memberService.signIn(signInReq, response);
+    }
+
+    @PostMapping("/regenerate")
+    public ApiResponse<Object> regenerate(@Validated @RequestBody ReissueReq reissueReq, HttpServletResponse response, Errors errors) {
+        // validation check
         log.info(logCurrent(getClassName(), getMethodName(), START));
-        UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(singInReq.getLoginId(), singInReq.getLoginPw());
-
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String jwt = tokenProvider.createToken(authentication);
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-
+        if (errors.hasErrors()) {
+            throw new CustomException(INVALID_FIELDS_REQUEST);
+        }
         log.info(logCurrent(getClassName(), getMethodName(), END));
-        return new ResponseEntity<>(new TokenRes(jwt), httpHeaders, HttpStatus.OK);
+        return memberService.regenerate(reissueReq, response);
     }
 
-    @GetMapping
-    @PreAuthorize("hasAnyRole('USER','ADMIN')") // 모든 권한이 조회 가능
-    public ApiResponse<Object> getMemberInfo(HttpServletRequest request) {
-        return ApiResponse.ok(memberService.findMyUserWithAuthorities());
+    @PostMapping("/logout")
+    public ApiResponse<Object> logout(HttpServletRequest request) {
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+        return memberService.signOut(request);
     }
 
-    @GetMapping("/{memberId}")
-    @PreAuthorize("hasAnyRole('ADMIN')") // admin 권한만 memberId 조회 가능
-    public ApiResponse<Object> getAllMemberInfo(@PathVariable String memberId) {
-        return ApiResponse.ok(memberService.findUserWithAuthorities(memberId));
+    @GetMapping("/authority")
+    public ApiResponse<Object> authority() {
+        log.info("ADD ROLE_ADMIN");
+        return memberService.authority();
+    }
+
+    @GetMapping("/userTest")
+    public ApiResponse<Object> userTest() {
+        log.info("ROLE_USER TEST");
+        return ApiResponse.ok(null);
+    }
+
+    @GetMapping("/adminTest")
+    public ApiResponse<Object> adminTest() {
+        log.info("ROLE_ADMIN TEST");
+        return ApiResponse.ok(null);
     }
 }

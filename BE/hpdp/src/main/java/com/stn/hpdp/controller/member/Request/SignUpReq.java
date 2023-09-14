@@ -4,25 +4,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-@Data
 @Getter
 @Setter
-@ToString
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class SignUpReq {
 
-    @NotNull
-    @Size(min = 3, max = 50)
+    @NotEmpty(message = "아이디는 필수 입력값입니다.")
+    @Pattern(regexp = "^[A-Za-z0-9._%+-]", message = "아이디 형식에 맞지 않습니다.")
     private String loginId;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @NotNull
-    @Size(min = 3, max = 100)
+    @NotEmpty(message = "비밀번호는 필수 입력값입니다.")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]{8,16}$", message = "비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.")
     private String loginPw;
 
     @NotNull
@@ -34,7 +30,4 @@ public class SignUpReq {
     private String email;
 
     private String address;
-
-    @ColumnDefault("0")
-    private int role;
 }

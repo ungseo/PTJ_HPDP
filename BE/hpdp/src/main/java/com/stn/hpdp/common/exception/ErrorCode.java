@@ -9,8 +9,12 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     /* 400 BAD_REQUEST */
-    REFRESH_TOKEN_BAD_REQUEST(HttpStatus.BAD_REQUEST, "refresh token이 저장된 값과 같지 않습니다."),
+    REFRESH_TOKEN_MISMATCH(HttpStatus.BAD_REQUEST, "Refresh Token 정보가 일치하지 않습니다."),
+    REFRESH_TOKEN_NOT_VALID(HttpStatus.BAD_REQUEST, "Refresh Token 정보가 유효하지 않습니다."),
+    REFRESH_TOKEN_EMPTY(HttpStatus.BAD_REQUEST, "Refresh Token 정보가 유효하지 않습니다."),
     TOKEN_BAD_REQUEST(HttpStatus.BAD_REQUEST, "유효하지 않은 토큰입니다."),
+    USER_BAD_REQUEST(HttpStatus.BAD_REQUEST, "해당하는 유저가 존재하지 않습니다."),
+    INVALID_FIELDS_REQUEST(HttpStatus.BAD_REQUEST, "유효하지 않은 필드입니다."),
 
     /* 401 UNAUTHORIZED */
     NOT_LOGIN_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "로그인 후 이용해주세요."),
