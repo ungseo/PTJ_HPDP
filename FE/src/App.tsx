@@ -15,6 +15,7 @@ import FundingDetailPage from "./pages/FundingDetailPage";
 import CompanyDetailPage from "./pages/CompanyDetailPage";
 import SearchPage from "./pages/SearchPage";
 import ProfileEditPage from "./pages/ProfileEditPage";
+import TransactionHistoryPage from "./pages/TransactionHistoryPage";
 function App() {
   return (
     <div id="app-root" className={style.App}>
@@ -32,6 +33,10 @@ function App() {
         <Route path="/fundingdetail" Component={FundingDetailPage}></Route>
         <Route path="/companydetail" Component={CompanyDetailPage}></Route>
         <Route path="/profile/edit/:userid" Component={ProfileEditPage}></Route>
+        <Route
+          path="/profile/history/transaction/:userid"
+          Component={TransactionHistoryPage}
+        ></Route>
       </Routes>
       <div className={style.blank}></div>
       <div className={style.navBar}>

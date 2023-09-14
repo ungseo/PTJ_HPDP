@@ -13,6 +13,7 @@ const PageNotFound404 = () => {
         <DefaultButton
           text="뒤로가기"
           styles={{ width: "80%", height: "3vh" }}
+          onClick={onClick}
         />
       </div>
     </div>
