@@ -1,38 +1,38 @@
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import React, { Component } from "react";
-import Slider from "react-slick";
+import React from 'react';
 import style from "../../styles/css/HomeBanner.module.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
+import 'swiper/css/navigation';
+import { Autoplay } from 'swiper/modules';
 
-export default class SimpleSlider extends Component {
-  render() {
-    const settings = {
-      dots: false,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 2000,
-    };
 
-    const slideContents = [
-      { className: style["slide-1"], content: "1" },
-      { className: style["slide-2"], content: "2" },
-      { className: style["slide-3"], content: "3" },
-      { className: style["slide-4"], content: "4" },
-    ];
+const HomeBanner = () => {
+  const swiperProps = {
+    spaceBetween: 30,
+    centeredSlides: true,
+    modules: [Autoplay],
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      clickable: true,
+    },
+    className: style.totalcontent,
+  };
 
-    return (
-      <div className={style.totalcontent}>
-        <Slider {...settings}>
-          {slideContents.map((slide, index) => (
-            <div key={index} className={`slide ${slide.className}`}>
-              <div className={style.slide}>{slide.content}</div>
-            </div>
-          ))}
-        </Slider>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Swiper {...swiperProps}>
+        <SwiperSlide style={{ backgroundColor:"yellow", height: "15rem" }}>1</SwiperSlide>
+        <SwiperSlide style={{ backgroundColor:"blue", height: "15rem" }}>2</SwiperSlide>
+        <SwiperSlide style={{ backgroundColor:"red", height: "15rem" }}>3</SwiperSlide>
+        <SwiperSlide style={{ backgroundColor:"pink", height: "15rem" }}>4</SwiperSlide>
+      </Swiper>
+    </div>
+  );
+};
+
+export default HomeBanner;
