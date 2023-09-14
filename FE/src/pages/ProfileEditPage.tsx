@@ -42,7 +42,7 @@ const ProfileEditPage = () => {
             position: "absolute",
             top: "0",
             right: "0",
-            margin: "1rem 1rem auto auto",
+            margin: "1rem auto auto auto",
             width: "4rem",
           }}
           onClick={modalOpener}
@@ -50,7 +50,10 @@ const ProfileEditPage = () => {
       </div>
       <AnimationLabelInput labelTitle="상세주소" type="text" />
       {modalOpen && <UserAddressModal />}
-      <div></div>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <span style={{ color: "red" }}>회원탈퇴</span>
+        <DefaultButton text="비밀번호 변경" />
+      </div>
       <DefaultButton text="저장" styles={{ width: "9rem", height: "3.5rem" }} />
     </div>
   );
