@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AscendingNumberInterface } from "../../interface/commonInterface";
 
-const AscendingNumber = ({ num, fs }: AscendingNumberInterface) => {
+const AscendingNumber = ({ num, fs, unit }: AscendingNumberInterface) => {
   const [targetNumber, setTargetNumber] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -14,8 +14,8 @@ const AscendingNumber = ({ num, fs }: AscendingNumberInterface) => {
             return prev + 73333;
           } else if (remainNum > 1000) {
             return prev + 733;
-          } else if (remainNum > 10) {
-            return prev + 7;
+          } else if (remainNum > 100) {
+            return prev + 33;
           }
           return ++prev;
         } else {
@@ -30,7 +30,10 @@ const AscendingNumber = ({ num, fs }: AscendingNumberInterface) => {
   }, [num]);
   return (
     <div>
-      <span style={{ fontSize: `${fs}` }}>{targetNumber}</span>
+      <span style={{ fontSize: `${fs}` }}>
+        {targetNumber}
+        {unit}
+      </span>
     </div>
   );
 };

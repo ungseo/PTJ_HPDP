@@ -21,4 +21,5 @@ export interface InputInterface {
 export interface AscendingNumberInterface {
   num: number;
   fs?: string;
+  unit?: string;
 }

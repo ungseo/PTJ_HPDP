@@ -2,10 +2,17 @@ import { useNavigate } from "react-router-dom";
 import style from "../../styles/css/TopBar.module.css";
 
 const LogoTopbar = () => {
+  const navigate = useNavigate();
+  const goToSearchPage = () => {
+    navigate("/search");
+  };
   return (
     <div className={style.logoTopbar}>
-      <img className={style.logo} src="/hpdpLogo.png" alt="LOGO" />
-      <h1 className={style.logoName}>한푼두푼</h1>
+      <div className={style.leftCpnt}>
+        <img className={style.logo} src="/hpdpLogo.png" alt="LOGO" />
+        <h1 className={style.logoName}>한푼두푼</h1>
+      </div>
+      <button className={style.searchBtn} onClick={goToSearchPage}></button>
     </div>
   );
 };
