@@ -1,12 +1,9 @@
-package com.stn.hpdp.controller.member.Request;
+package com.stn.hpdp.controller.auth.Request;
 
 import lombok.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 @Data
 @Getter

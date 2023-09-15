@@ -1,6 +1,6 @@
 package com.stn.hpdp.common.jwt;
 
-import com.stn.hpdp.controller.member.Response.TokenInfoRes;
+import com.stn.hpdp.controller.auth.Response.TokenInfoRes;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

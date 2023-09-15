@@ -1,8 +1,7 @@
-package com.stn.hpdp.controller.member.Request;
+package com.stn.hpdp.controller.auth.Request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -12,9 +11,8 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 public class SignUpReq {
-
     @NotEmpty(message = "아이디는 필수 입력값입니다.")
-    @Pattern(regexp = "^[A-Za-z0-9._%+-]", message = "아이디 형식에 맞지 않습니다.")
+    @Pattern(regexp = "^[A-Za-z0-9_-]{2,10}$", message = "아이디 형식에 맞지 않습니다.")
     private String loginId;
 
     @NotEmpty(message = "비밀번호는 필수 입력값입니다.")

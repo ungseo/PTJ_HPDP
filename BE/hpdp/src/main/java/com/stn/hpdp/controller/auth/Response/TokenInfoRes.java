@@ -1,4 +1,4 @@
-package com.stn.hpdp.controller.member.Response;
+package com.stn.hpdp.controller.auth.Response;
 
 import lombok.*;
 
