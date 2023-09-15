@@ -1,0 +1,16 @@
+@import "Style";
+
+.wrapper {
+  margin-top: 1rem;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    p {
+      margin: 0;
+      font-weight: bold;
+    }
+  }
+  hr {
+    border-color: gray 1px;
+  }
+}

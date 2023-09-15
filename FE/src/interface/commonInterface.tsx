@@ -6,6 +6,7 @@ export default interface ButtonInterface {
   onClick?: any;
   id?: string;
   styles?: styleInterface;
+  type?: "button" | "reset" | "submit" | undefined;
 }
 
 export interface InputInterface {
@@ -15,4 +16,10 @@ export interface InputInterface {
   onChange?: any;
   styles?: styleInterface;
   labelTitle: string | "";
+}
+
+export interface AscendingNumberInterface {
+  num: number;
+  fs?: string;
+  unit?: string;
 }

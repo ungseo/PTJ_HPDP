@@ -1,0 +1,15 @@
+.photoEditButton {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  .label {
+    img {
+      width: 3rem;
+    }
+  }
+
+  .input {
+    display: none;
+  }
+}

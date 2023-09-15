@@ -1,0 +1,10 @@
+.bottomsheetcontainer {
+  position: fixed;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  bottom: 1rem;
+  border-radius: 1rem 1rem 0 0;
+  background-color: white;
+}
