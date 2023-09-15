@@ -25,7 +25,10 @@ const ProfileItemList = () => {
         <p>거래내역</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
-      <div className={style.item} onClick={onClick}>
+      <div
+        className={style.item}
+        id={`history/funding/${userId}`}        
+        onClick={onClick}>
         <p>후원내역</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
