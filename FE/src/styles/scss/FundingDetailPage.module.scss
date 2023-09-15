@@ -11,19 +11,6 @@
   width: 100%;
   height: 2rem;
   max-width: 500px;
-
-  .fundingBtn {
-    background-color: $hotPink;
-    height: 2rem;
-    width: 80%;
-    border-radius: 30px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    z-index: 30;
-  }
 }
 
 .bodyWithModalOpen {
@@ -31,10 +18,6 @@
   position: fixed;
   width: 100%;
   height: 100%;
-}
-
-.App {
-  position: relative;
 }
 
 .bottomsheetbackground {
@@ -47,7 +30,7 @@
   overflow: auto;
 }
 
-.modalBackground {
+.modalbackground {
   background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 0;
