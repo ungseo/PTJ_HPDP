@@ -13,7 +13,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 public class JwtTokenProvider {
 
     private static final String AUTHORITIES_KEY = "auth";
+    private static final String AUTHORIZATION_HEADER = "AccessToken";
     private static final String BEARER_TYPE = "Bearer";
     private static final long ACCESS_TOKEN_EXPIRE_TIME = 30 * 60 * 1000L;              // 30분
     private static final long REFRESH_TOKEN_EXPIRE_TIME = 7 * 24 * 60 * 60 * 1000L;    // 7일
@@ -118,5 +121,14 @@ public class JwtTokenProvider {
         // 현재 시간
         Long now = new Date().getTime();
         return (expiration.getTime() - now);
+    }
+
+    // Request Header 에서 토큰 정보 추출
+    public String resolveToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_TYPE)) {
+            return bearerToken.substring(7);
+        }
+        return null;
     }
 }
