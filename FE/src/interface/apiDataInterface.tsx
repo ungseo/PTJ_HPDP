@@ -1,7 +1,9 @@
 // Notion에 이름똑같이 구분해놨읍니다. Ctrl + F 로 찾아서 하든지
 // request 데이타는 header 빼고 넣어야할 값들만 타입지정 해놓음, In + 기능 + 목적어 ex) InSearchCompanyInfo
-// response 데이타는 전부 다 지정해놓음, Out + 기능 + 목적어 => reponse.data.data (x) reponse자체에 인터페이스적용하기.
 
+import { AxiosHeaderValue } from "axios";
+
+// response 데이타는 전부 다 지정해놓음, Out + 기능 + 목적어 => reponse.data.data (x) reponse자체에 인터페이스적용하기.
 // 인증 request, response Interface
 
 //로그인
@@ -44,7 +46,9 @@ export interface TokenInterface {
 }
 
 // 로그아웃
-export interface InLogoutRequestInterface extends TokenInterface {}
+export interface InLogoutRequestInterface {
+  accessToken: string;
+}
 
 // 내정보 조회
 //(개인멤버)
@@ -148,7 +152,7 @@ export interface OutCompanyFundingInfoInterface {
 // 펀딩 request, response Interface
 
 // 펀딩 조회 & 펀딩 상세조회
-export interface OutFundingInfoInterface {
+export interface OutFundingsInfoInterface {
   body: {
     statusCode: number;
     message: string;
@@ -170,7 +174,7 @@ export interface OutFundingInfoInterface {
       reward_desc?: string;
       reward_img?: string;
       settlement?: number;
-    };
+    }[];
   };
 }
 
