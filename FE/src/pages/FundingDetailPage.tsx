@@ -14,12 +14,11 @@ const FundingDetailPage = () => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
   const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
-  
+
   const tabProps = {
     소개: <FundingIntroduce />,
     소식: <FundingSituation />,
   };
-
 
   useEffect(() => {
     if (isFundingCompleteOpen) {
@@ -48,11 +47,11 @@ const FundingDetailPage = () => {
       <CustomizedTabs tabProps={tabProps} />
       {isBottomSheetOpen && (
         <>
-        <div className={style.bottomsheetarea}></div>
-        <BottomSheet
-          setIsBottomSheetOpen={setIsBottomSheetOpen}
-          handleDonationAmount={setDonationAmount}
-        />
+          <div className={style.bottomsheetbackground}></div>
+          <BottomSheet
+            setIsBottomSheetOpen={setIsBottomSheetOpen}
+            handleDonationAmount={setDonationAmount}
+          />
         </>
       )}
       {isFundingCompleteOpen && (
