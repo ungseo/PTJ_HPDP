@@ -1,24 +1,22 @@
 import React from 'react';
+import Grid from '@mui/material/Grid';
 import style from "../styles/css/ActivityItem.module.css";
+import { useNavigate } from "react-router-dom";
 
 const ActivityItem = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className={style.total}>
-      <div className={style.backimg}>
-        <div className={style.topdiv}>
-          <div className={style.topimg}></div>
-          <div className={style.topcontent}>
-            <div>2023.09.01</div>
-            <div>제주도 푸른 밤~</div>
-            <div>김웅서님의 1,000포인트가 ~</div>
-          </div>
-        </div>
-        <div className={style.botdiv}>
-          <div className={style.botimg}></div>
-          <div className={style.botcontent}>z</div>
-        </div>
-      </div>
-    </div>
+    <Grid container className={style.total}>
+      <Grid item xs={3} className={style.imgheight}>
+        <div className={style.img}>xs=3</div>
+      </Grid>
+      <Grid item xs={9} className={style.contentheight}>
+        <div className={style.content}>1</div>
+        <div className={style.content}>2</div>
+        <div className={style.content}>3</div>
+      </Grid>
+    </Grid>
   )
 }
 

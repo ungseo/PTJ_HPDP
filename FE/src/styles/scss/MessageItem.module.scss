@@ -1,43 +1,33 @@
 .total {
-    display: flex;
+    background-color: antiquewhite;
+    align-items: center;
   }
 
-  .backimg {
-    height: 10vw;
-    width: 100%;
-    background-color: red;
-  }
-
-    .topdiv {
-        height: 7.5vw;
-        display: flex;
+    .imgheight {
+        aspect-ratio: 1/1;
         background-color: aqua;
-    }
 
-        .topimg {
-            height: 7.5vw;
-            width: 7.5vw;
-            background-color: bisque;
-            margin: 0 2rem;
-        }
-
-        .topcontent {
-            text-align: start;
-        }
-
-    .botdiv {
-        height: 2.5vw;
         display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+        .img {
+            width: 66.66%;
+            aspect-ratio: 1/1;
+            height: auto;
+            background-color: gray;
+        }
+    
+    .contentheight {
         background-color: aquamarine;
-    }
 
-        .botimg {
-            height: 2.5vw;
-            width: 7.5vw;
-            background-color: blueviolet;
-            margin: 0 2rem;
-        }
+        display: block;
+        justify-content: center;
+        align-items: center;
+      }
 
-        .botcontent {
-            text-align: start;
-        }
+      .content {
+        text-align: start;
+        background-color: azure;
+      }
