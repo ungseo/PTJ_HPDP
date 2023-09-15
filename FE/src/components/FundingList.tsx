@@ -1,5 +1,6 @@
 import React from "react";
 import FundingItem from "./FundingItem";
+
 const FundingList = () => {
   const fundingItems = [1, 2, 3, 4, 5, 6];
 
