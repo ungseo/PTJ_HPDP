@@ -6,29 +6,18 @@ server:
 # logging
 logging:
   level:
-    org.hibernate: debug
-    com.stn.hpdp: debug
+    root: info
+    org:
+      springframework:
+        boot : info
+        security : DEBUG
+        web : info
 
 ---
 #spring default setting
 spring:
   profiles:
-    include:
-      -env
-
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-  jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        show_sql: true
-        default_batch_fetch_size: 100
-    open-in-view: false
+    default: env
 
   mvc:
     pathmatch:

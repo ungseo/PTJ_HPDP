@@ -1,5 +1,3 @@
-// App.tsx
-
 import style from "./styles/css/App.module.css";
 import { Routes, Route } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
@@ -16,6 +14,7 @@ import CompanyDetailPage from "./pages/CompanyDetailPage";
 import SearchPage from "./pages/SearchPage";
 import ProfileEditPage from "./pages/ProfileEditPage";
 import TransactionHistoryPage from "./pages/TransactionHistoryPage";
+import FundingHistoryPage from './components/FundingHistoryPage';
 function App() {
   return (
     <div id="app-root" className={style.App}>
@@ -36,6 +35,10 @@ function App() {
         <Route
           path="/profile/history/transaction/:userid"
           Component={TransactionHistoryPage}
+        ></Route>
+        <Route
+          path="/profile/history/funding/:userid"
+          Component={FundingHistoryPage}
         ></Route>
       </Routes>
       <div className={style.blank}></div>

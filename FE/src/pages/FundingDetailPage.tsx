@@ -7,19 +7,18 @@ import BottomSheet from "../components/fundingdetail/BottomSheet";
 import FundingComplete from "../components/fundingdetail/FundingComplete";
 import FundingDetailTop from "../components/fundingdetail/FundingDetailTop";
 
-// import DefaultButtons from "../components/common/Buttons";
+import DefaultButton from "../components/common/Buttons";
 import style from "../styles/css/FundingDetailPage.module.css";
 
 const FundingDetailPage = () => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
   const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
-  
+
   const tabProps = {
     소개: <FundingIntroduce />,
     소식: <FundingSituation />,
   };
-
 
   useEffect(() => {
     if (isFundingCompleteOpen) {
@@ -48,24 +47,27 @@ const FundingDetailPage = () => {
       <CustomizedTabs tabProps={tabProps} />
       {isBottomSheetOpen && (
         <>
-        <div className={style.bottomsheetarea}></div>
-        <BottomSheet
-          setIsBottomSheetOpen={setIsBottomSheetOpen}
-          handleDonationAmount={setDonationAmount}
-        />
+          <div className={style.bottomsheetbackground}></div>
+          <BottomSheet
+            setIsBottomSheetOpen={setIsBottomSheetOpen}
+            handleDonationAmount={setDonationAmount}
+          />
         </>
       )}
       {isFundingCompleteOpen && (
         <>
-          <div className={style.modalBackground}></div>
+          <div className={style.modalbackground}></div>
           <FundingComplete donationAmount={donationAmount} />
         </>
       )}
 
       <div className={style.fixedButton}>
-        <div className={style.fundingBtn} onClick={FundingHandler}>
-          후원하기
-        </div>
+        <DefaultButton
+          text="후원하기"
+          styles={{ width: "80%", height: "2rem" }}
+          type="submit"
+          onClick={FundingHandler}
+        />
       </div>
     </div>
   );

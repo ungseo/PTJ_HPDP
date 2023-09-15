@@ -18,6 +18,13 @@
     min-height: 100%;
     .upcontent {
       text-align: left;
+      .fundingcontent {
+        display: block;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
     }
   }
 }

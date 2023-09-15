@@ -6,7 +6,7 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function NavigationBar() {
   const [value, setValue] = React.useState("home");
@@ -14,8 +14,29 @@ export default function NavigationBar() {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
-
+  
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  React.useEffect(() => {
+    switch (location.pathname) {
+      case "/":
+        setValue("home");
+        break;
+      case "/list":
+        setValue("list");
+        break;
+      case "/notification":
+        setValue("notification");
+        break;
+      case "/profile":
+        setValue("profile");
+        break;
+      default:
+        setValue("");
+    }
+  }, [location.pathname]);
 
   return (
     <BottomNavigation value={value} onChange={handleChange}>
