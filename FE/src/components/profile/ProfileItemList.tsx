@@ -1,9 +1,15 @@
+import { useSelector } from "react-redux";
 import style from "../../styles/css/ProfileItemList.module.css";
 import { Icon } from "@iconify/react";
+import { useNavigate } from "react-router-dom";
 const ProfileItemList = () => {
+  const navigate = useNavigate();
+  const userId = useSelector((state: any) => state.user.userId);
+
+  //router 설정, id = 각 버튼의 id, 버튼 id값에 주소 입력후 navigate에 동적으로 할당
   const onClick = (event: any) => {
-    const { id } = event.target.id;
-    console.log(id);
+    const { id } = event.target;
+    navigate(`/profile/${id}`);
   };
   return (
     <div className={style.profileItemList}>
@@ -11,11 +17,18 @@ const ProfileItemList = () => {
         <p>쪽지함</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
-      <div className={style.item} onClick={onClick}>
-        <p>거래/후원내역</p>
+      <div
+        className={style.item}
+        id={`history/transaction/${userId}`}
+        onClick={onClick}
+      >
+        <p>거래내역</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
-      <div className={style.item} onClick={onClick}>
+      <div
+        className={style.item}
+        id={`history/funding/${userId}`}        
+        onClick={onClick}>
         <p>후원내역</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>

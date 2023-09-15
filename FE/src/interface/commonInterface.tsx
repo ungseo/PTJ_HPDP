@@ -17,3 +17,9 @@ export interface InputInterface {
   styles?: styleInterface;
   labelTitle: string | "";
 }
+
+export interface AscendingNumberInterface {
+  num: number;
+  fs?: string;
+  unit?: string;
+}
