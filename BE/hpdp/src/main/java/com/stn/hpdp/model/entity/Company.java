@@ -65,7 +65,7 @@ public class Company extends TimeBaseEntity implements UserDetails  {
     @NotNull
     private String accountNumber;
 
-//    private MultipartFile profile;
+    private String profile;
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
