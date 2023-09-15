@@ -27,3 +27,4 @@ yarn-error.log*
 
 # docker
 Dockerfile
+nginx.conf
