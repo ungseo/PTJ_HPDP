@@ -7,7 +7,7 @@ import BottomSheet from "../components/fundingdetail/BottomSheet";
 import FundingComplete from "../components/fundingdetail/FundingComplete";
 import FundingDetailTop from "../components/fundingdetail/FundingDetailTop";
 
-// import DefaultButtons from "../components/common/Buttons";
+import DefaultButton from "../components/common/Buttons";
 import style from "../styles/css/FundingDetailPage.module.css";
 
 const FundingDetailPage = () => {
@@ -56,15 +56,18 @@ const FundingDetailPage = () => {
       )}
       {isFundingCompleteOpen && (
         <>
-          <div className={style.modalBackground}></div>
+          <div className={style.modalbackground}></div>
           <FundingComplete donationAmount={donationAmount} />
         </>
       )}
 
       <div className={style.fixedButton}>
-        <div className={style.fundingBtn} onClick={FundingHandler}>
-          후원하기
-        </div>
+        <DefaultButton
+          text="후원하기"
+          styles={{ width: "80%", height: "2rem" }}
+          type="submit"
+          onClick={FundingHandler}
+        />
       </div>
     </div>
   );
