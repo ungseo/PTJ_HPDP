@@ -24,7 +24,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -130,7 +129,7 @@ public class AuthService {
         // 2. Access Token 에서 User email 을 가져옵니다.
         Authentication authentication = jwtTokenProvider.getAuthentication(reissue.getAccessToken());
 
-        // 3. Redis 에서 User email 을 기반으로 저장된 Refresh Token 값을 가져옵니다.
+        // 3. Redis 에서 User Id 을 기반으로 저장된 Refresh Token 값을 가져옵니다.
         String refreshToken = (String)redisTemplate.opsForValue().get("RT:" + authentication.getName());
         // (추가) 로그아웃되어 Redis 에 RefreshToken 이 존재하지 않는 경우 처리
         if(ObjectUtils.isEmpty(refreshToken)) {
@@ -162,7 +161,7 @@ public class AuthService {
         // 2. Access Token 에서 User email 을 가져옵니다.
         Authentication authentication = jwtTokenProvider.getAuthentication(token);
 
-        // 3. Redis 에서 해당 User email 로 저장된 Refresh Token 이 있는지 여부를 확인 후 있을 경우 삭제합니다.
+        // 3. Redis 에서 해당 User Id 로 저장된 Refresh Token 이 있는지 여부를 확인 후 있을 경우 삭제합니다.
         if (redisTemplate.opsForValue().get("RT:" + authentication.getName()) != null) {
             // Refresh Token 삭제
             redisTemplate.delete("RT:" + authentication.getName());
@@ -177,7 +176,7 @@ public class AuthService {
     }
 
     public ApiResponse<Object> authority() {
-        // SecurityContext에 담겨 있는 authentication userEamil 정보
+        // SecurityContext에 담겨 있는 authentication userId 정보
         String loginId = SecurityUtil.getCurrentMemberLoginId();
 
         Member member = memberRepository.findByLoginId(loginId)

@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import static com.stn.hpdp.common.util.LogCurrent.*;
 
 @Slf4j
 @Api
@@ -27,5 +28,10 @@ public class MemberController {
     public ApiResponse<Object> adminTest() {
         log.info("ROLE_ADMIN TEST");
         return ApiResponse.ok(null);
+    }
+    @GetMapping // 사용자 정보 조회
+    public ApiResponse<Object> getMemberInfo() {
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+        return ApiResponse.ok(memberService.getMemberInfo());
     }
 }
