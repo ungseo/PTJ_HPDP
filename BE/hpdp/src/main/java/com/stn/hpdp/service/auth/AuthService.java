@@ -153,7 +153,7 @@ public class AuthService {
 
     public ApiResponse<Object> signOut(HttpServletRequest request) {
 
-        String token = resolveToken(request);
+        String token = jwtTokenProvider.resolveToken(request);
         // 1. Access Token 검증
         if (!jwtTokenProvider.validateToken(token)) {
             throw new CustomException(TOKEN_BAD_REQUEST);
@@ -192,16 +192,6 @@ public class AuthService {
 
     private static final String AUTHORIZATION_HEADER = "AccessToken";
     private static final String BEARER_TYPE = "Bearer";
-
-    // Request Header 에서 토큰 정보 추출
-    private String resolveToken(HttpServletRequest request) {
-        System.out.println(request);
-        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_TYPE)) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
 
     private void setHeader(HttpServletResponse response, TokenInfoRes tokenInfo) {
         response.addHeader("accessToken", tokenInfo.getAccessToken());
