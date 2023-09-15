@@ -8,6 +8,7 @@ build/
 
 ### docker ###
 Dockerfile
+.dockerignore
 
 ### STS ###
 .apt_generated
@@ -23,6 +24,7 @@ bin/
 
 ### Spring Boot ###
 **/application-env.yml
+**/application-prod.yml
 
 ### IntelliJ IDEA ###
 .idea
