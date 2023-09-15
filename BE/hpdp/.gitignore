@@ -6,6 +6,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### docker ###
+Dockerfile
+.dockerignore
+
 ### STS ###
 .apt_generated
 .classpath
@@ -20,6 +24,7 @@ bin/
 
 ### Spring Boot ###
 **/application-env.yml
+**/application-prod.yml
 
 ### IntelliJ IDEA ###
 .idea
