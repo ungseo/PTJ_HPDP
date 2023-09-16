@@ -3,10 +3,10 @@ package com.stn.hpdp.controller.auth;
 import com.stn.hpdp.common.ApiResponse;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.jwt.JwtTokenProvider;
-import com.stn.hpdp.controller.auth.Request.CompanySignUpReq;
-import com.stn.hpdp.controller.auth.Request.ReissueReq;
-import com.stn.hpdp.controller.auth.Request.SignInReq;
-import com.stn.hpdp.controller.auth.Request.SignUpReq;
+import com.stn.hpdp.controller.auth.request.CompanySignUpReq;
+import com.stn.hpdp.controller.auth.request.ReissueReq;
+import com.stn.hpdp.controller.auth.request.SignInReq;
+import com.stn.hpdp.controller.auth.request.SignUpReq;
 import com.stn.hpdp.service.auth.AuthService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -57,12 +57,12 @@ public class AuthController {
             throw new CustomException(INVALID_FIELDS_REQUEST);
         }
         log.info(logCurrent(getClassName(), getMethodName(), END));
-        return authService.CompanySignUp(signUpReq);
+        return authService.companySignUp(signUpReq);
     }
 
     @PostMapping("/login") // 로그인
     public ApiResponse<Object> signIn(@Validated @RequestBody SignInReq signInReq, HttpServletResponse response, Errors errors
-    , @RequestParam(name = "type", required = false, defaultValue = "0") int type) {
+    ,@RequestParam(name = "type", required = false, defaultValue = "0") int type) {
         // validation check
         log.info(logCurrent(getClassName(), getMethodName(), START));
 
@@ -74,9 +74,13 @@ public class AuthController {
             throw new CustomException(INVALID_FIELDS_REQUEST);
         }
 
-        //todo : type = 0 Memebr / type = 1 Company
-        log.info(logCurrent(getClassName(), getMethodName(), END));
-        return authService.signIn(signInReq, response);
+        if(type == 0) {
+            log.info(logCurrent(getClassName(), getMethodName(), END));
+            return authService.signIn(signInReq, response);
+        } else {
+            log.info(logCurrent(getClassName(), getMethodName(), END));
+            return authService.companySignIn(signInReq, response);
+        }
     }
 
     @GetMapping("/check/{loginId}") // 아이디 중복 체크

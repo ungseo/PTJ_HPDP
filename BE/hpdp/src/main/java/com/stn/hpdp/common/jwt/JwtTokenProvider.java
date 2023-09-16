@@ -1,6 +1,7 @@
 package com.stn.hpdp.common.jwt;
 
-import com.stn.hpdp.controller.auth.Response.TokenInfoRes;
+import com.stn.hpdp.common.exception.ErrorCode;
+import com.stn.hpdp.controller.auth.response.TokenInfoRes;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -29,7 +30,7 @@ public class JwtTokenProvider {
     private static final String AUTHORITIES_KEY = "auth";
     private static final String AUTHORIZATION_HEADER = "AccessToken";
     private static final String BEARER_TYPE = "Bearer";
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 30 * 60 * 1000L;              // 30분
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1 * 60 * 1000L;              // 30분
     private static final long REFRESH_TOKEN_EXPIRE_TIME = 7 * 24 * 60 * 60 * 1000L;    // 7일
 
     private final Key key;
@@ -97,14 +98,17 @@ public class JwtTokenProvider {
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             log.info("Invalid JWT Token", e);
+            throw new JwtException(ErrorCode.ACCESS_TOKEN_INVALID.getDescription());
         } catch (ExpiredJwtException e) {
             log.info("Expired JWT Token", e);
+            throw new JwtException(ErrorCode.EXPIRED_TOKEN.getDescription());
         } catch (UnsupportedJwtException e) {
             log.info("Unsupported JWT Token", e);
+            throw new JwtException(ErrorCode.UNSUPPORTED_TOKEN.getDescription());
         } catch (IllegalArgumentException e) {
             log.info("JWT claims string is empty.", e);
+            throw new JwtException(ErrorCode.UNKNOWN_ERROR.getDescription());
         }
-        return false;
     }
 
     private Claims parseClaims(String accessToken) {

@@ -1,17 +1,14 @@
-package com.stn.hpdp.controller.auth.Request;
+package com.stn.hpdp.controller.auth.request;
 
 import lombok.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import javax.validation.constraints.NotEmpty;
 
-@Data
 @Getter
-@Setter
-@ToString
 @Builder
+@ToString
 @AllArgsConstructor
-@NoArgsConstructor
 public class SignInReq {
 
     @NotEmpty(message = "아이디는 필수 입력값입니다.")

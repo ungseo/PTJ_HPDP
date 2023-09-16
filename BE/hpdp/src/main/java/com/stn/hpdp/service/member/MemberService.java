@@ -1,6 +1,7 @@
 package com.stn.hpdp.service.member;
 
 import com.stn.hpdp.common.exception.CustomException;
+import com.stn.hpdp.controller.member.requset.MemberUpdateReq;
 import com.stn.hpdp.controller.member.response.MemberInfoRes;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.model.repository.MemberRepository;
@@ -32,6 +33,24 @@ public class MemberService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Member member = memberRepository.findByLoginId(auth.getName())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+        return MemberInfoRes.from(member);
+    }
+    @Transactional
+    public MemberInfoRes updateMemberInfo(MemberUpdateReq memberUpdateReq) {
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Member member = memberRepository.findByLoginId(auth.getName())
+                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+
+        member.setProfile(memberUpdateReq.getProfile());
+        member.setName(memberUpdateReq.getName());
+        member.setPhoneNumber(memberUpdateReq.getPhoneNumber());
+        member.setEmail(memberUpdateReq.getEmail());
+
+        memberRepository.save(member);
 
         log.info(logCurrent(getClassName(), getMethodName(), END));
         return MemberInfoRes.from(member);
