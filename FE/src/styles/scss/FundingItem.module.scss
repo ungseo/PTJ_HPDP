@@ -1,3 +1,5 @@
+@import "Style";
+
 .total {
   display: flex;
   margin-bottom: 1rem;
@@ -16,15 +18,43 @@
     flex-direction: column;
     justify-content: space-between;
     min-height: 100%;
+
     .upcontent {
       text-align: left;
+      margin-top: 0.2rem;
       .fundingcontent {
         display: block;
         width: 100%;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        font-size: 1.3rem;
+        font-weight: bold;
+      }
+      .companyname {
+        color: $grey;
+        font-weight: 500;
+      }
+    }
+
+    .downcontent {
+      margin-bottom: 0.2rem;
+      .remaindate {
+        text-align: start;
+        font-weight: bold;
+        color: rgb(37, 37, 37);
+      }
+
+      .accountdetail {
+        display: flex;
+        justify-content: space-between;
+
+        .fundingpercent {
+          color: $hotPink;
+          font-weight: 600;
+        }
       }
     }
   }
 }
+
