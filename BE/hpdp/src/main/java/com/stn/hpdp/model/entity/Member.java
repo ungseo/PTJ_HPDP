@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-import com.stn.hpdp.common.enums.Authority;
 
 @Entity
 @Table(name ="members")
@@ -56,6 +55,8 @@ public class Member extends TimeBaseEntity implements UserDetails {
 
     @ColumnDefault("100")
     private int balanceUnit;
+
+    private String profile;
 
 //    @ColumnDefault("1")
 //    private int role;
