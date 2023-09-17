@@ -1,7 +1,6 @@
-package com.stn.hpdp.controller.auth.Request;
+package com.stn.hpdp.controller.auth.request;
 
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -20,7 +19,7 @@ public class SignUpReq {
     private String loginPw;
 
     @NotNull
-    @Size(min = 3, max = 50)
+    @Size(min = 2, max = 50)
     private String name;
 
     private String phoneNumber;

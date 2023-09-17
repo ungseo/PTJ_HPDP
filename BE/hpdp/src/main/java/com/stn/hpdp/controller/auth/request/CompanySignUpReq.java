@@ -1,4 +1,4 @@
-package com.stn.hpdp.controller.auth.Request;
+package com.stn.hpdp.controller.auth.request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +18,7 @@ public class CompanySignUpReq {
     private String loginPw;
 
     @NotNull
-    @Size(min = 3, max = 50)
+    @Size(min = 2, max = 50)
     private String name;
 
     @NotNull
