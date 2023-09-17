@@ -6,7 +6,7 @@ import { uiActions } from "../store/ui-slice";
 import ProfileEditList from "../components/profile/ProfileEditList";
 import UserAddressModal from "../components/profile/UserAddressModal";
 import AnimationLabelInput from "../components/common/Inputs";
-import DefaultButton from "../components/common/Buttons";
+import DefaultButton from "../components/common/DefaultButton";
 
 const ProfileEditPage = () => {
   const test = useSelector((state: any) => state.ui.isEditPage);

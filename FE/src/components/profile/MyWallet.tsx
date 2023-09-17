@@ -1,6 +1,6 @@
 import style from "../../styles/css/MyWallet.module.css";
 import { Icon } from "@iconify/react";
-import DefaultButton from "../common/Buttons";
+import DefaultButton from "../common/DefaultButton";
 const MyWallet = () => {
   return (
     <div className={style.mywallet}>

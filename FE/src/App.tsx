@@ -14,7 +14,12 @@ import CompanyDetailPage from "./pages/CompanyDetailPage";
 import SearchPage from "./pages/SearchPage";
 import ProfileEditPage from "./pages/ProfileEditPage";
 import TransactionHistoryPage from "./pages/TransactionHistoryPage";
-import FundingHistoryPage from './components/FundingHistoryPage';
+import FundingHistoryPage from "./components/FundingHistoryPage";
+import InterestCompaniesPage from "./pages/InterestCompaniesPage";
+import { CheckoutPage } from "./pages/Toss/CheckoutPage";
+import { SuccessPage } from "./pages/Toss/SuccessPage";
+import { FailPage } from "./pages/Toss/FailPage";
+import HPDPBankPage from "./pages/HPDPBankPage";
 function App() {
   return (
     <div id="app-root" className={style.App}>
@@ -32,6 +37,7 @@ function App() {
         <Route path="/fundingdetail" Component={FundingDetailPage}></Route>
         <Route path="/companydetail" Component={CompanyDetailPage}></Route>
         <Route path="/profile/edit/:userid" Component={ProfileEditPage}></Route>
+        <Route path="/profile/testbank" Component={HPDPBankPage}></Route>
         <Route
           path="/profile/history/transaction/:userid"
           Component={TransactionHistoryPage}
@@ -40,6 +46,13 @@ function App() {
           path="/profile/history/funding/:userid"
           Component={FundingHistoryPage}
         ></Route>
+        <Route
+          path="/profile/interest-companies"
+          Component={InterestCompaniesPage}
+        ></Route>
+        <Route path="/payment" Component={CheckoutPage}></Route>
+        <Route path="success" Component={SuccessPage}></Route>
+        <Route path="/fail" Component={FailPage}></Route>
       </Routes>
       <div className={style.blank}></div>
       <div className={style.navBar}>
