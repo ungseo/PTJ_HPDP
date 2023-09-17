@@ -292,3 +292,14 @@ export interface OutSearchSendHistoryInterface {
     }[];
   };
 }
+
+// 결제
+
+export interface InCreatePaymentsInterface {
+  header: { accessToken: string };
+  body: {
+    amount: number | string | null;
+    retUrl?: string;
+    retCancleUrl?: string;
+  };
+}

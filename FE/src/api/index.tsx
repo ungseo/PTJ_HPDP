@@ -99,6 +99,13 @@ export const banksApiFormData = axios.create({
   },
 });
 
+export const paymentsApi = axios.create({
+  baseURL: `${process.env.REACT_APP_API_URL}/payments`,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
 export const messagesApi = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}/messages`,
   headers: {
