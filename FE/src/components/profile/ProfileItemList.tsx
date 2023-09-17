@@ -27,16 +27,17 @@ const ProfileItemList = () => {
       </div>
       <div
         className={style.item}
-        id={`history/funding/${userId}`}        
-        onClick={onClick}>
+        id={`history/funding/${userId}`}
+        onClick={onClick}
+      >
         <p>후원내역</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
-      <div className={style.item} onClick={onClick}>
-        <p>관심기억</p>
+      <div className={style.item} id="interest-companies" onClick={onClick}>
+        <p>관심기업</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
-      <div className={style.item} onClick={onClick}>
+      <div className={style.item} id="testbank" onClick={onClick}>
         <p>서비스 테스트 페이지</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>

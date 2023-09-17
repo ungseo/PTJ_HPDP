@@ -2,6 +2,7 @@ package com.stn.hpdp.config;
 
 import com.stn.hpdp.common.jwt.JwtAuthenticationFilter;
 import com.stn.hpdp.common.jwt.JwtTokenProvider;
+import com.stn.hpdp.common.jwt.JwtExceptionFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.CorsFilter;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -20,7 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final RedisTemplate redisTemplate;
-
+    private final CorsFilter corsFilter;
+    private final JwtExceptionFilter jwtExceptionFilter;
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().mvcMatchers(
@@ -38,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .httpBasic().disable()
                 .csrf().disable()
+                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
@@ -46,7 +50,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/members/adminTest").hasRole("ADMIN")
                 .antMatchers("/api/companies").permitAll()
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, redisTemplate), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, redisTemplate), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtExceptionFilter,JwtAuthenticationFilter.class); // jwt 에러처리를 위한 필터등록
         // JwtAuthenticationFilter를 UsernamePasswordAuthentictaionFilter 전에 적용시킨다.
     }
 

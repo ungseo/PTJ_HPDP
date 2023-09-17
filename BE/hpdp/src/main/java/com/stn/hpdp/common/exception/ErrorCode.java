@@ -10,13 +10,19 @@ public enum ErrorCode {
 
     /* 400 BAD_REQUEST */
     REFRESH_TOKEN_MISMATCH(HttpStatus.BAD_REQUEST, "Refresh Token 정보가 일치하지 않습니다."),
-    REFRESH_TOKEN_NOT_VALID(HttpStatus.BAD_REQUEST, "Refresh Token 정보가 유효하지 않습니다."),
-    REFRESH_TOKEN_EMPTY(HttpStatus.BAD_REQUEST, "Refresh Token 정보가 유효하지 않습니다."),
-    TOKEN_BAD_REQUEST(HttpStatus.BAD_REQUEST, "유효하지 않은 토큰입니다."),
+    REFRESH_TOKEN_INVALID(HttpStatus.BAD_REQUEST, "Refresh Token 정보가 유효하지 않습니다."),
+    ACCESS_TOKEN_INVALID(HttpStatus.BAD_REQUEST, "Access Token 유효하지 않은 토큰입니다."),
     USER_BAD_REQUEST(HttpStatus.BAD_REQUEST, "해당하는 유저가 존재하지 않습니다."),
-    INVALID_FIELDS_REQUEST(HttpStatus.BAD_REQUEST, "유효하지 않은 필드입니다."),
+    COMPANY_BAD_REQUEST(HttpStatus.BAD_REQUEST, "해당하는 회사는 존재하지 않습니다."),
+    INVALID_FIELDS_REQUEST(HttpStatus.BAD_REQUEST, "유효하지 않은 필드입니다."),   // JWTFilterException
 
     /* 401 UNAUTHORIZED */
+    UNKNOWN_ERROR(HttpStatus.UNAUTHORIZED,"인증 Token 이 존재하지 않습니다."),     // JWTFilterException
+    WRONG_TYPE_TOKEN(HttpStatus.UNAUTHORIZED,"잘못된 Access Token 정보입니다."),           // JWTFilterException
+    EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED,"만료된 Access Token 입니다."),               // JWTFilterException
+    UNSUPPORTED_TOKEN(HttpStatus.UNAUTHORIZED,"지원하지 않는 Token 입니다."),      // JWTFilterException
+    ACCESS_DENIED(HttpStatus.UNAUTHORIZED,"알 수 없는 이유로 요청이 거절되었습니다."), //JWTFilterException
+
     NOT_LOGIN_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "로그인 후 이용해주세요."),
 
     /* 403 FORBIDDEN : 페이지 접근 거부 */

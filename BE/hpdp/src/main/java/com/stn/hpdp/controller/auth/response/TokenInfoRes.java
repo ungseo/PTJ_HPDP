@@ -1,14 +1,11 @@
-package com.stn.hpdp.controller.auth.Response;
+package com.stn.hpdp.controller.auth.response;
 
 import lombok.*;
 
-@Data
 @Getter
-@Setter
 @ToString
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class TokenInfoRes {
     private String grantType;
     private String accessToken;

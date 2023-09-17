@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import ActivityItem from './ActivityItem';
 
 const Activity = () => {
   return (
     <div>
-      Activity Component입니다아아아
+      <ActivityItem />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import DefaultButton from "../common/Buttons";
+import DefaultButton from "../common/DefaultButton";
 import AnimationLabelInput from "../common/Inputs";
 
 const SignUpForm = ({ onSubmit }: any) => {

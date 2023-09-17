@@ -2,6 +2,7 @@ import React from "react";
 import { Grid } from "@mui/material";
 import style from "../styles/css/FundingItem.module.css";
 import { useNavigate } from "react-router-dom";
+import ProgressBar from "./common/ProgressBar";
 
 const FundingItem = () => {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ const FundingItem = () => {
   const handleGoFundingDetail = () => {
     navigate("/fundingdetail");
   };
+
   return (
     <Grid container className={style.total} onClick={handleGoFundingDetail}>
       <Grid item xs={3} className={style.leftimg}></Grid>
@@ -20,7 +22,12 @@ const FundingItem = () => {
           <div className={style.companyname}>한국 유기동물복지협회</div>
         </div>
         <div className={style.downcontent}>
-          <div className={style.processing}>진행 표시</div>
+          <div className={style.remaindate}>D-3</div>
+          <ProgressBar percent={50} />
+          <div className={style.accountdetail}>
+            <div className={style.nowaccount}>123456원</div>
+            <div className={style.fundingpercent}>50%</div>
+          </div>
         </div>
       </Grid>
     </Grid>
