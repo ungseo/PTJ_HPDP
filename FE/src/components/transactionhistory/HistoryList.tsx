@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { HistoryListInterface } from "../../interface/transactionHistoryInterface";
 import style from "../../styles/css/HistoryList.module.css";
-import DefaultButton from "../common/Buttons";
+import DefaultButton from "../common/DefaultButton";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { transHistoryActions } from "../../store/transHistory-slice";

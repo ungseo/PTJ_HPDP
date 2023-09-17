@@ -37,7 +37,7 @@ const ProfileItemList = () => {
         <p>관심기업</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
-      <div className={style.item} onClick={onClick}>
+      <div className={style.item} id="testbank" onClick={onClick}>
         <p>서비스 테스트 페이지</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>

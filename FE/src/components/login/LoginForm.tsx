@@ -1,5 +1,5 @@
 import AnimationLabelInput from "../common/Inputs";
-import DefaultButton from "../common/Buttons";
+import DefaultButton from "../common/DefaultButton";
 import { Link } from "react-router-dom";
 import style from "../../styles/css/LoginForm.module.css";
 import { useState } from "react";

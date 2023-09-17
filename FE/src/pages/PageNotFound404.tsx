@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import DefaultButton from "../components/common/Buttons";
+import DefaultButton from "../components/common/DefaultButton";
 const PageNotFound404 = () => {
   const navigate = useNavigate();
   const onClick = () => {

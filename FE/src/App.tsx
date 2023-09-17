@@ -19,6 +19,7 @@ import InterestCompaniesPage from "./pages/InterestCompaniesPage";
 import { CheckoutPage } from "./pages/Toss/CheckoutPage";
 import { SuccessPage } from "./pages/Toss/SuccessPage";
 import { FailPage } from "./pages/Toss/FailPage";
+import HPDPBankPage from "./pages/HPDPBankPage";
 function App() {
   return (
     <div id="app-root" className={style.App}>
@@ -36,6 +37,7 @@ function App() {
         <Route path="/fundingdetail" Component={FundingDetailPage}></Route>
         <Route path="/companydetail" Component={CompanyDetailPage}></Route>
         <Route path="/profile/edit/:userid" Component={ProfileEditPage}></Route>
+        <Route path="/profile/testbank" Component={HPDPBankPage}></Route>
         <Route
           path="/profile/history/transaction/:userid"
           Component={TransactionHistoryPage}

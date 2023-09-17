@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DefaultButton from "../components/common/Buttons";
+import DefaultButton from "../components/common/DefaultButton";
 import { OptionTopbar } from "../components/common/TopBar";
 import { CheckoutPage } from "./Toss/CheckoutPage";
 const InterestCompaniesPage = () => {

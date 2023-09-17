@@ -7,7 +7,7 @@ import BottomSheet from "../components/fundingdetail/BottomSheet";
 import FundingComplete from "../components/fundingdetail/FundingComplete";
 import FundingDetailTop from "../components/fundingdetail/FundingDetailTop";
 
-import DefaultButton from "../components/common/Buttons";
+import DefaultButton from "../components/common/DefaultButton";
 import style from "../styles/css/FundingDetailPage.module.css";
 
 const FundingDetailPage = () => {
