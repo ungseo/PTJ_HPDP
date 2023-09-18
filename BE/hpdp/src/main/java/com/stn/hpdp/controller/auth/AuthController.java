@@ -3,7 +3,7 @@ package com.stn.hpdp.controller.auth;
 import com.stn.hpdp.common.ApiResponse;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.jwt.JwtTokenProvider;
-import com.stn.hpdp.controller.auth.request.CompanySignUpReq;
+import com.stn.hpdp.controller.auth.request.SignUpCompanyReq;
 import com.stn.hpdp.controller.auth.request.ReissueReq;
 import com.stn.hpdp.controller.auth.request.SignInReq;
 import com.stn.hpdp.controller.auth.request.SignUpReq;
@@ -31,7 +31,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping // 개인 회원가입
-    public ApiResponse<Object> MemberSignUp(@Validated @RequestBody SignUpReq signUpReq, Errors errors) {
+    public ApiResponse<Object> signUp(@Validated @RequestBody SignUpReq signUpReq, Errors errors) {
         // validation check
         log.info(logCurrent(getClassName(), getMethodName(), START));
         if (errors.hasErrors()) {
@@ -42,11 +42,11 @@ public class AuthController {
             throw new CustomException(INVALID_FIELDS_REQUEST);
         }
         log.info(logCurrent(getClassName(), getMethodName(), END));
-        return authService.memberSignUp(signUpReq);
+        return authService.signUp(signUpReq);
     }
 
     @PostMapping("/company") // 기업 회원가입
-    public ApiResponse<Object> CompanysignUp(@Validated @RequestBody CompanySignUpReq signUpReq, Errors errors) {
+    public ApiResponse<Object> signUpCompany(@Validated @RequestBody SignUpCompanyReq signUpReq, Errors errors) {
         // validation check
         log.info(logCurrent(getClassName(), getMethodName(), START));
         if (errors.hasErrors()) {
@@ -57,7 +57,7 @@ public class AuthController {
             throw new CustomException(INVALID_FIELDS_REQUEST);
         }
         log.info(logCurrent(getClassName(), getMethodName(), END));
-        return authService.companySignUp(signUpReq);
+        return authService.signUpCompany(signUpReq);
     }
 
     @PostMapping("/login") // 로그인
@@ -79,7 +79,7 @@ public class AuthController {
             return authService.signIn(signInReq, response);
         } else {
             log.info(logCurrent(getClassName(), getMethodName(), END));
-            return authService.companySignIn(signInReq, response);
+            return authService.signInCompany(signInReq, response);
         }
     }
 

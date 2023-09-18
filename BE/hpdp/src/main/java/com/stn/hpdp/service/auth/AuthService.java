@@ -3,7 +3,7 @@ import com.stn.hpdp.common.ApiResponse;
 import com.stn.hpdp.common.enums.Authority;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.util.SecurityUtil;
-import com.stn.hpdp.controller.auth.request.CompanySignUpReq;
+import com.stn.hpdp.controller.auth.request.SignUpCompanyReq;
 import com.stn.hpdp.controller.auth.request.ReissueReq;
 import com.stn.hpdp.controller.auth.request.SignInReq;
 import com.stn.hpdp.controller.auth.request.SignUpReq;
@@ -44,7 +44,7 @@ public class AuthService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final RedisTemplate redisTemplate;
 
-    public ApiResponse<Object> memberSignUp(SignUpReq signUpReq) {
+    public ApiResponse<Object> signUp(SignUpReq signUpReq) {
         if (memberRepository.existsByLoginId(signUpReq.getLoginId())) {
             throw new CustomException(ID_ALREADY_EXIST);
         }
@@ -63,7 +63,7 @@ public class AuthService {
         return ApiResponse.messageOk("회원가입에 성공했습니다.");
     }
 
-    public ApiResponse<Object> companySignUp(CompanySignUpReq signUpReq) {
+    public ApiResponse<Object> signUpCompany(SignUpCompanyReq signUpReq) {
         if (companyRepository.existsByLoginId(signUpReq.getLoginId())) {
             throw new CustomException(USER_ALREADY_EXIST);
         }
@@ -122,7 +122,7 @@ public class AuthService {
         return ApiResponse.messageDataOk("로그인에 성공했습니다.", signInRes);
     }
 
-    public ApiResponse<Object> companySignIn(SignInReq signIpReq, HttpServletResponse response) {
+    public ApiResponse<Object> signInCompany(SignInReq signIpReq, HttpServletResponse response) {
 
         Company company = companyRepository.findByLoginId(signIpReq.getLoginId())
                 .orElseThrow(() -> new CustomException(COMPANY_BAD_REQUEST));

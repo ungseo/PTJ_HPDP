@@ -29,7 +29,7 @@ public class MemberInfoRes {
     private String createdDate;
 
     private String modifiedDate;
-    public static MemberInfoRes from(Member member) {
+    public static MemberInfoRes of(Member member) {
         if(member == null) return null;
 
         return MemberInfoRes.builder()
