@@ -42,5 +42,8 @@ public class CompanySignUpReq {
     @NotNull
     private String accountNumber;
 
+    @NotNull
+    private String registrationNumber;
+
     private MultipartFile profile;
 }

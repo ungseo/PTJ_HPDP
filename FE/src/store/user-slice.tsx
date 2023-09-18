@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { login } from "../api/auth";
 const userSlice = createSlice({
-  name: "ui",
+  name: "user",
   initialState: {
     isLogined: true,
     userId: "1",
@@ -10,9 +10,17 @@ const userSlice = createSlice({
   reducers: {
     //함수 작성
     loginHandler(state, action) {
-      state.isLogined = true;
-      state.token = action.payload.token;
-      state.userId = action.payload.userId;
+      login(
+        action.payload.type,
+        action.payload,
+        (res) => {
+          state.isLogined = true;
+          state.userId = res.data.data.userId;
+        },
+        (err) => {
+          console.log(action.payload, err);
+        }
+      );
     },
     logoutHandler(state) {
       state.isLogined = false;
@@ -23,4 +31,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice;
-export const uiActions = userSlice.actions;
+export const userActions = userSlice.actions;
