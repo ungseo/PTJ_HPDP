@@ -14,7 +14,7 @@ const ProfileItemList = () => {
   return (
     <div className={style.profileItemList}>
       <div className={style.item} onClick={onClick} id="">
-        <p>쪽지함</p>
+        <p>쪽지</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
       <div
@@ -28,12 +28,15 @@ const ProfileItemList = () => {
       <div
         className={style.item}
         id={`history/funding/${userId}`}
-        onClick={onClick}
-      >
+        onClick={onClick}>
         <p>후원내역</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
-      <div className={style.item} id="interest-companies" onClick={onClick}>
+      <div
+        className={style.item}
+        id={`company/interest/${userId}`}
+        onClick={onClick}
+      >
         <p>관심기업</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
