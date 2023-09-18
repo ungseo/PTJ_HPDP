@@ -19,6 +19,8 @@ import { CheckoutPage } from "./pages/Toss/CheckoutPage";
 import { SuccessPage } from "./pages/Toss/SuccessPage";
 import { FailPage } from "./pages/Toss/FailPage";
 import HPDPBankPage from "./pages/HPDPBankPage";
+import InterestingCompanyPage from './pages/InterestingCompanyPage';
+import PageNotFound404 from './pages/PageNotFound404';
 
 function App() {
   return (
@@ -49,13 +51,14 @@ function App() {
           path="/profile/company/interest/:userid"
           Component={InterestingCompanyPage}
         ></Route>
-        <Route path="*" Component={PageNotFound404}></Route>
+        <Route
           path="/profile/interest-companies"
           Component={InterestCompaniesPage}
         ></Route>
         <Route path="/payment" Component={CheckoutPage}></Route>
         <Route path="success" Component={SuccessPage}></Route>
         <Route path="/fail" Component={FailPage}></Route>
+        <Route path="*" Component={PageNotFound404}></Route>
       </Routes>
       <div className={style.blank}></div>
       <div className={style.navBar}>
