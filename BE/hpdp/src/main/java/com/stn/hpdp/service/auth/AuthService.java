@@ -79,6 +79,7 @@ public class AuthService {
                 .introduce(signUpReq.getIntroduce())
                 .hashtag(signUpReq.getHashtag())
                 .accountNumber(signUpReq.getAccountNumber())
+                .registrationNumber(signUpReq.getRegistrationNumber())
                 .roles(Collections.singletonList(Authority.ROLE_COMPANY.name()))
                 .build();
         companyRepository.save(company);
