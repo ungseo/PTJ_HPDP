@@ -1,16 +1,23 @@
 package com.stn.hpdp.controller.company.response;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
-@Builder
+@Setter
+//@Builder
 @ToString
 public class FindCompanyRes {
     private Long companyId;
     private String profile;
     private String name;
     private String hashtag;
-//    private boolean isInterested = false;
+    private boolean isInterested;
+
+    public FindCompanyRes(Long companyId, String profile, String name, String hashtag){
+        this.companyId = companyId;
+        this.profile = profile;
+        this.name = name;
+        this.hashtag = hashtag;
+        this.isInterested = false;
+    }
 }
