@@ -45,22 +45,25 @@ public class Company extends TimeBaseEntity implements UserDetails  {
     private String name;
 
     @NotNull
-    private String phoneNumber;
+    private String hashtag;
 
     @NotNull
     private String email;
 
     @NotNull
+    private String phoneNumber;
+
+    @NotNull
     private String address;
+
+    @NotNull
+    private String registrationNumber;
 
     @NotNull
     private String websiteUrl;
 
     @NotNull
     private String introduce;
-
-    @NotNull
-    private String hashtag;
 
     @NotNull
     private String accountNumber;

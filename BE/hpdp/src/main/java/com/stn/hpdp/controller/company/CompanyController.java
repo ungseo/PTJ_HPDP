@@ -1,6 +1,7 @@
 package com.stn.hpdp.controller.company;
 
 import com.stn.hpdp.common.ApiResponse;
+import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
 import com.stn.hpdp.controller.company.response.FindCompanyRes;
 import com.stn.hpdp.service.company.CompanyService;
 import io.swagger.annotations.Api;
@@ -28,6 +29,15 @@ public class CompanyController {
 
         log.info(logCurrent(getClassName(), getMethodName(), START));
         List<FindCompanyRes> result = companyService.findCompanies(keyword, request);
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+        return ApiResponse.ok(result);
+    }
+
+    @GetMapping("/{companyId}") // 아이디 중복 체크
+    public ApiResponse<Object> findCompany(@PathVariable("companyId") Long companyId, HttpServletRequest request) {
+
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+        FindCompanyDetailRes result = companyService.findCompany(companyId, request);
         log.info(logCurrent(getClassName(), getMethodName(), END));
         return ApiResponse.ok(result);
     }
