@@ -1,17 +1,20 @@
 package com.stn.hpdp.model.entity;
 
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.stn.hpdp.common.enums.BankCode;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 import static javax.persistence.FetchType.*;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Account extends TimeBaseEntity{
 
@@ -20,12 +23,25 @@ public class Account extends TimeBaseEntity{
     @Column(name = "account_id")
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
     private UUID uuid;
-
-    private String accountNumber;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "members_id")
     private Member member;
+
+    @NotNull
+    private String accountNumber;
+
+    @NotNull
+    private int accountPw;
+
+    @NotNull
+    private BankCode bankCode;
+
+    @NotNull
+    private int balance;
+
 }
