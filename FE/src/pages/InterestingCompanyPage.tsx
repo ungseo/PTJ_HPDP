@@ -1,16 +1,22 @@
-import * as React from 'react';
+import React from 'react'
+import { OptionTopbar } from "../components/common/TopBar";
 import ImageList from '@mui/material/ImageList';
-import CompanyItem from './CompanyItem';
+import CompanyItem from '../components/CompanyItem';
 
-export default function CompanyList() {
+const InterestingCompanyPage = () => {
   return (
-    <ImageList>
-      {itemData.map((item, index) => (
-        <CompanyItem key={index} item={item} />
-      ))}
-    </ImageList>
-  );
+    <div>
+      <OptionTopbar text="관심기업" />
+      <ImageList>
+        {itemData.map((item, index) => (
+          <CompanyItem key={index} item={item} />
+        ))}
+      </ImageList>
+    </div>
+  )
 }
+
+export default InterestingCompanyPage
 
 const itemData = [
   {
