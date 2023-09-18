@@ -1,0 +1,39 @@
+.period {
+  margin: 1rem 0;
+}
+
+.progress {
+  margin: 2rem 0;
+  .title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: start;
+    margin: 0 2rem;
+  }
+  .graph_content {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: center;
+    .graph {
+      flex: 1;
+    }
+    .content {
+      flex: 1;
+      text-align: start;
+      padding-left: 2rem;
+      .total_account {
+        margin-bottom: 2rem;
+        .amount {
+          margin-top: 0.5rem;
+          font-weight: 700;
+        }
+      }
+      .use_acccount {
+        .amount {
+          margin-top: 0.5rem;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
