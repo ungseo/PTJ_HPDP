@@ -8,13 +8,15 @@ import ProfilePage from "./pages/ProfilePage";
 import LogInPage from "./pages/LogInPage";
 import SignUpPage from "./pages/SignUpPage";
 import SearchResultPage from "./pages/SearchResultPage";
-import PageNotFound404 from "./pages/PageNotFound404";
 import FundingDetailPage from "./pages/FundingDetailPage";
 import CompanyDetailPage from "./pages/CompanyDetailPage";
 import SearchPage from "./pages/SearchPage";
 import ProfileEditPage from "./pages/ProfileEditPage";
 import TransactionHistoryPage from "./pages/TransactionHistoryPage";
 import FundingHistoryPage from './components/FundingHistoryPage';
+import InterestingCompanyPage from "./pages/InterestingCompanyPage";
+import PageNotFound404 from "./pages/PageNotFound404";
+
 function App() {
   return (
     <div id="app-root" className={style.App}>
@@ -28,7 +30,6 @@ function App() {
         <Route path="/signup" Component={SignUpPage}></Route>
         <Route path="/search" Component={SearchPage}></Route>
         <Route path="/search/:keyword" Component={SearchResultPage}></Route>
-        <Route path="*" Component={PageNotFound404}></Route>
         <Route path="/fundingdetail" Component={FundingDetailPage}></Route>
         <Route path="/companydetail" Component={CompanyDetailPage}></Route>
         <Route path="/profile/edit/:userid" Component={ProfileEditPage}></Route>
@@ -40,6 +41,11 @@ function App() {
           path="/profile/history/funding/:userid"
           Component={FundingHistoryPage}
         ></Route>
+        <Route
+          path="/profile/company/interest/:userid"
+          Component={InterestingCompanyPage}
+        ></Route>
+        <Route path="*" Component={PageNotFound404}></Route>
       </Routes>
       <div className={style.blank}></div>
       <div className={style.navBar}>

@@ -21,6 +21,14 @@ const CompanyItem = (props: CompanyItemProps) => {
 
     const toggleLike = () => {
         setIsLiked(!isLiked);
+
+        // axios.post('')
+        // .then((res)=>{
+        //   console.log(res.data)
+        // })
+        // .catch((err)=>{
+        //   console.log(err)
+        // })
     };
 
     return (
