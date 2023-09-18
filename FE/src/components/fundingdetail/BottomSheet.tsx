@@ -35,6 +35,7 @@ const BottomSheet = ({
       className={`${style.bottomsheetcontainer} ${
         isActive ? style.active : ""
       }`}
+      style={{ zIndex: 5 }}
     >
       <div className={style.closeicon}>
         <Icon icon="bi:x-circle" onClick={handleClose} />

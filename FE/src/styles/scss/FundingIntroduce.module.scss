@@ -1,0 +1,24 @@
+@import "Style";
+
+.participants_list {
+  margin: 1rem;
+  .textcontent {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    .first {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    .second {
+      margin: auto 0;
+      font-size: 0.9rem;
+      color: $grey;
+    }
+  }
+}
+
+.participants {
+  height: 5rem;
+  background-color: #d83333;
+}
