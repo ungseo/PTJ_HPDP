@@ -18,6 +18,7 @@ public class CorsConfig {
         config.setAllowCredentials(true);
         config.addAllowedOriginPattern("*"); // 도메인 패턴을 허용하도록 변경
         config.addAllowedHeader("*");
+        config.addExposedHeader("*");
         config.addAllowedMethod("*");
 
         source.registerCorsConfiguration("/api/**", config);
