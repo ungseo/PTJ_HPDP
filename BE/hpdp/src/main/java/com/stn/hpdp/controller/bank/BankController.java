@@ -4,7 +4,9 @@ import com.stn.hpdp.common.ApiResponse;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.controller.auth.request.CompanySignUpReq;
 import com.stn.hpdp.controller.bank.request.SaveAccountReq;
+import com.stn.hpdp.controller.bank.request.TransferAccountReq;
 import com.stn.hpdp.controller.bank.response.FindAccountRes;
+import com.stn.hpdp.controller.bank.response.TransferAccountRes;
 import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
 import com.stn.hpdp.controller.company.response.FindCompanyRes;
 import com.stn.hpdp.service.bank.BankService;
@@ -70,5 +72,24 @@ public class BankController {
         log.info(logCurrent(getClassName(), getMethodName(), END));
 
         return ApiResponse.messageOk("Success");
+    }
+
+    @PostMapping("/transfer") // 계좌 이체
+    public ApiResponse<Object> transferAccount(@Validated @RequestBody TransferAccountReq transferAccountReq, Errors errors) {
+
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+        if (errors.hasErrors()) {
+            errors.getFieldErrors().forEach(e-> {
+                System.out.println("message : " + e.getDefaultMessage());
+            });
+            log.info(logCurrent(getClassName(), getMethodName(), END));
+            throw new CustomException(INVALID_FIELDS_REQUEST);
+        }
+
+        TransferAccountRes transferAccountRes = bankService.transferAccount(transferAccountReq);
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+
+        return ApiResponse.ok(transferAccountRes);
     }
 }
