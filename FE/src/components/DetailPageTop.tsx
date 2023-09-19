@@ -1,10 +1,9 @@
 import React from 'react';
-import style from '../../styles/css/FundingDetailTop.module.css'
+import style from '../styles/css/DetailPageTop.module.css'
 import { Icon } from '@iconify/react';
 import { useNavigate } from "react-router-dom";
 
-
-const FundingDetailTop = () => {
+const DetailPageTop = () => {
 
     const navigate = useNavigate();
 
@@ -28,4 +27,4 @@ const FundingDetailTop = () => {
     );
 };
 
-export default FundingDetailTop;
+export default DetailPageTop;

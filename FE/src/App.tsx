@@ -35,8 +35,8 @@ function App() {
         <Route path="/signup" Component={SignUpPage}></Route>
         <Route path="/search" Component={SearchPage}></Route>
         <Route path="/search/:keyword" Component={SearchResultPage}></Route>
-        <Route path="/fundingdetail" Component={FundingDetailPage}></Route>
-        <Route path="/companydetail" Component={CompanyDetailPage}></Route>
+        <Route path="/funding/detail/:fundingid" Component={FundingDetailPage}></Route>
+        <Route path="/company/detail/:companyid" Component={CompanyDetailPage}></Route>
         <Route path="/profile/edit/:userid" Component={ProfileEditPage}></Route>
         <Route path="/profile/testbank" Component={HPDPBankPage}></Route>
         <Route

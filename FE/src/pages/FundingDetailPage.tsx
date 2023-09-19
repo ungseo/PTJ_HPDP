@@ -5,12 +5,12 @@ import FundingIntroduce from "../components/fundingdetail/FundingIntroduce";
 import FundingSituation from "../components/fundingdetail/FundingSituation";
 import BottomSheet from "../components/fundingdetail/BottomSheet";
 import FundingComplete from "../components/fundingdetail/FundingComplete";
-import FundingDetailTop from "../components/fundingdetail/FundingDetailTop";
-
+import DetailPageTop from "../components/DetailPageTop";
 import DefaultButton from "../components/common/DefaultButton";
 import style from "../styles/css/FundingDetailPage.module.css";
 
 const FundingDetailPage = () => {
+
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
   const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
@@ -43,7 +43,7 @@ const FundingDetailPage = () => {
 
   return (
     <div className={style.fundingdetailpage}>
-      <FundingDetailTop />
+      <DetailPageTop />
       <CustomizedTabs tabProps={tabProps} />
       {isBottomSheetOpen && (
         <>
