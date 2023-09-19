@@ -3,7 +3,7 @@ import NonLoginInfo from "./NonLoginInfo";
 import ProfilePhoto from "./ProfilePhoto";
 import { useSelector } from "react-redux";
 const ProfileWrapper = () => {
-  const isLogined = useSelector((state: any) => state.user.isLogined);
+  const isLogined = useSelector((state: any) => state.user.auth.isLogined);
 
   return (
     <div>
