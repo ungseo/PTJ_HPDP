@@ -50,7 +50,7 @@ public class MemberService {
         member.setPhoneNumber(memberUpdateReq.getPhoneNumber());
         member.setEmail(memberUpdateReq.getEmail());
 
-        memberRepository.save(member);
+//        memberRepository.save(member);
 
         log.info(logCurrent(getClassName(), getMethodName(), END));
         return MemberInfoRes.of(member);
