@@ -46,4 +46,16 @@ public class BankController {
         bankService.saveAccount(saveAccountReq);
         return ApiResponse.messageOk("Success");
     }
+
+    @PostMapping("/delete") // 계좌 연결 해제
+    public ApiResponse<Object> deleteAccount() {
+
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+
+        bankService.deleteAccount();
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+
+        return ApiResponse.messageOk("Success");
+    }
 }

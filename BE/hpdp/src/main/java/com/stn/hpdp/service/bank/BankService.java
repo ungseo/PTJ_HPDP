@@ -47,4 +47,16 @@ public class BankService {
         Account account = saveAccountReq.toEntity(member);
         accountRepository.save(account);
     }
+
+    public void deleteAccount(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Member member = memberRepository.findByLoginId(auth.getName())
+                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+
+        Optional<Account> saved = accountRepository.findAccountByMember_Id(member.getId());
+        if(saved.isPresent()){
+            saved.get().setMember(null);
+            accountRepository.save(saved.get());
+        }
+    }
 }
