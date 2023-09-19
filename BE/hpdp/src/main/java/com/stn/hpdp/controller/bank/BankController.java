@@ -2,16 +2,12 @@ package com.stn.hpdp.controller.bank;
 
 import com.stn.hpdp.common.ApiResponse;
 import com.stn.hpdp.common.exception.CustomException;
-import com.stn.hpdp.controller.auth.request.CompanySignUpReq;
 import com.stn.hpdp.controller.bank.request.SaveAccountReq;
 import com.stn.hpdp.controller.bank.request.TransferAccountReq;
 import com.stn.hpdp.controller.bank.response.FindAccountRes;
 import com.stn.hpdp.controller.bank.response.FindTransferRes;
 import com.stn.hpdp.controller.bank.response.TransferAccountRes;
-import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
-import com.stn.hpdp.controller.company.response.FindCompanyRes;
 import com.stn.hpdp.service.bank.BankService;
-import com.stn.hpdp.service.company.CompanyService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +15,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static com.stn.hpdp.common.exception.ErrorCode.INVALID_FIELDS_REQUEST;
