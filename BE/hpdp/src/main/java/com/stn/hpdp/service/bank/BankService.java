@@ -3,6 +3,7 @@ package com.stn.hpdp.service.bank;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.jwt.JwtTokenProvider;
 import com.stn.hpdp.controller.bank.request.SaveAccountReq;
+import com.stn.hpdp.controller.bank.response.FindAccountRes;
 import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
 import com.stn.hpdp.controller.company.response.FindCompanyRes;
 import com.stn.hpdp.model.entity.Account;
@@ -46,6 +47,19 @@ public class BankService {
 
         Account account = saveAccountReq.toEntity(member);
         accountRepository.save(account);
+    }
+
+    public FindAccountRes findAccount() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Member member = memberRepository.findByLoginId(auth.getName())
+                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+
+        Optional<Account> saved = accountRepository.findAccountByMember_Id(member.getId());
+        if (saved.isEmpty()) {
+            throw new CustomException(CONNECTED_ACCOUNT_NOT_FOUND);
+        }
+
+        return FindAccountRes.of(saved.get());
     }
 
     public void deleteAccount(){

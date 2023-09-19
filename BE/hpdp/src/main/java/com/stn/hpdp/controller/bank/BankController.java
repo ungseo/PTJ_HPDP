@@ -4,6 +4,7 @@ import com.stn.hpdp.common.ApiResponse;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.controller.auth.request.CompanySignUpReq;
 import com.stn.hpdp.controller.bank.request.SaveAccountReq;
+import com.stn.hpdp.controller.bank.response.FindAccountRes;
 import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
 import com.stn.hpdp.controller.company.response.FindCompanyRes;
 import com.stn.hpdp.service.bank.BankService;
@@ -45,6 +46,18 @@ public class BankController {
 
         bankService.saveAccount(saveAccountReq);
         return ApiResponse.messageOk("Success");
+    }
+
+    @PostMapping("/account") // 계좌 조회
+    public ApiResponse<Object> findAccount() {
+
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+
+        FindAccountRes findAccountRes = bankService.findAccount();
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+
+        return ApiResponse.ok(findAccountRes);
     }
 
     @PostMapping("/delete") // 계좌 연결 해제

@@ -30,6 +30,7 @@ public enum ErrorCode {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 회원입니다."),
     TRANSFER_FAIL(HttpStatus.NOT_FOUND, "이체에 실패하였습니다."),
     COMPANY_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 기업입니다."),
+    CONNECTED_ACCOUNT_NOT_FOUND(HttpStatus.NOT_FOUND, "연결된 계좌가 없습니다."),
 
     /* 409 CONFLICT : Resource 의 현재 상태와 충돌. 보통 중복된 데이터 존재 */
     DUPLICATE_RESOURCE(HttpStatus.CONFLICT, "데이터가 이미 존재합니다"),
