@@ -18,7 +18,7 @@ import java.util.UUID;
 public class TransferAccountReq {
 
     @NotNull
-    private int accountPw;
+    private String accountPw;
 
     @NotNull
     private BankCode opponentBankCode;

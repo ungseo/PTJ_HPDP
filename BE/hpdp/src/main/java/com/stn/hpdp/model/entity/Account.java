@@ -37,7 +37,7 @@ public class Account extends TimeBaseEntity{
     private String accountNumber;
 
     @NotNull
-    private int accountPw;
+    private String accountPw;
 
     @NotNull
     private BankCode bankCode;
