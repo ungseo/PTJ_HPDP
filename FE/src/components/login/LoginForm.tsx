@@ -7,26 +7,39 @@ import { login } from "../../api/auth";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../store/user-slice";
 import { Switch } from "@mui/material";
+import { getMemberInfo } from "../../api/members";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const loginHandler = (event: any) => {
     event.preventDefault();
-    const type = checked ? 0 : 1;
+    const type = !checked ? 0 : 1;
     const data = {
       loginId: id,
       loginPw: pw,
     };
+    console.log(data);
     login(
       type,
       data,
       (res) => {
-        const data = {
-          accessToken: res.headers.accessToken,
-          refreshToken: res.headers.refreshToken,
+        const headers: any = res.headers;
+        const tokens = {
+          accessToken: headers.get("accessToken"),
+          refreshToken: headers.get("refreshToken"),
         };
-        dispatch(userActions.loginHandler(data));
+        dispatch(userActions.loginHandler(tokens));
+        getMemberInfo(
+          headers.get("accessToken"),
+          (res) => {
+            console.log("성공", res);
+            dispatch(userActions.saveMemberInfo(res.data.data));
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
         navigate("/");
       },
       (err) => {

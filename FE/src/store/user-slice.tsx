@@ -1,24 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login } from "../api/auth";
+const memberInfo = {
+  memberId: "",
+  loginId: "",
+  name: "",
+  email: "",
+  phoneNumber: "",
+  point: 0,
+  profile: "",
+  address: "",
+  role: "",
+  createDate: "",
+  modifiedDate: "",
+};
 const userSlice = createSlice({
   name: "user",
   initialState: {
     auth: {
-      isLogined: true,
+      isLogined: false,
     },
     info: {
-      memberId: "1",
-      loginId: "ungse0",
-      token: "asdfadsfadfasfsafa", // 임시용
-      name: "김웅서",
-      email: "ungseo@gmail.com",
-      phoneNumber: "010-9402-3393",
-      point: 123456,
-      profile: "/americano.png",
-      address: "",
-      role: "INDIVIDUAL",
-      createDate: "2023-10-09",
-      modifiedDate: "2023-10-09",
+      ...memberInfo,
     },
   },
   reducers: {
@@ -32,6 +34,10 @@ const userSlice = createSlice({
       state.auth.isLogined = false;
       localStorage.setItem("Atoken", "");
       localStorage.setItem("Rtoken", "");
+    },
+    saveMemberInfo(state, action) {
+      state.info = { ...memberInfo, ...action.payload };
+      console.log(state.info);
     },
   },
 });
