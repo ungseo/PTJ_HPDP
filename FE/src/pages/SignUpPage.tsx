@@ -11,7 +11,7 @@ const SignUpPage = () => {
       <LogoTopbar />
       <div className={style.wrapper}>
         <h1 className={style.header}>회원가입</h1>
-        <SignUpForm onSubmit={onSubmit} />
+        <SignUpForm />
       </div>
     </div>
   );

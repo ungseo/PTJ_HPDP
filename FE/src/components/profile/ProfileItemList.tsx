@@ -2,13 +2,21 @@ import { useSelector } from "react-redux";
 import style from "../../styles/css/ProfileItemList.module.css";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../store/user-slice";
 const ProfileItemList = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const userId = useSelector((state: any) => state.user.userId);
 
   //router 설정, id = 각 버튼의 id, 버튼 id값에 주소 입력후 navigate에 동적으로 할당
   const onClick = (event: any) => {
     const { id } = event.target;
+    if (id === "logout") {
+      dispatch(userActions.logoutHandler());
+      navigate("/");
+      return;
+    }
     navigate(`/profile/${id}`);
   };
   return (
@@ -45,7 +53,12 @@ const ProfileItemList = () => {
         <p>서비스 테스트 페이지</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
-      <div className={style.item} style={{ color: "red" }} onClick={onClick}>
+      <div
+        className={style.item}
+        id="logout"
+        style={{ color: "red" }}
+        onClick={onClick}
+      >
         <p>로그아웃</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>

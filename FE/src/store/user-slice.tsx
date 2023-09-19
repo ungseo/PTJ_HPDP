@@ -1,31 +1,43 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login } from "../api/auth";
+const memberInfo = {
+  memberId: "",
+  loginId: "",
+  name: "",
+  email: "",
+  phoneNumber: "",
+  point: 0,
+  profile: "",
+  address: "",
+  role: "",
+  createDate: "",
+  modifiedDate: "",
+};
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    isLogined: true,
-    userId: "1",
-    token: "asdfadsfadfasfsafa",
+    auth: {
+      isLogined: false,
+    },
+    info: {
+      ...memberInfo,
+    },
   },
   reducers: {
     //함수 작성
     loginHandler(state, action) {
-      login(
-        action.payload.type,
-        action.payload,
-        (res) => {
-          state.isLogined = true;
-          state.userId = res.data.data.userId;
-        },
-        (err) => {
-          console.log(action.payload, err);
-        }
-      );
+      state.auth.isLogined = true;
+      localStorage.setItem("Atoken", action.payload.accessToken);
+      localStorage.setItem("Rtoken", action.payload.refreshToken);
     },
     logoutHandler(state) {
-      state.isLogined = false;
-      state.token = "";
-      state.userId = "";
+      state.auth.isLogined = false;
+      localStorage.setItem("Atoken", "");
+      localStorage.setItem("Rtoken", "");
+    },
+    saveMemberInfo(state, action) {
+      state.info = { ...memberInfo, ...action.payload };
+      console.log(state.info);
     },
   },
 });

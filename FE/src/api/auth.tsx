@@ -16,7 +16,7 @@ export async function signup(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  await api.post("/signup", data).then(success).catch(fail);
+  await api.post("", data).then(success).catch(fail);
 }
 
 export async function login(

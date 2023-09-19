@@ -1,40 +1,72 @@
 import AnimationLabelInput from "../common/Inputs";
 import DefaultButton from "../common/DefaultButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import style from "../../styles/css/LoginForm.module.css";
 import { useState } from "react";
 import { login } from "../../api/auth";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../store/user-slice";
 import { Switch } from "@mui/material";
+import { getMemberInfo } from "../../api/members";
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const loginHandler = (event: any) => {
     event.preventDefault();
+    const type = !checked ? 0 : 1;
     const data = {
-      type: checked ? 0 : 1,
       loginId: id,
       loginPw: pw,
     };
-    dispatch(userActions.loginHandler(data));
+    console.log(data);
+    login(
+      type,
+      data,
+      (res) => {
+        const headers: any = res.headers;
+        const tokens = {
+          accessToken: headers.get("accessToken"),
+          refreshToken: headers.get("refreshToken"),
+        };
+        dispatch(userActions.loginHandler(tokens));
+        getMemberInfo(
+          headers.get("accessToken"),
+          (res) => {
+            console.log("성공", res);
+            dispatch(userActions.saveMemberInfo(res.data.data));
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+        navigate("/");
+      },
+      (err) => {
+        alert(err.message);
+      }
+    );
   };
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const [checked, setChecked] = useState(false);
   const toggler = () => {
-    setChecked(true);
+    setChecked(!checked);
   };
   const onChange = (event: any) => {
-    const { id } = event.target;
+    const { id, value } = event.target;
     if (id === "id") {
-      setId(event.target.value);
+      setId(value);
     } else if (id === "pw") {
-      setPw(event.target.value);
+      setPw(value);
     }
   };
   return (
     <form className={style.form} onSubmit={loginHandler}>
-      <Switch checked={checked} onChange={toggler} />
+      <div className={style.toggler}>
+        <p>기업회원 이신가요?</p>
+        <Switch checked={checked} onChange={toggler} />
+      </div>
       <AnimationLabelInput
         labelTitle={"Id"}
         type="text"

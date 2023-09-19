@@ -7,7 +7,7 @@ import { ProfilePhotoInterFace } from "../../interface/profilePageInterface";
 
 const ProfilePhoto = ({ styles }: ProfilePhotoInterFace) => {
   const navigate = useNavigate();
-  const isLogined = useSelector((state: any) => state.user.isLogined);
+  const isLogined = useSelector((state: any) => state.user.auth.isLogined);
   const isEditPage = useSelector((state: any) => state.ui.isEditPage);
   const profilePhotoURL = isLogined ? "/nonProfile.png" : "/nonProfile.png";
   const goToEditPage = () => {
@@ -24,7 +24,7 @@ const ProfilePhoto = ({ styles }: ProfilePhotoInterFace) => {
           style={styles}
           alt="프사"
         />
-        {isLogined && isEditPage ? <PhotoEditButton /> : null}
+        {isEditPage && <PhotoEditButton />}
       </div>
       {isLogined && !isEditPage ? (
         <div className={style.p} onClick={goToEditPage}>

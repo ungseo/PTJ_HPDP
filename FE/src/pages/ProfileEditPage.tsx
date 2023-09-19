@@ -9,7 +9,6 @@ import AnimationLabelInput from "../components/common/Inputs";
 import DefaultButton from "../components/common/DefaultButton";
 
 const ProfileEditPage = () => {
-  const test = useSelector((state: any) => state.ui.isEditPage);
   const [inputAddress, setInputAddress] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const modalOpener = () => {
@@ -21,7 +20,6 @@ const ProfileEditPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(uiActions.inEditPage());
-    console.log(test);
   }, []);
 
   return (
