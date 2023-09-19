@@ -13,14 +13,15 @@ import CompanyDetailPage from "./pages/CompanyDetailPage";
 import SearchPage from "./pages/SearchPage";
 import ProfileEditPage from "./pages/ProfileEditPage";
 import TransactionHistoryPage from "./pages/TransactionHistoryPage";
-import FundingHistoryPage from "./components/FundingHistoryPage";
+import FundingHistoryPage from "./pages/FundingHistoryPage";
 import InterestCompaniesPage from "./pages/InterestCompaniesPage";
 import { CheckoutPage } from "./pages/Toss/CheckoutPage";
 import { SuccessPage } from "./pages/Toss/SuccessPage";
 import { FailPage } from "./pages/Toss/FailPage";
 import HPDPBankPage from "./pages/HPDPBankPage";
-import InterestingCompanyPage from './pages/InterestingCompanyPage';
-import PageNotFound404 from './pages/PageNotFound404';
+import InterestingCompanyPage from "./pages/InterestingCompanyPage";
+import MessagePage from "./pages/MessagePage";
+import PageNotFound404 from "./pages/PageNotFound404";
 
 function App() {
   return (
@@ -35,8 +36,14 @@ function App() {
         <Route path="/signup" Component={SignUpPage}></Route>
         <Route path="/search" Component={SearchPage}></Route>
         <Route path="/search/:keyword" Component={SearchResultPage}></Route>
-        <Route path="/fundingdetail" Component={FundingDetailPage}></Route>
-        <Route path="/companydetail" Component={CompanyDetailPage}></Route>
+        <Route
+          path="/funding/detail/:fundingid"
+          Component={FundingDetailPage}
+        ></Route>
+        <Route
+          path="/company/detail/:companyid"
+          Component={CompanyDetailPage}
+        ></Route>
         <Route path="/profile/edit/:userid" Component={ProfileEditPage}></Route>
         <Route path="/profile/testbank" Component={HPDPBankPage}></Route>
         <Route
@@ -55,6 +62,7 @@ function App() {
           path="/profile/interest-companies"
           Component={InterestCompaniesPage}
         ></Route>
+        <Route path="/profile/message/:userid" Component={MessagePage}></Route>
         <Route path="/payment" Component={CheckoutPage}></Route>
         <Route path="success" Component={SuccessPage}></Route>
         <Route path="/fail" Component={FailPage}></Route>
