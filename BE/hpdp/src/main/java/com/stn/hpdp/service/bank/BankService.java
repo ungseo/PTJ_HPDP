@@ -5,6 +5,7 @@ import com.stn.hpdp.common.jwt.JwtTokenProvider;
 import com.stn.hpdp.controller.bank.request.SaveAccountReq;
 import com.stn.hpdp.controller.bank.request.TransferAccountReq;
 import com.stn.hpdp.controller.bank.response.FindAccountRes;
+import com.stn.hpdp.controller.bank.response.FindTransferRes;
 import com.stn.hpdp.controller.bank.response.TransferAccountRes;
 import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
 import com.stn.hpdp.controller.company.response.FindCompanyRes;
@@ -20,6 +21,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.tree.TreeNode;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -91,6 +94,30 @@ public class BankService {
         Transfer transfer = transferAccountReq.toEntity(saved.get());
         transferRepository.save(transfer);
 
+        saved.get().setBalance(transfer.getAfterBlnc());
+        accountRepository.save(saved.get());
+
+        // TODO: 잔돈 자동이체 추가 account -> point로 이동
+
         return TransferAccountRes.of(transfer);
+    }
+
+    public List<FindTransferRes> findTransfer() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Member member = memberRepository.findByLoginId(auth.getName())
+                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+
+        Optional<Account> saved = accountRepository.findAccountByMember_Id(member.getId());
+        if (saved.isEmpty()) {
+            throw new CustomException(CONNECTED_ACCOUNT_NOT_FOUND);
+        }
+
+        List<Transfer> transferList = transferRepository.findAllByAccount_Uuid(saved.get().getUuid());
+        List<FindTransferRes> result = new ArrayList<>();
+        for (Transfer transfer : transferList){
+            result.add(FindTransferRes.of(transfer));
+        }
+
+        return result;
     }
 }

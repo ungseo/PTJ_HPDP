@@ -6,6 +6,7 @@ import com.stn.hpdp.controller.auth.request.CompanySignUpReq;
 import com.stn.hpdp.controller.bank.request.SaveAccountReq;
 import com.stn.hpdp.controller.bank.request.TransferAccountReq;
 import com.stn.hpdp.controller.bank.response.FindAccountRes;
+import com.stn.hpdp.controller.bank.response.FindTransferRes;
 import com.stn.hpdp.controller.bank.response.TransferAccountRes;
 import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
 import com.stn.hpdp.controller.company.response.FindCompanyRes;
@@ -91,5 +92,17 @@ public class BankController {
         log.info(logCurrent(getClassName(), getMethodName(), END));
 
         return ApiResponse.ok(transferAccountRes);
+    }
+
+    @PostMapping("/transfer-detail") // 계좌 이체 내역 조회
+    public ApiResponse<Object> findTransfer() {
+
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+
+        List<FindTransferRes> findTransferRes = bankService.findTransfer();
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+
+        return ApiResponse.ok(findTransferRes);
     }
 }
