@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 @Getter
 @Setter
-public class CompanySignUpReq {
+public class SignUpCompanyReq {
 
     @NotEmpty(message = "아이디는 필수 입력값입니다.")
     private String loginId;

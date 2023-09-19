@@ -35,7 +35,7 @@ public class MemberService {
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
         log.info(logCurrent(getClassName(), getMethodName(), END));
-        return MemberInfoRes.from(member);
+        return MemberInfoRes.of(member);
     }
     @Transactional
     public MemberInfoRes updateMemberInfo(MemberUpdateReq memberUpdateReq) {
@@ -53,7 +53,7 @@ public class MemberService {
         memberRepository.save(member);
 
         log.info(logCurrent(getClassName(), getMethodName(), END));
-        return MemberInfoRes.from(member);
+        return MemberInfoRes.of(member);
     }
 
 }

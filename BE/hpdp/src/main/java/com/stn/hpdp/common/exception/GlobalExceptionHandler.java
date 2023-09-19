@@ -2,6 +2,7 @@ package com.stn.hpdp.common.exception;
 
 import com.stn.hpdp.common.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -11,12 +12,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {CustomException.class})
-    public ApiResponse<Object> handleCustomException(CustomException e) {
+    public ResponseEntity<ErrorResponse> handleCustomException(CustomException e) {
         log.error("handleCustomException throw CustomException : {}", e.getErrorCode());
-        return ApiResponse.of(
-                e.getErrorCode().getHttpStatus(),
-                e.getErrorCode().getDescription(),
-                null
-        );
+        return ErrorResponse.toResponseEntity(e.getErrorCode());
     }
 }
