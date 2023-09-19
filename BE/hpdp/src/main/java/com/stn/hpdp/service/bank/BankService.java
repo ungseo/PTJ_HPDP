@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.stn.hpdp.common.exception.ErrorCode.*;
 
@@ -36,6 +37,12 @@ public class BankService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Member member = memberRepository.findByLoginId(auth.getName())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+
+        Optional<Account> saved = accountRepository.findAccountByMember_Id(member.getId());
+        if(saved.isPresent()){
+            saved.get().setMember(null);
+            accountRepository.save(saved.get());
+        }
 
         Account account = saveAccountReq.toEntity(member);
         accountRepository.save(account);

@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Getter
 @Builder
@@ -32,6 +33,7 @@ public class SaveAccountReq {
                 .accountPw(accountPw)
                 .bankCode(bankCode)
                 .balance(100000)
+                .uuid(UUID.randomUUID())
                 .build();
     }
 }
