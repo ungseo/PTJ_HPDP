@@ -3,6 +3,7 @@ import sampleSlice from "./sample-slice";
 import uiSlice from "./ui-slice";
 import userSlice from "./user-slice";
 import transHistorySlice from "./transHistory-slice";
+import messageSlice from "./message-slice";
 //슬라이스 import
 
 const store = configureStore({
@@ -12,6 +13,7 @@ const store = configureStore({
     ui: uiSlice.reducer,
     user: userSlice.reducer,
     transHistory: transHistorySlice.reducer,
+    message: messageSlice.reducer,
   },
 });
 
