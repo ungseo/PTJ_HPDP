@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.ToString;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Getter
@@ -29,7 +31,7 @@ public class SaveFundingReq {
     private String rewardDesc;
     private MultipartFile rewardImg;
 
-    private List<Budget> budgetList;
+//    private List<Budget> budgetList;
 
     public Funding toEntity(Company company){
         return Funding.builder()
@@ -37,8 +39,8 @@ public class SaveFundingReq {
                 .hashtag(hashtag)
                 .title(title)
                 .targetAmount(Integer.parseInt(targetAmount))
-//                .startDate(startDate)
-//                .endDate(endDate)
+                .startDate(LocalDateTime.parse(startDate))
+                .endDate(LocalDateTime.parse(endDate))
                 .rewardName(rewardName)
                 .rewardPrice(Integer.parseInt(rewardPrice))
                 .rewardDesc(rewardDesc)
