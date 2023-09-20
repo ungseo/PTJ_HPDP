@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login } from "../api/auth";
+import { PURGE } from 'redux-persist';
+
 const memberInfo = {
   memberId: "",
   loginId: "",

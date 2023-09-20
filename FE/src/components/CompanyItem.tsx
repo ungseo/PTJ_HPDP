@@ -18,7 +18,7 @@ const CompanyItem = (props: CompanyItemProps) => {
 
     const [isLiked, setIsLiked] = useState(false);
 
-    const isLogined = useSelector((state: any) => state.user.isLogined);
+    const isLogined = useSelector((state: any) => state.user.auth.isLogined);
 
     const toggleLike = () => {
         setIsLiked(!isLiked);
