@@ -1,18 +1,34 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import sampleSlice from "./sample-slice";
 import uiSlice from "./ui-slice";
 import userSlice from "./user-slice";
 import transHistorySlice from "./transHistory-slice";
 //슬라이스 import
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+
+// test code
+const reducers = combineReducers({
+  sample: sampleSlice.reducer,
+
+  ui: uiSlice.reducer,
+  user: userSlice.reducer,
+  transHistory: transHistorySlice.reducer,
+});
+
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["user"],
+};
+
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 const store = configureStore({
-  reducer: {
-    sample: sampleSlice.reducer,
-    // 슬라이스 리듀서 이름 지정하고 추가.
-    ui: uiSlice.reducer,
-    user: userSlice.reducer,
-    transHistory: transHistorySlice.reducer,
-  },
+  reducer: persistedReducer,
+  middleware: [thunk, logger]
 });
 
 export default store;
