@@ -1,42 +1,44 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 import { login } from "../api/auth";
-const memberInfo = {
-  memberId: "",
-  loginId: "",
-  name: "",
-  email: "",
-  phoneNumber: "",
-  point: 0,
-  profile: "",
-  address: "",
-  role: "",
-  createDate: "",
-  modifiedDate: "",
+import { PURGE } from "redux-persist";
+
+const initialState = {
+  auth: {
+    isLogined: false,
+    accessToken: "",
+    refreshToken: "",
+  },
+  info: {
+    memberId: "",
+    loginId: "",
+    name: "",
+    email: "",
+    phoneNumber: "",
+    point: 0,
+    profile: "",
+    address: "",
+    role: "",
+    createDate: "",
+    modifiedDate: "",
+  },
 };
 const userSlice = createSlice({
   name: "user",
-  initialState: {
-    auth: {
-      isLogined: false,
-    },
-    info: {
-      ...memberInfo,
-    },
-  },
+  initialState,
   reducers: {
     //함수 작성
     loginHandler(state, action) {
       state.auth.isLogined = true;
-      localStorage.setItem("Atoken", action.payload.accessToken);
-      localStorage.setItem("Rtoken", action.payload.refreshToken);
+      state.auth.accessToken = action.payload.accessToken;
+      state.auth.refreshToken = action.payload.refreshToken;
     },
     logoutHandler(state) {
-      state.auth.isLogined = false;
-      localStorage.setItem("Atoken", "");
-      localStorage.setItem("Rtoken", "");
+      localStorage.removeItem("persist:root");
+      console.log(state);
+      return { ...initialState };
     },
     saveMemberInfo(state, action) {
-      state.info = { ...memberInfo, ...action.payload };
+      state.info = { ...state.info, ...action.payload };
       state.auth.isLogined = true;
       console.log(state.info);
     },
