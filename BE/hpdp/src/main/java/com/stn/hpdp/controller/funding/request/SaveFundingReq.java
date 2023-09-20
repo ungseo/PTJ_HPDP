@@ -31,7 +31,7 @@ public class SaveFundingReq {
     private String rewardDesc;
     private MultipartFile rewardImg;
 
-//    private List<Budget> budgetList;
+    private List<SaveBudgetReq> budgetList;
 
     public Funding toEntity(Company company){
         return Funding.builder()

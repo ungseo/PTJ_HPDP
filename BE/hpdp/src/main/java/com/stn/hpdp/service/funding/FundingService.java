@@ -45,6 +45,7 @@ public class FundingService {
             throw new CustomException(COMPANY_NOT_FOUND);
         }
 
+        log.info(saveFundingReq.getBudgetList().toString());
         Funding funding = saveFundingReq.toEntity(company.get());
 
         // startdate 따져서 state 세팅
@@ -84,6 +85,13 @@ public class FundingService {
                 log.info(e.getMessage());
             }
         }
+
+        saveFundingReq.getBudgetList().forEach(
+                budgetDto -> {
+                    log.info(budgetDto.toString());
+                    funding.addBudgets(budgetDto.toEntity(funding));
+                }
+        );
 
         fundingRepository.save(funding);
     }

@@ -7,6 +7,8 @@ import lombok.*;
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.persistence.FetchType.*;
 
@@ -44,6 +46,14 @@ public class Funding extends TimeBaseEntity {
     private FundingState state;
     private int settlement;
     private String docsUrl;
+
+    @OneToMany(mappedBy = "funding", cascade = CascadeType.ALL)
+    private List<Budget> budgets = new ArrayList<>();
+
+    public void addBudgets(Budget budget){
+        budget.setFunding(this);
+        budgets.add(budget);
+    }
 
     // update method
     public void update(UpdateFundingReq updateFundingReq){
