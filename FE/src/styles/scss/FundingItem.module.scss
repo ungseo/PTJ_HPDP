@@ -2,7 +2,7 @@
 
 .total {
   display: flex;
-  margin-bottom: 1rem;
+  // margin-bottom: 1rem;
 
   .leftimg {
     width: 100%;
@@ -13,7 +13,7 @@
   }
 
   .rightcontent {
-    padding-left: 1rem;
+    // padding-left: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -21,7 +21,7 @@
 
     .upcontent {
       text-align: left;
-      margin-top: 0.2rem;
+      // margin-top: 0.2rem;
       .fundingcontent {
         display: block;
         width: 100%;
@@ -38,7 +38,7 @@
     }
 
     .downcontent {
-      margin-bottom: 0.2rem;
+      // margin-bottom: 0.2rem;
       .remaindate {
         text-align: start;
         font-weight: bold;

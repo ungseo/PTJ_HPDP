@@ -22,8 +22,30 @@ import HPDPBankPage from "./pages/HPDPBankPage";
 import InterestingCompanyPage from "./pages/InterestingCompanyPage";
 import MessagePage from "./pages/MessagePage";
 import PageNotFound404 from "./pages/PageNotFound404";
+import { useEffect } from "react";
+import { getMemberInfo } from "./api/members";
+import { userActions } from "./store/user-slice";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  const refresh = () => {
+    getMemberInfo(
+      localStorage.getItem("Atoken"),
+      (res) => {
+        console.log("유저정보 불러오기성공");
+        dispatch(userActions.saveMemberInfo(res.data.data));
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  };
+  useEffect(() => {
+    if (localStorage.getItem("Atoken")) {
+      refresh();
+    }
+  }, []);
   return (
     <div id="app-root" className={style.App}>
       <Routes>

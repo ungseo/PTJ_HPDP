@@ -8,7 +8,7 @@ const FundingItem = () => {
   const navigate = useNavigate();
 
   const handleGoFundingDetail = () => {
-    navigate("/fundingdetail");
+    navigate("/funding/detail/:fundingid");
   };
 
   return (

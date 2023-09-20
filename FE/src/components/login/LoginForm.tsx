@@ -30,16 +30,6 @@ const LoginForm = () => {
           refreshToken: headers.get("refreshToken"),
         };
         dispatch(userActions.loginHandler(tokens));
-        getMemberInfo(
-          headers.get("accessToken"),
-          (res) => {
-            console.log("성공", res);
-            dispatch(userActions.saveMemberInfo(res.data.data));
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
         navigate("/");
       },
       (err) => {
