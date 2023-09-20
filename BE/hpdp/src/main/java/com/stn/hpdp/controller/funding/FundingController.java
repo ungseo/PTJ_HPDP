@@ -41,4 +41,15 @@ public class FundingController {
 
         return ApiResponse.messageOk("Success");
     }
+
+    @DeleteMapping("/{fundingId}") // 펀딩 삭제
+    public ApiResponse<Object> deleteFunding(@PathVariable("fundingId") Long fundingId) {
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+
+        fundingService.deleteFunding(fundingId);
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+
+        return ApiResponse.messageOk("Success");
+    }
 }

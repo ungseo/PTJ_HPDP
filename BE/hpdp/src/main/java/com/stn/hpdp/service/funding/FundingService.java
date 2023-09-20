@@ -136,4 +136,8 @@ public class FundingService {
 
         fundingRepository.save(funding.get());
     }
+
+    public void deleteFunding(Long fundingId){
+        fundingRepository.deleteById(fundingId);
+    }
 }
