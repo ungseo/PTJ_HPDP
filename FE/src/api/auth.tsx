@@ -51,7 +51,7 @@ export async function duplicationIdCheck(
 }
 
 export async function logout(
-  accessToken: Interfaces.InLogoutRequestInterface,
+  accessToken: string | null,
   success: (
     res: AxiosResponse<any, any>
   ) =>

@@ -37,6 +37,7 @@ const userSlice = createSlice({
     },
     saveMemberInfo(state, action) {
       state.info = { ...memberInfo, ...action.payload };
+      state.auth.isLogined = true;
       console.log(state.info);
     },
   },

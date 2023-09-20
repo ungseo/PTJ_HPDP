@@ -14,7 +14,7 @@ const ProfilePhoto = ({ styles }: ProfilePhotoInterFace) => {
     navigate(`/profile/edit/${userId}`);
   };
 
-  const userId = useSelector((state: any) => state.user.userId);
+  const userId = useSelector((state: any) => state.user.auth.memberId);
   return (
     <div className={style.profilePhoto}>
       <div className={style.photoWrapper}>

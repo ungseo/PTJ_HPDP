@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 export function SuccessPage() {
   const [searchParams] = useSearchParams();
   // Back에 API쏘기
-  const token = useSelector((state: any) => state.user.token);
+  const token = localStorage.getItem("Atoken");
 
   useEffect(() => {
     const data: InCreatePaymentsInterface = {
