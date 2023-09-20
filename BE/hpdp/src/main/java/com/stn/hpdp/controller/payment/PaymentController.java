@@ -32,6 +32,6 @@ public class PaymentController {
             throw new CustomException(INVALID_FIELDS_REQUEST);
         }
         paymentService.savePayment(savePaymentReq);
-        return ApiResponse.ok("결제 결과 등록에 성공했습니다.");
+        return ApiResponse.messageOk("결제 결과 등록에 성공했습니다.");
     }
 }
