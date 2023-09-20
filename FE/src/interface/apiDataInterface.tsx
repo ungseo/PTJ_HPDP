@@ -47,7 +47,7 @@ export interface TokenInterface {
 
 // 로그아웃
 export interface InLogoutRequestInterface {
-  accessToken: string;
+  accessToken: string | null;
 }
 
 // 내정보 조회
@@ -296,7 +296,7 @@ export interface OutSearchSendHistoryInterface {
 // 결제
 
 export interface InCreatePaymentsInterface {
-  header: { accessToken: string };
+  header: { accessToken: string | null };
   body: {
     amount: number | string | null;
     retUrl?: string;
