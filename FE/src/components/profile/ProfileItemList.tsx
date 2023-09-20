@@ -8,8 +8,8 @@ import { logout } from "../../api/auth";
 const ProfileItemList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userId = useSelector((state: any) => state.user.auth.memberId);
-
+  const userId = useSelector((state: any) => state.user.info.memberId);
+  console.log(userId);
   //router 설정, id = 각 버튼의 id, 버튼 id값에 주소 입력후 navigate에 동적으로 할당
   const onClick = (event: any) => {
     const { id } = event.target;
@@ -32,7 +32,7 @@ const ProfileItemList = () => {
   };
   return (
     <div className={style.profileItemList}>
-      <div className={style.item} onClick={onClick} id="{`message`}">
+      <div className={style.item} onClick={onClick} id={`message/${userId}`}>
         <p>쪽지</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>

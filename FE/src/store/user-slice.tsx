@@ -32,8 +32,8 @@ const userSlice = createSlice({
     },
     logoutHandler(state) {
       state.auth.isLogined = false;
-      localStorage.setItem("Atoken", "");
-      localStorage.setItem("Rtoken", "");
+      localStorage.removeItem("Atoken");
+      localStorage.removeItem("Rtoken");
     },
     saveMemberInfo(state, action) {
       state.info = { ...memberInfo, ...action.payload };

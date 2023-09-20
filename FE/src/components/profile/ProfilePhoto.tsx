@@ -8,8 +8,10 @@ import { ProfilePhotoInterFace } from "../../interface/profilePageInterface";
 const ProfilePhoto = ({ styles }: ProfilePhotoInterFace) => {
   const navigate = useNavigate();
   const isLogined = useSelector((state: any) => state.user.auth.isLogined);
+  const userName = useSelector((state: any) => state.user.info.name);
   const isEditPage = useSelector((state: any) => state.ui.isEditPage);
-  const profilePhotoURL = isLogined ? "/nonProfile.png" : "/nonProfile.png";
+  const userProfile = useSelector((state: any) => state.user.info.profile);
+  const profilePhotoURL = userProfile ? userProfile : "/nonProfile.png";
   const goToEditPage = () => {
     navigate(`/profile/edit/${userId}`);
   };
@@ -28,7 +30,7 @@ const ProfilePhoto = ({ styles }: ProfilePhotoInterFace) => {
       </div>
       {isLogined && !isEditPage ? (
         <div className={style.p} onClick={goToEditPage}>
-          <p>{"유저이름"}</p>
+          <p>{userName}</p>
           <Icon icon="bi:gear-fill"></Icon>
         </div>
       ) : null}

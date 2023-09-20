@@ -43,6 +43,7 @@ function App() {
   };
   useEffect(() => {
     if (localStorage.getItem("Atoken")) {
+      console.log("hi");
       refresh();
     }
   }, []);
