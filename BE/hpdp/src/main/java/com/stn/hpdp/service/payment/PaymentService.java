@@ -1,6 +1,7 @@
 package com.stn.hpdp.service.payment;
 
 import com.stn.hpdp.common.exception.CustomException;
+import com.stn.hpdp.common.util.SecurityUtil;
 import com.stn.hpdp.controller.payment.request.SavePaymentReq;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.model.repository.MemberRepository;
@@ -22,8 +23,8 @@ public class PaymentService {
     @Transactional
     public void savePayment (SavePaymentReq savePaymentReq){
         log.info(logCurrent(getClassName(), getMethodName(), START));
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Member member = memberRepository.findByLoginId(auth.getName())
+
+        Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
         pointHistoryRepository.save(savePaymentReq.toEntity(member));
