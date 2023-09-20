@@ -22,4 +22,7 @@ public class Budget extends TimeBaseEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "funding_id")
     private Funding funding;
+
+    private int price;
+    private String content;
 }
