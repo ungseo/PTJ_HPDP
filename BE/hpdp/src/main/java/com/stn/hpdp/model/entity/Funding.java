@@ -1,6 +1,7 @@
 package com.stn.hpdp.model.entity;
 
 import com.stn.hpdp.common.enums.FundingState;
+import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
 import lombok.*;
 
 import javax.persistence.*;
@@ -43,5 +44,17 @@ public class Funding extends TimeBaseEntity {
     private FundingState state;
     private int settlement;
     private String docsUrl;
+
+    // update method
+    public void update(UpdateFundingReq updateFundingReq){
+        this.hashtag = updateFundingReq.getHashtag();
+        this.title = updateFundingReq.getTitle();
+        this.targetAmount = Integer.parseInt(updateFundingReq.getTargetAmount());
+        this.startDate = LocalDateTime.parse(updateFundingReq.getStartDate());
+        this.endDate = LocalDateTime.parse(updateFundingReq.getEndDate());
+        this.rewardName = updateFundingReq.getRewardName();
+        this.rewardPrice = Integer.parseInt(updateFundingReq.getRewardPrice());
+        this.rewardDesc = updateFundingReq.getRewardDesc();
+    }
 
 }

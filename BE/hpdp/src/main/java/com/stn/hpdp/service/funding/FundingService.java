@@ -1,6 +1,7 @@
 package com.stn.hpdp.service.funding;
 
 import com.stn.hpdp.common.AwsS3Uploader;
+import com.stn.hpdp.common.enums.FundingState;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.controller.bank.request.SaveAccountReq;
 import com.stn.hpdp.controller.bank.request.TransferAccountReq;
@@ -8,6 +9,7 @@ import com.stn.hpdp.controller.bank.response.FindAccountRes;
 import com.stn.hpdp.controller.bank.response.FindTransferRes;
 import com.stn.hpdp.controller.bank.response.TransferAccountRes;
 import com.stn.hpdp.controller.funding.request.SaveFundingReq;
+import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
 import com.stn.hpdp.model.entity.*;
 import com.stn.hpdp.model.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +46,14 @@ public class FundingService {
         }
 
         Funding funding = saveFundingReq.toEntity(company.get());
+
+        // startdate 따져서 state 세팅
+        LocalDateTime startDate = LocalDateTime.parse(saveFundingReq.getStartDate());
+        if(startDate.isAfter(LocalDateTime.now())) {
+            funding.setState(FundingState.READY);
+        }else{
+            funding.setState(FundingState.ING);
+        }
 
         // 썸네일 이미지
         if(saveFundingReq.getThumbnail() != null){
@@ -75,6 +86,54 @@ public class FundingService {
         }
 
         fundingRepository.save(funding);
+    }
 
+    public void updateFunding(UpdateFundingReq updateFundingReq){
+        Optional<Funding> funding = fundingRepository.findById(Long.parseLong(updateFundingReq.getFundingId()));
+        if(funding.isEmpty()){
+            throw new CustomException(FUNDING_NOT_FOUND);
+        }
+
+        funding.get().update(updateFundingReq);
+
+        // startdate 따져서 state 세팅
+        LocalDateTime startDate = LocalDateTime.parse(updateFundingReq.getStartDate());
+        if(startDate.isAfter(LocalDateTime.now())) {
+            funding.get().setState(FundingState.READY);
+        }else{
+            funding.get().setState(FundingState.ING);
+        }
+
+        // 썸네일 이미지
+        if(updateFundingReq.getThumbnail() != null){
+            try {
+                String thumbnailUrl = awsS3Uploader.uploadFile(updateFundingReq.getThumbnail(), "funding/thumbnail");
+                funding.get().setThumbnailUrl(thumbnailUrl);
+            } catch (IOException e) {
+                log.info(e.getMessage());
+            }
+        }
+
+        // 내용 이미지
+        if(updateFundingReq.getContent() != null){
+            try {
+                String contentUrl = awsS3Uploader.uploadFile(updateFundingReq.getContent(), "funding/content");
+                funding.get().setContentUrl(contentUrl);
+            } catch (IOException e) {
+                log.info(e.getMessage());
+            }
+        }
+
+        // 리워드 이미지
+        if(updateFundingReq.getRewardImg() != null){
+            try {
+                String rewardUrl = awsS3Uploader.uploadFile(updateFundingReq.getRewardImg(), "funding/reward");
+                funding.get().setRewardImg(rewardUrl);
+            } catch (IOException e) {
+                log.info(e.getMessage());
+            }
+        }
+
+        fundingRepository.save(funding.get());
     }
 }
