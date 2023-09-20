@@ -1,4 +1,4 @@
-package com.stn.hpdp.controller.member.requset;
+package com.stn.hpdp.controller.member.request;
 
 import lombok.Getter;
 import lombok.Setter;

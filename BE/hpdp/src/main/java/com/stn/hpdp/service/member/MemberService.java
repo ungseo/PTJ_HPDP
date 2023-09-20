@@ -1,7 +1,7 @@
 package com.stn.hpdp.service.member;
 
 import com.stn.hpdp.common.exception.CustomException;
-import com.stn.hpdp.controller.member.requset.MemberUpdateReq;
+import com.stn.hpdp.controller.member.request.MemberUpdateReq;
 import com.stn.hpdp.controller.member.response.MemberInfoRes;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.model.repository.MemberRepository;

@@ -3,7 +3,7 @@ package com.stn.hpdp.controller.member;
 import com.stn.hpdp.common.ApiResponse;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.jwt.JwtTokenProvider;
-import com.stn.hpdp.controller.member.requset.MemberUpdateReq;
+import com.stn.hpdp.controller.member.request.MemberUpdateReq;
 import com.stn.hpdp.service.member.MemberService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
