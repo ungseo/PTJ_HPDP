@@ -11,10 +11,11 @@ const ProfileItemList = () => {
   const navigate = useNavigate();
   const userId = useSelector((state: any) => state.user.info.memberId);
   console.log(userId);
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   //router 설정, id = 각 버튼의 id, 버튼 id값에 주소 입력후 navigate에 동적으로 할당
   const onClick = (event: any) => {
     const { id } = event.target;
-    const accessToken = localStorage.getItem("Atoken");
+
     if (id === "logout") {
       logout(
         accessToken,

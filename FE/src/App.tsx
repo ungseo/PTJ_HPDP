@@ -26,12 +26,14 @@ import { useEffect } from "react";
 import { getMemberInfo } from "./api/members";
 import { userActions } from "./store/user-slice";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const refresh = () => {
     getMemberInfo(
-      localStorage.getItem("Atoken"),
+      accessToken,
       (res) => {
         console.log("유저정보 불러오기성공");
         dispatch(userActions.saveMemberInfo(res.data.data));
@@ -42,7 +44,7 @@ function App() {
     );
   };
   useEffect(() => {
-    if (localStorage.getItem("Atoken")) {
+    if (accessToken) {
       console.log("hi");
       refresh();
     }
