@@ -4,6 +4,7 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 interface CompanyItemProps {
     item: {
@@ -31,26 +32,39 @@ const CompanyItem = (props: CompanyItemProps) => {
         // })
     };
 
+    const navigate = useNavigate();
+
+    const handleCompanyDetail = () => {
+      navigate("/company/detail/:companyid");
+    };
+
     return (
-        <ImageListItem key={item.img}>
+      <div>
+        <ImageListItem
+          key={item.img}
+          onClick={handleCompanyDetail}
+        >
           <img
             src={`${item.img}?w=248&fit=crop&auto=format`}
             srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
             alt={item.title}
             loading="lazy"
-          />
+            />
 
         {isLogined ? (
-            <IconButton
+          <IconButton
                 aria-label={`like ${item.title}`}
-                onClick={toggleLike}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  toggleLike()
+                }}
                 color={isLiked ? 'error' : 'default'}
                 style={{
-                    position: 'absolute',
-                    top: '0',
-                    right: '0',
+                  position: 'absolute',
+                  top: '0',
+                  right: '0',
                 }}
-            >
+                >
                 <FavoriteIcon />
             </IconButton>
         ) : null}
@@ -58,8 +72,9 @@ const CompanyItem = (props: CompanyItemProps) => {
           <ImageListItemBar
             title={item.title}
             position="below"
-          />
+            />
         </ImageListItem>
+      </div>
     );
 };
 
