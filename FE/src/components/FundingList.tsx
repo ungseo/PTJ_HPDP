@@ -6,9 +6,7 @@ const FundingList = () => {
 
   return (
     <div>
-      <div>
-        총 1345개의 펀딩이 진행중 입니다
-      </div>
+      <div>총 1345개의 펀딩이 진행중 입니다</div>
 
       {fundingItems.map((item) => (
         <FundingItem key={item} />
