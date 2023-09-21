@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { userActions } from "../../store/user-slice";
 import { Switch } from "@mui/material";
 import { getMemberInfo } from "../../api/members";
+import DuplicationBtn from "./DuplicationBtn";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const LoginForm = () => {
         };
         dispatch(userActions.loginHandler(tokens));
         navigate("/");
+        window.location.reload();
       },
       (err) => {
         alert(err.message);
@@ -57,14 +59,17 @@ const LoginForm = () => {
         <p>기업회원 이신가요?</p>
         <Switch checked={checked} onChange={toggler} />
       </div>
-      <AnimationLabelInput
-        labelTitle={"Id"}
-        type="text"
-        styles={{ height: "4em" }}
-        id="id"
-        value={id}
-        onChange={onChange}
-      />
+      <div style={{ width: "100%", position: "relative" }}>
+        <AnimationLabelInput
+          labelTitle={"Id"}
+          type="text"
+          styles={{ height: "4em" }}
+          id="id"
+          value={id}
+          onChange={onChange}
+        />
+        <DuplicationBtn checkingId={id} />
+      </div>
       <AnimationLabelInput
         labelTitle={"Password"}
         type="password"

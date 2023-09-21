@@ -7,6 +7,7 @@ import messageSlice from "./message-slice";
 //슬라이스 import
 import { persistReducer, PERSIST, PURGE } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import profileEditSlice from "./profileEdit-slice";
 
 // test code
 const reducers = combineReducers({
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   user: userSlice.reducer,
   transHistory: transHistorySlice.reducer,
   message: messageSlice.reducer,
+  profileEdit: profileEditSlice.reducer,
 });
 
 const persistConfig = {

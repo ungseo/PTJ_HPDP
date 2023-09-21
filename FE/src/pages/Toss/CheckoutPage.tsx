@@ -67,7 +67,7 @@ export function CheckoutPage({}) {
       <input type="text" value={price} onChange={onChange} />P<div></div>
       <div id="payment-widget" />
       <div id="agreement" />
-      <span>충전금액 : {`${price.toLocaleString()}원`}</span>
+      <span>충전금액 : {price}원</span>
       <br />
       <button
         onClick={async () => {
