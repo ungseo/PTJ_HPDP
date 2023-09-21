@@ -26,20 +26,4 @@ public class Budget extends TimeBaseEntity {
 
     private String price;
     private String content;
-
-//    public void setFunding(){
-//        if(this.funding != null){
-//            this.funding.getBudgets().remove(this);
-//        }
-//        this.funding = funding;
-//        funding.getBudgets().add(this);
-//    }
-
-//    public static Budget createBudget(String price, String content, Funding funding){
-//        return Budget.builder()
-//                .price(price)
-//                .content(content)
-//                .funding(funding)
-//                .build();
-//    }
 }

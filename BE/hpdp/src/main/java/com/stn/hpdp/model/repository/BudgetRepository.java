@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BudgetRepository extends JpaRepository<Budget, Long> {
+    void deleteAllByFunding_Id(Long fundingId);
 }

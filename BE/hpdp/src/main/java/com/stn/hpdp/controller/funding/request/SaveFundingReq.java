@@ -1,20 +1,19 @@
 package com.stn.hpdp.controller.funding.request;
 
 import com.stn.hpdp.model.entity.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
 @Builder
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 public class SaveFundingReq {
 
     private String companyLoginId;
@@ -31,7 +30,7 @@ public class SaveFundingReq {
     private String rewardDesc;
     private MultipartFile rewardImg;
 
-    private List<SaveBudgetReq> budgetList;
+    private List<Budget> budgetList = new ArrayList<>();
 
     public Funding toEntity(Company company){
         return Funding.builder()

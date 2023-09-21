@@ -18,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -45,7 +46,6 @@ public class FundingService {
             throw new CustomException(COMPANY_NOT_FOUND);
         }
 
-        log.info(saveFundingReq.getBudgetList().toString());
         Funding funding = saveFundingReq.toEntity(company.get());
 
         // startdate 따져서 state 세팅
@@ -87,21 +87,20 @@ public class FundingService {
         }
 
         saveFundingReq.getBudgetList().forEach(
-                budgetDto -> {
-                    log.info(budgetDto.toString());
-                    funding.addBudgets(budgetDto.toEntity(funding));
-                }
+                funding::addBudgets
         );
 
         fundingRepository.save(funding);
     }
 
+    @Transactional
     public void updateFunding(UpdateFundingReq updateFundingReq){
         Optional<Funding> funding = fundingRepository.findById(Long.parseLong(updateFundingReq.getFundingId()));
         if(funding.isEmpty()){
             throw new CustomException(FUNDING_NOT_FOUND);
         }
 
+        budgetRepository.deleteAllByFunding_Id(funding.get().getId());
         funding.get().update(updateFundingReq);
 
         // startdate 따져서 state 세팅
@@ -142,9 +141,14 @@ public class FundingService {
             }
         }
 
+        updateFundingReq.getBudgetList().forEach(
+                funding.get()::addBudgets
+        );
+
         fundingRepository.save(funding.get());
     }
 
+    @Transactional
     public void deleteFunding(Long fundingId){
         fundingRepository.deleteById(fundingId);
     }

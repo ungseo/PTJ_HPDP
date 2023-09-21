@@ -18,6 +18,7 @@ import static javax.persistence.FetchType.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class Funding extends TimeBaseEntity {
 
     @Id
@@ -51,8 +52,11 @@ public class Funding extends TimeBaseEntity {
     private List<Budget> budgets = new ArrayList<>();
 
     public void addBudgets(Budget budget){
+        if(this.budgets == null){
+            budgets = new ArrayList<>();
+        }
         budget.setFunding(this);
-        budgets.add(budget);
+        this.budgets.add(budget);
     }
 
     // update method
@@ -65,6 +69,7 @@ public class Funding extends TimeBaseEntity {
         this.rewardName = updateFundingReq.getRewardName();
         this.rewardPrice = Integer.parseInt(updateFundingReq.getRewardPrice());
         this.rewardDesc = updateFundingReq.getRewardDesc();
+        this.budgets = new ArrayList<>();
     }
 
 }
