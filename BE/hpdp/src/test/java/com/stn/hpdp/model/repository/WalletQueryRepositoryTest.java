@@ -29,7 +29,7 @@ class WalletQueryRepositoryTest extends IntegrationTestSupport {
     void getWallet() throws Exception {
         //given
         Member member = InsertMember();
-        Wallet wallet = InsertWallet("0x6f68CF31F6278B22c3d6355c39833592654d0225", "UTC--2023-09-15T05-52-01.470016300Z--879788d3c7bf2161e0696146cfdcfc77c4b493be", "1q2w3e4r!",member);
+        Wallet wallet = InsertWallet("0x6f68CF31F6278B22c3d6355c39833592654d0225", "UTC--2023-09-15T05-52-01.470016300Z--879788d3c7bf2161e0696146cfdcfc77c4b493be", "1q2w3e4r!", member);
 
         //when
         WalletRes walletRes = walletQueryRepository.findWalletByMember(member.getId());
