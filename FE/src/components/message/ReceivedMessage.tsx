@@ -65,7 +65,7 @@ const ReceivedMessage = () => {
       </Grid>
       <div className={style.down_content}>
         {messages.map((message, index) => (
-          <div onClick={handleShowContentClick}>
+          <div onClick={handleShowContentClick} key={message.id}>
             <MessagePart
               key={message.id}
               isChecked={isCheckedList[index]}
