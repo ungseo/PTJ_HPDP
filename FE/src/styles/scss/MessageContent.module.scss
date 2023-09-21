@@ -1,6 +1,35 @@
 .messageModal {
-  width: 15rem;
-  height: 20rem;
-  background-color: #d68888;
-  border-radius: 0.5rem;
+  max-width: 500px;
+  width: 100%;
+  height: 100%;
+
+  .messagecontent {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    max-width: 350px;
+    width: 75%;
+    height: 70%;
+    position: fixed;
+    padding: 1rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    @media (min-height: 680px) {
+      height: 65%;
+    }
+    .icon_section {
+      position: relative;
+      margin-bottom: 2rem;
+      .icon {
+        position: absolute;
+        right: 0;
+      }
+    }
+    .sending {
+      display: flex;
+    }
+    .received {
+      display: flex;
+    }
+  }
 }

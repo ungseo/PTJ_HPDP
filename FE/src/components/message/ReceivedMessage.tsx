@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import { Grid } from "@mui/material";
 import style from "../../styles/css/ReceivedMessage.module.css";
 import MessagePart from "./MessagePart";
+import MessageContent from "./MessageContent";
 
 import { useSelector, useDispatch } from "react-redux";
 import { messageSliceActions } from "../../store/message-slice";
@@ -17,6 +18,7 @@ const ReceivedMessage = () => {
     (state: { message: { isCheckedAll: boolean; isCheckedList: boolean[] } }) =>
       state.message.isCheckedList
   );
+  const [isMessageContent, setMessageContent] = useState(false);
 
   const messages = [
     { id: 1, content: "First" },
@@ -37,6 +39,13 @@ const ReceivedMessage = () => {
     dispatch(messageSliceActions.initializeIsCheckedList(messages.length));
   }, [dispatch, messages.length]);
 
+  const handleShowContentClick = () => {
+    setMessageContent(true);
+  };
+  const handleCloseModal = () => {
+    setMessageContent(false);
+  };
+
   return (
     <div className={style.message}>
       <Grid container className={style.upcontent}>
@@ -56,13 +65,21 @@ const ReceivedMessage = () => {
       </Grid>
       <div className={style.down_content}>
         {messages.map((message, index) => (
-          <MessagePart
-            key={message.id}
-            isChecked={isCheckedList[index]}
-            onCheckboxChange={() => handleCheckboxChangeSingle(index)}
-          />
+          <div onClick={handleShowContentClick}>
+            <MessagePart
+              key={message.id}
+              isChecked={isCheckedList[index]}
+              onCheckboxChange={() => handleCheckboxChangeSingle(index)}
+            />
+          </div>
         ))}
       </div>
+      {isMessageContent && (
+        <div className="modal">
+          <div className={style.modalbackground}></div>
+          <MessageContent onClose={handleCloseModal} />
+        </div>
+      )}
     </div>
   );
 };
