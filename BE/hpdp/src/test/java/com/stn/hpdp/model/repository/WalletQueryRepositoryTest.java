@@ -24,7 +24,7 @@ class WalletQueryRepositoryTest extends IntegrationTestSupport {
     @Autowired
     private MemberRepository memberRepository;
 
-    @DisplayName("사용자의 아이디로 지갑의 주소, 키파일, 비밀번호를 조회 할 수 있다.")
+    @DisplayName("로그인한 사용자의 지갑 주소, 키파일, 비밀번호를 조회 할 수 있다.")
     @Test
     void getWallet() throws Exception {
         //given

@@ -1,6 +1,7 @@
 package com.stn.hpdp.controller.blockchain;
 
 import com.stn.hpdp.service.blockchain.TokenService;
+import com.stn.hpdp.service.blockchain.WalletService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class BlockChainController {
 
     private final TokenService tokenService;
+    private final WalletService walletService;
+
     @GetMapping("/privateKey")
     public String getPrivateKey() {
         String keystorePassword = "1q2w3e4r!";  // 실제 사용 시에는 보안을 고려하여 관리해야 합니다.
@@ -28,4 +31,19 @@ public class BlockChainController {
     public String getBalance() throws Exception {
         return tokenService.getBalance().toString();
     }
+
+    @GetMapping("/make")
+    public String createWallet() {
+        String wallet = walletService.createWallet();
+        log.info("wallet :{}", wallet);
+        String address = walletService.verifyWallet(wallet);
+        log.info("address :{}", address);
+        String recepit = walletService.sendEther(address);
+        log.info("recepit :{}", recepit);
+
+        return recepit;
+
+    }
+
+
 }

@@ -60,7 +60,9 @@ dependencies {
 
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation group: 'org.springframework.security', name: 'spring-security-test'
     testImplementation 'org.springframework.security:spring-security-test'
+
 
     // swagger
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
