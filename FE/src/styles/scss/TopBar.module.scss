@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   height: 7vh;
-  border-bottom: 1px solid $black;
+  border-bottom: 1px solid $hrcolor;
   position: sticky;
   top: 0;
   z-index: 5;
@@ -15,6 +15,7 @@
     .logo {
       padding: 0 0.5rem 0 0.5rem;
       width: 4rem;
+      background-size: cover;
     }
     .logoName {
       font-family: $GamjaFlower;
@@ -37,7 +38,7 @@
 .optionTopbar {
   display: flex;
   height: 7vh;
-  border-bottom: 1px solid $black;
+  border-bottom: 1px solid $hrcolor;
   justify-content: space-between;
   align-items: center;
   position: sticky;
@@ -66,4 +67,13 @@
     background-size: cover;
     margin-right: 1rem;
   }
+}
+
+.defaultTopbar {
+  height: 7vh;
+  border-bottom: 1px solid $hrcolor;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background-color: $white;
 }
