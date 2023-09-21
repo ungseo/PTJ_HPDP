@@ -4,24 +4,37 @@ import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../store/user-slice";
+import { logout } from "../../api/auth";
+
 const ProfileItemList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userId = useSelector((state: any) => state.user.userId);
-
+  const userId = useSelector((state: any) => state.user.info.memberId);
+  console.log(userId);
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   //router 설정, id = 각 버튼의 id, 버튼 id값에 주소 입력후 navigate에 동적으로 할당
   const onClick = (event: any) => {
     const { id } = event.target;
+
     if (id === "logout") {
-      dispatch(userActions.logoutHandler());
-      navigate("/");
+      logout(
+        accessToken,
+        (res) => {
+          dispatch(userActions.logoutHandler());
+          alert("로그아웃 되었습니다.");
+          navigate("/");
+        },
+        (err) => {
+          alert(err);
+        }
+      );
       return;
     }
     navigate(`/profile/${id}`);
   };
   return (
     <div className={style.profileItemList}>
-      <div className={style.item} onClick={onClick} id="{`message`}">
+      <div className={style.item} onClick={onClick} id={`message/${userId}`}>
         <p>쪽지</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>

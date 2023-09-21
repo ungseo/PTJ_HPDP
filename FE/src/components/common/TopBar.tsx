@@ -9,7 +9,9 @@ const LogoTopbar = () => {
   return (
     <div className={style.logoTopbar}>
       <div className={style.leftCpnt}>
-        <img className={style.logo} src="/hpdpLogo.png" alt="LOGO" />
+        <div>
+          <img className={style.logo} src="/hpdpLogo.png" alt="LOGO" />
+        </div>
         <h1 className={style.logoName}>한푼두푼</h1>
       </div>
       <button className={style.searchBtn} onClick={goToSearchPage}></button>
@@ -32,6 +34,14 @@ const OptionTopbar = ({ text }: { text: string }) => {
         <h3>{text}</h3>
       </div>
       <button className={style.searchBtn} onClick={goToSearchPage}></button>
+    </div>
+  );
+};
+
+const DefaultTopbar = (text: string) => {
+  return (
+    <div className={style.defaultTopbar}>
+      <h3>{text}</h3>
     </div>
   );
 };

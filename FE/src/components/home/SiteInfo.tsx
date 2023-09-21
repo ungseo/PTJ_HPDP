@@ -3,13 +3,13 @@ import InfoItem from "./InfoItem";
 
 const SiteInfo = () => {
   return (
-    <div>
+    <div className={style.totalwarapper}>
       <p style={{ fontSize: "1.3rem", marginBottom: "2rem" }}>
         후원자 여러분 덕분에 세상은 조금씩 달콤해지고 있습니다.
       </p>
       <div className={style.wrapper}>
         <InfoItem
-          imgSrc="/save_money.png"
+          imgSrc="/dollar-symbol.png"
           text="후원 금액"
           num={9203292}
           unit="원"
@@ -22,8 +22,8 @@ const SiteInfo = () => {
           unit="개"
         />
         <InfoItem
-          imgSrc="/save_money.png"
-          text="후원 금액"
+          imgSrc="/enterprise.png"
+          text="참여 기업"
           num={72}
           unit="개"
         />

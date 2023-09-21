@@ -206,11 +206,8 @@ public class AuthService {
 
     public ApiResponse<Object> authority() {
         // SecurityContext에 담겨 있는 authentication userId 정보
-        String loginId = SecurityUtil.getCurrentMemberLoginId();
-
-        Member member = memberRepository.findByLoginId(loginId)
-                .orElseThrow(() -> new UsernameNotFoundException("No authentication information."));
-
+        Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
+                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
         // add ROLE_ADMIN
         member.getRoles().add(Authority.ROLE_ADMIN.name());
         memberRepository.save(member);

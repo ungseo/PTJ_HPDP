@@ -10,6 +10,7 @@ const HomePage = () => {
     <div>
       <LogoTopbar />
       <HomeBanner />
+      <SiteInfo />
       <div>
         <h3>펀딩추천1</h3>
         <FundingCardList />
@@ -18,7 +19,6 @@ const HomePage = () => {
         <h3>펀딩추천2</h3>
         <FundingCardList />
       </div>
-      <SiteInfo />
     </div>
   );
 };

@@ -2,6 +2,7 @@ package com.stn.hpdp.service.bank;
 
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.jwt.JwtTokenProvider;
+import com.stn.hpdp.common.util.SecurityUtil;
 import com.stn.hpdp.controller.bank.request.SaveAccountReq;
 import com.stn.hpdp.controller.bank.request.TransferAccountReq;
 import com.stn.hpdp.controller.bank.response.FindAccountRes;
@@ -39,8 +40,7 @@ public class BankService {
     private final TransferRepository transferRepository;
 
     public void saveAccount(SaveAccountReq saveAccountReq){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Member member = memberRepository.findByLoginId(auth.getName())
+        Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
         Optional<Account> saved = accountRepository.findAccountByMember_Id(member.getId());
@@ -54,8 +54,7 @@ public class BankService {
     }
 
     public FindAccountRes findAccount() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Member member = memberRepository.findByLoginId(auth.getName())
+        Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
         Optional<Account> saved = accountRepository.findAccountByMember_Id(member.getId());
@@ -67,8 +66,7 @@ public class BankService {
     }
 
     public void deleteAccount(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Member member = memberRepository.findByLoginId(auth.getName())
+        Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
         Optional<Account> saved = accountRepository.findAccountByMember_Id(member.getId());
@@ -79,8 +77,7 @@ public class BankService {
     }
 
     public TransferAccountRes transferAccount(TransferAccountReq transferAccountReq) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Member member = memberRepository.findByLoginId(auth.getName())
+        Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
         Optional<Account> saved = accountRepository.findAccountByMember_Id(member.getId());
@@ -103,8 +100,7 @@ public class BankService {
     }
 
     public List<FindTransferRes> findTransfer() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Member member = memberRepository.findByLoginId(auth.getName())
+        Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
         Optional<Account> saved = accountRepository.findAccountByMember_Id(member.getId());

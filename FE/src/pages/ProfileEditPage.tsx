@@ -28,7 +28,13 @@ const ProfileEditPage = () => {
       <OptionTopbar text="회원정보수정" />
       <ProfilePhoto styles={{ width: "8rem", height: "8rem" }} />
       <ProfileEditList />
-      <div style={{ position: "relative" }}>
+      <div
+        style={{
+          position: "relative",
+          padding: "0 1.5rem",
+          boxSizing: "content-box",
+        }}
+      >
         <AnimationLabelInput
           labelTitle="주소(우편번호)"
           value={inputAddress}
@@ -39,16 +45,24 @@ const ProfileEditPage = () => {
           styles={{
             position: "absolute",
             top: "0",
-            right: "0",
+            right: "1.5rem",
             margin: "1rem auto auto auto",
             width: "4rem",
           }}
           onClick={modalOpener}
         />
       </div>
-      <AnimationLabelInput labelTitle="상세주소" type="text" />
+      <div style={{ padding: "0 1.5rem" }}>
+        <AnimationLabelInput labelTitle="상세주소" type="text" />
+      </div>
       {modalOpen && <UserAddressModal />}
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "0 1.5rem",
+        }}
+      >
         <span style={{ color: "red" }}>회원탈퇴</span>
         <DefaultButton text="비밀번호 변경" />
       </div>

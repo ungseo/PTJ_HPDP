@@ -8,7 +8,7 @@ const apiForm = membersApiFormData;
 //내 정보 조회
 
 export async function getMemberInfo(
-  accessToken: Interfaces.InLogoutRequestInterface,
+  accessToken: string | null,
   success: (
     res: AxiosResponse<any, any>
   ) =>

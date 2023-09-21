@@ -22,8 +22,33 @@ import HPDPBankPage from "./pages/HPDPBankPage";
 import InterestingCompanyPage from "./pages/InterestingCompanyPage";
 import MessagePage from "./pages/MessagePage";
 import PageNotFound404 from "./pages/PageNotFound404";
+import { useEffect } from "react";
+import { getMemberInfo } from "./api/members";
+import { userActions } from "./store/user-slice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+  const refresh = () => {
+    getMemberInfo(
+      accessToken,
+      (res) => {
+        console.log("유저정보 불러오기성공");
+        dispatch(userActions.saveMemberInfo(res.data.data));
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  };
+  useEffect(() => {
+    if (accessToken) {
+      console.log("hi");
+      refresh();
+    }
+  }, []);
   return (
     <div id="app-root" className={style.App}>
       <Routes>

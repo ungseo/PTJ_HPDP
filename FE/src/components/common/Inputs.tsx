@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { InputInterface } from "../../interface/commonInterface";
 import style from "../../styles/css/Inputs.module.css";
 
@@ -8,7 +9,16 @@ const AnimationLabelInput = ({
   styles,
   labelTitle,
   type,
+  required,
 }: InputInterface) => {
+  const onClick = (event: any) => {
+    if (id) {
+      const input = document.getElementById(id);
+      if (input) {
+        input.focus();
+      }
+    }
+  };
   return (
     <div className={style.formControl} style={styles}>
       <input
@@ -17,9 +27,11 @@ const AnimationLabelInput = ({
         value={value}
         onChange={onChange}
         id={id}
-        required
+        name={id}
+        placeholder=""
+        required={required}
       />
-      <label className={style.label}>
+      <label className={style.label} htmlFor={id} onClick={onClick}>
         {labelTitle.split("").map((letter, idx) => (
           <span
             className={style.span}
