@@ -1,0 +1,49 @@
+@import "Style";
+
+.wrapper {
+  
+  .account {
+    width: 100%;
+    background-color: #25228C;
+    
+    .bank {
+      margin: 0 1.5rem;
+      padding-top: 1rem;
+      padding-bottom: 0.5rem;
+
+      .name {
+        display: flex;
+        justify-content: start;
+      }
+
+      .addr {
+        display: flex;
+        justify-content: start;
+      }  
+    }
+
+    .amount {
+      margin: 0 1.5rem;
+      padding-top: 0.5rem;
+      padding-bottom: 1rem;
+
+      .remain {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+  }
+
+  .label {
+    margin: 1rem 1.5rem;
+
+    display: flex;
+    justify-content: space-between;
+
+    .text {
+      font-weight: bold;
+    }
+  }
+
+}
