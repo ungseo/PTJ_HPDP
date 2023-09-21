@@ -3,7 +3,7 @@ package com.stn.hpdp.model.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.stn.hpdp.controller.company.response.FindCompanyRes;
+import com.stn.hpdp.common.enums.FundingState;
 import com.stn.hpdp.controller.funding.response.FindFundingsRes;
 import org.springframework.stereotype.Repository;
 
@@ -21,12 +21,15 @@ public class FundingQueryRepository {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
-    public List<FindFundingsRes> findFundingsByDone(int done){
+    public List<FindFundingsRes> findFundingsByCompanyIdAndDone(Long companyId, Integer done){
+        // 전체 조회
+        // 펀딩의 기업 아이디 = companyId 인 펀딩 조회
         return queryFactory
                 .select(Projections.constructor(FindFundingsRes.class,
                         funding.company.id.as("companyId"),
                         funding.company.name.as("name"),
-                        funding.id.as("thumbnail"),
+                        funding.id.as("fundingId"),
+                        funding.thumbnailUrl.as("thumbnail"),
                         funding.hashtag.as("hashtag"),
                         funding.title.as("title"),
                         funding.targetAmount.as("targetAmount"),
@@ -35,44 +38,24 @@ public class FundingQueryRepository {
                         funding.state.as("state")
                 ))
                 .from(funding)
-//                .where(containKeyword(keyword))
+                .where(equalCompanyId(companyId), equalDone(done))
                 .orderBy(funding.createdDate.asc())
                 .fetch();
     }
 
-//    public List<FindFundingsRes> findFundingsByDoneAndMember(int done, String memberLoginId){
-//        return queryFactory
-//                .select(Projections.constructor(FindCompanyRes.class,
-//                        company.id.as("companyId"),
-//                        company.profile.as("profile"),
-//                        company.name.as("name"),
-//                        company.hashtag.as("hashtag")
-//                ))
-//                .from(company)
-//                .where(containKeyword(keyword))
-//                .orderBy(company.createdDate.asc())
-//                .fetch();
-//    }
+    private BooleanExpression equalCompanyId(Long companyId){
+        if(companyId == null){
+            return null;
+        }
+        return funding.company.id.eq(companyId);
+    }
 
-//    public List<FindFundingsRes> findFundingsByDoneAndCompany(int done, String companyLoginId){
-//        return queryFactory
-//                .select(Projections.constructor(FindCompanyRes.class,
-//                        company.id.as("companyId"),
-//                        company.profile.as("profile"),
-//                        company.name.as("name"),
-//                        company.hashtag.as("hashtag")
-//                ))
-//                .from(company)
-//                .where(containKeyword(keyword))
-//                .orderBy(company.createdDate.asc())
-//                .fetch();
-//    }
-
-//    private BooleanExpression containKeyword(String keyoword){
-//        if(keyoword == null || keyoword.isEmpty()){
-//            return null;
-//        }else{
-//            return company.name.containsIgnoreCase(keyoword).or(company.hashtag.containsIgnoreCase(keyoword));
-//        }
-//    }
+    private BooleanExpression equalDone(Integer done){
+        if(done == null || done == 0){
+            return funding.state.eq(FundingState.ING).or(funding.state.eq(FundingState.READY)).or(funding.state.eq(FundingState.END)).or(funding.state.eq(FundingState.SETTLE));
+        }else if(done == 1){
+            return funding.state.eq(FundingState.ING).or(funding.state.eq(FundingState.READY));
+        }
+        return funding.state.eq(FundingState.END).or(funding.state.eq(FundingState.SETTLE));
+    }
 }

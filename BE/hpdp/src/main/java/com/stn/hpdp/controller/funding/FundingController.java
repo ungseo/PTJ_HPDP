@@ -61,9 +61,9 @@ public class FundingController {
     }
 
     @GetMapping("") // 펀딩 조회
-    public ApiResponse<Object> findFundings(@RequestParam(required = false, name = "type") int type, @RequestParam(required = false, name = "done") int done) {
+    public ApiResponse<Object> findFundings(@RequestParam(required = false, name = "companyId") Long companyId, @RequestParam(required = false, name = "done") Integer done) {
         log.info(logCurrent(getClassName(), getMethodName(), START));
-        List<FindFundingsRes> result = fundingQueryService.findFundings(type, done);
+        List<FindFundingsRes> result = fundingQueryService.findFundings(companyId, done);
         log.info(logCurrent(getClassName(), getMethodName(), END));
         return ApiResponse.ok(result);
     }

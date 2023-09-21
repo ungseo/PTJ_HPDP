@@ -22,14 +22,14 @@ public class FindFundingsRes {
     private String thumbnail;
     private String hashtag;
     private String title;
-    private String targetAmount;
+    private int targetAmount;
     private String startDate;
     private String endDate;
+    private FundingState state;
     private String dDay;
     private int totalFunding;
-    private FundingState state;
 
-    public FindFundingsRes(Long companyId, String name, Long fundingId, String thumbnail, String hashtag, String title, String targetAmount, LocalDateTime startDate, LocalDateTime endDate, FundingState state){
+    public FindFundingsRes(Long companyId, String name, Long fundingId, String thumbnail, String hashtag, String title, int targetAmount, LocalDateTime startDate, LocalDateTime endDate, FundingState state){
         this.companyId = companyId;
         this.name = name;
         this.fundingId = fundingId;
