@@ -10,6 +10,7 @@
     font-size: 0.5rem;
     margin-right: auto;
   }
+
   .content {
     display: flex;
     justify-content: space-between;
@@ -24,9 +25,9 @@
   }
 
   .remain_point {
-    color: gray;
-    margin-left: auto;
-    font-size: 0.5rem;
+      color: gray;
+      font-size: 0.5rem;
+      margin-left: auto;
   }
 
 }

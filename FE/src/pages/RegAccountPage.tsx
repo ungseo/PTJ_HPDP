@@ -7,7 +7,7 @@ const RegAccountPage = () => {
   };
   return (
     <div>
-      <OptionTopbar text="HPDP 은행" />
+      <OptionTopbar text="test bank" />
       <div className={style.wrapper} onClick={registerHandler}>
         <p className={style.p}>계좌를 등록해주세요</p>
         <Icon className={style.icon} icon="bi-plus-circle-dotted" />
