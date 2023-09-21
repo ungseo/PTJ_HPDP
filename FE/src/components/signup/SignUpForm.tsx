@@ -2,8 +2,10 @@ import { useState } from "react";
 import DefaultButton from "../common/DefaultButton";
 import AnimationLabelInput from "../common/Inputs";
 import { signup } from "../../api/auth";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
   const [signupInput, setSignupInput] = useState({
     loginId: "",
     loginPw: "",
@@ -27,7 +29,8 @@ const SignUpForm = () => {
     signup(
       data,
       (res) => {
-        console.log(res);
+        alert("회원가입이 완료되었습니다.");
+        navigate("/login");
       },
       (err) => {
         console.log(err);

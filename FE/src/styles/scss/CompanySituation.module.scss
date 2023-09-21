@@ -1,4 +1,23 @@
-.container {
+.text {
+    text-align: start;
+}
+
+.total {
     background-color: gray;
-    margin: auto;
+    
+    .container {
+        margin: 1rem;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+    }
+    
 }
