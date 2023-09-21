@@ -7,10 +7,19 @@ interface MessagePartProps {
   onCheckboxChange: () => void;
 }
 
-const MessagePart = ({ isChecked, onCheckboxChange }: MessagePartProps) => {
+const MessagePart = ({
+  isChecked = false,
+  onCheckboxChange,
+}: MessagePartProps) => {
   return (
     <Grid container style={{ paddingTop: "1rem" }}>
-      <Grid item xs={1}>
+      <Grid
+        item
+        xs={1}
+        onClick={(event) => {
+          event.stopPropagation();
+        }}
+      >
         <input
           type="checkbox"
           checked={isChecked}
