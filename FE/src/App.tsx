@@ -14,11 +14,11 @@ import SearchPage from "./pages/SearchPage";
 import ProfileEditPage from "./pages/ProfileEditPage";
 import TransactionHistoryPage from "./pages/TransactionHistoryPage";
 import FundingHistoryPage from "./pages/FundingHistoryPage";
-import InterestCompaniesPage from "./pages/InterestCompaniesPage";
 import { CheckoutPage } from "./pages/Toss/CheckoutPage";
 import { SuccessPage } from "./pages/Toss/SuccessPage";
 import { FailPage } from "./pages/Toss/FailPage";
-import HPDPBankPage from "./pages/HPDPBankPage";
+import TestBankPage from "./pages/TestBankPage";
+import BankStatementPage from "./pages/BankStatementPage";
 import InterestingCompanyPage from "./pages/InterestingCompanyPage";
 import MessagePage from "./pages/MessagePage";
 import PageNotFound404 from "./pages/PageNotFound404";
@@ -69,8 +69,19 @@ function App() {
           path="/company/detail/:companyid"
           Component={CompanyDetailPage}
         ></Route>
-        <Route path="/profile/edit/:userid" Component={ProfileEditPage}></Route>
-        <Route path="/profile/testbank" Component={HPDPBankPage}></Route>
+        <Route
+          path="/profile/edit/:userid"
+          Component={ProfileEditPage}
+        ></Route>
+        <Route
+          path="/profile/testbank"
+          Component={TestBankPage}
+        >
+        </Route>
+        <Route
+          path="/profile/bankstatement/:userid"
+          Component={BankStatementPage}>
+        </Route>
         <Route
           path="/profile/history/transaction/:userid"
           Component={TransactionHistoryPage}
@@ -82,10 +93,6 @@ function App() {
         <Route
           path="/profile/company/interest/:userid"
           Component={InterestingCompanyPage}
-        ></Route>
-        <Route
-          path="/profile/interest-companies"
-          Component={InterestCompaniesPage}
         ></Route>
         <Route path="/profile/message/:userid" Component={MessagePage}></Route>
         <Route path="/payment" Component={CheckoutPage}></Route>
