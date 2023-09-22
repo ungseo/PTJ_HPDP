@@ -2,16 +2,16 @@ package com.stn.hpdp.controller.member.request;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-public class MemberUpdateReq {
+public class UpdateMemberReq {
 
-    //todo : 프로필 이미지
-    private String profile;
+    private MultipartFile profile;
 
     @Size(min = 2, max = 50)
     private String name;
