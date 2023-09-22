@@ -63,8 +63,9 @@ export async function logout(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  customApi("auth").defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-  await customApi("auth").post(`/logout`).then(success).catch(fail);
+  const api = customApi("auth");
+  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  await api.post(`/logout`).then(success).catch(fail);
 }
 
 export async function expireToken(

@@ -1,9 +1,5 @@
 import { AxiosResponse } from "axios";
-import { fundingsApi } from ".";
-import * as Interfaces from "../interface/apiDataInterface";
-import { SuccessPage } from "../pages/Toss/SuccessPage";
-
-const api = fundingsApi;
+import { customApi, customApiForm } from ".";
 
 export async function getFundingTotalList(
   success: (
@@ -16,7 +12,7 @@ export async function getFundingTotalList(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  await api.get("").then(success).catch(fail);
+  await customApi("fundings").get("").then(success).catch(fail);
 }
 
 export async function getFundingProgress(
@@ -35,7 +31,7 @@ export async function getFundingProgress(
   let apiUrl = "";
   apiUrl += `?companyId=${companyid}`;
   apiUrl += `&done=${done}`;
-  await api.get(apiUrl).then(success).catch(fail);
+  await customApi("fundings").get(apiUrl).then(success).catch(fail);
 }
 
 export async function getFundingDetail(
@@ -50,5 +46,5 @@ export async function getFundingDetail(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  await api.get(`/${fundingid}`).then(success).catch(fail);
+  await customApi("fundings").get(`/${fundingid}`).then(success).catch(fail);
 }

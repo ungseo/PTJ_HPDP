@@ -1,8 +1,6 @@
 import { AxiosResponse } from "axios";
-import { companiesApi } from ".";
+import { customApi, customApiForm } from ".";
 import * as Interfaces from "../interface/apiDataInterface";
-
-const api = companiesApi;
 
 export async function getCompaniesInfo(
   keyword: string | null,
@@ -17,6 +15,7 @@ export async function getCompaniesInfo(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
+  const api = customApi("companies");
   api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
 
   await api.get(`?keyword=${keyword}`).then(success).catch(fail);
@@ -35,6 +34,7 @@ export async function getCompanyItem(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
+  const api = customApi("companies");
   api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
 
   await api.get(`/${companyId}`).then(success).catch(fail);
