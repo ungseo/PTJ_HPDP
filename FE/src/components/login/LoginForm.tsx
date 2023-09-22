@@ -59,21 +59,18 @@ const LoginForm = () => {
         <p>기업회원 이신가요?</p>
         <Switch checked={checked} onChange={toggler} />
       </div>
-      <div style={{ width: "100%", position: "relative" }}>
-        <AnimationLabelInput
-          labelTitle={"Id"}
-          type="text"
-          styles={{ height: "4em" }}
-          id="id"
-          value={id}
-          onChange={onChange}
-        />
-        <DuplicationBtn checkingId={id} />
-      </div>
+      <AnimationLabelInput
+        labelTitle={"Id"}
+        type="text"
+        styles={{ height: "4rem" }}
+        id="id"
+        value={id}
+        onChange={onChange}
+      />
       <AnimationLabelInput
         labelTitle={"Password"}
         type="password"
-        styles={{ height: "4em" }}
+        styles={{ height: "4rem" }}
         id="pw"
         value={pw}
         onChange={onChange}
