@@ -3,26 +3,21 @@ package com.stn.hpdp.service.funding;
 import com.stn.hpdp.common.AwsS3Uploader;
 import com.stn.hpdp.common.enums.FundingState;
 import com.stn.hpdp.common.exception.CustomException;
-import com.stn.hpdp.controller.bank.request.SaveAccountReq;
-import com.stn.hpdp.controller.bank.request.TransferAccountReq;
-import com.stn.hpdp.controller.bank.response.FindAccountRes;
-import com.stn.hpdp.controller.bank.response.FindTransferRes;
-import com.stn.hpdp.controller.bank.response.TransferAccountRes;
+import com.stn.hpdp.common.util.SecurityUtil;
+import com.stn.hpdp.controller.funding.request.ReportFundingReq;
 import com.stn.hpdp.controller.funding.request.SaveFundingReq;
+import com.stn.hpdp.controller.funding.request.SettleFundingReq;
 import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
+import com.stn.hpdp.controller.funding.response.SettleFundingRes;
 import com.stn.hpdp.model.entity.*;
 import com.stn.hpdp.model.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static com.stn.hpdp.common.exception.ErrorCode.*;
@@ -30,12 +25,12 @@ import static com.stn.hpdp.common.exception.ErrorCode.*;
 @Slf4j
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class FundingService {
 
     private final FundingRepository fundingRepository;
     private final BudgetRepository budgetRepository;
 
-    private final MemberRepository memberRepository;
     private final CompanyRepository companyRepository;
 
     private final AwsS3Uploader awsS3Uploader;
@@ -93,7 +88,6 @@ public class FundingService {
         fundingRepository.save(funding);
     }
 
-    @Transactional
     public void updateFunding(UpdateFundingReq updateFundingReq){
         Optional<Funding> funding = fundingRepository.findById(Long.parseLong(updateFundingReq.getFundingId()));
         if(funding.isEmpty()){
@@ -148,8 +142,61 @@ public class FundingService {
         fundingRepository.save(funding.get());
     }
 
-    @Transactional
     public void deleteFunding(Long fundingId){
         fundingRepository.deleteById(fundingId);
+    }
+
+    public SettleFundingRes settleFunding(SettleFundingReq settleFundingReq){
+        Optional<Funding> funding = fundingRepository.findById(settleFundingReq.getFundingId());
+        if(funding.isEmpty()){
+            throw new CustomException(FUNDING_NOT_FOUND);
+        }
+
+        String loginId = SecurityUtil.getCurrentMemberLoginId();
+        String companyLoginId = funding.get().getCompany().getLoginId();
+        if(!loginId.equals(companyLoginId)){
+            throw new CustomException(NOT_COMPANY_FORBIDDEN);
+        }
+
+        if(funding.get().getState().equals(FundingState.SETTLE)){
+            throw new CustomException(SETTLE_ALREADY_CONFLICT);
+        }
+
+        SettleFundingRes settleFundingRes = SettleFundingRes.of(funding.get());
+
+        // TODO: 후원하기 기능 완료 후 totalPoint 세팅
+
+        // TODO: totalPoint를 settlement로 세팅한 후 update
+        // state update
+        funding.get().setState(FundingState.SETTLE);
+        fundingRepository.save(funding.get());
+
+        return settleFundingRes;
+    }
+
+
+    public void reportFunding(ReportFundingReq reportFundingReq){
+        Optional<Funding> funding = fundingRepository.findById(Long.parseLong(reportFundingReq.getFundingId()));
+        if(funding.isEmpty()){
+            throw new CustomException(FUNDING_NOT_FOUND);
+        }
+
+        String loginId = SecurityUtil.getCurrentMemberLoginId();
+        String companyLoginId = funding.get().getCompany().getLoginId();
+        if(!loginId.equals(companyLoginId)){
+            throw new CustomException(NOT_COMPANY_FORBIDDEN);
+        }
+
+        // 보고서 파일
+        if(reportFundingReq.getDocs() != null){
+            try {
+                String docsUrl = awsS3Uploader.uploadFile(reportFundingReq.getDocs(), "funding/docs");
+                funding.get().setDocsUrl(docsUrl);
+            } catch (IOException e) {
+                log.info(e.getMessage());
+            }
+        }
+
+        fundingRepository.save(funding.get());
     }
 }

@@ -31,7 +31,9 @@ public class Funding extends TimeBaseEntity {
     @JoinColumn(name = "company_id")
     private Company company;
 
+    @Column(length = 500)
     private String thumbnailUrl;
+    @Column(length = 500)
     private String contentUrl;
     private String hashtag;
     private String title;
@@ -42,10 +44,12 @@ public class Funding extends TimeBaseEntity {
     private String rewardName;
     private int rewardPrice;
     private String rewardDesc;
+    @Column(length = 500)
     private String rewardImg;
 
     private FundingState state;
     private int settlement;
+    @Column(length = 500)
     private String docsUrl;
 
     @OneToMany(mappedBy = "funding", cascade = CascadeType.ALL)

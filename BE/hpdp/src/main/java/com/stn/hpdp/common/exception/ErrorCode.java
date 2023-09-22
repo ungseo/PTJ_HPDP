@@ -26,6 +26,7 @@ public enum ErrorCode {
     NOT_LOGIN_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "로그인 후 이용해주세요."),
 
     /* 403 FORBIDDEN : 페이지 접근 거부 */
+    NOT_COMPANY_FORBIDDEN(HttpStatus.FORBIDDEN, "펀딩을 등록한 회사만 이용 가능합니다."),
 
     /* 404 NOT_FOUND : Resource 를 찾을 수 없음 */
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 회원입니다."),
@@ -41,6 +42,8 @@ public enum ErrorCode {
     USER_ALREADY_EXIST(HttpStatus.CONFLICT, "이미 가입되어 있는 유저입니다."),
     ID_ALREADY_EXIST(HttpStatus.CONFLICT, "이미 존재하는 아이디입니다."),
     COMPANY_UPDATE_CONFLICT(HttpStatus.CONFLICT, "기업은 정보를 수정할 수 없습니다. 이메일로 문의해주세요."),
+    SETTLE_ALREADY_CONFLICT(HttpStatus.CONFLICT, "이미 정산 완료됐습니다.");
+
 
     /* 500 INTERNAL_SERVER_ERROR : 서버 내부 로직 에러 */
     CREATE_WALLET_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "사용자의 지갑을 만드는데 실패하였습니다."),
