@@ -1,8 +1,6 @@
 import { AxiosResponse } from "axios";
-import { paymentsApi } from ".";
+import { customApi, customApiForm } from ".";
 import * as Interfaces from "../interface/apiDataInterface";
-
-const api = paymentsApi;
 
 export async function createPayments(
   data: Interfaces.InCreatePaymentsInterface,
@@ -16,7 +14,9 @@ export async function createPayments(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  api.defaults.headers["accessToken"] = `Bearer ${data.header.accessToken}`;
+  customApi("payments").defaults.headers[
+    "accessToken"
+  ] = `Bearer ${data.header.accessToken}`;
 
-  await api.post("/payments", data).then(success).catch(fail);
+  await customApi("payments").post("/payments", data).then(success).catch(fail);
 }

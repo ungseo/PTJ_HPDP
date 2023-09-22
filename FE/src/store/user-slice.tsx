@@ -1,6 +1,4 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
-import { login } from "../api/auth";
-import { PURGE } from "redux-persist";
 
 const initialState = {
   auth: {

@@ -1,12 +1,11 @@
-import React from 'react';
+import React from "react";
 import style from "../../styles/css/HomeBanner.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
-import 'swiper/css/navigation';
-import { Autoplay } from 'swiper/modules';
-
+import "swiper/css/navigation";
+import { Autoplay } from "swiper/modules";
 
 const HomeBanner = () => {
   const swiperProps = {
@@ -26,10 +25,46 @@ const HomeBanner = () => {
   return (
     <div>
       <Swiper {...swiperProps}>
-        <SwiperSlide style={{ backgroundColor:"yellow", height: "15rem" }}>1</SwiperSlide>
-        <SwiperSlide style={{ backgroundColor:"blue", height: "15rem" }}>2</SwiperSlide>
-        <SwiperSlide style={{ backgroundColor:"red", height: "15rem" }}>3</SwiperSlide>
-        <SwiperSlide style={{ backgroundColor:"pink", height: "15rem" }}>4</SwiperSlide>
+        <SwiperSlide
+          style={{
+            backgroundColor: "yellow",
+            height: "15rem",
+            backgroundImage: "url(/1.png)",
+            backgroundSize: "cover",
+          }}
+        >
+          1
+        </SwiperSlide>
+        <SwiperSlide
+          style={{
+            backgroundColor: "blue",
+            height: "15rem",
+            backgroundImage: "url(/2.png)",
+            backgroundSize: "cover",
+          }}
+        >
+          2
+        </SwiperSlide>
+        <SwiperSlide
+          style={{
+            backgroundColor: "red",
+            height: "15rem",
+            backgroundImage: "url(/3.png)",
+            backgroundSize: "cover",
+          }}
+        >
+          3
+        </SwiperSlide>
+        <SwiperSlide
+          style={{
+            backgroundColor: "pink",
+            height: "15rem",
+            backgroundImage: "url(/4.png)",
+            backgroundSize: "cover",
+          }}
+        >
+          4
+        </SwiperSlide>
       </Swiper>
     </div>
   );

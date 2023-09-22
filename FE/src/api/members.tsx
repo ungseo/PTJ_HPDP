@@ -1,9 +1,6 @@
-import { membersApi, membersApiFormData } from ".";
+import { customApi, customApiForm } from ".";
 import { AxiosResponse } from "axios";
 import * as Interfaces from "../interface/apiDataInterface";
-
-const api = membersApi;
-const apiForm = membersApiFormData;
 
 //내 정보 조회
 
@@ -18,6 +15,7 @@ export async function getMemberInfo(
     | null,
   fail: (err: any) => PromiseLike<never> | null | void
 ) {
+  const api = customApi("members");
   api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
   await api.get("").then(success).catch(fail);
 }
@@ -34,8 +32,10 @@ export async function updateMemberInfo(
     | null,
   fail: (err: any) => PromiseLike<never> | null | void
 ) {
-  apiForm.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-  await apiForm.put("", formData).then(success).catch(fail);
+  customApiForm("members").defaults.headers[
+    "accessToken"
+  ] = `Bearer ${accessToken}`;
+  await customApiForm("members").put("", formData).then(success).catch(fail);
 }
 
 export async function searchMemberFundingHistory(
@@ -49,6 +49,8 @@ export async function searchMemberFundingHistory(
     | null,
   fail: (err: any) => PromiseLike<never> | null | void
 ) {
-  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-  await api.get("/fundings").then(success).catch(fail);
+  customApi("members").defaults.headers[
+    "accessToken"
+  ] = `Bearer ${accessToken}`;
+  await customApi("members").get("/fundings").then(success).catch(fail);
 }

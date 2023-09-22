@@ -1,7 +1,6 @@
-import { authApi } from "./index";
 import { AxiosResponse } from "axios";
 import * as Interfaces from "../interface/apiDataInterface";
-const api = authApi;
+import { customApi } from "./index";
 
 export async function signup(
   data: Interfaces.InSignupInterface,
@@ -15,7 +14,7 @@ export async function signup(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  await api.post("", data).then(success).catch(fail);
+  await customApi("auth").post("", data).then(success).catch(fail);
 }
 
 export async function login(
@@ -31,7 +30,10 @@ export async function login(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  await api.post(`/login?type=${type}`, data).then(success).catch(fail);
+  await customApi("auth")
+    .post(`/login?type=${type}`, data)
+    .then(success)
+    .catch(fail);
 }
 
 export async function duplicationIdCheck(
@@ -46,7 +48,7 @@ export async function duplicationIdCheck(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  await api.get(`/check/${loginId}`).then(success).catch(fail);
+  await customApi("auth").get(`/check/${loginId}`).then(success).catch(fail);
 }
 
 export async function logout(
@@ -61,8 +63,8 @@ export async function logout(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-  await api.post(`/logout`).then(success).catch(fail);
+  customApi("auth").defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  await customApi("auth").post(`/logout`).then(success).catch(fail);
 }
 
 export async function expireToken(
@@ -77,5 +79,5 @@ export async function expireToken(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  await api.post(`/regenerate`, data).then(success).catch(fail);
+  await customApi("auth").post(`/regenerate`, data).then(success).catch(fail);
 }
