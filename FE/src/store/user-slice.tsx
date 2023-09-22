@@ -5,7 +5,7 @@ import { PURGE } from "redux-persist";
 const initialState = {
   auth: {
     isLogined: false,
-    accessToken: "asdfadsfadsasdfasdfasdff",
+    accessToken: "",
     refreshToken: "",
   },
   info: {

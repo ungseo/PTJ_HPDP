@@ -6,8 +6,8 @@ import TestWalletRegistration from './../components/testbank/TestWalletRegistrat
 import { useSelector } from "react-redux";
 
 const TestBankPage = () => {
-
-  const isRegistered = useSelector((state: any) => state.account.isRegisterd);
+  const isRegistered = useSelector((state: any) => state.account.isRegistered);
+  console.log(isRegistered)
 
   return (
     <div>

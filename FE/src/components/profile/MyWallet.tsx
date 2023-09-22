@@ -19,7 +19,7 @@ const MyWallet = () => {
     const { id } = event.target;
     if (id === "reg") {
       // 계좌 등록 화면 이동
-      navigate("/수정하기");
+      navigate("/profile/testbank/register");
     } else if (id === "unreg" ) {
       // 계좌 해제 aiox
       unregisterAccount(

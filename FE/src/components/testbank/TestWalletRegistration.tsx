@@ -1,11 +1,13 @@
 import React from 'react'
 import style from "../../styles/css/TestWalletRegistration.module.css"
 import { Icon } from '@iconify/react'
+import { useNavigate } from 'react-router-dom'
 
 const TestWalletRegistration = () => {
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    // 계좌 등록 페이지로 이동
+    navigate("/profile/testbank/register");
   }
 
   return (

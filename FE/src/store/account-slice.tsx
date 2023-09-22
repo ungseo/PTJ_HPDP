@@ -12,8 +12,7 @@ const accountSlice = createSlice({
   initialState: initialState,
   reducers: {
     registerAccount(state, action) {
-      state.isRegistered = true
-      return {...state, ...action.payload}
+      return {...state, isRegistered: true, ...action.payload}
     },
     unregisterAccount(state) {
       return initialState

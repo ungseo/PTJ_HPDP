@@ -10,17 +10,25 @@ const LoginInfo = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const dispatch = useDispatch();
 
+  const tt = useSelector((state: any) => state.account.isRegistered)
+  console.log('확인합시다', tt)
+
+  console.log()
+
   useEffect(() => {
-    getAccount(
-      accessToken,
-      (res) => {
-        dispatch(accountActions.registerAccount(res.data.data));
-      },
-      (err) => {
-        // 404 error only
-        console.log(err.message)
-      }
-    )
+    const getAccountInfo = () => {
+      getAccount(
+        accessToken,
+        (res) => {
+          dispatch(accountActions.registerAccount(res.data.data));
+        },
+        (err) => {
+          // 404 error only
+          console.log(err)
+        }
+      )
+    }
+    getAccountInfo();
   }, []);
 
   return (
