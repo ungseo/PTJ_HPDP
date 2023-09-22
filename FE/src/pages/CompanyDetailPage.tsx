@@ -16,8 +16,6 @@ const CompanyDetailPage = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   console.log(accessToken);
   const { companyid } = useParams();
-  console.log(companyid);
-  console.log(typeof companyid);
 
   useEffect(() => {
     getCompanyItem(
@@ -25,10 +23,10 @@ const CompanyDetailPage = () => {
       Number(companyid),
       (res) => {
         setCompanyItem(res.data.data);
-        console.log("API연결");
+        console.log("기업 상세 API연결");
       },
       (err) => {
-        console.error("API 호출 실패:", err);
+        console.error("기업 상세 API 호출 실패:", err);
       }
     );
   }, []);
