@@ -5,6 +5,7 @@ import com.stn.hpdp.controller.company.request.UpdateCompanyReq;
 import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
 import com.stn.hpdp.controller.company.response.FindCompanyRes;
 import com.stn.hpdp.controller.company.response.FindMyCompanyRes;
+import com.stn.hpdp.controller.company.response.FindMyFundingsRes;
 import com.stn.hpdp.service.company.CompanyService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -66,5 +67,17 @@ public class CompanyController {
         log.info(logCurrent(getClassName(), getMethodName(), END));
 
         return ApiResponse.messageOk("success");
+    }
+
+    @GetMapping("/fundings") // 내 펀딩 조회(기업)
+    public ApiResponse<Object> findMyFundings() {
+
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+
+        List<FindMyFundingsRes> result = companyService.findMyFundings();
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+
+        return ApiResponse.ok(result);
     }
 }

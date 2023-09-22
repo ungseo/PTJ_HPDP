@@ -8,10 +8,13 @@ import com.stn.hpdp.controller.company.request.UpdateCompanyReq;
 import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
 import com.stn.hpdp.controller.company.response.FindCompanyRes;
 import com.stn.hpdp.controller.company.response.FindMyCompanyRes;
+import com.stn.hpdp.controller.company.response.FindMyFundingsRes;
 import com.stn.hpdp.model.entity.Company;
+import com.stn.hpdp.model.entity.Funding;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.model.repository.CompanyQueryRepository;
 import com.stn.hpdp.model.repository.CompanyRepository;
+import com.stn.hpdp.model.repository.FundingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -33,8 +36,8 @@ public class CompanyService {
 
     private final CompanyRepository companyRepository;
     private final CompanyQueryRepository companyQueryRepository;
+    private final FundingRepository fundingRepository;
 
-    private final JwtTokenProvider jwtTokenProvider;
     private final AwsS3Uploader awsS3Uploader;
 
     public List<FindCompanyRes> findCompanies(String keyword, HttpServletRequest request){
@@ -89,5 +92,18 @@ public class CompanyService {
         }
 
         companyRepository.save(company.get());
+    }
+
+    public List<FindMyFundingsRes> findMyFundings(){
+        String loginId = SecurityUtil.getCurrentMemberLoginId();
+        Optional<Company> company = companyRepository.findByLoginId(loginId);
+
+        List<Funding> fundings = fundingRepository.findAllByCompany_Id(company.get().getId());
+        List<FindMyFundingsRes> result = new ArrayList<>();
+        for(Funding funding : fundings){
+            result.add(FindMyFundingsRes.from(funding));
+        }
+
+        return result;
     }
 }
