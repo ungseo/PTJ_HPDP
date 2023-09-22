@@ -51,6 +51,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/auth/logout").authenticated()
                 .antMatchers("/api/members/adminTest").hasRole("ADMIN")
                 .antMatchers("/api/companies").permitAll()
+                .antMatchers(HttpMethod.PUT,"/api/companies").authenticated()
+                .antMatchers("/api/companies/info", "/api/companies/fundings").authenticated()
                 .antMatchers("/api/banks").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/fundings").permitAll()
                 .antMatchers("/api/fundings").hasRole("ADMIN")

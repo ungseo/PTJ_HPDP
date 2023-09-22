@@ -46,7 +46,7 @@ public class AuthController {
     }
 
     @PostMapping("/company") // 기업 회원가입
-    public ApiResponse<Object> signUpCompany(@Validated @RequestBody SignUpCompanyReq signUpReq, Errors errors) {
+    public ApiResponse<Object> signUpCompany(@ModelAttribute SignUpCompanyReq signUpReq, Errors errors) {
         // validation check
         log.info(logCurrent(getClassName(), getMethodName(), START));
         if (errors.hasErrors()) {

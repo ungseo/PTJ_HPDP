@@ -5,6 +5,7 @@ import com.stn.hpdp.common.jwt.JwtTokenProvider;
 import com.stn.hpdp.common.util.SecurityUtil;
 import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
 import com.stn.hpdp.controller.company.response.FindCompanyRes;
+import com.stn.hpdp.controller.company.response.FindMyCompanyRes;
 import com.stn.hpdp.model.entity.Company;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.model.repository.CompanyQueryRepository;
@@ -58,5 +59,12 @@ public class CompanyService {
         // TODO: funding api 개발 후 fundingsNumber, participantsNumber, amount 설정
 
         return findCompanyDetailRes;
+    }
+
+    public FindMyCompanyRes findMyCompany(){
+        String loginId = SecurityUtil.getCurrentMemberLoginId();
+        Optional<Company> company = companyRepository.findByLoginId(loginId);
+
+        return FindMyCompanyRes.from(company.get());
     }
 }
