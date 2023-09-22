@@ -1,5 +1,6 @@
 package com.stn.hpdp.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Budget extends TimeBaseEntity {
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "funding_id")
+    @JsonIgnore
     private Funding funding;
 
     private String price;

@@ -1,11 +1,13 @@
 package com.stn.hpdp.controller.funding;
 
 import com.stn.hpdp.common.ApiResponse;
-import com.stn.hpdp.controller.company.response.FindCompanyRes;
+import com.stn.hpdp.controller.funding.request.ReportFundingReq;
 import com.stn.hpdp.controller.funding.request.SaveFundingReq;
+import com.stn.hpdp.controller.funding.request.SettleFundingReq;
 import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
 import com.stn.hpdp.controller.funding.response.FindFundingRes;
 import com.stn.hpdp.controller.funding.response.FindFundingsRes;
+import com.stn.hpdp.controller.funding.response.SettleFundingRes;
 import com.stn.hpdp.service.funding.FundingQueryService;
 import com.stn.hpdp.service.funding.FundingService;
 import io.swagger.annotations.Api;
@@ -13,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static com.stn.hpdp.common.util.LogCurrent.*;
@@ -75,5 +76,27 @@ public class FundingController {
         FindFundingRes result = fundingQueryService.findFunding(fundingId);
         log.info(logCurrent(getClassName(), getMethodName(), END));
         return ApiResponse.ok(result);
+    }
+
+    @PostMapping("/settle") // 펀딩 정산하기
+    public ApiResponse<Object> settleFunding(@RequestBody SettleFundingReq settleFundingReq) {
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+
+        SettleFundingRes settleFundingRes = fundingService.settleFunding(settleFundingReq);
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+
+        return ApiResponse.ok(settleFundingRes);
+    }
+
+    @PostMapping("/report") // 펀딩 보고서 등록
+    public ApiResponse<Object> reportFunding(@ModelAttribute ReportFundingReq reportFundingReq) {
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+
+        fundingService.reportFunding(reportFundingReq);
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+
+        return ApiResponse.messageOk("Success");
     }
 }
