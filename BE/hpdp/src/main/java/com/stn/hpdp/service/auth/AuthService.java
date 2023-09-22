@@ -1,11 +1,13 @@
 package com.stn.hpdp.service.auth;
+
 import com.stn.hpdp.common.ApiResponse;
 import com.stn.hpdp.common.enums.Authority;
 import com.stn.hpdp.common.exception.CustomException;
+import com.stn.hpdp.common.jwt.JwtTokenProvider;
 import com.stn.hpdp.common.util.SecurityUtil;
-import com.stn.hpdp.controller.auth.request.SignUpCompanyReq;
 import com.stn.hpdp.controller.auth.request.ReissueReq;
 import com.stn.hpdp.controller.auth.request.SignInReq;
+import com.stn.hpdp.controller.auth.request.SignUpCompanyReq;
 import com.stn.hpdp.controller.auth.request.SignUpReq;
 import com.stn.hpdp.controller.auth.response.SignInRes;
 import com.stn.hpdp.controller.auth.response.TokenInfoRes;
@@ -13,14 +15,13 @@ import com.stn.hpdp.model.entity.Company;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.model.repository.CompanyRepository;
 import com.stn.hpdp.model.repository.MemberRepository;
-import com.stn.hpdp.common.jwt.JwtTokenProvider;
+import com.stn.hpdp.service.blockchain.WalletService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -37,12 +38,16 @@ import static com.stn.hpdp.common.exception.ErrorCode.*;
 @Service
 public class AuthService {
 
+    private static final String AUTHORIZATION_HEADER = "AccessToken";
+    private static final String BEARER_TYPE = "Bearer";
     private final MemberRepository memberRepository;
     private final CompanyRepository companyRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final RedisTemplate redisTemplate;
+    // refactoring 필요함!!!
+    private final WalletService walletService;
 
     public ApiResponse<Object> signUp(SignUpReq signUpReq) {
         if (memberRepository.existsByLoginId(signUpReq.getLoginId())) {
@@ -59,6 +64,8 @@ public class AuthService {
                 .roles(Collections.singletonList(Authority.ROLE_USER.name()))
                 .build();
         memberRepository.save(member);
+
+        walletService.registWallet(member);
 
         return ApiResponse.messageOk("회원가입에 성공했습니다.");
     }
@@ -88,7 +95,7 @@ public class AuthService {
     }
 
     public ApiResponse<Object> checkLoginId(String loginId) {
-        if(memberRepository.countByLoginId(loginId) > 0){
+        if (memberRepository.countByLoginId(loginId) > 0) {
             throw new CustomException(ID_ALREADY_EXIST);
         }
         return ApiResponse.messageOk("사용 가능한 아이디입니다.");
@@ -159,12 +166,12 @@ public class AuthService {
         Authentication authentication = jwtTokenProvider.getAuthentication(reissue.getAccessToken());
 
         // 3. Redis 에서 User Id 을 기반으로 저장된 Refresh Token 값을 가져옵니다.
-        String refreshToken = (String)redisTemplate.opsForValue().get("RT:" + authentication.getName());
+        String refreshToken = (String) redisTemplate.opsForValue().get("RT:" + authentication.getName());
         // (추가) 로그아웃되어 Redis 에 RefreshToken 이 존재하지 않는 경우 처리
-        if(ObjectUtils.isEmpty(refreshToken)) {
+        if (ObjectUtils.isEmpty(refreshToken)) {
             throw new CustomException(REFRESH_TOKEN_INVALID);
         }
-        if(!refreshToken.equals(reissue.getRefreshToken())) {
+        if (!refreshToken.equals(reissue.getRefreshToken())) {
             throw new CustomException(REFRESH_TOKEN_MISMATCH);
         }
 
@@ -214,9 +221,6 @@ public class AuthService {
 
         return ApiResponse.ok(null);
     }
-
-    private static final String AUTHORIZATION_HEADER = "AccessToken";
-    private static final String BEARER_TYPE = "Bearer";
 
     private void setHeader(HttpServletResponse response, TokenInfoRes tokenInfo) {
         response.addHeader("accessToken", tokenInfo.getAccessToken());
