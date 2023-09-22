@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Builder
 @ToString
-public class MemberInfoRes {
+public class FindMemberInfoRes {
 
     private Long memberId;
 
@@ -29,10 +29,11 @@ public class MemberInfoRes {
     private String createdDate;
 
     private String modifiedDate;
-    public static MemberInfoRes of(Member member) {
-        if(member == null) return null;
 
-        return MemberInfoRes.builder()
+    public static FindMemberInfoRes of(Member member) {
+        if (member == null) return null;
+
+        return FindMemberInfoRes.builder()
                 .memberId(member.getId())
                 .loginId(member.getLoginId())
                 .name(member.getName())
