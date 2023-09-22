@@ -19,14 +19,6 @@ public class BlockChainController {
     private final TokenService tokenService;
     private final WalletService walletService;
 
-    @GetMapping("/privateKey")
-    public String getPrivateKey() {
-        String keystorePassword = "1q2w3e4r!";  // 실제 사용 시에는 보안을 고려하여 관리해야 합니다.
-        String keystoreFilePath = "C:\\SSAFY\\c110\\BE\\hpdp\\src\\main\\java\\com\\stn\\hpdp\\key\\UTC--2023-09-15T05-52-28.239664500Z--6f68cf31f6278b22c3d6355c39833592654d0225"; // keystore 파일의 절대 경로나 상대 경로
-
-        return tokenService.getPrivateKeyFromKeystore(keystorePassword, keystoreFilePath);
-    }
-
     @GetMapping("/test")
     public String getBalance() throws Exception {
         return tokenService.getBalance().toString();
@@ -44,6 +36,4 @@ public class BlockChainController {
 //        return recepit;
 //
 //    }
-
-
 }
