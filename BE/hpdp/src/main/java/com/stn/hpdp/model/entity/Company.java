@@ -72,6 +72,7 @@ public class Company extends TimeBaseEntity implements UserDetails  {
     private String accountNumber;
 
     private String profile;
+    private String banner;
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)

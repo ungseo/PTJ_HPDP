@@ -97,7 +97,15 @@ public class AuthService {
             }
         }
 
-        // TODO: 기업 배너 이미지 추가
+        // 기업 배너 이미지 추가
+        if(signUpReq.getBanner() != null){
+            try {
+                String bannerUrl = awsS3Uploader.uploadFile(signUpReq.getBanner(), "company/banner");
+                company.setBanner(bannerUrl);
+            } catch (IOException e) {
+                log.info(e.getMessage());
+            }
+        }
 
         companyRepository.save(company);
 

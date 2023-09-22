@@ -40,7 +40,7 @@ public class CompanyService {
 
     private final AwsS3Uploader awsS3Uploader;
 
-    public List<FindCompanyRes> findCompanies(String keyword, HttpServletRequest request){
+    public List<FindCompanyRes> findCompanies(String keyword){
         List<FindCompanyRes> companyResList = companyQueryRepository.findCompanyByKeyword(keyword);
 
         String loginId = SecurityUtil.getCurrentMemberLoginId();
@@ -50,7 +50,7 @@ public class CompanyService {
         return companyResList;
     }
 
-    public FindCompanyDetailRes findCompany(Long companyId, HttpServletRequest request){
+    public FindCompanyDetailRes findCompany(Long companyId){
         Optional<Company> companyRes = companyRepository.findById(companyId);
 
         if(companyRes.isEmpty()){
@@ -86,6 +86,16 @@ public class CompanyService {
             try {
                 String profileUrl = awsS3Uploader.uploadFile(updateCompanyReq.getProfile(), "company/profile");
                 company.get().setProfile(profileUrl);
+            } catch (IOException e) {
+                log.info(e.getMessage());
+            }
+        }
+
+        // 배너
+        if(updateCompanyReq.getBanner() != null){
+            try {
+                String bannerUrl = awsS3Uploader.uploadFile(updateCompanyReq.getBanner(), "company/banner");
+                company.get().setBanner(bannerUrl);
             } catch (IOException e) {
                 log.info(e.getMessage());
             }

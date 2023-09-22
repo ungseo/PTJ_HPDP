@@ -28,19 +28,19 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @GetMapping("") // 기업 조회
-    public ApiResponse<Object> findCompanies(@RequestParam(required = false, name = "keyword") String keyword, HttpServletRequest request) {
+    public ApiResponse<Object> findCompanies(@RequestParam(required = false, name = "keyword") String keyword) {
 
         log.info(logCurrent(getClassName(), getMethodName(), START));
-        List<FindCompanyRes> result = companyService.findCompanies(keyword, request);
+        List<FindCompanyRes> result = companyService.findCompanies(keyword);
         log.info(logCurrent(getClassName(), getMethodName(), END));
         return ApiResponse.ok(result);
     }
 
     @GetMapping("/{companyId}") // 기업 상세 조회
-    public ApiResponse<Object> findCompany(@PathVariable("companyId") Long companyId, HttpServletRequest request) {
+    public ApiResponse<Object> findCompany(@PathVariable("companyId") Long companyId) {
 
         log.info(logCurrent(getClassName(), getMethodName(), START));
-        FindCompanyDetailRes result = companyService.findCompany(companyId, request);
+        FindCompanyDetailRes result = companyService.findCompany(companyId);
         log.info(logCurrent(getClassName(), getMethodName(), END));
         return ApiResponse.ok(result);
     }

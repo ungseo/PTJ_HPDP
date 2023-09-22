@@ -14,6 +14,7 @@ public class FindMyCompanyRes {
     private Long companyId;
     private String loginId;
     private String profile;
+    private String banner;
     private String name;
     private String hashtag;
     private String email;
@@ -30,6 +31,7 @@ public class FindMyCompanyRes {
                 .companyId(company.getId())
                 .loginId(company.getLoginId())
                 .profile(company.getProfile())
+                .banner(company.getBanner())
                 .name(company.getName())
                 .hashtag(company.getHashtag())
                 .email(company.getEmail())

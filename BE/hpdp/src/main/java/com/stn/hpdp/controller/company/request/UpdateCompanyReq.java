@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 public class UpdateCompanyReq {
 
     private MultipartFile profile;
+    private MultipartFile banner;
 
     @Size(min = 2, max = 50)
     private String name;
