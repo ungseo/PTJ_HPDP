@@ -10,15 +10,12 @@ import com.stn.hpdp.model.repository.CompanyRepository;
 import com.stn.hpdp.model.repository.InterestQueryRepository;
 import com.stn.hpdp.model.repository.InterestRepository;
 import com.stn.hpdp.model.repository.MemberRepository;
-import io.netty.util.internal.ObjectUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -49,11 +46,7 @@ public class InterestService {
         if (interestList.isEmpty()) {
             return Collections.emptyList();
         }
-        List<FindInterestRes> result = new ArrayList<>();
-        for (Interest item : interestList) {
-            result.add(FindInterestRes.of(item));
-        }
-        return result;
+        return interestList.stream().map(FindInterestRes::of).collect(Collectors.toList());
     }
 
     public void saveInterest(Long companyId) {
