@@ -1,8 +1,7 @@
-import { authApi, authApiFormData } from "./index";
+import { authApi } from "./index";
 import { AxiosResponse } from "axios";
 import * as Interfaces from "../interface/apiDataInterface";
 const api = authApi;
-const apiForm = authApiFormData;
 
 export async function signup(
   data: Interfaces.InSignupInterface,
