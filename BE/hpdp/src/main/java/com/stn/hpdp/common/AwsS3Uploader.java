@@ -32,11 +32,18 @@ public class AwsS3Uploader {
         return upload(uploadFile, dirName, multipartFile.getOriginalFilename());
     }
 
-    private String upload(File uploadFile, String dirName, String originalName){
+    public String upload(File uploadFile, String dirName, String originalName){
         String fileName = dirName + "/" + UUID.randomUUID() + originalName;
         String uploadImageUrl = putS3(uploadFile, fileName);
 
         // Multipartfile -> File로 전환되면서 로컬에 파일 생성된 것을 삭제
+        removeNewFile(uploadFile);
+
+        return uploadImageUrl;
+    }
+    public String upload(File uploadFile, String fileName){
+        String uploadImageUrl = putS3(uploadFile, fileName);
+
         removeNewFile(uploadFile);
 
         return uploadImageUrl;
