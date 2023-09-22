@@ -1,12 +1,10 @@
 import { AxiosResponse } from "axios";
-import { companiesApi } from ".";
+import { fundingsApi } from ".";
 import * as Interfaces from "../interface/apiDataInterface";
 
-const api = companiesApi;
+const api = fundingsApi;
 
-export async function getCompaniesInfo(
-  keyword: string | null,
-  accessToken: string | null,
+export async function getFundingTotalList(
   success: (
     res: AxiosResponse<any, any>
   ) =>
@@ -17,14 +15,12 @@ export async function getCompaniesInfo(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-
-  await api.get(`?keyword=${keyword}`).then(success).catch(fail);
+  await api.get("").then(success).catch(fail);
 }
 
-export async function getCompanyItem(
-  accessToken: string | null,
-  companyId: number,
+export async function getFundingProgress(
+  companyid: number | null,
+  done: number | null,
   success: (
     res: AxiosResponse<any, any>
   ) =>
@@ -35,7 +31,8 @@ export async function getCompanyItem(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-
-  await api.get(`/${companyId}`).then(success).catch(fail);
+  let apiUrl = "";
+  apiUrl += `?companyId=${companyid}`;
+  apiUrl += `&done=${done}`;
+  await api.get(apiUrl).then(success).catch(fail);
 }
