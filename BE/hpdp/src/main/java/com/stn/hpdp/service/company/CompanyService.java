@@ -1,8 +1,10 @@
 package com.stn.hpdp.service.company;
 
+import com.stn.hpdp.common.AwsS3Uploader;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.jwt.JwtTokenProvider;
 import com.stn.hpdp.common.util.SecurityUtil;
+import com.stn.hpdp.controller.company.request.UpdateCompanyReq;
 import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
 import com.stn.hpdp.controller.company.response.FindCompanyRes;
 import com.stn.hpdp.controller.company.response.FindMyCompanyRes;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.text.html.Option;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +35,7 @@ public class CompanyService {
     private final CompanyQueryRepository companyQueryRepository;
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final AwsS3Uploader awsS3Uploader;
 
     public List<FindCompanyRes> findCompanies(String keyword, HttpServletRequest request){
         List<FindCompanyRes> companyResList = companyQueryRepository.findCompanyByKeyword(keyword);
@@ -66,5 +70,24 @@ public class CompanyService {
         Optional<Company> company = companyRepository.findByLoginId(loginId);
 
         return FindMyCompanyRes.from(company.get());
+    }
+
+    public void updateMyCompany(UpdateCompanyReq updateCompanyReq){
+        String loginId = SecurityUtil.getCurrentMemberLoginId();
+        Optional<Company> company = companyRepository.findByLoginId(loginId);
+
+        company.get().update(updateCompanyReq);
+
+        // 프로필
+        if(updateCompanyReq.getProfile() != null){
+            try {
+                String profileUrl = awsS3Uploader.uploadFile(updateCompanyReq.getProfile(), "company/profile");
+                company.get().setProfile(profileUrl);
+            } catch (IOException e) {
+                log.info(e.getMessage());
+            }
+        }
+
+        companyRepository.save(company.get());
     }
 }

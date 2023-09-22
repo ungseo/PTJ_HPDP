@@ -1,6 +1,7 @@
 package com.stn.hpdp.controller.company;
 
 import com.stn.hpdp.common.ApiResponse;
+import com.stn.hpdp.controller.company.request.UpdateCompanyReq;
 import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
 import com.stn.hpdp.controller.company.response.FindCompanyRes;
 import com.stn.hpdp.controller.company.response.FindMyCompanyRes;
@@ -53,5 +54,17 @@ public class CompanyController {
         log.info(logCurrent(getClassName(), getMethodName(), END));
 
         return ApiResponse.ok(result);
+    }
+
+    @PutMapping("") // 내 정보 수정(기업)
+    public ApiResponse<Object> updateMyCompany(@ModelAttribute UpdateCompanyReq updateCompanyReq) {
+
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+
+        companyService.updateMyCompany(updateCompanyReq);
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+
+        return ApiResponse.messageOk("success");
     }
 }
