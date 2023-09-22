@@ -3,6 +3,7 @@ import DefaultButton from "../common/DefaultButton";
 import AnimationLabelInput from "../common/Inputs";
 import { signup } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
+import DuplicationBtn from "../login/DuplicationBtn";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -39,19 +40,23 @@ const SignUpForm = () => {
   };
   return (
     <form onSubmit={onSubmit}>
-      <AnimationLabelInput
-        id="loginId"
-        labelTitle={"Id"}
-        type="text"
-        styles={{ height: "4em" }}
-        value={signupInput.loginId}
-        onChange={onChange}
-      />
+      <div style={{ width: "100%", position: "relative" }}>
+        <AnimationLabelInput
+          id="loginId"
+          labelTitle={"Id"}
+          type="text"
+          styles={{ height: "4rem" }}
+          value={signupInput.loginId}
+          onChange={onChange}
+        />
+        <DuplicationBtn checkingId={signupInput.loginId} />
+      </div>
+
       <AnimationLabelInput
         id="loginPw"
         labelTitle={"Password"}
         type="password"
-        styles={{ height: "4em" }}
+        styles={{ height: "4rem" }}
         value={signupInput.loginPw}
         onChange={onChange}
       />
@@ -59,7 +64,7 @@ const SignUpForm = () => {
         id="loginPw2"
         labelTitle={"Password Confirmation"}
         type="password"
-        styles={{ height: "4em" }}
+        styles={{ height: "4rem" }}
         value={pw2}
         onChange={onChange}
       />
@@ -67,7 +72,7 @@ const SignUpForm = () => {
         id="name"
         labelTitle={"Name"}
         type="text"
-        styles={{ height: "4em" }}
+        styles={{ height: "4rem" }}
         value={signupInput.name}
         onChange={onChange}
       />
@@ -75,7 +80,7 @@ const SignUpForm = () => {
         id="email"
         labelTitle={"Email"}
         type="text"
-        styles={{ height: "4em" }}
+        styles={{ height: "4rem" }}
         value={signupInput.email}
         onChange={onChange}
       />

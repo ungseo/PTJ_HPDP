@@ -53,14 +53,38 @@ function App() {
     <div id="app-root" className={style.App}>
       <Routes>
         {/* <Route path="/" Component={??Page}></Route> */}
-        <Route path="/" Component={HomePage}></Route>
-        <Route path="/list" Component={ListPage}></Route>
-        <Route path="/notification" Component={NotificationPage}></Route>
-        <Route path="/profile" Component={ProfilePage}></Route>
-        <Route path="/login" Component={LogInPage}></Route>
-        <Route path="/signup" Component={SignUpPage}></Route>
-        <Route path="/search" Component={SearchPage}></Route>
-        <Route path="/search/:keyword" Component={SearchResultPage}></Route>
+        <Route
+          path="/"
+          Component={HomePage}
+        ></Route>
+        <Route
+          path="/list"
+          Component={ListPage}
+        ></Route>
+        <Route
+          path="/notification"
+          Component={NotificationPage}
+        ></Route>
+        <Route
+          path="/profile"
+          Component={ProfilePage}
+        ></Route>
+        <Route
+          path="/login"
+          Component={LogInPage}
+        ></Route>
+        <Route
+          path="/signup"
+          Component={SignUpPage}
+        ></Route>
+        <Route
+          path="/search"
+          Component={SearchPage}
+        ></Route>
+        <Route
+          path="/search/:keyword"
+          Component={SearchResultPage}
+        ></Route>
         <Route
           path="/funding/detail/:fundingid"
           Component={FundingDetailPage}
@@ -76,12 +100,11 @@ function App() {
         <Route
           path="/profile/testbank"
           Component={TestBankPage}
-        >
-        </Route>
+        ></Route>
         <Route
           path="/profile/bankstatement/:userid"
-          Component={BankStatementPage}>
-        </Route>
+          Component={BankStatementPage}
+        ></Route>
         <Route
           path="/profile/history/transaction/:userid"
           Component={TransactionHistoryPage}
@@ -94,11 +117,26 @@ function App() {
           path="/profile/company/interest/:userid"
           Component={InterestingCompanyPage}
         ></Route>
-        <Route path="/profile/message/:userid" Component={MessagePage}></Route>
-        <Route path="/payment" Component={CheckoutPage}></Route>
-        <Route path="success" Component={SuccessPage}></Route>
-        <Route path="/fail" Component={FailPage}></Route>
-        <Route path="*" Component={PageNotFound404}></Route>
+        <Route
+          path="/profile/message/:userid"
+          Component={MessagePage}
+        ></Route>
+        <Route
+          path="/payment"
+          Component={CheckoutPage}
+        ></Route>
+        <Route
+          path="success"
+          Component={SuccessPage}
+        ></Route>
+        <Route
+          path="/fail"
+          Component={FailPage}
+        ></Route>
+        <Route
+          path="*"
+          Component={PageNotFound404}
+        ></Route>
       </Routes>
       <div className={style.blank}></div>
       <div className={style.navBar}>

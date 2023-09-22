@@ -2,12 +2,12 @@
 
 .formControl {
   position: relative;
-  margin: 1.25em 0;
+  margin: 1.25rem 0;
   width: 100%;
   .inputBox {
     border: 0;
     border-bottom: 2px solid #333;
-    padding: 0.5em 0;
+    padding: 0.5rem 0;
     display: block;
     font-size: 1.2em;
     font-family: "Muli", sans-serif;
@@ -29,12 +29,12 @@
   }
   .label {
     position: absolute;
-    top: 1em;
+    top: 1rem;
     left: 0;
     .span {
       display: inline-block;
-      font-size: 1em;
-      min-width: 0.3em;
+      font-size: 1rem;
+      min-width: 0.3rem;
       transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
   }

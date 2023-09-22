@@ -1,23 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import CustomizedTabs from "../components/CustomizedTabs";
+import { useParams } from "react-router-dom";
+import CompanyIntroduce from "../components/CompanyIntroduce";
+import CompanySituation from "../components/CompanySituation";
+import DetailPageTop from "../components/DetailPageTop";
 
-import CustomizedTabs from '../components/CustomizedTabs';
-
-import CompanyIntroduce from '../components/CompanyIntroduce';
-import CompanySituation from '../components/CompanySituation';
-import DetailPageTop from '../components/DetailPageTop';
+import * as Interfaces from "../interface/apiDataInterface";
+import { getCompanyItem } from "../api/companies";
 
 const CompanyDetailPage = () => {
+  const [companyItem, setCompanyItem] = useState<
+    Interfaces.InSearchCompanyInfoResponseInterface[]
+  >([]);
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+  console.log(accessToken);
+  const { companyid } = useParams();
+  console.log(companyid);
+  console.log(typeof companyid);
 
-    const tabProps = {
-        '소개': <CompanyIntroduce />,
-        '후원': <CompanySituation />
+  useEffect(() => {
+    getCompanyItem(
+      accessToken,
+      Number(companyid),
+      (res) => {
+        setCompanyItem(res.data.data);
+        console.log("API연결");
+      },
+      (err) => {
+        console.error("API 호출 실패:", err);
       }
-    return (
-        <>
-            <DetailPageTop></DetailPageTop>
-            <CustomizedTabs tabProps={tabProps} /> 
-        </>
     );
+  }, []);
+
+  const tabProps = {
+    소개: <CompanyIntroduce />,
+    후원: <CompanySituation />,
+  };
+  return (
+    <>
+      <DetailPageTop></DetailPageTop>
+      <CustomizedTabs tabProps={tabProps} />
+    </>
+  );
 };
 
 export default CompanyDetailPage;

@@ -1,6 +1,6 @@
 import { OptionTopbar } from "../components/common/TopBar";
-import TestWallet from "../components/hpdpbank/TestWallet";
-import TransactionList from "../components/hpdpbank/TransactionList";
+import TestWallet from "../components/testbank/TestWallet";
+import TransactionList from "../components/testbank/TransactionList";
 
 const TestBankPage = () => {
   return (

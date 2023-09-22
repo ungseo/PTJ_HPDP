@@ -9,7 +9,7 @@ const initialState = {
     refreshToken: "",
   },
   info: {
-    memberId: "",
+    memberId: "1",
     loginId: "",
     name: "",
     email: "",
@@ -38,9 +38,7 @@ const userSlice = createSlice({
       return { ...initialState };
     },
     saveMemberInfo(state, action) {
-      state.info = { ...state.info, ...action.payload };
-      state.auth.isLogined = true;
-      console.log(state.info);
+      return { ...state, info: action.payload };
     },
   },
 });
