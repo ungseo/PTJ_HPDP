@@ -8,6 +8,8 @@ import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
 import com.stn.hpdp.controller.funding.response.FindFundingRes;
 import com.stn.hpdp.controller.funding.response.FindFundingsRes;
 import com.stn.hpdp.controller.funding.response.SettleFundingRes;
+import com.stn.hpdp.dto.FundingInfoForContractDTO;
+import com.stn.hpdp.service.blockchain.CrowdFundingService;
 import com.stn.hpdp.service.funding.FundingQueryService;
 import com.stn.hpdp.service.funding.FundingService;
 import io.swagger.annotations.Api;
@@ -28,12 +30,15 @@ public class FundingController {
 
     private final FundingService fundingService;
     private final FundingQueryService fundingQueryService;
+    private final CrowdFundingService crowdFundingService;
 
     @PostMapping("") // 펀딩 작성
     public ApiResponse<Object> saveFunding(@ModelAttribute SaveFundingReq saveFundingReq) {
         log.info(logCurrent(getClassName(), getMethodName(), START));
 
-        fundingService.saveFunding(saveFundingReq);
+        FundingInfoForContractDTO fundingInfo = fundingService.saveFunding(saveFundingReq);
+
+        crowdFundingService.createFunding(fundingInfo);
 
         log.info(logCurrent(getClassName(), getMethodName(), END));
 

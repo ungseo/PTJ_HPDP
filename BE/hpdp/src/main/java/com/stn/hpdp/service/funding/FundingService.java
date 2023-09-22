@@ -9,8 +9,12 @@ import com.stn.hpdp.controller.funding.request.SaveFundingReq;
 import com.stn.hpdp.controller.funding.request.SettleFundingReq;
 import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
 import com.stn.hpdp.controller.funding.response.SettleFundingRes;
-import com.stn.hpdp.model.entity.*;
-import com.stn.hpdp.model.repository.*;
+import com.stn.hpdp.dto.FundingInfoForContractDTO;
+import com.stn.hpdp.model.entity.Company;
+import com.stn.hpdp.model.entity.Funding;
+import com.stn.hpdp.model.repository.BudgetRepository;
+import com.stn.hpdp.model.repository.CompanyRepository;
+import com.stn.hpdp.model.repository.FundingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -35,9 +39,9 @@ public class FundingService {
 
     private final AwsS3Uploader awsS3Uploader;
 
-    public void saveFunding(SaveFundingReq saveFundingReq){
+    public FundingInfoForContractDTO saveFunding(SaveFundingReq saveFundingReq) {
         Optional<Company> company = companyRepository.findByLoginId(saveFundingReq.getCompanyLoginId());
-        if(company.isEmpty()){
+        if (company.isEmpty()) {
             throw new CustomException(COMPANY_NOT_FOUND);
         }
 
@@ -45,14 +49,14 @@ public class FundingService {
 
         // startdate 따져서 state 세팅
         LocalDateTime startDate = LocalDateTime.parse(saveFundingReq.getStartDate());
-        if(startDate.isAfter(LocalDateTime.now())) {
+        if (startDate.isAfter(LocalDateTime.now())) {
             funding.setState(FundingState.READY);
-        }else{
+        } else {
             funding.setState(FundingState.ING);
         }
 
         // 썸네일 이미지
-        if(saveFundingReq.getThumbnail() != null){
+        if (saveFundingReq.getThumbnail() != null) {
             try {
                 String thumbnailUrl = awsS3Uploader.uploadFile(saveFundingReq.getThumbnail(), "funding/thumbnail");
                 funding.setThumbnailUrl(thumbnailUrl);
@@ -62,7 +66,7 @@ public class FundingService {
         }
 
         // 내용 이미지
-        if(saveFundingReq.getContent() != null){
+        if (saveFundingReq.getContent() != null) {
             try {
                 String contentUrl = awsS3Uploader.uploadFile(saveFundingReq.getContent(), "funding/content");
                 funding.setContentUrl(contentUrl);
@@ -72,7 +76,7 @@ public class FundingService {
         }
 
         // 리워드 이미지
-        if(saveFundingReq.getRewardImg() != null){
+        if (saveFundingReq.getRewardImg() != null) {
             try {
                 String rewardUrl = awsS3Uploader.uploadFile(saveFundingReq.getRewardImg(), "funding/reward");
                 funding.setRewardImg(rewardUrl);
@@ -86,11 +90,18 @@ public class FundingService {
         );
 
         fundingRepository.save(funding);
+
+        return FundingInfoForContractDTO.builder()
+                .companyId(company.get().getId())
+                .fundingId(funding.getId())
+                .goal((long) funding.getTargetAmount())
+                .days(funding.getEndDate())
+                .build();
     }
 
-    public void updateFunding(UpdateFundingReq updateFundingReq){
+    public void updateFunding(UpdateFundingReq updateFundingReq) {
         Optional<Funding> funding = fundingRepository.findById(Long.parseLong(updateFundingReq.getFundingId()));
-        if(funding.isEmpty()){
+        if (funding.isEmpty()) {
             throw new CustomException(FUNDING_NOT_FOUND);
         }
 
@@ -99,14 +110,14 @@ public class FundingService {
 
         // startdate 따져서 state 세팅
         LocalDateTime startDate = LocalDateTime.parse(updateFundingReq.getStartDate());
-        if(startDate.isAfter(LocalDateTime.now())) {
+        if (startDate.isAfter(LocalDateTime.now())) {
             funding.get().setState(FundingState.READY);
-        }else{
+        } else {
             funding.get().setState(FundingState.ING);
         }
 
         // 썸네일 이미지
-        if(updateFundingReq.getThumbnail() != null){
+        if (updateFundingReq.getThumbnail() != null) {
             try {
                 String thumbnailUrl = awsS3Uploader.uploadFile(updateFundingReq.getThumbnail(), "funding/thumbnail");
                 funding.get().setThumbnailUrl(thumbnailUrl);
@@ -116,7 +127,7 @@ public class FundingService {
         }
 
         // 내용 이미지
-        if(updateFundingReq.getContent() != null){
+        if (updateFundingReq.getContent() != null) {
             try {
                 String contentUrl = awsS3Uploader.uploadFile(updateFundingReq.getContent(), "funding/content");
                 funding.get().setContentUrl(contentUrl);
@@ -126,7 +137,7 @@ public class FundingService {
         }
 
         // 리워드 이미지
-        if(updateFundingReq.getRewardImg() != null){
+        if (updateFundingReq.getRewardImg() != null) {
             try {
                 String rewardUrl = awsS3Uploader.uploadFile(updateFundingReq.getRewardImg(), "funding/reward");
                 funding.get().setRewardImg(rewardUrl);
@@ -142,23 +153,23 @@ public class FundingService {
         fundingRepository.save(funding.get());
     }
 
-    public void deleteFunding(Long fundingId){
+    public void deleteFunding(Long fundingId) {
         fundingRepository.deleteById(fundingId);
     }
 
-    public SettleFundingRes settleFunding(SettleFundingReq settleFundingReq){
+    public SettleFundingRes settleFunding(SettleFundingReq settleFundingReq) {
         Optional<Funding> funding = fundingRepository.findById(settleFundingReq.getFundingId());
-        if(funding.isEmpty()){
+        if (funding.isEmpty()) {
             throw new CustomException(FUNDING_NOT_FOUND);
         }
 
         String loginId = SecurityUtil.getCurrentMemberLoginId();
         String companyLoginId = funding.get().getCompany().getLoginId();
-        if(!loginId.equals(companyLoginId)){
+        if (!loginId.equals(companyLoginId)) {
             throw new CustomException(NOT_COMPANY_FORBIDDEN);
         }
 
-        if(funding.get().getState().equals(FundingState.SETTLE)){
+        if (funding.get().getState().equals(FundingState.SETTLE)) {
             throw new CustomException(SETTLE_ALREADY_CONFLICT);
         }
 
@@ -175,20 +186,20 @@ public class FundingService {
     }
 
 
-    public void reportFunding(ReportFundingReq reportFundingReq){
+    public void reportFunding(ReportFundingReq reportFundingReq) {
         Optional<Funding> funding = fundingRepository.findById(Long.parseLong(reportFundingReq.getFundingId()));
-        if(funding.isEmpty()){
+        if (funding.isEmpty()) {
             throw new CustomException(FUNDING_NOT_FOUND);
         }
 
         String loginId = SecurityUtil.getCurrentMemberLoginId();
         String companyLoginId = funding.get().getCompany().getLoginId();
-        if(!loginId.equals(companyLoginId)){
+        if (!loginId.equals(companyLoginId)) {
             throw new CustomException(NOT_COMPANY_FORBIDDEN);
         }
 
         // 보고서 파일
-        if(reportFundingReq.getDocs() != null){
+        if (reportFundingReq.getDocs() != null) {
             try {
                 String docsUrl = awsS3Uploader.uploadFile(reportFundingReq.getDocs(), "funding/docs");
                 funding.get().setDocsUrl(docsUrl);
@@ -199,4 +210,5 @@ public class FundingService {
 
         fundingRepository.save(funding.get());
     }
+
 }
