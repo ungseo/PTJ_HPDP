@@ -38,8 +38,6 @@ public class FindFundingRes {
     private List<Budget> budgetList = new ArrayList<>();
 
     public static FindFundingRes of(Funding funding, List<Budget> budgets){
-        if(funding == null) return null;
-
         return FindFundingRes.builder()
                 .companyId(funding.getCompany().getId())
                 .name(funding.getCompany().getName())
