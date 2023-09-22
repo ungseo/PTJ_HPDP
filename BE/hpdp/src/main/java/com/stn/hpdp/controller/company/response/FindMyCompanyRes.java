@@ -10,13 +10,13 @@ import lombok.ToString;
 @Setter
 @Builder
 @ToString
-public class FindCompanyDetailRes {
+public class FindMyCompanyRes {
     private Long companyId;
+    private String loginId;
     private String profile;
     private String banner;
     private String name;
     private String hashtag;
-    private boolean isInterested;
     private String email;
     private String phoneNumber;
     private String address;
@@ -24,13 +24,12 @@ public class FindCompanyDetailRes {
     private String websiteUrl;
     private String introduce;
     private String createdDate;
-    private int fundingsNumber;
-    private int participantsNumber;
-    private int amount;
+    private String modifiedDate;
 
-    public static FindCompanyDetailRes from(Company company) {
-        return FindCompanyDetailRes.builder()
+    public static FindMyCompanyRes from(Company company) {
+        return FindMyCompanyRes.builder()
                 .companyId(company.getId())
+                .loginId(company.getLoginId())
                 .profile(company.getProfile())
                 .banner(company.getBanner())
                 .name(company.getName())
@@ -42,6 +41,7 @@ public class FindCompanyDetailRes {
                 .websiteUrl(company.getWebsiteUrl())
                 .introduce(company.getIntroduce())
                 .createdDate(String.valueOf(company.getCreatedDate()))
+                .modifiedDate(String.valueOf(company.getModifiedDate()))
                 .build();
     }
 }

@@ -1,6 +1,7 @@
 package com.stn.hpdp.service.auth;
 
 import com.stn.hpdp.common.ApiResponse;
+import com.stn.hpdp.common.AwsS3Uploader;
 import com.stn.hpdp.common.enums.Authority;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.jwt.JwtTokenProvider;
@@ -28,6 +29,7 @@ import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
@@ -48,6 +50,8 @@ public class AuthService {
     private final RedisTemplate redisTemplate;
     // refactoring 필요함!!!
     private final WalletService walletService;
+
+    private final AwsS3Uploader awsS3Uploader;
 
     public ApiResponse<Object> signUp(SignUpReq signUpReq) {
         if (memberRepository.existsByLoginId(signUpReq.getLoginId())) {
@@ -89,6 +93,27 @@ public class AuthService {
                 .registrationNumber(signUpReq.getRegistrationNumber())
                 .roles(Collections.singletonList(Authority.ROLE_COMPANY.name()))
                 .build();
+
+        // 프로필 이미지
+        if(signUpReq.getProfile() != null){
+            try {
+                String profileUrl = awsS3Uploader.uploadFile(signUpReq.getProfile(), "company/profile");
+                company.setProfile(profileUrl);
+            } catch (IOException e) {
+                log.info(e.getMessage());
+            }
+        }
+
+        // 기업 배너 이미지 추가
+        if(signUpReq.getBanner() != null){
+            try {
+                String bannerUrl = awsS3Uploader.uploadFile(signUpReq.getBanner(), "company/banner");
+                company.setBanner(bannerUrl);
+            } catch (IOException e) {
+                log.info(e.getMessage());
+            }
+        }
+
         companyRepository.save(company);
 
         return ApiResponse.messageOk("기업 회원가입에 성공했습니다.");
