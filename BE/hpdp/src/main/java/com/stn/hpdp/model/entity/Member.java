@@ -2,6 +2,7 @@ package com.stn.hpdp.model.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.stn.hpdp.controller.member.request.UpdateMemberReq;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name ="members")
+@Table(name = "members")
 @Getter
 @Setter
 @ToString
@@ -58,13 +59,21 @@ public class Member extends TimeBaseEntity implements UserDetails {
 
     private String profile;
 
-//    @ColumnDefault("1")
-//    private int role;
+    public void changePw(String encryptedPw) {
+        this.loginPw = encryptedPw;
+    }
+
+    public void changeInfo(UpdateMemberReq memberUpdateReq) {
+        this.name = memberUpdateReq.getName();
+        this.phoneNumber = memberUpdateReq.getPhoneNumber();
+        this.email = memberUpdateReq.getEmail();
+    }
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream()

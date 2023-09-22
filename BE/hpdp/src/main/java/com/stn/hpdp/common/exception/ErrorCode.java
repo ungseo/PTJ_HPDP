@@ -42,7 +42,7 @@ public enum ErrorCode {
     USER_ALREADY_EXIST(HttpStatus.CONFLICT, "이미 가입되어 있는 유저입니다."),
     ID_ALREADY_EXIST(HttpStatus.CONFLICT, "이미 존재하는 아이디입니다."),
     COMPANY_UPDATE_CONFLICT(HttpStatus.CONFLICT, "기업은 정보를 수정할 수 없습니다. 이메일로 문의해주세요."),
-    SETTLE_ALREADY_CONFLICT(HttpStatus.CONFLICT, "이미 정산 완료됐습니다.");
+    SETTLE_ALREADY_CONFLICT(HttpStatus.CONFLICT, "이미 정산 완료됐습니다."),
 
 
     /* 500 INTERNAL_SERVER_ERROR : 서버 내부 로직 에러 */

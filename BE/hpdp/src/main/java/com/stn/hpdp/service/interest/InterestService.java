@@ -17,6 +17,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import java.util.*;
@@ -33,17 +34,19 @@ public class InterestService {
     private final InterestQueryRepository interestQueryRepository;
     private final CompanyRepository companyRepository;
     private final RedisTemplate redisTemplate;
+
+    @Transactional
     public List<FindInterestRes> findInterests() {
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
         // redis -> mysql
         Set<Object> companies = redisTemplate.opsForHash().keys("IT:" + member.getId());
-        if(!companies.isEmpty()) {
+        if (!companies.isEmpty()) {
             syncInterests();
         }
         // mysql check
         List<Interest> interestList = interestQueryRepository.findByMember_IdWithCompany(member.getId());
-        if(interestList.isEmpty()) {
+        if (interestList.isEmpty()) {
             return Collections.emptyList();
         }
         List<FindInterestRes> result = new ArrayList<>();
@@ -65,15 +68,16 @@ public class InterestService {
         redisTemplate.opsForHash().put("IT:" + member.getId(), companyId, "false");
     }
 
+    @Transactional
     @Scheduled(cron = "0 0/30 * * * ?") // Redis -> MySQL 30분 마다 동기화
     public void syncInterests() {
         Set<String> changeMemberKeys = redisTemplate.keys("IT:*");
-        if(changeMemberKeys.isEmpty()) return;
+        if (changeMemberKeys.isEmpty()) return;
 
         for (String key : changeMemberKeys) {
             Long memberId = Long.parseLong(key.split(":")[1]);
             Member member = memberRepository.findById(memberId).orElse(null);
-            if(member != null) syncInterestsForMember(member); // mysql update
+            if (member != null) syncInterestsForMember(member); // mysql update
             redisTemplate.delete(key); // Redis 데이터 삭제
         }
     }
@@ -89,14 +93,14 @@ public class InterestService {
 
         Set<Company> saveCompany = new HashSet<>();
 
-        for(Company com : companies) {
+        for (Company com : companies) {
             Object check = redisTemplate.opsForHash().get("IT:" + member.getId(), com.getId());
-            if(check == null) continue;
-            if(check.equals("true")) {
+            if (check == null) continue;
+            if (check.equals("true")) {
                 saveCompany.add(com);
             } else {
                 Interest interest = interestRepository.findByCompany_Id(com.getId());
-                if(interest != null) interestRepository.delete(interest);
+                if (interest != null) interestRepository.delete(interest);
             }
         }
         List<Interest> interests = saveCompany.stream().map(company -> Interest.builder()
