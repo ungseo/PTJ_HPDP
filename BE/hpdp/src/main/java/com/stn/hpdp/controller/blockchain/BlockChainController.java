@@ -32,18 +32,18 @@ public class BlockChainController {
         return tokenService.getBalance().toString();
     }
 
-    @GetMapping("/make")
-    public String createWallet() {
-        String wallet = walletService.createWallet();
-        log.info("wallet :{}", wallet);
-        String address = walletService.verifyWallet(wallet);
-        log.info("address :{}", address);
-        String recepit = walletService.sendEther(address);
-        log.info("recepit :{}", recepit);
-
-        return recepit;
-
-    }
+//    @GetMapping("/make")
+//    public String createWallet() {
+//        String wallet = walletService.createWallet();
+//        log.info("wallet :{}", wallet);
+//        String address = walletService.verifyWallet(wallet);
+//        log.info("address :{}", address);
+//        String recepit = walletService.sendEther(address);
+//        log.info("recepit :{}", recepit);
+//
+//        return recepit;
+//
+//    }
 
 
 }

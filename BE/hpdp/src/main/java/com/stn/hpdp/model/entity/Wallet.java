@@ -17,7 +17,9 @@ public class Wallet {
 
     private String account;
 
-    private String keyfile;
+    private String keyFile;
+
+    private String privateKey;
 
     private String keyPw;
 
@@ -26,9 +28,10 @@ public class Wallet {
     private Member member;
 
     @Builder
-    public Wallet(String account, String keyfile, String keyPw, Member member) {
+    public Wallet(String account, String keyFile, String privateKey, String keyPw, Member member) {
         this.account = account;
-        this.keyfile = keyfile;
+        this.keyFile = keyFile;
+        this.privateKey = privateKey;
         this.keyPw = keyPw;
         this.member = member;
     }

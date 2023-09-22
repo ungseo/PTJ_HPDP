@@ -22,7 +22,7 @@ public class WalletQueryRepository {
         return queryFactory
                 .select(Projections.constructor(WalletRes.class,
                         wallet.account,
-                        wallet.keyfile,
+                        wallet.keyFile,
                         wallet.keyPw))
                 .from(wallet)
                 .where(wallet.member.id.eq(memberId))

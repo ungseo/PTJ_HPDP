@@ -1,12 +1,13 @@
 package com.stn.hpdp.service.blockchain;
 
+import com.stn.hpdp.common.AwsS3Uploader;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.exception.ErrorCode;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.model.entity.Wallet;
-import com.stn.hpdp.model.repository.MemberRepository;
 import com.stn.hpdp.model.repository.WalletRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,16 +19,18 @@ import org.web3j.protocol.http.HttpService;
 import org.web3j.utils.Convert;
 import org.web3j.utils.Numeric;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+@Slf4j
 @Transactional
 @RequiredArgsConstructor
 @Service
 public class WalletService {
 
     private final WalletRepository walletRepository;
-    private final MemberRepository memberRepository;
+    private final AwsS3Uploader awsS3Uploader;
     private Credentials adminCredentials;
     @Value("${ethereum.rpc-url}")
     private String rpcUrl;
@@ -35,28 +38,29 @@ public class WalletService {
     @Value("${ethereum.password}")
     private String password;
 
+    @Value("${privatekey.admin}")
+    private String privateKey;
 
     public void registWallet(Member member) {
         init();
         String keyfile = createWallet();
-        String account = verifyWallet(keyfile);
-        String txReceipt = sendEther(account);
+        Credentials account = verifyWallet(keyfile);
+        String txReceipt = sendEther(account.getAddress());
 
         walletRepository.save(Wallet.builder()
                 .member(member)
-                .account(account)
-                .keyfile(keyfile)
+                .account(account.getAddress())
+                .keyFile(keyfile)
+                .privateKey(account.getEcKeyPair().getPrivateKey().toString(16))
                 .keyPw(password)
                 .build());
+
+        uploadAndDeleteFile(keyfile);
 
     }
 
     public void init() {
-        try {
-            adminCredentials = WalletUtils.loadCredentials(password, "C:\\SSAFY\\c110\\BE\\hpdp\\src\\main\\java\\com\\stn\\hpdp\\key\\UTC--2023-09-12T23-57-15.846774500Z--9a6d9db08f536fd90dd4f77ac79e17fa6b9c1e6a");
-        } catch (Exception e) {
-            throw new CustomException(ErrorCode.WALLET_NOT_FOUND);
-        }
+        adminCredentials = Credentials.create(privateKey);
         web3j = Web3j.build(new HttpService(rpcUrl));
     }
 
@@ -68,14 +72,16 @@ public class WalletService {
             throw new CustomException(ErrorCode.CREATE_KEYPAIR_FAIL);
         }
         String walletDirectory = "./";
+
         try {
             return WalletUtils.generateWalletFile(password, ecKeyPair, new java.io.File(walletDirectory), true);
+
         } catch (Exception e) {
             throw new CustomException(ErrorCode.CREATE_WALLET_FAIL);
         }
     }
 
-    public String verifyWallet(String walletFileName) {
+    public Credentials verifyWallet(String walletFileName) {
         String walletDirectory = "./";
         Credentials credentials = null;
         try {
@@ -83,7 +89,7 @@ public class WalletService {
         } catch (Exception e) {
             throw new CustomException(ErrorCode.WALLET_NOT_FOUND);
         }
-        return credentials.getAddress();
+        return credentials;
     }
 
     public String sendEther(String toAddress) {
@@ -92,7 +98,7 @@ public class WalletService {
             BigInteger nonce = web3j.ethGetTransactionCount(adminCredentials.getAddress(), DefaultBlockParameterName.LATEST).send().getTransactionCount();
             BigInteger gasPrice = BigInteger.valueOf(21000); // 가스 값
             BigInteger gasLimit = BigInteger.valueOf(21000); // 가스 최댓값
-            BigInteger value = Convert.toWei(BigDecimal.TEN, Convert.Unit.ETHER).toBigInteger(); // 초기 이더리움 값
+            BigInteger value = Convert.toWei(BigDecimal.valueOf(10L), Convert.Unit.ETHER).toBigInteger(); // 초기 이더리움 값
 
             // RawTransaction 객체 생성
             RawTransaction rawTransaction = RawTransaction.createEtherTransaction(
@@ -103,7 +109,7 @@ public class WalletService {
                     value
             );
 
-            // chainId 추가 (예: 메인넷의 경우 1)
+            // chainId 추가
             int chainId = 12345;
             Credentials credentials = adminCredentials;
 
@@ -119,6 +125,11 @@ public class WalletService {
         } catch (Exception e) {
             throw new CustomException(ErrorCode.SEND_ETH_FAIL);
         }
+    }
+
+    private void uploadAndDeleteFile(String keyfile) {
+        File file = new File("./" + keyfile);
+        awsS3Uploader.upload(file, "keystore/" + keyfile);
     }
 
 
