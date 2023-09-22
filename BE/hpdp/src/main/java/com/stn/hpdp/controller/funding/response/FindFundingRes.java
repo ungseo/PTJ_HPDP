@@ -5,6 +5,8 @@ import com.stn.hpdp.model.entity.Budget;
 import com.stn.hpdp.model.entity.Funding;
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +58,7 @@ public class FindFundingRes {
                 .state(funding.getState())
                 .settlement(funding.getSettlement())
                 .budgetList(budgets)
+                .dDay(funding.getEndDate().isAfter(LocalDateTime.now()) ? Long.toString(ChronoUnit.DAYS.between(LocalDateTime.now(), funding.getEndDate())) : "마감")
                 .build();
     }
 }

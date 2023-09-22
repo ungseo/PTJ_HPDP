@@ -1,7 +1,6 @@
 package com.stn.hpdp.service.funding;
 
 import com.stn.hpdp.common.exception.CustomException;
-import com.stn.hpdp.common.exception.ErrorCode;
 import com.stn.hpdp.controller.funding.response.FindFundingRes;
 import com.stn.hpdp.controller.funding.response.FindFundingsRes;
 import com.stn.hpdp.model.entity.Budget;
@@ -30,7 +29,7 @@ public class FundingQueryService {
     public List<FindFundingsRes> findFundings(Long companyId, Integer done){
         List<FindFundingsRes> result = fundingQueryRepository.findFundingsByCompanyIdAndDone(companyId, done);
 
-        // dDay, totalFunding 세팅
+        // TODO: 후원하기 기능 완료 후 totalFunding 세팅
 
         return result;
     }
@@ -45,7 +44,7 @@ public class FundingQueryService {
 
         FindFundingRes findFundingRes = FindFundingRes.of(result.get(), budgets);
 
-        // dDay, totalFunding 세팅
+        // TODO: 후원하기 기능 완료 후 totalFunding 세팅
 
         return findFundingRes;
     }

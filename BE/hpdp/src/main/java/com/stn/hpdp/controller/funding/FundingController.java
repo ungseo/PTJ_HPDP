@@ -1,7 +1,6 @@
 package com.stn.hpdp.controller.funding;
 
 import com.stn.hpdp.common.ApiResponse;
-import com.stn.hpdp.controller.company.response.FindCompanyRes;
 import com.stn.hpdp.controller.funding.request.SaveFundingReq;
 import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
 import com.stn.hpdp.controller.funding.response.FindFundingRes;
@@ -13,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static com.stn.hpdp.common.util.LogCurrent.*;

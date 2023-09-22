@@ -3,26 +3,17 @@ package com.stn.hpdp.service.funding;
 import com.stn.hpdp.common.AwsS3Uploader;
 import com.stn.hpdp.common.enums.FundingState;
 import com.stn.hpdp.common.exception.CustomException;
-import com.stn.hpdp.controller.bank.request.SaveAccountReq;
-import com.stn.hpdp.controller.bank.request.TransferAccountReq;
-import com.stn.hpdp.controller.bank.response.FindAccountRes;
-import com.stn.hpdp.controller.bank.response.FindTransferRes;
-import com.stn.hpdp.controller.bank.response.TransferAccountRes;
 import com.stn.hpdp.controller.funding.request.SaveFundingReq;
 import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
 import com.stn.hpdp.model.entity.*;
 import com.stn.hpdp.model.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static com.stn.hpdp.common.exception.ErrorCode.*;
@@ -35,7 +26,6 @@ public class FundingService {
     private final FundingRepository fundingRepository;
     private final BudgetRepository budgetRepository;
 
-    private final MemberRepository memberRepository;
     private final CompanyRepository companyRepository;
 
     private final AwsS3Uploader awsS3Uploader;
