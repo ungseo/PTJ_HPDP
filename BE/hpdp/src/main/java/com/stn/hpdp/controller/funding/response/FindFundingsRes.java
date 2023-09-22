@@ -1,15 +1,10 @@
 package com.stn.hpdp.controller.funding.response;
 
 import com.stn.hpdp.common.enums.FundingState;
-import com.stn.hpdp.model.entity.Budget;
-import com.stn.hpdp.model.entity.Company;
-import com.stn.hpdp.model.entity.Funding;
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 @Getter
 @Setter
@@ -40,5 +35,10 @@ public class FindFundingsRes {
         this.startDate = startDate.toString();
         this.endDate = endDate.toString();
         this.state = state;
+        if(endDate.isAfter(LocalDateTime.now())){
+            this.dDay = Long.toString(ChronoUnit.DAYS.between(LocalDateTime.now(), endDate));
+        }else{
+            this.dDay = "마감";
+        }
     }
 }

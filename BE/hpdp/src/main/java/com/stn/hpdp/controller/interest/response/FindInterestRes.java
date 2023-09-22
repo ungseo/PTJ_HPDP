@@ -14,8 +14,6 @@ public class FindInterestRes {
     private String name;
 
     public static FindInterestRes of(Interest interest){
-        if(interest == null) return null;
-
         return FindInterestRes.builder()
                 .companyId(interest.getCompany().getId())
                 .profile(interest.getCompany().getProfile())
