@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { userActions } from "../../store/user-slice";
 import { Switch } from "@mui/material";
 import { getMemberInfo } from "../../api/members";
+import DuplicationBtn from "./DuplicationBtn";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const LoginForm = () => {
         };
         dispatch(userActions.loginHandler(tokens));
         navigate("/");
+        window.location.reload();
       },
       (err) => {
         alert(err.message);
@@ -60,7 +62,7 @@ const LoginForm = () => {
       <AnimationLabelInput
         labelTitle={"Id"}
         type="text"
-        styles={{ height: "4em" }}
+        styles={{ height: "4rem" }}
         id="id"
         value={id}
         onChange={onChange}
@@ -68,7 +70,7 @@ const LoginForm = () => {
       <AnimationLabelInput
         labelTitle={"Password"}
         type="password"
-        styles={{ height: "4em" }}
+        styles={{ height: "4rem" }}
         id="pw"
         value={pw}
         onChange={onChange}

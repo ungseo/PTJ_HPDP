@@ -10,6 +10,7 @@ const AnimationLabelInput = ({
   labelTitle,
   type,
   required,
+  disabled,
 }: InputInterface) => {
   const onClick = (event: any) => {
     if (id) {
@@ -30,6 +31,7 @@ const AnimationLabelInput = ({
         name={id}
         placeholder=""
         required={required}
+        disabled={disabled}
       />
       <label className={style.label} htmlFor={id} onClick={onClick}>
         {labelTitle.split("").map((letter, idx) => (

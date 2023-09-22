@@ -17,6 +17,7 @@ export interface InputInterface {
   styles?: styleInterface;
   labelTitle: string | "";
   required?: boolean;
+  disabled?: boolean;
 }
 
 export interface AscendingNumberInterface {
