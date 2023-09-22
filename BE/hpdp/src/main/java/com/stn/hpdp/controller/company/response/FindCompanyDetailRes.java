@@ -13,6 +13,7 @@ import lombok.ToString;
 public class FindCompanyDetailRes {
     private Long companyId;
     private String profile;
+    private String banner;
     private String name;
     private String hashtag;
     private boolean isInterested;
@@ -28,11 +29,10 @@ public class FindCompanyDetailRes {
     private int amount;
 
     public static FindCompanyDetailRes from(Company company) {
-        if(company == null) return null;
-
         return FindCompanyDetailRes.builder()
                 .companyId(company.getId())
                 .profile(company.getProfile())
+                .banner(company.getBanner())
                 .name(company.getName())
                 .hashtag(company.getHashtag())
                 .email(company.getEmail())

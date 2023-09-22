@@ -28,8 +28,8 @@ const HistoryList = () => {
   };
   return (
     <div className={style.wrapper}>
-      <div className={style.header}>
-        <p>{isInsert ? "충전내역 (최신순)" : "후원내역 (최신순)"}</p>
+      <div className={style.label}>
+        <div className={style.text}>{isInsert ? "충전내역 (최신순)" : "후원내역 (최신순)"}</div>
         <DefaultButton
           text={buttonProps.text}
           styles={buttonProps.style}

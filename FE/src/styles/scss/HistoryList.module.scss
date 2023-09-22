@@ -1,16 +1,16 @@
 @import "Style";
 
 .wrapper {
-  margin-top: 1rem;
-  .header {
+
+  .label {
+    margin: 1rem 1.5rem;
+
     display: flex;
     justify-content: space-between;
-    p {
+
+    .text {
       margin: 0;
       font-weight: bold;
     }
-  }
-  hr {
-    border-color: gray 1px;
   }
 }

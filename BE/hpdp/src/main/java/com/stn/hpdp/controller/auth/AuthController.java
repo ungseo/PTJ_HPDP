@@ -3,11 +3,12 @@ package com.stn.hpdp.controller.auth;
 import com.stn.hpdp.common.ApiResponse;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.jwt.JwtTokenProvider;
-import com.stn.hpdp.controller.auth.request.SignUpCompanyReq;
 import com.stn.hpdp.controller.auth.request.ReissueReq;
 import com.stn.hpdp.controller.auth.request.SignInReq;
+import com.stn.hpdp.controller.auth.request.SignUpCompanyReq;
 import com.stn.hpdp.controller.auth.request.SignUpReq;
 import com.stn.hpdp.service.auth.AuthService;
+import com.stn.hpdp.service.blockchain.WalletService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import static com.stn.hpdp.common.exception.ErrorCode.INVALID_FIELDS_REQUEST;
 import static com.stn.hpdp.common.util.LogCurrent.*;
-import static com.stn.hpdp.common.util.LogCurrent.END;
+
 @Slf4j
 @Api
 @RequiredArgsConstructor
@@ -35,7 +36,7 @@ public class AuthController {
         // validation check
         log.info(logCurrent(getClassName(), getMethodName(), START));
         if (errors.hasErrors()) {
-            errors.getFieldErrors().forEach(e-> {
+            errors.getFieldErrors().forEach(e -> {
                 System.out.println("message : " + e.getDefaultMessage());
             });
             log.info(logCurrent(getClassName(), getMethodName(), END));
@@ -46,11 +47,11 @@ public class AuthController {
     }
 
     @PostMapping("/company") // 기업 회원가입
-    public ApiResponse<Object> signUpCompany(@Validated @RequestBody SignUpCompanyReq signUpReq, Errors errors) {
+    public ApiResponse<Object> signUpCompany(@ModelAttribute SignUpCompanyReq signUpReq, Errors errors) {
         // validation check
         log.info(logCurrent(getClassName(), getMethodName(), START));
         if (errors.hasErrors()) {
-            errors.getFieldErrors().forEach(e-> {
+            errors.getFieldErrors().forEach(e -> {
                 System.out.println("message : " + e.getDefaultMessage());
             });
             log.info(logCurrent(getClassName(), getMethodName(), END));
@@ -62,19 +63,19 @@ public class AuthController {
 
     @PostMapping("/login") // 로그인
     public ApiResponse<Object> signIn(@Validated @RequestBody SignInReq signInReq, HttpServletResponse response, Errors errors
-    ,@RequestParam(name = "type", required = false, defaultValue = "0") int type) {
+            , @RequestParam(name = "type", required = false, defaultValue = "0") int type) {
         // validation check
         log.info(logCurrent(getClassName(), getMethodName(), START));
 
         if (errors.hasErrors()) {
-            errors.getFieldErrors().forEach(e-> {
+            errors.getFieldErrors().forEach(e -> {
                 System.out.println("message : " + e.getDefaultMessage());
             });
             log.info(logCurrent(getClassName(), getMethodName(), END));
             throw new CustomException(INVALID_FIELDS_REQUEST);
         }
 
-        if(type == 0) {
+        if (type == 0) {
             log.info(logCurrent(getClassName(), getMethodName(), END));
             return authService.signIn(signInReq, response);
         } else {

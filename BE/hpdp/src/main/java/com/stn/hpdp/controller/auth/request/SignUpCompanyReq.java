@@ -46,4 +46,5 @@ public class SignUpCompanyReq {
     private String registrationNumber;
 
     private MultipartFile profile;
+    private MultipartFile banner;
 }

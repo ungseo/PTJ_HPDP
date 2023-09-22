@@ -21,7 +21,6 @@ const InsertHistoryItem = ({
         <p className={style.content_point}>{Point} P</p>
       </div>
       <p className={style.remain_point}>{balancePoint} P</p>
-      <hr className={style.hr} />
     </div>
   );
 };
