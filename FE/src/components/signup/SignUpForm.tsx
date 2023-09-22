@@ -16,6 +16,7 @@ const SignUpForm = () => {
     address: "",
   });
   const [pw2, setPw2] = useState("");
+
   const onChange = (event: any) => {
     const { id, value } = event.target;
     if (id === "loginPw2") {
