@@ -7,6 +7,7 @@ import messageSlice from "./message-slice";
 //슬라이스 import
 import { persistReducer, PERSIST, PURGE } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import storageSession from "redux-persist/lib/storage/session";
 import profileEditSlice from "./profileEdit-slice";
 import accountSlice from './account-slice';
 
@@ -24,7 +25,7 @@ const reducers = combineReducers({
 
 const persistConfig = {
   key: "root",
-  storage,
+  storage: storageSession,
   whitelist: ["user"],
 };
 
