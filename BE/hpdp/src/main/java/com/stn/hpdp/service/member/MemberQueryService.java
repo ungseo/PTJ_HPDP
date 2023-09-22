@@ -2,63 +2,61 @@ package com.stn.hpdp.service.member;
 
 import com.stn.hpdp.common.AwsS3Uploader;
 import com.stn.hpdp.common.exception.CustomException;
-import com.stn.hpdp.common.util.SecurityUtil;
-import com.stn.hpdp.controller.member.request.UpdateMemberPwReq;
-import com.stn.hpdp.controller.member.request.UpdateMemberReq;
-import com.stn.hpdp.controller.member.response.FindMemberInfoRes;
-import com.stn.hpdp.model.entity.Member;
-import com.stn.hpdp.model.repository.MemberRepository;
 import com.stn.hpdp.common.jwt.JwtTokenProvider;
+import com.stn.hpdp.common.util.SecurityUtil;
+import com.stn.hpdp.controller.funding.response.FindFundingsRes;
+import com.stn.hpdp.controller.member.response.FindMemberFundingRes;
+import com.stn.hpdp.controller.member.response.FindMemberInfoRes;
+import com.stn.hpdp.model.entity.FundingHistory;
+import com.stn.hpdp.model.entity.Interest;
+import com.stn.hpdp.model.entity.Member;
+import com.stn.hpdp.model.repository.FundingHistoryRepository;
+import com.stn.hpdp.model.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.stn.hpdp.common.exception.ErrorCode.USER_NOT_FOUND;
 import static com.stn.hpdp.common.util.LogCurrent.*;
+import static com.stn.hpdp.common.util.LogCurrent.END;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class MemberService {
+@Transactional(readOnly = true)
+public class MemberQueryService {
 
     private final MemberRepository memberRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final JwtTokenProvider jwtTokenProvider;
-    private final AwsS3Uploader awsS3Uploader;
+    private final FundingHistoryRepository fundingHistoryRepository;
 
-    @Transactional
-    public FindMemberInfoRes updateMemberInfo(UpdateMemberReq memberUpdateReq) {
+    public FindMemberInfoRes findMemberInfo() {
         log.info(logCurrent(getClassName(), getMethodName(), START));
 
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
-        member.changeInfo(memberUpdateReq);
-
-        if (memberUpdateReq.getProfile() != null) {
-            try {
-                String profileUrl = awsS3Uploader.uploadFile(memberUpdateReq.getProfile(), "member/profile");
-                member.setProfile(profileUrl);
-                System.out.println(profileUrl);
-            } catch (IOException e) {
-                log.info(e.getMessage());
-            }
-        }
         log.info(logCurrent(getClassName(), getMethodName(), END));
         return FindMemberInfoRes.of(member);
     }
 
-    @Transactional
-    public void updatePassword(UpdateMemberPwReq updateMemberPwReq) {
+    public List<FindMemberFundingRes> findMemberFunding() {
         log.info(logCurrent(getClassName(), getMethodName(), START));
 
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
-        member.changePw(passwordEncoder.encode(updateMemberPwReq.getLoginPw()));
+        List<FundingHistory> fundingHistoryList = fundingHistoryRepository.findAllByMember_Id(member.getId());
+
+        List<FindMemberFundingRes> result = fundingHistoryList.stream().map(fundingHistory ->
+                        FindMemberFundingRes.of(fundingHistory.getFunding()))
+                .collect(Collectors.toList());
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+        return result;
     }
 }

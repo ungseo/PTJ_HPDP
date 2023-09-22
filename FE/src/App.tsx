@@ -27,7 +27,7 @@ import { getMemberInfo } from "./api/members";
 import { userActions } from "./store/user-slice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-
+import RegisterAccountPage from "./pages/RegisterAccountPage";
 function App() {
   const dispatch = useDispatch();
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -137,6 +137,15 @@ function App() {
           path="*"
           Component={PageNotFound404}
         ></Route>
+        <Route path="/profile/message/:userid" Component={MessagePage}></Route>
+        <Route path="/payment" Component={CheckoutPage}></Route>
+        <Route path="success" Component={SuccessPage}></Route>
+        <Route path="/fail" Component={FailPage}></Route>
+        <Route
+          path="/profile/testbank/register/test"
+          Component={RegisterAccountPage}
+        ></Route>
+        <Route path="*" Component={PageNotFound404}></Route>
       </Routes>
       <div className={style.blank}></div>
       <div className={style.navBar}>
