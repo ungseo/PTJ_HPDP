@@ -76,7 +76,6 @@ dependencies {
     // web3j
     implementation 'org.web3j:core:4.8.4'
 
-
     // aws s3
     implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 }
