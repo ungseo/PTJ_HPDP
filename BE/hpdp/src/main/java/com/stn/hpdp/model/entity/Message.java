@@ -1,15 +1,16 @@
 package com.stn.hpdp.model.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Message extends TimeBaseEntity {
 
@@ -25,4 +26,13 @@ public class Message extends TimeBaseEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
+
+    @NotNull
+    private String title;
+    @NotNull
+    private String content;
+    @NotNull
+    private boolean to;
+    @NotNull
+    private boolean isRead = false;
 }
