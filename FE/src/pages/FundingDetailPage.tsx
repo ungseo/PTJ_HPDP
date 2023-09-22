@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import * as Interfaces from "../interface/apiDataInterface";
+import { getFundingDetail } from "../api/funding";
 
 import CustomizedTabs from "../components/CustomizedTabs";
 import FundingIntroduce from "../components/fundingdetail/FundingIntroduce";
@@ -10,15 +14,30 @@ import DefaultButton from "../components/common/DefaultButton";
 import style from "../styles/css/FundingDetailPage.module.css";
 
 const FundingDetailPage = () => {
-
+  const [fundingDetailData, setFundingDetailData] = useState<
+    Interfaces.OutFundingsInfoInterface[]
+  >([]);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
   const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
-
+  const { fundingid } = useParams();
   const tabProps = {
     소개: <FundingIntroduce />,
     소식: <FundingSituation />,
   };
+
+  useEffect(() => {
+    getFundingDetail(
+      Number(fundingid),
+      (res) => {
+        setFundingDetailData(res.data.data);
+        console.log("펀딩 상세 API 연결");
+      },
+      (err) => {
+        console.log("펀딩상세 API 호출 실패", err);
+      }
+    );
+  }, []);
 
   useEffect(() => {
     if (isFundingCompleteOpen) {
