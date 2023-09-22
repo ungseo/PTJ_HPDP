@@ -8,5 +8,8 @@ import java.util.List;
 @Repository
 public interface InterestRepository extends JpaRepository<Interest, Long> {
 
-    List<Interest> findAccountByMember_Id(Long memberId);
+    List<Interest> findByMember_Id(Long memberId);
+    boolean existsByCompany_Id(Long companyId);
+    Interest findByCompany_Id(Long companyId);
+
 }
