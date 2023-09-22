@@ -1,8 +1,6 @@
 import { AxiosResponse } from "axios";
-import { banksApi } from ".";
+import { customApi } from ".";
 import * as Interfaces from "../interface/apiDataInterface";
-
-const api = banksApi;
 
 // 계좌 등록
 export async function registerAccount(
@@ -26,7 +24,7 @@ export async function registerAccount(
       accountPw: accountPw,
       bankCode: bankCode,
     }
-
+    const api = customApi("banks")
     api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
     await api.post('', data).then(success).catch(fail);
 }
@@ -44,6 +42,7 @@ export async function getAccount(
       | void,
     fail: (err: any) => PromiseLike<never> | null | undefined | void
   ) {
+      const api = customApi("banks")
       api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
       await api.post(`/account`).then(success).catch(fail);
   }
@@ -61,6 +60,7 @@ export async function transAccount(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
+    const api = customApi("banks")
     api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
     await api.post(`/transfer`).then(success).catch(fail);
 }
@@ -78,6 +78,7 @@ export async function transDetailAccount(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
+    const api = customApi("banks")
     api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
     await api.post(`/transfer-detail`).then(success).catch(fail);
 }
@@ -95,6 +96,7 @@ export async function unregisterAccount(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
+    const api = customApi("banks")
     api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
     await api.post(`/delete`).then(success).catch(fail);
 }
