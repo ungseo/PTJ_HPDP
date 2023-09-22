@@ -3,8 +3,11 @@ package com.stn.hpdp.service.funding;
 import com.stn.hpdp.common.AwsS3Uploader;
 import com.stn.hpdp.common.enums.FundingState;
 import com.stn.hpdp.common.exception.CustomException;
+import com.stn.hpdp.common.util.SecurityUtil;
 import com.stn.hpdp.controller.funding.request.SaveFundingReq;
+import com.stn.hpdp.controller.funding.request.SettleFundingReq;
 import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
+import com.stn.hpdp.controller.funding.response.SettleFundingRes;
 import com.stn.hpdp.model.entity.*;
 import com.stn.hpdp.model.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -141,5 +144,34 @@ public class FundingService {
     @Transactional
     public void deleteFunding(Long fundingId){
         fundingRepository.deleteById(fundingId);
+    }
+
+    @Transactional
+    public SettleFundingRes settleFunding(SettleFundingReq settleFundingReq){
+        Optional<Funding> funding = fundingRepository.findById(settleFundingReq.getFundingId());
+        if(funding.isEmpty()){
+            throw new CustomException(FUNDING_NOT_FOUND);
+        }
+
+        String loginId = SecurityUtil.getCurrentMemberLoginId();
+        String companyLoginId = funding.get().getCompany().getLoginId();
+        if(!loginId.equals(companyLoginId)){
+            throw new CustomException(NOT_COMPANY_FORBIDDEN);
+        }
+
+        if(funding.get().getState().equals(FundingState.SETTLE)){
+            throw new CustomException(SETTLE_ALREADY_CONFLICT);
+        }
+
+        SettleFundingRes settleFundingRes = SettleFundingRes.of(funding.get());
+
+        // TODO: 후원하기 기능 완료 후 totalPoint 세팅
+
+        // TODO: totalPoint를 settlement로 세팅한 후 update
+        // state update
+        funding.get().setState(FundingState.SETTLE);
+        fundingRepository.save(funding.get());
+
+        return settleFundingRes;
     }
 }

@@ -2,9 +2,11 @@ package com.stn.hpdp.controller.funding;
 
 import com.stn.hpdp.common.ApiResponse;
 import com.stn.hpdp.controller.funding.request.SaveFundingReq;
+import com.stn.hpdp.controller.funding.request.SettleFundingReq;
 import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
 import com.stn.hpdp.controller.funding.response.FindFundingRes;
 import com.stn.hpdp.controller.funding.response.FindFundingsRes;
+import com.stn.hpdp.controller.funding.response.SettleFundingRes;
 import com.stn.hpdp.service.funding.FundingQueryService;
 import com.stn.hpdp.service.funding.FundingService;
 import io.swagger.annotations.Api;
@@ -73,5 +75,16 @@ public class FundingController {
         FindFundingRes result = fundingQueryService.findFunding(fundingId);
         log.info(logCurrent(getClassName(), getMethodName(), END));
         return ApiResponse.ok(result);
+    }
+
+    @PostMapping("/settle") // 펀딩 정산하기
+    public ApiResponse<Object> settleFunding(@RequestBody SettleFundingReq settleFundingReq) {
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+
+        SettleFundingRes settleFundingRes = fundingService.settleFunding(settleFundingReq);
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+
+        return ApiResponse.ok(settleFundingRes);
     }
 }
