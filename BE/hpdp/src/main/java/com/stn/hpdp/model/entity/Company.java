@@ -1,6 +1,8 @@
 package com.stn.hpdp.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.stn.hpdp.controller.company.request.UpdateCompanyReq;
+import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -69,6 +72,7 @@ public class Company extends TimeBaseEntity implements UserDetails  {
     private String accountNumber;
 
     private String profile;
+    private String banner;
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
@@ -79,6 +83,16 @@ public class Company extends TimeBaseEntity implements UserDetails  {
         return this.roles.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
+    }
+
+    public void update(UpdateCompanyReq updateCompanyReq){
+        this.name = updateCompanyReq.getHashtag();
+        this.phoneNumber = updateCompanyReq.getPhoneNumber();
+        this.email = updateCompanyReq.getEmail();
+        this.websiteUrl = updateCompanyReq.getWebsiteUrl();
+        this.introduce = updateCompanyReq.getIntroduce();
+        this.hashtag = updateCompanyReq.getHashtag();
+        this.accountNumber = updateCompanyReq.getAccountNumber();
     }
 
     @Override

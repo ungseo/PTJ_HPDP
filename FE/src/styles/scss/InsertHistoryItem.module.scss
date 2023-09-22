@@ -3,6 +3,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  margin: 0 1.5rem;
 
   .date {
     color: gray;
@@ -16,16 +17,16 @@
 
     .content_title {
     }
+
     .content_point {
       color: red;
     }
   }
+
   .remain_point {
-    margin-left: auto;
     color: gray;
+    margin-left: auto;
     font-size: 0.5rem;
   }
-  .hr {
-    margin: 0;
-  }
+
 }

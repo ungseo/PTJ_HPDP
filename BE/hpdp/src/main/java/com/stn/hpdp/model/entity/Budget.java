@@ -1,8 +1,7 @@
 package com.stn.hpdp.model.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,6 +9,9 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Budget extends TimeBaseEntity {
 
@@ -21,5 +23,9 @@ public class Budget extends TimeBaseEntity {
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "funding_id")
+    @JsonIgnore
     private Funding funding;
+
+    private String price;
+    private String content;
 }

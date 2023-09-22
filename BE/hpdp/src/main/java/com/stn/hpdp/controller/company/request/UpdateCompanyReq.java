@@ -1,17 +1,18 @@
-package com.stn.hpdp.controller.member.request;
+package com.stn.hpdp.controller.company.request;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-public class MemberUpdateReq {
+public class UpdateCompanyReq {
 
-    //todo : 프로필 이미지
-    private String profile;
+    private MultipartFile profile;
+    private MultipartFile banner;
 
     @Size(min = 2, max = 50)
     private String name;
@@ -21,4 +22,9 @@ public class MemberUpdateReq {
 
     @Pattern(regexp = "^([A-Za-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$", message = "이메일 형식에 맞지 않습니다.")
     private String email;
+
+    private String websiteUrl;
+    private String introduce;
+    private String hashtag;
+    private String accountNumber;
 }
