@@ -66,7 +66,7 @@ class WalletQueryServiceTest extends IntegrationTestSupport {
     private Wallet InsertWallet(String account, String keyfile, String keyPw, Member member) {
         Wallet wallet = Wallet.builder()
                 .account(account)
-                .keyfile(keyfile)
+                .keyFile(keyfile)
                 .keyPw(keyPw)
                 .member(member)
                 .build();
