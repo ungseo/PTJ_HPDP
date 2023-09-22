@@ -14,11 +14,11 @@ import SearchPage from "./pages/SearchPage";
 import ProfileEditPage from "./pages/ProfileEditPage";
 import TransactionHistoryPage from "./pages/TransactionHistoryPage";
 import FundingHistoryPage from "./pages/FundingHistoryPage";
-import InterestCompaniesPage from "./pages/InterestCompaniesPage";
 import { CheckoutPage } from "./pages/Toss/CheckoutPage";
 import { SuccessPage } from "./pages/Toss/SuccessPage";
 import { FailPage } from "./pages/Toss/FailPage";
-import HPDPBankPage from "./pages/HPDPBankPage";
+import TestBankPage from "./pages/TestBankPage";
+import BankStatementPage from "./pages/BankStatementPage";
 import InterestingCompanyPage from "./pages/InterestingCompanyPage";
 import MessagePage from "./pages/MessagePage";
 import PageNotFound404 from "./pages/PageNotFound404";
@@ -53,14 +53,38 @@ function App() {
     <div id="app-root" className={style.App}>
       <Routes>
         {/* <Route path="/" Component={??Page}></Route> */}
-        <Route path="/" Component={HomePage}></Route>
-        <Route path="/list" Component={ListPage}></Route>
-        <Route path="/notification" Component={NotificationPage}></Route>
-        <Route path="/profile" Component={ProfilePage}></Route>
-        <Route path="/login" Component={LogInPage}></Route>
-        <Route path="/signup" Component={SignUpPage}></Route>
-        <Route path="/search" Component={SearchPage}></Route>
-        <Route path="/search/:keyword" Component={SearchResultPage}></Route>
+        <Route
+          path="/"
+          Component={HomePage}
+        ></Route>
+        <Route
+          path="/list"
+          Component={ListPage}
+        ></Route>
+        <Route
+          path="/notification"
+          Component={NotificationPage}
+        ></Route>
+        <Route
+          path="/profile"
+          Component={ProfilePage}
+        ></Route>
+        <Route
+          path="/login"
+          Component={LogInPage}
+        ></Route>
+        <Route
+          path="/signup"
+          Component={SignUpPage}
+        ></Route>
+        <Route
+          path="/search"
+          Component={SearchPage}
+        ></Route>
+        <Route
+          path="/search/:keyword"
+          Component={SearchResultPage}
+        ></Route>
         <Route
           path="/funding/detail/:fundingid"
           Component={FundingDetailPage}
@@ -69,8 +93,18 @@ function App() {
           path="/company/detail/:companyid"
           Component={CompanyDetailPage}
         ></Route>
-        <Route path="/profile/edit/:userid" Component={ProfileEditPage}></Route>
-        <Route path="/profile/testbank" Component={HPDPBankPage}></Route>
+        <Route
+          path="/profile/edit/:userid"
+          Component={ProfileEditPage}
+        ></Route>
+        <Route
+          path="/profile/testbank"
+          Component={TestBankPage}
+        ></Route>
+        <Route
+          path="/profile/bankstatement/:userid"
+          Component={BankStatementPage}
+        ></Route>
         <Route
           path="/profile/history/transaction/:userid"
           Component={TransactionHistoryPage}
@@ -84,14 +118,25 @@ function App() {
           Component={InterestingCompanyPage}
         ></Route>
         <Route
-          path="/profile/interest-companies"
-          Component={InterestCompaniesPage}
+          path="/profile/message/:userid"
+          Component={MessagePage}
         ></Route>
-        <Route path="/profile/message/:userid" Component={MessagePage}></Route>
-        <Route path="/payment" Component={CheckoutPage}></Route>
-        <Route path="success" Component={SuccessPage}></Route>
-        <Route path="/fail" Component={FailPage}></Route>
-        <Route path="*" Component={PageNotFound404}></Route>
+        <Route
+          path="/payment"
+          Component={CheckoutPage}
+        ></Route>
+        <Route
+          path="success"
+          Component={SuccessPage}
+        ></Route>
+        <Route
+          path="/fail"
+          Component={FailPage}
+        ></Route>
+        <Route
+          path="*"
+          Component={PageNotFound404}
+        ></Route>
       </Routes>
       <div className={style.blank}></div>
       <div className={style.navBar}>

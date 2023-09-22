@@ -6,6 +6,7 @@ import com.stn.hpdp.common.jwt.JwtExceptionFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -45,10 +46,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/api/hello").permitAll() // test api
                 .antMatchers("/api/auth").permitAll()
                 .antMatchers("/api/auth/logout").authenticated()
                 .antMatchers("/api/members/adminTest").hasRole("ADMIN")
                 .antMatchers("/api/companies").permitAll()
+                .antMatchers("/api/banks").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/fundings").permitAll()
+                .antMatchers("/api/fundings").hasRole("ADMIN")
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, redisTemplate), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtExceptionFilter,JwtAuthenticationFilter.class); // jwt 에러처리를 위한 필터등록

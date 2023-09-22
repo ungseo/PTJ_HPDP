@@ -34,6 +34,7 @@ public enum ErrorCode {
     CONNECTED_ACCOUNT_NOT_FOUND(HttpStatus.NOT_FOUND, "연결된 계좌가 없습니다."),
     WALLET_NOT_FOUND(HttpStatus.NOT_FOUND,"사용자의 지갑이 존재하지 않습니다."),
 
+    FUNDING_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 펀딩입니다."),
 
     /* 409 CONFLICT : Resource 의 현재 상태와 충돌. 보통 중복된 데이터 존재 */
     DUPLICATE_RESOURCE(HttpStatus.CONFLICT, "데이터가 이미 존재합니다"),

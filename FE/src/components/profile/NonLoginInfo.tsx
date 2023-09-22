@@ -2,7 +2,10 @@ import { Link } from "react-router-dom";
 const NonLoginInfo = () => {
   return (
     <div>
-      <Link style={{ fontSize: "1.5em", textDecoration: "none" }} to={"/login"}>
+      <Link
+        style={{ fontSize: "1.5rem", textDecoration: "none" }}
+        to={"/login"}
+      >
         로그인 및 회원가입 하기
       </Link>
       <br />
