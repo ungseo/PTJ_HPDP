@@ -55,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/fundings").permitAll()
                 .antMatchers("/api/fundings").hasRole("ADMIN")
                 .antMatchers("/api/fundings/settle").hasRole("COMPANY")
+                .antMatchers("/api/fundings/report").hasRole("COMPANY")
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, redisTemplate), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtExceptionFilter,JwtAuthenticationFilter.class); // jwt 에러처리를 위한 필터등록

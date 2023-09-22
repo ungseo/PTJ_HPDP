@@ -1,6 +1,7 @@
 package com.stn.hpdp.controller.funding;
 
 import com.stn.hpdp.common.ApiResponse;
+import com.stn.hpdp.controller.funding.request.ReportFundingReq;
 import com.stn.hpdp.controller.funding.request.SaveFundingReq;
 import com.stn.hpdp.controller.funding.request.SettleFundingReq;
 import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
@@ -86,5 +87,16 @@ public class FundingController {
         log.info(logCurrent(getClassName(), getMethodName(), END));
 
         return ApiResponse.ok(settleFundingRes);
+    }
+
+    @PostMapping("/report") // 펀딩 보고서 등록
+    public ApiResponse<Object> reportFunding(@ModelAttribute ReportFundingReq reportFundingReq) {
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+
+        fundingService.reportFunding(reportFundingReq);
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+
+        return ApiResponse.messageOk("Success");
     }
 }
