@@ -48,6 +48,8 @@ public enum ErrorCode {
     /* 500 INTERNAL_SERVER_ERROR : 서버 내부 로직 에러 */
     CREATE_WALLET_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "사용자의 지갑을 만드는데 실패하였습니다."),
     CREATE_KEYPAIR_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "Key Pair를 만드는데 실패하였습니다."),
+    CREATE_FUNDING_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "펀딩을 만드는데 실패하였습니다."),
+
     SEND_ETH_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "이더리움 전송에 실패하였습니다.");
 
     private final HttpStatus httpStatus;
