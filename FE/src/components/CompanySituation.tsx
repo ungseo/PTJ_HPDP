@@ -27,6 +27,8 @@ const CompanySituation = (props :CompanySituationProps) => {
     Interfaces.OutFundingsInfoInterface[]
   >([]);
 
+  console.log(companyProgressFundingData)
+
   useEffect(() => {
     getFundingProgress(
       companyId,
@@ -65,37 +67,46 @@ const CompanySituation = (props :CompanySituationProps) => {
         <Grid item xs={9} className={style.container}>
           <div className={style.item}>
             <div>프로젝트 개수</div>
-            <div>gksk</div>
+            <div>{item.fundingsNumber} 개</div>
           </div>
           <div className={style.item}>
             <div>후원 인원</div>
-            <div>gksk</div>
+            <div>{item.participantsNumber} 명</div>
           </div>
           <div className={style.item}>
-            <div>모금 개수</div>
-            <div>gksk</div>
+            <div>모금 금액</div>
+            <div>{item.amount} 원</div>
           </div>
           <Grid item xs={1.5} className={style.height}></Grid>
         </Grid>
       </Grid>
-      <div className={style.text}>
-        <p>진행 내역</p>
-        {companyProgressFundingData.length > 0 ? (
-          <FundingItem
-            key={companyProgressFundingData[0].fundingId}
-            item={companyProgressFundingData[0]}
-          />
-        ) : (
-          <p>진행 중인 펀딩이 없습니다.</p>
-        )}
-      </div>
 
+      {
+        companyProgressFundingData.length > 0
+        ? (
+          <div className={style.text}>
+          <p>진행 내역</p>
+            <FundingItem
+              key={companyProgressFundingData[0].fundingId}
+              item={companyProgressFundingData[0]}
+            />
+          </div>
+        )
+        : null
+      }
+
+      {
+        companyCompleteFundingData.length > 0
+        ? (
       <div className={style.text}>
         <p>종료 내역</p>
         {companyCompleteFundingData.map((item) => (
           <FundingItem key={item.fundingId} item={item} />
         ))}
       </div>
+        )
+        : null        
+      }
     </div>
   );
 };

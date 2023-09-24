@@ -11,6 +11,7 @@ const FundingList = () => {
   const [fundingTotalData, setFundingTotalData] = useState<
     Interfaces.OutFundingsInfoInterface[]
   >([]);
+  console.log(fundingTotalData);
 
   useEffect(() => {
     getFundingTotalList(
