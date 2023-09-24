@@ -5,15 +5,13 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import * as Interfaces from "../interface/apiDataInterface";
 
 interface CompanyItemProps {
-  item: {
-    img: string;
-    title: string;
-  };
+  item: Interfaces.InSearchCompanyInfoResponseInterface;
 }
 
-const CompanyItem = (props: CompanyItemProps) => {
+const CompanyItem = (props :CompanyItemProps) => {
   const { item } = props;
 
   const [isLiked, setIsLiked] = useState(false);
@@ -34,23 +32,23 @@ const CompanyItem = (props: CompanyItemProps) => {
 
   const navigate = useNavigate();
 
-  const handleCompanyDetail = () => {
-    navigate("/company/detail/:companyid");
+  const handleImageListItemClick = () => {
+    navigate(`/company/detail/${item.companyId}`);
   };
 
   return (
     <div>
-      <ImageListItem key={item.img} onClick={handleCompanyDetail}>
+      <ImageListItem key={item.profile} onClick={handleImageListItemClick}>
         <img
-          src={`${item.img}?w=248&fit=crop&auto=format`}
-          srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-          alt={item.title}
+          src={`${item.profile}?w=248&fit=crop&auto=format`}
+          srcSet={`${item.profile}?w=248&fit=crop&auto=format&dpr=2 2x`}
+          alt={item.name}
           loading="lazy"
         />
 
         {isLogined ? (
           <IconButton
-            aria-label={`like ${item.title}`}
+            aria-label={`like ${item.name}`}
             onClick={(event) => {
               event.stopPropagation();
               toggleLike();
@@ -66,7 +64,7 @@ const CompanyItem = (props: CompanyItemProps) => {
           </IconButton>
         ) : null}
 
-        <ImageListItemBar title={item.title} position="below" />
+        <ImageListItemBar title={item.name} position="below" />
       </ImageListItem>
     </div>
   );

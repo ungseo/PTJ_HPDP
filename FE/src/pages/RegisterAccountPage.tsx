@@ -5,13 +5,13 @@ import style from "../styles/css/RegisterAccountPage.module.css";
 import MenuItem from '@mui/material/MenuItem';
 import { useSelector } from 'react-redux';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { registerAccount } from '../api/bank';
+import { registerAccount } from '../api/banks';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterAccountPage = () => {
   const navigate = useNavigate();
 
-  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+  // 정보 저장
   const [accountNumber, setAccountNumber] = useState("");
   const [accountPw, setAccountPw] = useState("");
   const [bankCode, setBankCode] = useState("");
@@ -19,6 +19,9 @@ const RegisterAccountPage = () => {
   const handleChange = (event: SelectChangeEvent) => {
     setBankCode(event.target.value as string);
   };
+
+  // 계좌 등록
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
   const handleButtonClick = () => {
     registerAccount(
@@ -53,7 +56,7 @@ const RegisterAccountPage = () => {
       </Select>
       <input
         type="text"
-        placeholder="계좌번호"
+        placeholder="계좌 번호"
         value={accountNumber}
         onChange={(e) => setAccountNumber(e.target.value)}
       />
@@ -63,7 +66,7 @@ const RegisterAccountPage = () => {
         value={accountPw}
         onChange={(e) => setAccountPw(e.target.value)}
       />
-      <DeepBlueBtn text="계좌등록" onClick={handleButtonClick} />
+      <DeepBlueBtn text="계좌 등록" onClick={handleButtonClick} />
     </div>
   )
 }

@@ -7,11 +7,11 @@ const InterestingCompanyPage = () => {
   return (
     <div>
       <OptionTopbar text="관심기업" />
-      <ImageList>
+      {/* <ImageList>
         {itemData.map((item, index) => (
           <CompanyItem key={index} item={item} />
         ))}
-      </ImageList>
+      </ImageList> */}
     </div>
   )
 }

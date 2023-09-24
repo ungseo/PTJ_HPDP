@@ -3,37 +3,42 @@ import style from "../../styles/css/TestWallet.module.css";
 import DeepBlueBtn from "../common/DeepBlueBtn";
 import GreyBtn from "../common/GreyButton";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { getAccount } from "../../api/bank";
+import { unregisterAccount } from "../../api/banks";
+import { accountActions } from "../../store/account-slice";
+import { useDispatch } from "react-redux";
 
 const TestWallet = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  // 거래 내역
   const userId = useSelector((state: any) => state.user.info.memberId)
 
   const handleGoStatement = () => {
     navigate(`/profile/bankstatement/${userId}`);
   };
-  
+
+  // 계좌 해제
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
-  const [accountNumber, setAccountNumber] = useState('')
-  const [bankCode, setBankCode] = useState('')
-  const [balance, setBalance] = useState(0)
-
-  useEffect(() => {
-    getAccount(
+  const handleGo = () => {
+    // 계좌 해제 axios
+    unregisterAccount(
       accessToken,
       (res) => {
-        setAccountNumber(res.data.data.accountNumber)
-        setBankCode(res.data.data.bankCode)
-        setBalance(res.data.data.Balance)
+        console.log('성공', res)
       },
       (err) => {
-        alert(err.message);
+        console.log('실패', err)
       }
     )
-  }, []);
+    // 계좌 해제 redux
+    dispatch(accountActions.unregisterAccount())
+  };
+
+  const accountNumber = useSelector((state: any) => state.account.accountNumber);
+  const bankCode = useSelector((state: any) => state.account.bankCode);
+  const balance = useSelector((state: any) => state.account.balance);
 
   return (
     <div className={style.wrapper}>
@@ -46,8 +51,9 @@ const TestWallet = () => {
           onClick={handleGoStatement}
         />
         <GreyBtn
-          text="연결 해제"
+          text="계좌 해제"
           styles={{ width: "48%", height: "2.5rem", borderRadius: "0.6rem" }}
+          onClick={handleGo}
         />
       </div>
     </div>
