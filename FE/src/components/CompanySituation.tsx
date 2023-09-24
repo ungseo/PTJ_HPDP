@@ -1,17 +1,25 @@
 import React from "react";
-import style from "../../src/styles/scss/CompanySituation.module.scss";
-import Grid from "@mui/material/Grid";
-import FundingItem from "./FundingItem";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+
 import * as Interfaces from "../interface/apiDataInterface";
 import { getFundingProgress } from "../api/funding";
 
+import FundingItem from "./FundingItem";
+
+import style from "../../src/styles/scss/CompanySituation.module.scss";
+import Grid from "@mui/material/Grid";
+
 const CompanySituation = () => {
-  const [companyfundingData, setcompanyfundingData] = useState<
+  // 진행중인 펀딩과 종료된 펀딩을 분리하여 axios 요청 및 저장
+  const [companyProgressFundingData, setcompanyProgressFundingData] = useState<
     Interfaces.OutFundingsInfoInterface[]
   >([]);
+  const [companyCompleteFundingData, setcompanyCompleteFundingData] = useState<
+    Interfaces.OutFundingsInfoInterface[]
+  >([]);
+
   const { companyid } = useParams();
 
   useEffect(() => {
@@ -19,7 +27,8 @@ const CompanySituation = () => {
       Number(companyid),
       1, // 진행중
       (res) => {
-        setcompanyfundingData(res.data.data);
+        setcompanyProgressFundingData(res.data.data);
+        console.log(companyProgressFundingData);
         console.log("진행 펀딩API연결");
       },
       (err) => {
@@ -27,13 +36,14 @@ const CompanySituation = () => {
       }
     );
   }, []);
+
   useEffect(() => {
-    // Fetching "진행 내역" data
     getFundingProgress(
       Number(companyid),
       2, // 종료됨
       (res) => {
-        setcompanyfundingData(res.data.data);
+        setcompanyCompleteFundingData(res.data.data);
+        console.log(companyCompleteFundingData);
         console.log("종료 펀딩API연결");
       },
       (err) => {
@@ -65,13 +75,20 @@ const CompanySituation = () => {
       </Grid>
       <div className={style.text}>
         <p>진행 내역</p>
-        <FundingItem />
+        {companyProgressFundingData.length > 0 ? (
+          <FundingItem
+            key={companyProgressFundingData[0].fundingId}
+            item={companyProgressFundingData[0]}
+          />
+        ) : (
+          <p>진행 중인 펀딩이 없습니다.</p>
+        )}
       </div>
 
       <div className={style.text}>
         <p>종료 내역</p>
-        {[1, 2].map((item) => (
-          <FundingItem key={item} />
+        {companyCompleteFundingData.map((item) => (
+          <FundingItem key={item.fundingId} item={item} />
         ))}
       </div>
     </div>
