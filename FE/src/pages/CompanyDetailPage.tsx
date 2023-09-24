@@ -13,6 +13,7 @@ const CompanyDetailPage = () => {
   const [companyItem, setCompanyItem] = useState<
     Interfaces.InSearchCompanyInfoResponseInterface[]
   >([]);
+  console.log(companyItem)
 
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const { companyid } = useParams();

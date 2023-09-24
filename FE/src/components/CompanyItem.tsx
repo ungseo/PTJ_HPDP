@@ -5,31 +5,9 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { InSearchCompanyInfoResponseInterface } from "../interface/apiDataInterface"
 
-interface CompanyItemProps {
-  item: {
-    companyId: number;
-    profile: string;
-    banner:string;
-    name: string;
-    hashtag: string;
-    isInterested: boolean;
-    email?: string;
-    phoneNumber?: string;
-    address?: string;
-    registrationNumber?: string;
-    websiteUrl?: string;
-    introduce?: string;
-    createdDate?: string;
-    fundingsNumber?: number;
-    participantsNumber?: number;
-    amount?: number;
-  };
-}
-
-const CompanyItem = (props: CompanyItemProps) => {
-  const { item } = props;
-
+const CompanyItem = ({item}: { item :InSearchCompanyInfoResponseInterface }) => {
   const [isLiked, setIsLiked] = useState(false);
 
   const isLogined = useSelector((state: any) => state.user.auth.isLogined);
@@ -49,7 +27,7 @@ const CompanyItem = (props: CompanyItemProps) => {
   const navigate = useNavigate();
 
   const handleCompanyDetail = () => {
-    navigate("/company/detail/:companyid");
+    navigate(`/company/detail/${item.companyId}`);
   };
 
   return (
