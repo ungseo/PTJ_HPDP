@@ -15,10 +15,11 @@ export async function getCompaniesInfo(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  const api = customApi("companies");
-  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-
-  await api.get(`?keyword=${keyword}`).then(success).catch(fail);
+  const api = customApi(`companies${keyword ? `?keyword=${keyword}` : "?keyword="}`);
+  if (accessToken) {
+    api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  }
+  await api.get(``).then(success).catch(fail);
 }
 
 export async function getCompanyItem(
@@ -35,7 +36,8 @@ export async function getCompanyItem(
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
   const api = customApi("companies");
-  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-
+  if (accessToken) {
+    api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  }
   await api.get(`/${companyId}`).then(success).catch(fail);
 }

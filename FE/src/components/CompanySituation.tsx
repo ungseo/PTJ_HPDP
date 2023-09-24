@@ -11,7 +11,14 @@ import FundingItem from "./FundingItem";
 import style from "../../src/styles/scss/CompanySituation.module.scss";
 import Grid from "@mui/material/Grid";
 
-const CompanySituation = () => {
+interface CompanySituationProps {
+    item: Interfaces.InSearchCompanyInfoResponseInterface;
+}
+
+const CompanySituation = (props :CompanySituationProps) => {
+  const { item } = props;
+  const companyId = item.companyId;
+
   // 진행중인 펀딩과 종료된 펀딩을 분리하여 axios 요청 및 저장
   const [companyProgressFundingData, setcompanyProgressFundingData] = useState<
     Interfaces.OutFundingsInfoInterface[]
@@ -20,11 +27,11 @@ const CompanySituation = () => {
     Interfaces.OutFundingsInfoInterface[]
   >([]);
 
-  const { companyid } = useParams();
+  console.log(companyProgressFundingData)
 
   useEffect(() => {
     getFundingProgress(
-      Number(companyid),
+      companyId,
       1, // 진행중
       (res) => {
         setcompanyProgressFundingData(res.data.data);
@@ -38,7 +45,7 @@ const CompanySituation = () => {
 
   useEffect(() => {
     getFundingProgress(
-      Number(companyid),
+      companyId,
       2, // 종료됨
       (res) => {
         setcompanyCompleteFundingData(res.data.data);
@@ -58,37 +65,46 @@ const CompanySituation = () => {
         <Grid item xs={9} className={style.container}>
           <div className={style.item}>
             <div>프로젝트 개수</div>
-            <div>gksk</div>
+            <div>{item.fundingsNumber} 개</div>
           </div>
           <div className={style.item}>
             <div>후원 인원</div>
-            <div>gksk</div>
+            <div>{item.participantsNumber} 명</div>
           </div>
           <div className={style.item}>
-            <div>모금 개수</div>
-            <div>gksk</div>
+            <div>모금 금액</div>
+            <div>{item.amount} 원</div>
           </div>
           <Grid item xs={1.5} className={style.height}></Grid>
         </Grid>
       </Grid>
-      <div className={style.text}>
-        <p>진행 내역</p>
-        {companyProgressFundingData.length > 0 ? (
-          <FundingItem
-            key={companyProgressFundingData[0].fundingId}
-            item={companyProgressFundingData[0]}
-          />
-        ) : (
-          <p>진행 중인 펀딩이 없습니다.</p>
-        )}
-      </div>
 
+      {
+        companyProgressFundingData.length > 0
+        ? (
+          <div className={style.text}>
+          <p>진행 내역</p>
+            <FundingItem
+              key={companyProgressFundingData[0].fundingId}
+              item={companyProgressFundingData[0]}
+            />
+          </div>
+        )
+        : null
+      }
+
+      {
+        companyCompleteFundingData.length > 0
+        ? (
       <div className={style.text}>
         <p>종료 내역</p>
         {companyCompleteFundingData.map((item) => (
           <FundingItem key={item.fundingId} item={item} />
         ))}
       </div>
+        )
+        : null        
+      }
     </div>
   );
 };

@@ -19,6 +19,7 @@ const FundingDetailPage = () => {
     useState<Interfaces.OutFundingsInfoInterface>(
       {} as Interfaces.OutFundingsInfoInterface
     );
+  console.log(fundingDetailData);
 
   const { fundingid } = useParams();
 
@@ -72,6 +73,7 @@ const FundingDetailPage = () => {
     name: fundingDetailData.name,
     title: fundingDetailData.title,
     thumbnail: fundingDetailData.thumbnail,
+    companyId: fundingDetailData.companyId,
   };
 
   return (

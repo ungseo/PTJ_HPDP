@@ -16,7 +16,6 @@ const CompanyDetailPage = () => {
     );
 
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
-  console.log(accessToken);
   const { companyid } = useParams();
 
   useEffect(() => {
@@ -34,9 +33,10 @@ const CompanyDetailPage = () => {
   }, []);
   console.log(companyItem);
   const tabProps = {
-    소개: <CompanyIntroduce />,
-    후원: <CompanySituation />,
+    소개: <CompanyIntroduce item={companyItem} />,
+    후원: <CompanySituation item={companyItem} />,
   };
+
   const data = {
     name: companyItem.name,
     profile: companyItem.profile,

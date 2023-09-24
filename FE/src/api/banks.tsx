@@ -43,6 +43,7 @@ export async function getAccount(
     fail: (err: any) => PromiseLike<never> | null | undefined | void
   ) {
       const api = customApi("banks")
+      console.log(accessToken)
       api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
       await api.post(`/account`).then(success).catch(fail);
   }

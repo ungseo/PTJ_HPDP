@@ -10,6 +10,7 @@ interface DetailTopProps {
     title?: string;
     thumbnail?: string;
     profile?: string;
+    companyId?: number;
   };
 }
 
@@ -19,6 +20,12 @@ const DetailPageTop = (props: DetailTopProps) => {
 
   const handleGoList = () => {
     navigate("/list");
+  };
+  const handleGoCompany = () => {
+    const { companyId } = data;
+    if (companyId) {
+      navigate(`/company/detail/${companyId}`);
+    }
   };
   const totalStyle = {
     backgroundImage: `url(${data.thumbnail})`,
@@ -35,7 +42,9 @@ const DetailPageTop = (props: DetailTopProps) => {
       <div className={style.topcontent}>
         <div className={style.upsection}>
           <img src={data.profile} alt="Company Logo" className={style.upimg} />
-          <div className={style.companyname}>{data.name}</div>
+          <div className={style.companyname} onClick={handleGoCompany}>
+            {data.name}
+          </div>
         </div>
         <div className={style.downsection}>
           {data.title && <div className={style.fundingtitle}>{data.title}</div>}
