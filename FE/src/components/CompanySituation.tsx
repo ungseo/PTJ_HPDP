@@ -28,7 +28,6 @@ const CompanySituation = () => {
       1, // 진행중
       (res) => {
         setcompanyProgressFundingData(res.data.data);
-        console.log(companyProgressFundingData);
         console.log("진행 펀딩API연결");
       },
       (err) => {
@@ -43,7 +42,6 @@ const CompanySituation = () => {
       2, // 종료됨
       (res) => {
         setcompanyCompleteFundingData(res.data.data);
-        console.log(companyCompleteFundingData);
         console.log("종료 펀딩API연결");
       },
       (err) => {

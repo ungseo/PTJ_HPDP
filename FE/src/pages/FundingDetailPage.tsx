@@ -68,10 +68,15 @@ const FundingDetailPage = () => {
     }
   };
 
+  const data = {
+    name: fundingDetailData.name,
+    title: fundingDetailData.title,
+    thumbnail: fundingDetailData.thumbnail,
+  };
+
   return (
     <div className={style.fundingdetailpage}>
-      {/* <DetailPageTop props={fundingDetailData} /> */}
-      <DetailPageTop />
+      <DetailPageTop data={data} />
       <CustomizedTabs tabProps={tabProps} />
       {isBottomSheetOpen && (
         <>

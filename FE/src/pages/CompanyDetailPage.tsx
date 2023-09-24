@@ -10,9 +10,11 @@ import * as Interfaces from "../interface/apiDataInterface";
 import { getCompanyItem } from "../api/companies";
 
 const CompanyDetailPage = () => {
-  const [companyItem, setCompanyItem] = useState<
-    Interfaces.InSearchCompanyInfoResponseInterface[]
-  >([]);
+  const [companyItem, setCompanyItem] =
+    useState<Interfaces.InSearchCompanyInfoResponseInterface>(
+      {} as Interfaces.InSearchCompanyInfoResponseInterface
+    );
+
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   console.log(accessToken);
   const { companyid } = useParams();
@@ -30,14 +32,18 @@ const CompanyDetailPage = () => {
       }
     );
   }, []);
-
+  console.log(companyItem);
   const tabProps = {
     소개: <CompanyIntroduce />,
     후원: <CompanySituation />,
   };
+  const data = {
+    name: companyItem.name,
+    profile: companyItem.profile,
+  };
   return (
     <>
-      <DetailPageTop></DetailPageTop>
+      <DetailPageTop data={data} />
       <CustomizedTabs tabProps={tabProps} />
     </>
   );
