@@ -153,29 +153,26 @@ export interface OutCompanyFundingInfoInterface {
 
 // 펀딩 조회 & 펀딩 상세조회
 export interface OutFundingsInfoInterface {
-  body: {
-    statusCode: number;
-    message: string;
-    data: {
-      companyId: number; //
-      name: string; //
-      thumbnail: string; //
-      hashtag: string; //
-      title: string; //
-      target_amount: number; //
-      startDate: string; //
-      endDate: string; //
-      dDay: string; //
-      totalFunding: number; //
-      state: string; //
-      content_url?: string;
-      reward_name?: string;
-      reward_price?: number;
-      reward_desc?: string;
-      reward_img?: string;
-      settlement?: number;
-    }[];
-  };
+  companyId: number; //
+  name: string; //
+  fundingId: number;
+  thumbnail: string; //
+  hashtag: string; //
+  title: string; //
+  targetAmount: number; //
+  startDate: string; //
+  endDate: string; //
+  dDay: string; //
+  totalFunding: number; //
+  state: string; //
+  content?: string;
+  content_url?: string;
+  reward_name?: string;
+  reward_price?: number;
+  reward_desc?: string;
+  reward_img?: string;
+  settlement?: number;
+  dday?: number | string;
 }
 
 //펀딩 예산 상세 조회
