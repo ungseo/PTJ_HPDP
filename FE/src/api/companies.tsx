@@ -36,6 +36,8 @@ export async function getCompanyItem(
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
   const api = customApi("companies");
-  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  if (accessToken) {
+    api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  }
   await api.get(`/${companyId}`).then(success).catch(fail);
 }

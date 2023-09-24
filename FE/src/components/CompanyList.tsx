@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import * as Interfaces from "../interface/apiDataInterface";
 import ImageList from "@mui/material/ImageList";
 import CompanyItem from "./CompanyItem";
-
 import { getCompaniesInfo } from "../api/companies";
 
 export default function CompanyList() {

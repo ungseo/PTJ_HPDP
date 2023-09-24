@@ -5,9 +5,15 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { InSearchCompanyInfoResponseInterface } from "../interface/apiDataInterface"
+import * as Interfaces from "../interface/apiDataInterface";
 
-const CompanyItem = ({item}: { item :InSearchCompanyInfoResponseInterface }) => {
+interface CompanyItemProps {
+  item: Interfaces.InSearchCompanyInfoResponseInterface;
+}
+
+const CompanyItem = (props :CompanyItemProps) => {
+  const { item } = props;
+
   const [isLiked, setIsLiked] = useState(false);
 
   const isLogined = useSelector((state: any) => state.user.auth.isLogined);
@@ -26,13 +32,13 @@ const CompanyItem = ({item}: { item :InSearchCompanyInfoResponseInterface }) => 
 
   const navigate = useNavigate();
 
-  const handleCompanyDetail = () => {
+  const handleImageListItemClick = () => {
     navigate(`/company/detail/${item.companyId}`);
   };
 
   return (
     <div>
-      <ImageListItem key={item.profile} onClick={handleCompanyDetail}>
+      <ImageListItem key={item.profile} onClick={handleImageListItemClick}>
         <img
           src={`${item.profile}?w=248&fit=crop&auto=format`}
           srcSet={`${item.profile}?w=248&fit=crop&auto=format&dpr=2 2x`}

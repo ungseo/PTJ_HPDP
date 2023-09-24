@@ -11,7 +11,14 @@ import FundingItem from "./FundingItem";
 import style from "../../src/styles/scss/CompanySituation.module.scss";
 import Grid from "@mui/material/Grid";
 
-const CompanySituation = () => {
+interface CompanySituationProps {
+    item: Interfaces.InSearchCompanyInfoResponseInterface;
+}
+
+const CompanySituation = (props :CompanySituationProps) => {
+  const { item } = props;
+  const companyId = item.companyId;
+
   // 진행중인 펀딩과 종료된 펀딩을 분리하여 axios 요청 및 저장
   const [companyProgressFundingData, setcompanyProgressFundingData] = useState<
     Interfaces.OutFundingsInfoInterface[]
@@ -20,11 +27,9 @@ const CompanySituation = () => {
     Interfaces.OutFundingsInfoInterface[]
   >([]);
 
-  const { companyid } = useParams();
-
   useEffect(() => {
     getFundingProgress(
-      Number(companyid),
+      companyId,
       1, // 진행중
       (res) => {
         setcompanyProgressFundingData(res.data.data);
@@ -39,7 +44,7 @@ const CompanySituation = () => {
 
   useEffect(() => {
     getFundingProgress(
-      Number(companyid),
+      companyId,
       2, // 종료됨
       (res) => {
         setcompanyCompleteFundingData(res.data.data);
