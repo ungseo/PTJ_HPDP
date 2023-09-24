@@ -56,8 +56,7 @@ public class CrowdFundingService {
                 fundingContractAddress, web3j, transactionManager, new DefaultGasProvider()
         );
         try {
-            log.info("id :{}, :{}, :{}",dto.getFundingId(),dto.getGoal(),getFinalDays(dto.getDays()));
-            funding.createFunding(BigInteger.valueOf(dto.getFundingId() + 10011L)
+            funding.createFunding(BigInteger.valueOf(dto.getFundingId() + 123L)
                     , BigInteger.valueOf(dto.getGoal())
                     , BigInteger.valueOf(getFinalDays(dto.getDays()))).send();
         } catch (Exception e) {

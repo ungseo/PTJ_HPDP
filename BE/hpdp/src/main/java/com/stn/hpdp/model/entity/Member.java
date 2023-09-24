@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @ToString
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 @DynamicInsert
 @DynamicUpdate
 public class Member extends TimeBaseEntity implements UserDetails {
@@ -67,6 +67,9 @@ public class Member extends TimeBaseEntity implements UserDetails {
         this.name = memberUpdateReq.getName();
         this.phoneNumber = memberUpdateReq.getPhoneNumber();
         this.email = memberUpdateReq.getEmail();
+    }
+    public void changePoint(int point){
+        this.point += point;
     }
 
     @Column

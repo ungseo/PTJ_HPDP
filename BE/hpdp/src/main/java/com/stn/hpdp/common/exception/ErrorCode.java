@@ -16,6 +16,7 @@ public enum ErrorCode {
     COMPANY_BAD_REQUEST(HttpStatus.BAD_REQUEST, "해당하는 회사는 존재하지 않습니다."),
     INVALID_FIELDS_REQUEST(HttpStatus.BAD_REQUEST, "유효하지 않은 필드입니다."),   // JWTFilterException
     ACCOUNT_PASSWORD_BAD_REQUEST(HttpStatus.BAD_REQUEST, "계좌 비밀번호가 일치하지 않습니다."),
+    SCARCE_POINT_BAD_REQUEST(HttpStatus.BAD_REQUEST, "잔액이 부족합니다."),
 
     /* 401 UNAUTHORIZED */
     UNKNOWN_ERROR(HttpStatus.UNAUTHORIZED, "인증 Token 이 존재하지 않습니다."),     // JWTFilterException

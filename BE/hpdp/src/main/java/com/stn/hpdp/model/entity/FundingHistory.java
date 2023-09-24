@@ -1,6 +1,7 @@
 package com.stn.hpdp.model.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,5 +28,9 @@ public class FundingHistory extends TimeBaseEntity {
     @JoinColumn(name = "funding_id")
     private Funding funding;
 
-
+    @Builder
+    public FundingHistory(Member member, Funding funding) {
+        this.member = member;
+        this.funding = funding;
+    }
 }
