@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface FundingHistoryRepository extends JpaRepository<FundingHistory, Long> {
     List<FundingHistory> findAllByMember_Id(Long memberId);
+
+    FundingHistory findByFunding_Id(Long fundingId);
 }

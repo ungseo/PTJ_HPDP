@@ -20,6 +20,8 @@ public class FundingHistory extends TimeBaseEntity {
     @Column(name = "funding_history_id")
     private Long id;
 
+    private int price;
+
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "members_id")
     private Member member;
@@ -29,7 +31,8 @@ public class FundingHistory extends TimeBaseEntity {
     private Funding funding;
 
     @Builder
-    public FundingHistory(Member member, Funding funding) {
+    public FundingHistory(int pirce, Member member, Funding funding) {
+        this.price = pirce;
         this.member = member;
         this.funding = funding;
     }

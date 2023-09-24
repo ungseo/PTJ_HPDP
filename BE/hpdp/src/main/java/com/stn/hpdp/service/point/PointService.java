@@ -34,7 +34,6 @@ public class PointService {
     public boolean fundingCheck(int reqPoint) {
         // 후원 하려는 멤버의 포인트 불러오기
         int point = getMemberPoint();
-        log.info("point :{}", point);
         // 금액이 후원하려는 금액보다 큰지 확인
         if (!isEnoughPoint(point, reqPoint))
             throw new CustomException(SCARCE_POINT_BAD_REQUEST);
@@ -44,7 +43,7 @@ public class PointService {
 
     public void funding(FundingByPointReq fundingByPointReq) {
 
-        Member sponsor = registFundingHistory(fundingByPointReq.getFundingId());
+        Member sponsor = registFundingHistory(fundingByPointReq.getFundingId(), fundingByPointReq.getSponsorPoint());
 
         pointDeduction(sponsor, fundingByPointReq.getSponsorPoint());
     }
@@ -53,13 +52,14 @@ public class PointService {
         sponsor.changePoint(-sponsorPoint);
     }
 
-    private Member registFundingHistory(Long fundingId) {
+    private Member registFundingHistory(Long fundingId, int reqPoint) {
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
         Funding funding = fundingRepository.findById(fundingId).orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
         FundingHistory fundingHistory = FundingHistory
                 .builder()
+                .pirce(reqPoint)
                 .member(member)
                 .funding(funding)
                 .build();
@@ -70,10 +70,10 @@ public class PointService {
     }
 
     private int getMemberPoint() {
-        log.info("loginId:{}",SecurityUtil.getCurrentMemberLoginId());
+        log.info("loginId:{}", SecurityUtil.getCurrentMemberLoginId());
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
-        log.info("memberId:{}",member.getId());
+        log.info("memberId:{}", member.getId());
         return member.getPoint();
     }
 
