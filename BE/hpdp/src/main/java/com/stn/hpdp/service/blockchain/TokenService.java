@@ -34,7 +34,7 @@ public class TokenService {
         credentials = Credentials.create(privateKey);
     }
 
-    public BigInteger getBalance() throws Exception {
+    public BigInteger getBalance(String account) throws Exception {
         log.info("address {}",ERC20_CONTRACT_ADDRESS);
 
         ERC20Token erc20Token = ERC20Token.load(
@@ -42,24 +42,11 @@ public class TokenService {
                 web3j,
                 credentials,
                 BigInteger.valueOf(21000),
-                BigInteger.valueOf(3000000)
+                BigInteger.valueOf(21000)
         );
 
-        return erc20Token.balanceOf("0x645882BfAd675CB914D38F2d77461CA1cEbBc58A").send();
+        return erc20Token.balanceOf(account).send();
     }
-
-    // 펀딩에 기여하는 메서드
-    public void contributeToFunding(String fundingContractAddress, long fundingId, long amount) {
-        CrowdFunding funding = CrowdFunding.load(
-                fundingContractAddress, web3j, credentials, new DefaultGasProvider());
-
-        try {
-            funding.contribute(BigInteger.valueOf(fundingId), BigInteger.valueOf(amount)).send();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 
     public String getPrivateKeyFromKeystore(String keystorePassword, String keystoreFilePath) {
         try {

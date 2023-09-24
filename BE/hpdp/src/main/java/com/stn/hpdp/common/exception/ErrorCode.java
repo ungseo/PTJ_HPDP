@@ -16,6 +16,7 @@ public enum ErrorCode {
     COMPANY_BAD_REQUEST(HttpStatus.BAD_REQUEST, "해당하는 회사는 존재하지 않습니다."),
     INVALID_FIELDS_REQUEST(HttpStatus.BAD_REQUEST, "유효하지 않은 필드입니다."),   // JWTFilterException
     ACCOUNT_PASSWORD_BAD_REQUEST(HttpStatus.BAD_REQUEST, "계좌 비밀번호가 일치하지 않습니다."),
+    SCARCE_POINT_BAD_REQUEST(HttpStatus.BAD_REQUEST, "잔액이 부족합니다."),
 
     /* 401 UNAUTHORIZED */
     UNKNOWN_ERROR(HttpStatus.UNAUTHORIZED, "인증 Token 이 존재하지 않습니다."),     // JWTFilterException
@@ -49,8 +50,9 @@ public enum ErrorCode {
     CREATE_WALLET_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "사용자의 지갑을 만드는데 실패하였습니다."),
     CREATE_KEYPAIR_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "Key Pair를 만드는데 실패하였습니다."),
     CREATE_FUNDING_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "펀딩을 만드는데 실패하였습니다."),
-
-    SEND_ETH_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "이더리움 전송에 실패하였습니다.");
+    FUNDING_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "후원에 실패하였습니다."),
+    SEND_ETH_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "이더리움 전송에 실패하였습니다."),
+    APPROVAL_FUNDING_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "승인에 실패하였습니다.");
 
     private final HttpStatus httpStatus;
     private final String description;
