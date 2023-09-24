@@ -104,28 +104,23 @@ export type OutMemberInfoInterface =
 
 // 기업 조회 & 기업 상세 조회
 export interface InSearchCompanyInfoResponseInterface {
-  body: {
-    statusCode: number;
-    message: string;
-    data: {
-      companyId: number;
-      profile: string;
-      name: string;
-      hashtag: string;
-      isInterested: boolean;
-      email?: string;
-      phoneNumber?: string;
-      address?: string;
-      registrationNumber?: string;
-      websiteUrl?: string;
-      introduce?: string;
-      createdDate?: string;
-      fundingsNumber?: number;
-      participantsNumber?: number;
-      amount?: number;
-    };
+  companyId: number;
+  profile: string;
+  banner:string;
+  name: string;
+  hashtag: string;
+  isInterested: boolean;
+  email?: string;
+  phoneNumber?: string;
+  address?: string;
+  registrationNumber?: string;
+  websiteUrl?: string;
+  introduce?: string;
+  createdDate?: string;
+  fundingsNumber?: number;
+  participantsNumber?: number;
+  amount?: number;
   };
-}
 
 // 기업 펀딩 조회
 

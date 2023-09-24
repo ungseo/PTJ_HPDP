@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { accountActions } from "../../store/account-slice";
-import { unregisterAccount } from "../../api/bank";
+import { unregisterAccount } from "../../api/banks";
 
 const MyWallet = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const MyWallet = () => {
   
   const userPoint = useSelector((state: any) => state.user.info.point);
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
-  const isRegistered = useSelector((state: any) => state.account.isRegisterd);
+  const isRegistered = useSelector((state: any) => state.account.isRegistered);
 
   const onClick = (event: any) => {
     const { id } = event.target;
@@ -21,7 +21,7 @@ const MyWallet = () => {
       // 계좌 등록 화면 이동
       navigate("/profile/testbank/register");
     } else if (id === "unreg" ) {
-      // 계좌 해제 aiox
+      // 계좌 해제 axios
       unregisterAccount(
         accessToken,
         (res) => {
@@ -51,7 +51,7 @@ const MyWallet = () => {
           ? (
             <DefaultButton
               id="unreg"
-              text="계좌해제"
+              text="계좌 해제"
               styles={{
                 width: "48%",
                 height: "3.5rem",
@@ -64,7 +64,7 @@ const MyWallet = () => {
           : (
             <DefaultButton
               id="reg"
-              text="계좌등록"
+              text="계좌 등록"
               styles={{
                 width: "48%",
                 height: "3.5rem",

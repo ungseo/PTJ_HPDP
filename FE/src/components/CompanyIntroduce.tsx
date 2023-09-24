@@ -1,6 +1,7 @@
 import React from 'react';
 
 const CompanyIntroduce = () => {
+
     return (
         <div>
             <h1>벤처 소개</h1>

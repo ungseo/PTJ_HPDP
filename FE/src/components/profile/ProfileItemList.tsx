@@ -21,7 +21,7 @@ const ProfileItemList = () => {
         accessToken,
         (res) => {
           dispatch(userActions.logoutHandler());
-          alert("로그아웃 되었습니다.");
+          alert("로그 아웃 되었습니다.");
           navigate("/");
         },
         (err) => {
@@ -39,7 +39,7 @@ const ProfileItemList = () => {
         onClick={onClick}
         id={`message/${userId}`}
       >
-        <p>쪽지</p>
+        <p>쪽지내역</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
       <div
@@ -71,7 +71,7 @@ const ProfileItemList = () => {
         id="testbank"
         onClick={onClick}
       >
-        <p>서비스 테스트 페이지</p>
+        <p>시험은행</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
       <div

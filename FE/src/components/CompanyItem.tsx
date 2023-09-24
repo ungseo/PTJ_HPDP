@@ -8,8 +8,22 @@ import { useNavigate } from "react-router-dom";
 
 interface CompanyItemProps {
   item: {
-    img: string;
-    title: string;
+    companyId: number;
+    profile: string;
+    banner:string;
+    name: string;
+    hashtag: string;
+    isInterested: boolean;
+    email?: string;
+    phoneNumber?: string;
+    address?: string;
+    registrationNumber?: string;
+    websiteUrl?: string;
+    introduce?: string;
+    createdDate?: string;
+    fundingsNumber?: number;
+    participantsNumber?: number;
+    amount?: number;
   };
 }
 
@@ -40,17 +54,17 @@ const CompanyItem = (props: CompanyItemProps) => {
 
   return (
     <div>
-      <ImageListItem key={item.img} onClick={handleCompanyDetail}>
+      <ImageListItem key={item.profile} onClick={handleCompanyDetail}>
         <img
-          src={`${item.img}?w=248&fit=crop&auto=format`}
-          srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-          alt={item.title}
+          src={`${item.profile}?w=248&fit=crop&auto=format`}
+          srcSet={`${item.profile}?w=248&fit=crop&auto=format&dpr=2 2x`}
+          alt={item.name}
           loading="lazy"
         />
 
         {isLogined ? (
           <IconButton
-            aria-label={`like ${item.title}`}
+            aria-label={`like ${item.name}`}
             onClick={(event) => {
               event.stopPropagation();
               toggleLike();
@@ -66,7 +80,7 @@ const CompanyItem = (props: CompanyItemProps) => {
           </IconButton>
         ) : null}
 
-        <ImageListItemBar title={item.title} position="below" />
+        <ImageListItemBar title={item.name} position="below" />
       </ImageListItem>
     </div>
   );
