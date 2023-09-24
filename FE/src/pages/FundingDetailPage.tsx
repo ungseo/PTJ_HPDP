@@ -14,16 +14,21 @@ import DefaultButton from "../components/common/DefaultButton";
 import style from "../styles/css/FundingDetailPage.module.css";
 
 const FundingDetailPage = () => {
-  const [fundingDetailData, setFundingDetailData] = useState<
-    Interfaces.OutFundingsInfoInterface[]
-  >([]);
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-  const [donationAmount, setDonationAmount] = useState(0);
-  const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
+  // 디테일이라서 값이 1개라 []는 배열이라 안되고 null은 타입지정이 불가해서 안되서 {}객체로 설정
+  const [fundingDetailData, setFundingDetailData] =
+    useState<Interfaces.OutFundingsInfoInterface>(
+      {} as Interfaces.OutFundingsInfoInterface
+    );
+
   const { fundingid } = useParams();
+
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
+  const [donationAmount, setDonationAmount] = useState(0);
+
   const tabProps = {
-    소개: <FundingIntroduce />,
-    소식: <FundingSituation />,
+    소개: <FundingIntroduce props={fundingDetailData} />,
+    소식: <FundingSituation props={fundingDetailData} />,
   };
 
   useEffect(() => {
@@ -31,6 +36,7 @@ const FundingDetailPage = () => {
       Number(fundingid),
       (res) => {
         setFundingDetailData(res.data.data);
+        console.log(fundingDetailData);
         console.log("펀딩 상세 API 연결");
       },
       (err) => {
@@ -47,11 +53,13 @@ const FundingDetailPage = () => {
     }
   }, [isFundingCompleteOpen]);
 
+  // bottomsheet가 열린 상태에서 버튼이 눌리면
+  // bottomsheet는 false, complete는 true로 변경
   const FundingHandler = () => {
     if (isBottomSheetOpen) {
       setIsBottomSheetOpen(false);
       setIsFundingCompleteOpen(true);
-
+      // 2초후에 자동으로 complete닫기
       setTimeout(() => {
         setIsFundingCompleteOpen(false);
       }, 2000);
@@ -62,6 +70,7 @@ const FundingDetailPage = () => {
 
   return (
     <div className={style.fundingdetailpage}>
+      {/* <DetailPageTop props={fundingDetailData} /> */}
       <DetailPageTop />
       <CustomizedTabs tabProps={tabProps} />
       {isBottomSheetOpen && (
