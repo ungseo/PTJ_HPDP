@@ -5,6 +5,7 @@ import com.stn.hpdp.common.exception.ErrorCode;
 import com.stn.hpdp.common.util.SecurityUtil;
 import com.stn.hpdp.controller.point.request.FundingByPointReq;
 import com.stn.hpdp.dto.FundingInfoForContractDTO;
+import com.stn.hpdp.model.entity.Company;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.model.entity.Wallet;
 import com.stn.hpdp.model.repository.CompanyRepository;
@@ -50,7 +51,6 @@ public class CrowdFundingService {
 
     private Web3j web3j;
 
-
     private void init() {
         // Web3j 인스턴스 초기화
         web3j = Web3j.build(new HttpService(rpcUrl));
@@ -90,6 +90,46 @@ public class CrowdFundingService {
 
     }
 
+    public void settle() {
+        // 기업의 주소 가져오기
+        Credentials credentials = getCompanyWallet();
+        TransactionManager transactionManager = new RawTransactionManager(
+                web3j,
+                credentials,
+                12345
+        );
+
+        CrowdFunding funding = CrowdFunding.load(
+                fundingContractAddress, web3j, transactionManager, new DefaultGasProvider()
+        );
+        // 정산 금액 확인
+        int raiesdAmount = getRaisedAmount(funding, 1L);
+        // 정산 금액 승인
+        trxApproval(credentials, raiesdAmount);
+        // 정산 금액 인출
+        repayment(funding, raiesdAmount);
+    }
+
+    private void repayment(CrowdFunding funding, long fundingId) {
+        funding.settleFunds(BigInteger.valueOf(fundingId));
+    }
+
+    private int getRaisedAmount(CrowdFunding funding, long fundingId) {
+        try {
+            return funding.fundings(BigInteger.valueOf(fundingId)).send().component3().intValue();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Credentials getCompanyWallet() {
+        Company company = companyRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
+                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+
+        return Credentials.create(company.getPrivateKey());
+    }
+
+    /*** 후원 기능 ***/
     // 펀딩에 기여하는 메서드
     private TransactionReceipt contributeToFunding(Credentials credentials, long fundingId, long amount) {
         CrowdFunding funding = CrowdFunding.load(
@@ -127,7 +167,9 @@ public class CrowdFundingService {
 
         return Credentials.create(wallet.getPrivateKey());
     }
+    /*** 후원 기능 ***/
 
+    /*** 펀딩 생성 ***/
     private long getFinalDays(LocalDateTime days) {
         return ChronoUnit.DAYS.between(LocalDateTime.now(), days);
     }
@@ -138,5 +180,6 @@ public class CrowdFundingService {
 
         return Credentials.create(privateKey);
     }
+    /*** 펀딩 생성 ***/
 
 }
