@@ -70,7 +70,7 @@ public class CrowdFundingService {
                 fundingContractAddress, web3j, transactionManager, new DefaultGasProvider()
         );
         try {
-            funding.createFunding(BigInteger.valueOf(dto.getFundingId() + 125L)
+            funding.createFunding(BigInteger.valueOf(dto.getFundingId() + 10L)
                     , BigInteger.valueOf(dto.getGoal())
                     , BigInteger.valueOf(getFinalDays(dto.getDays()))).send();
         } catch (Exception e) {

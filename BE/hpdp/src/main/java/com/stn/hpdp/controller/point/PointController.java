@@ -30,7 +30,7 @@ public class PointController {
         // 펀딩 실패
         if (!pointService.fundingCheck(fundingByPointReq.getSponsorPoint()))
             throw new CustomException(ErrorCode.SCARCE_POINT_BAD_REQUEST);
-
+        crowdFundingService.funding(fundingByPointReq);
         pointService.funding(fundingByPointReq);
         return ApiResponse.messageOk("Success");
     }
