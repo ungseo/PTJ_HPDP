@@ -26,10 +26,10 @@ public class FundingQueryService {
     private final BudgetRepository budgetRepository;
     private final FundingQueryRepository fundingQueryRepository;
 
-    public List<FindFundingsRes> findFundings(Long companyId, Integer done){
-        List<FindFundingsRes> result = fundingQueryRepository.findFundingsByCompanyIdAndDone(companyId, done);
+    public List<FindFundingsRes> findFundings(Long companyId, Integer done, String keyword){
+        List<FindFundingsRes> result = fundingQueryRepository.findFundingsByCompanyIdAndDoneAndKeyword(companyId, done, keyword);
 
-        // TODO: 후원하기 기능 완료 후 totalFunding 세팅
+        // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
 
         return result;
     }
@@ -44,7 +44,7 @@ public class FundingQueryService {
 
         FindFundingRes findFundingRes = FindFundingRes.of(result.get(), budgets);
 
-        // TODO: 후원하기 기능 완료 후 totalFunding 세팅
+        // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
 
         return findFundingRes;
     }

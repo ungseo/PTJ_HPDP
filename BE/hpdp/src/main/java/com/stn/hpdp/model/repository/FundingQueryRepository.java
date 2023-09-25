@@ -21,7 +21,7 @@ public class FundingQueryRepository {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
-    public List<FindFundingsRes> findFundingsByCompanyIdAndDone(Long companyId, Integer done){
+    public List<FindFundingsRes> findFundingsByCompanyIdAndDoneAndKeyword(Long companyId, Integer done, String keyword){
         // 전체 조회
         // 펀딩의 기업 아이디 = companyId 인 펀딩 조회
         return queryFactory
@@ -38,9 +38,16 @@ public class FundingQueryRepository {
                         funding.state.as("state")
                 ))
                 .from(funding)
-                .where(equalCompanyId(companyId), equalDone(done))
+                .where(equalCompanyId(companyId), equalDone(done), containsKeyword(keyword))
                 .orderBy(funding.createdDate.asc())
                 .fetch();
+    }
+
+    private BooleanExpression containsKeyword(String keyword){
+        if(keyword == null){
+            return null;
+        }
+        return funding.title.containsIgnoreCase(keyword).or(funding.hashtag.containsIgnoreCase(keyword)).or(funding.company.name.containsIgnoreCase(keyword));
     }
 
     private BooleanExpression equalCompanyId(Long companyId){

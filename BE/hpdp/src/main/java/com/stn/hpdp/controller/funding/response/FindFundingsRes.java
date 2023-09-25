@@ -23,6 +23,7 @@ public class FindFundingsRes {
     private FundingState state;
     private String dDay;
     private int totalFunding;
+    private int percent;
 
     public FindFundingsRes(Long companyId, String name, Long fundingId, String thumbnail, String hashtag, String title, int targetAmount, LocalDateTime startDate, LocalDateTime endDate, FundingState state){
         this.companyId = companyId;
