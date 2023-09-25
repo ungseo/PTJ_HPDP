@@ -26,6 +26,10 @@ const SendMessageModal = ({ onClose }: SendMessageModalProps) => {
           <div style={{ marginRight: "0.5rem" }}>받는사람</div>
           <input type="text" name="" id="" />
         </div>
+        <div className={style.sending}>
+          <div style={{ marginRight: "0.5rem" }}>제목</div>
+          <input type="text" name="" id="" />
+        </div>
         <div className={style.textareaContainer}>
           <textarea
             className={style.textarea}

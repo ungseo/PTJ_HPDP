@@ -27,13 +27,14 @@
     }
     .sending {
       display: flex;
+      margin-bottom: 0.5rem;
     }
     .textareaContainer {
       margin-top: 1rem;
       margin-bottom: 0.5rem;
       .textarea {
         width: 98%;
-        height: 51vh;
+        height: 48vh;
       }
     }
   }
