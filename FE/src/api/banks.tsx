@@ -18,7 +18,7 @@ export async function registerAccount(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-    // data는 추후 해당 페이지에서 객체로 정의하고 params로 전달하도록 수정하기
+    // 요청할 화면에서 객체로 정의하고 params로 전달하는 방법도 있다
     const data = {
       accountNumber: accountNumber,
       accountPw: accountPw,
@@ -51,6 +51,9 @@ export async function getAccount(
 // 계좌 이체
 export async function transAccount(
   accessToken: string | null,
+  opponentName: string,
+  opponentAccount: string,
+  depositAmount: number,
   success: (
     res: AxiosResponse<any, any>
   ) =>
@@ -61,9 +64,14 @@ export async function transAccount(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
+    const data = {
+      opponentName: opponentName,
+      opponentAccount: opponentAccount,
+      depositAmount: depositAmount,
+    }
     const api = customApi("banks")
     api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-    await api.post(`/transfer`).then(success).catch(fail);
+    await api.post(`/transfer`, data).then(success).catch(fail);
 }
 
 // 내역 조회

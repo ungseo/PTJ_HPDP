@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 const TestBankPage = () => {
   const isRegistered = useSelector((state: any) => state.account.isRegistered);
-  console.log(isRegistered)
 
   return (
     <div>
