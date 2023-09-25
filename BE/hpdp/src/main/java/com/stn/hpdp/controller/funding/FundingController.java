@@ -91,6 +91,7 @@ public class FundingController {
 
         crowdFundingService.settle(settleFundingReq.getFundingId());
 
+
         log.info(logCurrent(getClassName(), getMethodName(), END));
 
         return ApiResponse.ok(settleFundingRes);

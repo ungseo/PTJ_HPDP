@@ -9,6 +9,7 @@ import com.stn.hpdp.model.entity.Company;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.model.entity.Wallet;
 import com.stn.hpdp.model.repository.CompanyRepository;
+import com.stn.hpdp.model.repository.FundingRepository;
 import com.stn.hpdp.model.repository.MemberRepository;
 import com.stn.hpdp.model.repository.WalletRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,7 @@ public class CrowdFundingService {
     private final CompanyRepository companyRepository;
     private final MemberRepository memberRepository;
     private final WalletRepository walletRepository;
+    private final FundingRepository fundingRepository;
 
     @Value("${ethereum.rpc-url}")
     private String rpcUrl;
@@ -136,6 +138,14 @@ public class CrowdFundingService {
         trxApproval(credentials, raiesdAmount);
         // 정산 금액 인출
         repayment(funding, fundingId);
+        // 원화로 환전
+        exchange(fundingId, raiesdAmount);
+    }
+
+    private void exchange(Long fundingId, int raiesdAmount) {
+        Company company = fundingRepository.findById(fundingId).get().getCompany();
+
+        company.changePoint(raiesdAmount);
     }
 
     private void repayment(CrowdFunding funding, long fundingId) {
