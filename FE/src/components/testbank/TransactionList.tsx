@@ -1,27 +1,29 @@
-import { useEffect, useState } from "react";
 import style from "../../styles/css/TransactionList.module.css";
 import DeepBlueBtn from "../common/DeepBlueBtn";
 import DefaultButton from "../common/DefaultButton";
-import { transAccount } from "../../api/banks";
+import { getAccount, transAccount } from "../../api/banks";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { accountActions } from "../../store/account-slice";
 
 const TransactionList = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+
+  const dispatch = useDispatch();
 
   const onClick = (event: any) => {
     const { id } = event.currentTarget;
 
     const [opponentAccount, depositAmount] = (() => {
       switch (id) {
-        case 'withdraw1':
+        case '커피':
           return ['123456789', -780];
-        case 'withdraw2':
+        case '소주':
           return ['987654321', -340];
-        case 'deposit1':
+        case '용돈':
           return ['1357911', 12570];
-        case 'deposit2':
-          return ['24681012', -123456];
+        case '월급':
+          return ['24681012', 123456];
         default:
           return ['', 0];
       }
@@ -33,6 +35,15 @@ const TransactionList = () => {
       opponentAccount,
       depositAmount,
       (res) => {
+        getAccount(
+          accessToken,
+          (res) => {
+            dispatch(accountActions.registerAccount(res.data.data));
+          },
+          (err) => {
+            console.log(err)
+          }
+        )
         console.log(res);
       },
       (err) => {
@@ -40,13 +51,13 @@ const TransactionList = () => {
       }
     );
   };
-  
+
   return (
     <div className={style.wrapper}>
       <div className={style.item}>
-        <img src="/americano.png" alt="아메리카노" />
-        <p className={style.title}>아메리카노</p>
-        <p className={style.price}>750원</p>
+        <img src="/americano.png" alt="커피" />
+        <p className={style.title}>커피</p>
+        <p className={style.price}>780 원</p>
         <DeepBlueBtn
           text="소비하기"
           styles={{
@@ -57,13 +68,13 @@ const TransactionList = () => {
             fontWeight: "bold",
           }}
           onClick={onClick}
-          id="withdraw1"
+          id="커피"
         />
       </div>
       <div className={style.item}>
-        <img src="/candy.png" alt="허니브레드" />
-        <p className={style.title}>허니브레드</p>
-        <p className={style.price}>250원</p>
+        <img src="/candy.png" alt="소주" />
+        <p className={style.title}>소주</p>
+        <p className={style.price}>340 원</p>
         <DeepBlueBtn
           text="소비하기"
           styles={{
@@ -74,13 +85,13 @@ const TransactionList = () => {
             fontWeight: "bold",
           }}
           onClick={onClick}
-          id="withdraw2"
+          id="소주"
         />
       </div>{" "}
       <div className={style.item}>
-        <img src="/hpdpLogo.png" alt="아메리카노" />
+        <img src="/hpdpLogo.png" alt="커피" />
         <p className={style.title}>용돈... 달다...</p>
-        <p className={style.price}>150원</p>
+        <p className={style.price}>12570 원</p>
         <DefaultButton
           text="입금하기"
           styles={{
@@ -91,13 +102,13 @@ const TransactionList = () => {
             fontWeight: "bold",
           }}
           onClick={onClick}
-          id="deposit1"
+          id="용돈"
         />
       </div>
       <div className={style.item}>
-        <img src="/salary.png" alt="아메리카노" />
+        <img src="/salary.png" alt="커피" />
         <p className={style.title}>월급... 달다...</p>
-        <p className={style.price}>850원</p>
+        <p className={style.price}>123456 원</p>
         <DefaultButton
           text="입금하기"
           styles={{
@@ -108,7 +119,7 @@ const TransactionList = () => {
             fontWeight: "bold",
           }}
           onClick={onClick}
-          id="deposit2"
+          id="월급"
         />
       </div>
     </div>
