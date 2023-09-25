@@ -13,6 +13,7 @@ import com.stn.hpdp.model.entity.Company;
 import com.stn.hpdp.model.entity.Funding;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.model.repository.*;
+import com.stn.hpdp.service.interest.InterestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -38,12 +39,13 @@ public class CompanyService {
     private final MemberRepository memberRepository;
     private final InterestRepository interestRepository;
     private final InterestQueryRepository interestQueryRepository;
-
+    private final InterestService interestService;
     private final AwsS3Uploader awsS3Uploader;
 
     public List<FindCompanyRes> findCompanies(String keyword){
-        List<FindCompanyRes> companyResList = new ArrayList<>();
+        List<FindCompanyRes> companyResList;
 
+        interestService.syncInterests(); // redis -> mysql
 
         if(SecurityUtil.getCurrentMemberLoginId().equals("anonymousUser")) {
             companyResList = companyQueryRepository.findCompanyByKeyword(keyword);
