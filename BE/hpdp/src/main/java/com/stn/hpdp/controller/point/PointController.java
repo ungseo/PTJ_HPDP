@@ -46,10 +46,8 @@ public class PointController {
 
 
     @GetMapping("/user")
-    public ApiResponse<List<FundingHistoryRes>> getFundingHistories(
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDateTime,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDateTime) {
-        List<FundingHistoryRes> response = pointQueryService.getFundingHistories(startDateTime,endDateTime);
+    public ApiResponse<List<FundingHistoryRes>> getFundingHistories() {
+        List<FundingHistoryRes> response = pointQueryService.getFundingHistories();
         return ApiResponse.ok(response);
     }
 

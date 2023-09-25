@@ -11,6 +11,7 @@ public class FundingHistoryRes {
     private int price;
     private String paymentDate;
 
+
     @Builder
     public FundingHistoryRes(Long fundingId, String title, int price, String paymentDate) {
         this.fundingId = fundingId;
