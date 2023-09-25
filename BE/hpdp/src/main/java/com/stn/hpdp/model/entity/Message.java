@@ -32,7 +32,7 @@ public class Message extends TimeBaseEntity {
     @NotNull
     private String content;
     @NotNull
-    private boolean to;
+    private boolean toWho;
     @NotNull
     private boolean isRead = false;
 }
