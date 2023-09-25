@@ -6,6 +6,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Interfaces from "../interface/apiDataInterface";
+import { registerInterestingCompany, unregisterInterestingCompany } from "../api/interests";
 
 interface CompanyItemProps {
   item: Interfaces.InSearchCompanyInfoResponseInterface;
@@ -13,23 +14,50 @@ interface CompanyItemProps {
 
 const CompanyItem = (props :CompanyItemProps) => {
   const { item } = props;
+  console.log(item)
 
-  const [isLiked, setIsLiked] = useState(false);
+  const companyId = item.companyId;
 
   const isLogined = useSelector((state: any) => state.user.auth.isLogined);
 
-  const toggleLike = () => {
-    setIsLiked(!isLiked);
+  // 관심 기업 등록(삭제)
+  const [isLiked, setIsLiked] = useState(false);
 
-    // axios.post('')
-    // .then((res)=>{
-    //   console.log(res.data)
-    // })
-    // .catch((err)=>{
-    //   console.log(err)
-    // })
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+
+  const toggleLike = () => {
+    console.log("기업 번호:", companyId, "관심 여부:", isLiked)
+
+    if (isLiked) {
+      unregisterInterestingCompany(
+        accessToken,
+        companyId,
+        (res) => {
+          setIsLiked(!isLiked);
+          console.log("관심 기업 삭제", res);
+        },
+        (err) => {
+          console.log('왜지?', companyId)
+          console.log(err);
+        }
+      );
+    } else {
+      registerInterestingCompany(
+        accessToken,
+        companyId,
+        (res) => {
+          setIsLiked(!isLiked);
+          console.log("관심 기업 등록", res);
+        },
+        (err) => {
+          console.log("뭐지?", companyId)
+          console.log(err);
+        }
+      );
+    }
   };
 
+  // 기업 상세 이동
   const navigate = useNavigate();
 
   const handleImageListItemClick = () => {

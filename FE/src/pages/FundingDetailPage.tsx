@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as Interfaces from "../interface/apiDataInterface";
-import { getFundingDetail } from "../api/funding";
+import { getFundingDetail } from "../api/fundings";
 
 import CustomizedTabs from "../components/CustomizedTabs";
 import FundingIntroduce from "../components/fundingdetail/FundingIntroduce";
