@@ -30,6 +30,7 @@ public class MessageQueryService {
     public List<FindMessagesRes> getMessages(Integer flag) {
         boolean isUser = SecurityUtil.checkUser();
         List<Message> result = messageQueryRepository.findMessagesByFlag(flag, isUser);
+        log.info("size: {}", result.size());
 
         List<FindMessagesRes> findMessagesResList = new ArrayList<>();
         for (Message message : result){
@@ -37,6 +38,7 @@ public class MessageQueryService {
             // opponent name 세팅
             if(isUser) findMessagesRes.setOpponentName(message.getCompany().getName());
             else findMessagesRes.setOpponentName(message.getMember().getName());
+            findMessagesResList.add(findMessagesRes);
         }
 
         return findMessagesResList;

@@ -23,7 +23,7 @@ public class FindDetailMessageRes {
                 .messageId(message.getId())
                 .title(message.getTitle())
                 .content(message.getContent())
-                .to(message.isTo())
+                .to(message.isToWho())
                 .createdDate(message.getCreatedDate().toString())
                 .build();
     }

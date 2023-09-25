@@ -32,15 +32,15 @@ public class MessageQueryRepository {
     private BooleanExpression equalFlag(Integer flag, boolean isUser){
         if(flag == null || flag == 0){
             if(isUser){
-                return message.to.eq(false);
+                return message.toWho.eq(false);
             }else{
-                return message.to.eq(true);
+                return message.toWho.eq(true);
             }
         }else{
             if(isUser){
-                return message.to.eq(true);
+                return message.toWho.eq(true);
             }else{
-                return message.to.eq(false);
+                return message.toWho.eq(false);
             }
         }
     }
