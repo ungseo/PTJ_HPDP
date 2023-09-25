@@ -30,7 +30,7 @@ class WalletQueryServiceTest extends IntegrationTestSupport {
     private MemberRepository memberRepository;
 
     @DisplayName("로그인 한 사용자의 지갑을 조회 할 때 지갑을 가지고 있지 않다면 예외가 발생한다.")
-    @WithMockUser(username = "test", value = "ROLE")
+    @WithMockUser(username = "test")
     @Test
     void getWalletNotExist() throws Exception {
         //given
