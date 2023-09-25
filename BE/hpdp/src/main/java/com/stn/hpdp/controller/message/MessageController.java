@@ -3,6 +3,7 @@ package com.stn.hpdp.controller.message;
 import com.stn.hpdp.common.ApiResponse;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.controller.message.request.SendMessageReq;
+import com.stn.hpdp.controller.message.response.FindDetailMessageRes;
 import com.stn.hpdp.controller.message.response.FindMessagesRes;
 import com.stn.hpdp.service.message.MessageQueryService;
 import com.stn.hpdp.service.message.MessageService;
@@ -53,6 +54,17 @@ public class MessageController {
         log.info(logCurrent(getClassName(), getMethodName(), START));
 
         List<FindMessagesRes> result = messageQueryService.getMessages(flag);
+
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+
+        return ApiResponse.ok(result);
+    }
+
+    @GetMapping("/{messageId}") // 쪽지 상세 조회
+    public ApiResponse<Object> getDetailMessage(@PathVariable("messageId") Long messageId) {
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+
+        FindDetailMessageRes result = messageQueryService.getDetailMessage(messageId);
 
         log.info(logCurrent(getClassName(), getMethodName(), END));
 
