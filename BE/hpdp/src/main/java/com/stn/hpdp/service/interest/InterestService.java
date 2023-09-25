@@ -90,7 +90,7 @@ public class InterestService {
             Object check = redisTemplate.opsForHash().get("IT:" + member.getId(), com.getId());
             if (check == null) continue;
             if (check.equals("true")) {
-                saveCompany.add(com);
+                if(!interestRepository.existsByCompany_Id(com.getId())) saveCompany.add(com);
             } else {
                 Interest interest = interestRepository.findByCompany_Id(com.getId());
                 if (interest != null) interestRepository.delete(interest);
