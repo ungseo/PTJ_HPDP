@@ -12,9 +12,7 @@ import com.stn.hpdp.controller.company.response.FindMyFundingsRes;
 import com.stn.hpdp.model.entity.Company;
 import com.stn.hpdp.model.entity.Funding;
 import com.stn.hpdp.model.entity.Member;
-import com.stn.hpdp.model.repository.CompanyQueryRepository;
-import com.stn.hpdp.model.repository.CompanyRepository;
-import com.stn.hpdp.model.repository.FundingRepository;
+import com.stn.hpdp.model.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -37,16 +35,23 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
     private final CompanyQueryRepository companyQueryRepository;
     private final FundingRepository fundingRepository;
+    private final MemberRepository memberRepository;
+    private final InterestRepository interestRepository;
+    private final InterestQueryRepository interestQueryRepository;
 
     private final AwsS3Uploader awsS3Uploader;
 
     public List<FindCompanyRes> findCompanies(String keyword){
-        List<FindCompanyRes> companyResList = companyQueryRepository.findCompanyByKeyword(keyword);
+        List<FindCompanyRes> companyResList = new ArrayList<>();
 
-        String loginId = SecurityUtil.getCurrentMemberLoginId();
 
-        // TODO: user login id로 관심 기업 설정해둔 거 확인해서 true로 바꿔서 반환
-
+        if(SecurityUtil.getCurrentMemberLoginId().equals("anonymousUser")) {
+            companyResList = companyQueryRepository.findCompanyByKeyword(keyword);
+        } else {
+            Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
+                    .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+            companyResList = companyQueryRepository.findCompanyByKeywordAndInterest(keyword,member.getId());
+        }
         return companyResList;
     }
 
@@ -59,9 +64,13 @@ public class CompanyService {
 
         FindCompanyDetailRes findCompanyDetailRes = FindCompanyDetailRes.from(companyRes.get());
 
-        String loginId = SecurityUtil.getCurrentMemberLoginId();
+        if(!SecurityUtil.getCurrentMemberLoginId().equals("anonymousUser")) {
+            Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
+                    .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
-        // TODO: user login id로 관심 기업 설정해둔 거 확인해서 true로 바꿔서 반환
+            if(interestRepository.existsByMember_IdAndCompany_Id(member.getId(), companyId))
+                findCompanyDetailRes.setInterested(true);
+        }
 
         // TODO: funding api 개발 후 fundingsNumber, participantsNumber, amount 설정
 

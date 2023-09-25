@@ -10,6 +10,8 @@ public interface InterestRepository extends JpaRepository<Interest, Long> {
 
     List<Interest> findByMember_Id(Long memberId);
     boolean existsByCompany_Id(Long companyId);
+    boolean existsByMember_IdAndCompany_Id(Long memberId, Long companyId);
     Interest findByCompany_Id(Long companyId);
+    Interest findByMember_IdAndCompany_Id(Long memberId, Long companyId);
 
 }

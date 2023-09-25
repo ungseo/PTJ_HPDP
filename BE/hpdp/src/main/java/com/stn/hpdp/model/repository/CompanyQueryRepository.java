@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static com.stn.hpdp.model.entity.QCompany.company;
+import static com.stn.hpdp.model.entity.QInterest.interest;
 
 @Repository
 public class CompanyQueryRepository {
@@ -29,6 +30,22 @@ public class CompanyQueryRepository {
                         company.hashtag.as("hashtag")
                 ))
                 .from(company)
+                .where(containKeyword(keyword))
+                .orderBy(company.createdDate.asc())
+                .fetch();
+    }
+
+    public List<FindCompanyRes> findCompanyByKeywordAndInterest(String keyword, Long memberId){
+        return queryFactory
+                .select(Projections.constructor(FindCompanyRes.class,
+                        company.id.as("companyId"),
+                        company.profile,
+                        company.name,
+                        company.hashtag,
+                        interest.member.id.eq(memberId).as("isInterested")))
+                .from(company)
+                .leftJoin(interest)
+                .on(company.id.eq(interest.company.id).and(interest.member.id.eq(memberId)))
                 .where(containKeyword(keyword))
                 .orderBy(company.createdDate.asc())
                 .fetch();
