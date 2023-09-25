@@ -60,6 +60,7 @@ public class CrowdFundingService {
         init();
 
         Credentials credentials = getCompanyWallet(dto.getCompanyId());
+        log.info("accounts :{}", credentials.getAddress());
         TransactionManager transactionManager = new RawTransactionManager(
                 web3j,
                 credentials,
@@ -67,12 +68,14 @@ public class CrowdFundingService {
         );
 
         CrowdFunding funding = CrowdFunding.load(
-                fundingContractAddress, web3j, transactionManager, new DefaultGasProvider()
+                fundingContractAddress, web3j, transactionManager, BigInteger.valueOf(210000L), BigInteger.valueOf(3000000L)
         );
         try {
+            log.info("id :{}, goal:{}, days:{}", dto.getFundingId(), dto.getGoal(), getFinalDays(dto.getDays()));
             funding.createFunding(BigInteger.valueOf(dto.getFundingId() + 10L)
                     , BigInteger.valueOf(dto.getGoal())
                     , BigInteger.valueOf(getFinalDays(dto.getDays()))).send();
+
         } catch (Exception e) {
             throw new CustomException(ErrorCode.CREATE_FUNDING_FAIL);
         }
@@ -80,8 +83,11 @@ public class CrowdFundingService {
     }
 
     public void funding(FundingByPointReq fundingByPointReq) {
+        init();
         // 사용자의 지갑 주소 가져오기
         Credentials credentials = getSponsorWallet();
+        // 사용자의 지갑에 포인트 넣어주기
+        chargePoint(credentials.getAddress(), fundingByPointReq.getSponsorPoint(), credentials);
         // 컨트랙트 배포 주소에게 후원할 금액 승인 받기
         trxApproval(credentials, fundingByPointReq.getSponsorPoint());
         // 기업에게 펀딩 하기
@@ -90,7 +96,29 @@ public class CrowdFundingService {
 
     }
 
-    public void settle() {
+    private void chargePoint(String address, int sponsorPoint, Credentials credentials) {
+        TransactionManager transactionManager = new RawTransactionManager(
+                web3j,
+                credentials,
+                12345
+        );
+        ERC20Token erc20Token = ERC20Token.load(
+                tokenContractAddress,
+                web3j,
+                transactionManager,
+                BigInteger.valueOf(1000000000L),
+                BigInteger.valueOf(300000L)
+        );
+        try {
+            erc20Token.mint(address, BigInteger.valueOf(sponsorPoint)).send();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void settle(Long fundingId) {
+        init();
         // 기업의 주소 가져오기
         Credentials credentials = getCompanyWallet();
         TransactionManager transactionManager = new RawTransactionManager(
@@ -100,18 +128,22 @@ public class CrowdFundingService {
         );
 
         CrowdFunding funding = CrowdFunding.load(
-                fundingContractAddress, web3j, transactionManager, new DefaultGasProvider()
+                fundingContractAddress, web3j, transactionManager, BigInteger.valueOf(210000L), BigInteger.valueOf(3000000L)
         );
         // 정산 금액 확인
-        int raiesdAmount = getRaisedAmount(funding, 1L);
+        int raiesdAmount = getRaisedAmount(funding, fundingId);
         // 정산 금액 승인
         trxApproval(credentials, raiesdAmount);
         // 정산 금액 인출
-        repayment(funding, raiesdAmount);
+        repayment(funding, fundingId);
     }
 
     private void repayment(CrowdFunding funding, long fundingId) {
-        funding.settleFunds(BigInteger.valueOf(fundingId));
+        try {
+            funding.settleFunds(BigInteger.valueOf(fundingId)).send();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private int getRaisedAmount(CrowdFunding funding, long fundingId) {
@@ -132,8 +164,13 @@ public class CrowdFundingService {
     /*** 후원 기능 ***/
     // 펀딩에 기여하는 메서드
     private TransactionReceipt contributeToFunding(Credentials credentials, long fundingId, long amount) {
+        TransactionManager transactionManager = new RawTransactionManager(
+                web3j,
+                credentials,
+                12345
+        );
         CrowdFunding funding = CrowdFunding.load(
-                fundingContractAddress, web3j, credentials, new DefaultGasProvider());
+                fundingContractAddress, web3j, transactionManager, BigInteger.valueOf(210000L), BigInteger.valueOf(300000L));
         try {
             return funding.contribute(BigInteger.valueOf(fundingId), BigInteger.valueOf(amount)).send();
         } catch (Exception e) {
@@ -160,6 +197,7 @@ public class CrowdFundingService {
     }
 
     private Credentials getSponsorWallet() {
+        log.info("지갑 가져오기 ");
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 

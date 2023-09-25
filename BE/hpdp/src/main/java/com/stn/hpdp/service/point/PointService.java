@@ -53,6 +53,8 @@ public class PointService {
     }
 
     private Member registFundingHistory(Long fundingId, int reqPoint) {
+        log.info("펀딩 히스토리 등록 ");
+
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
         Funding funding = fundingRepository.findById(fundingId).orElseThrow(() -> new CustomException(USER_NOT_FOUND));
@@ -70,6 +72,7 @@ public class PointService {
     }
 
     private int getMemberPoint() {
+        log.info("포인트 확인 ");
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
         return member.getPoint();
