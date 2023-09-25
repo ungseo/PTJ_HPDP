@@ -84,9 +84,6 @@ public class BankService {
         if (saved.isEmpty()) {
             throw new CustomException(CONNECTED_ACCOUNT_NOT_FOUND);
         }
-        if(!saved.get().getAccountPw().equals(transferAccountReq.getAccountPw())){
-            throw new CustomException(ACCOUNT_PASSWORD_BAD_REQUEST);
-        }
 
         Transfer transfer = transferAccountReq.toEntity(saved.get());
         transferRepository.save(transfer);
