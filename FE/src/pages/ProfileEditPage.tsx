@@ -8,7 +8,9 @@ import UserAddressModal from "../components/profile/UserAddressModal";
 import AnimationLabelInput from "../components/common/Inputs";
 import DefaultButton from "../components/common/DefaultButton";
 import { profileEditActions } from "../store/profileEdit-slice";
-import { updateMemberInfo } from "../api/members";
+import { getMemberInfo, updateMemberInfo } from "../api/members";
+import { userActions } from "../store/user-slice";
+import PwModal from "../components/profile/PwModal";
 
 const ProfileEditPage = () => {
   const dispatch = useDispatch();
@@ -27,33 +29,32 @@ const ProfileEditPage = () => {
     console.log(selectedImage);
     console.log(editInput);
     const formData = new FormData();
+    formData.append("name", editInput.name);
     if (selectedImage) {
       console.log("파일들어감");
       formData.append("profile", selectedImage);
     }
-    formData.append("name", new Blob([JSON.stringify(editInput.name)]));
     if (editInput.phoneNumber) {
-      console.log(editInput.phoneNumber);
-      formData.append(
-        "phoneNumber",
-        new Blob([JSON.stringify(editInput.phoneNumber)])
-      );
+      formData.append("phoneNumber", editInput.phoneNumber);
     }
     if (editInput.email) {
-      console.log("이메일들어감");
-
-      formData.append("email", new Blob([JSON.stringify(editInput.email)]));
+      formData.append("email", editInput.email);
     }
-    console.log(editInput);
-    console.log(formData.get("profile"));
-    console.log(formData.get("name"));
-    console.log(formData.get("phoneNumber"));
-    console.log(formData.get("email"));
-    console.log(formData);
+
     updateMemberInfo(
       token,
       formData,
       (res) => {
+        getMemberInfo(
+          token,
+          (res) => {
+            console.log("유저정보 불러오기성공");
+            dispatch(userActions.saveMemberInfo(res.data.data));
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
         alert("정보를 수정했습니다.");
       },
       (err) => {
@@ -61,7 +62,10 @@ const ProfileEditPage = () => {
       }
     );
   };
-
+  const [modal, setModal] = useState(false);
+  const modalHandler = () => {
+    setModal(true);
+  };
   return (
     <div>
       {/* 각 인풋 밸류에 사용자 정보 기본으로 등록해놓기 */}
@@ -80,13 +84,14 @@ const ProfileEditPage = () => {
         }}
       >
         <span style={{ color: "red" }}>회원탈퇴</span>
-        <DefaultButton text="비밀번호 변경" />
+        <DefaultButton text="비밀번호 변경" onClick={modalHandler} />
       </div>
       <DefaultButton
         text="저장"
         styles={{ width: "9rem", height: "3.5rem" }}
         onClick={saveEditHandler}
       />
+      {modal ? <PwModal modalHandler={setModal}></PwModal> : null}
     </div>
   );
 };

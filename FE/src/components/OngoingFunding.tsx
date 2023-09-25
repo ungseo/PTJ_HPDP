@@ -1,35 +1,20 @@
 import React, { useEffect, useState } from "react";
 import FundingItem from "./FundingItem";
-import { FundingHistoryInterface } from "../interface/profilePageInterface";
-import { searchMemberFundingHistory } from "../api/members";
-import { useSelector } from "react-redux";
+import { OutFundingsInfoInterface } from "../interface/apiDataInterface";
 
-const OngoingFunding = () => {
-  const token = useSelector((state: any) => state.user.auth.accessToken);
-  const [fundingHistory, setFundingHistory] = useState<any[]>([]);
-  // useEffect(() => {
-  //   const getFundingHistory = () => {
-  //     searchMemberFundingHistory(
-  //       token,
-  //       (res) => {
-  //         console.log(res.data.data);
-  //         const allFunding = res.data.data;
-  //         setFundingHistory((prev) => [...prev, res.data.data]);
-  //       },
-  //       (err) => {
-  //         console.log(err);
-  //       }
-  //     );
-  //   };
-  //   getFundingHistory();
-  // }, []);
+const OngoingFunding = ({ itemList }: any) => {
   return (
     <div>
-      {/* {fundingHistory.length ? (
-        fundingHistory.map((item, idx) => <FundingItem></FundingItem>)
+      {itemList.length ? (
+        itemList.map(
+          (
+            item: OutFundingsInfoInterface,
+            idx: React.Key | null | undefined
+          ): any => <FundingItem key={idx} item={item}></FundingItem>
+        )
       ) : (
-        <h1>없소용.</h1>
-      )} */}
+        <h1>후원중인 후원이 없습니다 ^^컄ㅋ~!~!</h1>
+      )}
     </div>
   );
 };

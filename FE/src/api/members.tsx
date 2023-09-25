@@ -32,10 +32,9 @@ export async function updateMemberInfo(
     | null,
   fail: (err: any) => PromiseLike<never> | null | void
 ) {
-  customApiForm("members").defaults.headers[
-    "accessToken"
-  ] = `Bearer ${accessToken}`;
-  await customApiForm("members").put("", formData).then(success).catch(fail);
+  const apiForm = customApiForm("members");
+  apiForm.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  await apiForm.put("", formData).then(success).catch(fail);
 }
 
 export async function searchMemberFundingHistory(
@@ -49,8 +48,24 @@ export async function searchMemberFundingHistory(
     | null,
   fail: (err: any) => PromiseLike<never> | null | void
 ) {
-  customApi("members").defaults.headers[
-    "accessToken"
-  ] = `Bearer ${accessToken}`;
-  await customApi("members").get("/fundings").then(success).catch(fail);
+  const api = customApi("members");
+  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  await api.get("/fundings").then(success).catch(fail);
+}
+
+export async function updatePassword(
+  accessToken: string,
+  loginPw: string,
+  success: (
+    res: AxiosResponse<any, any>
+  ) =>
+    | AxiosResponse<any, any>
+    | PromiseLike<AxiosResponse<any, any>>
+    | void
+    | null,
+  fail: (err: any) => PromiseLike<never> | null | void
+) {
+  const api = customApi("members");
+  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  await api.put("/password", { loginPw: loginPw }).then(success).catch(fail);
 }
