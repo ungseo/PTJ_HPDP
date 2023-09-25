@@ -19,7 +19,7 @@ const InterestingCompanyPage = () => {
     getInterestingCompany(
       accessToken,
       (res) => {
-        console.log(res)
+        console.log(res.data.data)
         setInterestingCoList(res.data.data);
       },
       (err) => {

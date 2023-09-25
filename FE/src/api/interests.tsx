@@ -55,5 +55,5 @@ export async function unregisterInterestingCompany(
 ) {
   const api = customApi("interests");
   api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-  await api.post(`/${companyId}`).then(success).catch(fail);
+  await api.delete(`/${companyId}`).then(success).catch(fail);
 }

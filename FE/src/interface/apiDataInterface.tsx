@@ -108,7 +108,7 @@ export interface InSearchCompanyInfoResponseInterface {
   profile: string;
   name: string;
   hashtag: string;
-  isInterested: boolean;
+  interested: boolean;
   email?: string;
   phoneNumber?: string;
   address?: string;

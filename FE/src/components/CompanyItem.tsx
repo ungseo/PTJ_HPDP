@@ -14,14 +14,13 @@ interface CompanyItemProps {
 
 const CompanyItem = (props :CompanyItemProps) => {
   const { item } = props;
-  console.log(item)
 
   const companyId = item.companyId;
 
   const isLogined = useSelector((state: any) => state.user.auth.isLogined);
 
   // 관심 기업 등록(삭제)
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(item.interested);
 
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
@@ -37,7 +36,6 @@ const CompanyItem = (props :CompanyItemProps) => {
           console.log("관심 기업 삭제", res);
         },
         (err) => {
-          console.log('왜지?', companyId)
           console.log(err);
         }
       );
@@ -50,7 +48,6 @@ const CompanyItem = (props :CompanyItemProps) => {
           console.log("관심 기업 등록", res);
         },
         (err) => {
-          console.log("뭐지?", companyId)
           console.log(err);
         }
       );
