@@ -20,6 +20,7 @@ public class FindFundingRes {
 
     private Long companyId;
     private String name;
+    private String profileImg;
     private Long fundingId;
     private String title;
     private String thumbnail;
@@ -36,6 +37,7 @@ public class FindFundingRes {
     private String rewardImg;
     private FundingState state;
     private int settlement;
+    private int percent;
 
     private List<Budget> budgetList = new ArrayList<>();
 
@@ -43,6 +45,7 @@ public class FindFundingRes {
         return FindFundingRes.builder()
                 .companyId(funding.getCompany().getId())
                 .name(funding.getCompany().getName())
+                .profileImg(funding.getCompany().getProfile())
                 .fundingId(funding.getId())
                 .title(funding.getTitle())
                 .thumbnail(funding.getThumbnailUrl())

@@ -7,6 +7,7 @@ import com.stn.hpdp.controller.funding.request.SettleFundingReq;
 import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
 import com.stn.hpdp.controller.funding.response.FindFundingRes;
 import com.stn.hpdp.controller.funding.response.FindFundingsRes;
+import com.stn.hpdp.controller.funding.response.RecommendFundingsRes;
 import com.stn.hpdp.controller.funding.response.SettleFundingRes;
 import com.stn.hpdp.dto.FundingInfoForContractDTO;
 import com.stn.hpdp.service.blockchain.CrowdFundingService;
@@ -68,9 +69,9 @@ public class FundingController {
     }
 
     @GetMapping("") // 펀딩 조회
-    public ApiResponse<Object> findFundings(@RequestParam(required = false, name = "companyId") Long companyId, @RequestParam(required = false, name = "done") Integer done) {
+    public ApiResponse<Object> findFundings(@RequestParam(required = false, name = "companyId") Long companyId, @RequestParam(required = false, name = "done") Integer done, @RequestParam(required = false, name = "keyword") String keyword) {
         log.info(logCurrent(getClassName(), getMethodName(), START));
-        List<FindFundingsRes> result = fundingQueryService.findFundings(companyId, done);
+        List<FindFundingsRes> result = fundingQueryService.findFundings(companyId, done, keyword);
         log.info(logCurrent(getClassName(), getMethodName(), END));
         return ApiResponse.ok(result);
     }
@@ -79,6 +80,22 @@ public class FundingController {
     public ApiResponse<Object> findFunding(@PathVariable("fundingId") Long fundingId) {
         log.info(logCurrent(getClassName(), getMethodName(), START));
         FindFundingRes result = fundingQueryService.findFunding(fundingId);
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+        return ApiResponse.ok(result);
+    }
+
+    @GetMapping("/recommend/deadline") // 펀딩 조회(마감임박순 5개)
+    public ApiResponse<Object> recommendDeadlineFundings() {
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+        List<RecommendFundingsRes> result = fundingQueryService.recommendDeadlineFundings();
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+        return ApiResponse.ok(result);
+    }
+
+    @GetMapping("/recommend/achievement") // 펀딩 조회(달성도가 높은 순 5개)
+    public ApiResponse<Object> recommendAchievementFundings() {
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+        List<RecommendFundingsRes> result = fundingQueryService.recommendAchievementFundings();
         log.info(logCurrent(getClassName(), getMethodName(), END));
         return ApiResponse.ok(result);
     }
