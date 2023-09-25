@@ -90,9 +90,9 @@ public class InterestService {
             Object check = redisTemplate.opsForHash().get("IT:" + member.getId(), com.getId());
             if (check == null) continue;
             if (check.equals("true")) {
-                if(!interestRepository.existsByCompany_Id(com.getId())) saveCompany.add(com);
+                if(!interestRepository.existsByMember_IdAndCompany_Id(member.getId(), com.getId())) saveCompany.add(com);
             } else {
-                Interest interest = interestRepository.findByCompany_Id(com.getId());
+                Interest interest = interestRepository.findByMember_IdAndCompany_Id(member.getId(), com.getId());
                 if (interest != null) interestRepository.delete(interest);
             }
         }
