@@ -5,9 +5,11 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.stn.hpdp.common.enums.FundingState;
 import com.stn.hpdp.controller.funding.response.FindFundingsRes;
+import com.stn.hpdp.controller.funding.response.RecommendFundingsRes;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.stn.hpdp.model.entity.QFunding.funding;
@@ -39,6 +41,39 @@ public class FundingQueryRepository {
                 ))
                 .from(funding)
                 .where(equalCompanyId(companyId), equalDone(done), containsKeyword(keyword))
+                .orderBy(funding.createdDate.asc())
+                .fetch();
+    }
+
+    public List<RecommendFundingsRes> findFundingsByDeadline(){
+        return queryFactory
+                .select(Projections.constructor(RecommendFundingsRes.class,
+                        funding.company.id.as("companyId"),
+                        funding.company.name.as("name"),
+                        funding.id.as("fundingId"),
+                        funding.thumbnailUrl.as("thumbnail"),
+                        funding.title.as("title"),
+                        funding.endDate.as("endDate")
+                ))
+                .from(funding)
+                .where(funding.state.eq(FundingState.ING))
+                .orderBy(funding.endDate.asc())
+                .limit(5)
+                .fetch();
+    }
+
+    public List<RecommendFundingsRes> findFundingsByAchievement(){
+        return queryFactory
+                .select(Projections.constructor(RecommendFundingsRes.class,
+                        funding.company.id.as("companyId"),
+                        funding.company.name.as("name"),
+                        funding.id.as("fundingId"),
+                        funding.thumbnailUrl.as("thumbnail"),
+                        funding.title.as("title"),
+                        funding.endDate.as("endDate")
+                ))
+                .from(funding)
+                .where(funding.state.eq(FundingState.ING))
                 .orderBy(funding.createdDate.asc())
                 .fetch();
     }

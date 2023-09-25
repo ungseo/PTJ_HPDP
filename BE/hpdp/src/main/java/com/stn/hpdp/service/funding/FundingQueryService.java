@@ -3,6 +3,7 @@ package com.stn.hpdp.service.funding;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.controller.funding.response.FindFundingRes;
 import com.stn.hpdp.controller.funding.response.FindFundingsRes;
+import com.stn.hpdp.controller.funding.response.RecommendFundingsRes;
 import com.stn.hpdp.model.entity.Budget;
 import com.stn.hpdp.model.entity.Funding;
 import com.stn.hpdp.model.repository.*;
@@ -47,5 +48,23 @@ public class FundingQueryService {
         // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
 
         return findFundingRes;
+    }
+
+    public List<RecommendFundingsRes> recommendDeadlineFundings(){
+        List<RecommendFundingsRes> result = fundingQueryRepository.findFundingsByDeadline();
+
+        // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
+
+        return result;
+    }
+
+    public List<RecommendFundingsRes> recommendAchievementFundings(){
+        List<RecommendFundingsRes> result = fundingQueryRepository.findFundingsByAchievement();
+
+        // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
+
+        // TODO: percent 세팅 후 높은 순으로 5개
+
+        return result;
     }
 }
