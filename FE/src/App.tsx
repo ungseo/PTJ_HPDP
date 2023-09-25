@@ -118,22 +118,6 @@ function App() {
           Component={InterestingCompanyPage}
         ></Route>
         <Route
-          path="/profile/message/:userid"
-          Component={MessagePage}
-        ></Route>
-        <Route
-          path="/payment"
-          Component={CheckoutPage}
-        ></Route>
-        <Route
-          path="success"
-          Component={SuccessPage}
-        ></Route>
-        <Route
-          path="/fail"
-          Component={FailPage}
-        ></Route>
-        <Route
           path="*"
           Component={PageNotFound404}
         ></Route>

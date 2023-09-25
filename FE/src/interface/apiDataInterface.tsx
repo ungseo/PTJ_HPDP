@@ -108,7 +108,7 @@ export interface InSearchCompanyInfoResponseInterface {
   profile: string;
   name: string;
   hashtag: string;
-  isInterested: boolean;
+  interested: boolean;
   email?: string;
   phoneNumber?: string;
   address?: string;
@@ -270,18 +270,12 @@ export interface OutSendMoneyInterface {
 }
 
 export interface OutSearchSendHistoryInterface {
-  body: {
-    statusCode: number;
-    message: string;
-    data: {
-      flag: boolean;
-      content: string;
-      afterBlnc: number;
-      opponentName: string;
-      opponentAccount: string;
-      createdDate: string;
-    }[];
-  };
+  flag: boolean;
+  content: string;
+  afterBlnc: number;
+  opponentName: string;
+  opponentAccount: string;
+  createdDate: string;
 }
 
 // 결제

@@ -25,10 +25,10 @@ const MyWallet = () => {
       unregisterAccount(
         accessToken,
         (res) => {
-          console.log('성공', res)
+          console.log('계좌 해제 성공 마월', res)
         },
         (err) => {
-          console.log('실패', err)
+          console.log('계좌 해제 실패 마월', err)
         }
       )
       // 계좌 해제 redux
