@@ -2,19 +2,15 @@ package com.stn.hpdp.model.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.stn.hpdp.controller.blockchain.response.WalletRes;
 import com.stn.hpdp.controller.point.response.FundingHistoryRes;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
 import java.util.List;
 
 import static com.stn.hpdp.model.entity.QFunding.funding;
 import static com.stn.hpdp.model.entity.QFundingHistory.fundingHistory;
 import static com.stn.hpdp.model.entity.QMember.member;
-import static com.stn.hpdp.model.entity.QWallet.wallet;
-import static org.springframework.data.jpa.domain.Specification.where;
 
 @Repository
 public class PointQueryRepository {
@@ -26,7 +22,7 @@ public class PointQueryRepository {
     }
 
 
-    public List<FundingHistoryRes> getFundingHistoryByPeriod(LocalDate startDateTime, LocalDate endDateTime,String name){
+    public List<FundingHistoryRes> getFundingHistoryByPeriod(String name) {
         return queryFactory
                 .select(Projections.constructor(FundingHistoryRes.class,
                         fundingHistory.funding.id,
@@ -34,10 +30,17 @@ public class PointQueryRepository {
                         fundingHistory.price,
                         fundingHistory.createdDate))
                 .from(fundingHistory)
-                .join(fundingHistory.funding,funding)
-                .join(fundingHistory.member,member)
-                .where(fundingHistory.member.name.eq(name),
-                        fundingHistory.createdDate.between(startDateTime.atStartOfDay(), endDateTime.atStartOfDay()))
+                .join(fundingHistory.funding, funding)
+                .join(fundingHistory.member, member)
+                .where(fundingHistory.member.name.eq(name))
                 .fetch();
+    }
+
+    public int findTotalPriceByMemberId(Long id) {
+        return queryFactory
+                .select(fundingHistory.price.sum())
+                .from(fundingHistory)
+                .where(fundingHistory.member.id.eq(id))
+                .fetchOne();
     }
 }
