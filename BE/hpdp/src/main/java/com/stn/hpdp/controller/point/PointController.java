@@ -6,6 +6,7 @@ import com.stn.hpdp.common.exception.ErrorCode;
 import com.stn.hpdp.common.util.SecurityUtil;
 import com.stn.hpdp.controller.point.request.FundingByPointReq;
 import com.stn.hpdp.controller.point.response.FundingHistoryRes;
+import com.stn.hpdp.controller.point.response.UserFundingHistoriesRes;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.service.blockchain.CrowdFundingService;
 import com.stn.hpdp.service.point.PointQueryService;
@@ -46,12 +47,14 @@ public class PointController {
 
 
     @GetMapping("/user")
-    public ApiResponse<List<FundingHistoryRes>> getFundingHistories() {
+    public ApiResponse<UserFundingHistoriesRes> getFundingHistories() {
         // 후원 내역 조회
         List<FundingHistoryRes> histories = pointQueryService.getFundingHistories();
-
         // 총 금액 조회
-        return ApiResponse.ok(histories);
+        int totalPrice = pointQueryService.getTotalPrice();
+        return ApiResponse.ok(UserFundingHistoriesRes.builder()
+                .fundingHistoryResList(histories)
+                .totalPrice(totalPrice).build());
     }
 
 }

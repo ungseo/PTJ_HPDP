@@ -36,11 +36,19 @@ public class PointQueryRepository {
                 .fetch();
     }
 
-    public int findTotalPriceByMemberId(Long id) {
+    public int findTotalPriceByMemberId(Long memberId) {
         return queryFactory
                 .select(fundingHistory.price.sum())
                 .from(fundingHistory)
-                .where(fundingHistory.member.id.eq(id))
+                .where(fundingHistory.member.id.eq(memberId))
+                .fetchOne();
+    }
+
+    public int findTotalPriceByFundingId(Long fundingId) {
+        return queryFactory
+                .select(fundingHistory.price.sum())
+                .from(fundingHistory)
+                .where(fundingHistory.funding.id.eq(fundingId))
                 .fetchOne();
     }
 }

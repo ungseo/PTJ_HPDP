@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static com.stn.hpdp.common.exception.ErrorCode.USER_NOT_FOUND;
@@ -32,7 +31,9 @@ public class PointQueryService {
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
         return pointQueryRepository.findTotalPriceByMemberId(member.getId());
     }
-
+    public int getTotalPriceForSearch(Long fundingId){
+        return pointQueryRepository.findTotalPriceByMemberId(fundingId);
+    }
     public List<FundingHistoryRes> getFundingHistories() {
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
