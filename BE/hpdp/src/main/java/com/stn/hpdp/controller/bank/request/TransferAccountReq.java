@@ -18,12 +18,6 @@ import java.util.UUID;
 public class TransferAccountReq {
 
     @NotNull
-    private String accountPw;
-
-    @NotNull
-    private BankCode opponentBankCode;
-
-    @NotNull
     private String opponentName;
 
     @NotNull
@@ -35,7 +29,6 @@ public class TransferAccountReq {
     public Transfer toEntity(Account account){
         return Transfer.builder()
                 .account(account)
-                .opponentBankCode(opponentBankCode)
                 .opponentName(opponentName)
                 .opponentAccount(opponentAccount)
                 .uuid(UUID.randomUUID())

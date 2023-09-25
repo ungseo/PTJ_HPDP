@@ -106,7 +106,6 @@ export type OutMemberInfoInterface =
 export interface InSearchCompanyInfoResponseInterface {
   companyId: number;
   profile: string;
-  banner:string;
   name: string;
   hashtag: string;
   isInterested: boolean;
@@ -120,7 +119,7 @@ export interface InSearchCompanyInfoResponseInterface {
   fundingsNumber?: number;
   participantsNumber?: number;
   amount?: number;
-  };
+}
 
 // 기업 펀딩 조회
 

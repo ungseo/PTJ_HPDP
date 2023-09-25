@@ -11,9 +11,9 @@ import { getCompanyItem } from "../api/companies";
 
 const CompanyDetailPage = () => {
   const [companyItem, setCompanyItem] =
-  useState<Interfaces.InSearchCompanyInfoResponseInterface>(
-    {} as Interfaces.InSearchCompanyInfoResponseInterface
-  );
+    useState<Interfaces.InSearchCompanyInfoResponseInterface>(
+      {} as Interfaces.InSearchCompanyInfoResponseInterface
+    );
 
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const { companyid } = useParams();
@@ -31,15 +31,19 @@ const CompanyDetailPage = () => {
       }
     );
   }, []);
-
+  console.log(companyItem);
   const tabProps = {
     소개: <CompanyIntroduce item={companyItem} />,
     후원: <CompanySituation item={companyItem} />,
   };
 
+  const data = {
+    name: companyItem.name,
+    profile: companyItem.profile,
+  };
   return (
     <>
-      <DetailPageTop></DetailPageTop>
+      <DetailPageTop data={data} />
       <CustomizedTabs tabProps={tabProps} />
     </>
   );

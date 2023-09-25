@@ -69,7 +69,7 @@ public class PointService {
         return member;
     }
 
-    public int getMemberPoint() {
+    private int getMemberPoint() {
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
         return member.getPoint();

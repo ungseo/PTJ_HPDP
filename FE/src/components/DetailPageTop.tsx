@@ -1,23 +1,38 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { OutFundingsInfoInterface } from "../interface/apiDataInterface";
+
 import style from "../styles/css/DetailPageTop.module.css";
 import { Icon } from "@iconify/react";
 
-// const DetailPageTop = ({ props }: { props: OutFundingsInfoInterface }) => {
-const DetailPageTop = () => {
+interface DetailTopProps {
+  data: {
+    name: string;
+    title?: string;
+    thumbnail?: string;
+    profile?: string;
+    companyId?: number;
+  };
+}
+
+const DetailPageTop = (props: DetailTopProps) => {
+  const { data } = props;
   const navigate = useNavigate();
 
   const handleGoList = () => {
     navigate("/list");
   };
-  //   const totalStyle = {
-  //     backgroundImage: `url(${props.thumbnail})`,
-  //   };
+  const handleGoCompany = () => {
+    const { companyId } = data;
+    if (companyId) {
+      navigate(`/company/detail/${companyId}`);
+    }
+  };
+  const totalStyle = {
+    backgroundImage: `url(${data.thumbnail})`,
+  };
 
   return (
-    // <div className={style.total} style={totalStyle}>
-    <div className={style.total}>
+    <div className={style.total} style={totalStyle}>
       <Icon
         icon="bi:chevron-left"
         className={style.icon}
@@ -26,13 +41,13 @@ const DetailPageTop = () => {
       />
       <div className={style.topcontent}>
         <div className={style.upsection}>
-          <img src="/hpdpLogo.png" alt="Company Logo" className={style.upimg} />
-          {/* <div className={style.companyname}>{props.name}</div> */}
-          <div className={style.companyname}>name</div>
+          <img src={data.profile} alt="Company Logo" className={style.upimg} />
+          <div className={style.companyname} onClick={handleGoCompany}>
+            {data.name}
+          </div>
         </div>
         <div className={style.downsection}>
-          {/* <div className={style.fundingtitle}>{props.title}</div> */}
-          <div className={style.fundingtitle}>title</div>
+          {data.title && <div className={style.fundingtitle}>{data.title}</div>}
         </div>
       </div>
     </div>
