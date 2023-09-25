@@ -18,8 +18,7 @@ import javax.validation.constraints.Size;
 public class SavePaymentReq {
     @NotNull
     private int amount;
-    @NotNull
-    @Size(min = 2,max = 2, message = "cardCode 는 두자리 입니다.")
+
     private String cardCode;
 
     public PointHistory toEntity(Member member){
@@ -29,7 +28,7 @@ public class SavePaymentReq {
                 .member(member)
                 .flag(false)
                 .paymentPoint(amount)
-                .cardCode(CardCode.of(cardCode))
+                .cardCode(cardCode == null ? CardCode.of("0") : CardCode.of(cardCode))
                 .afterPoint(member.getPoint())
                 .build();
     }
