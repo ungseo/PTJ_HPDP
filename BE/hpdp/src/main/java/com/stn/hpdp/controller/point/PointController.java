@@ -47,8 +47,11 @@ public class PointController {
 
     @GetMapping("/user")
     public ApiResponse<List<FundingHistoryRes>> getFundingHistories() {
-        List<FundingHistoryRes> response = pointQueryService.getFundingHistories();
-        return ApiResponse.ok(response);
+        // 후원 내역 조회
+        List<FundingHistoryRes> histories = pointQueryService.getFundingHistories();
+
+        // 총 금액 조회
+        return ApiResponse.ok(histories);
     }
 
 }

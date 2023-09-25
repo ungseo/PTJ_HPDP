@@ -34,7 +34,9 @@ public class PointQueryService {
     }
 
     public List<FundingHistoryRes> getFundingHistories() {
-        return pointQueryRepository.getFundingHistoryByPeriod( SecurityUtil.getCurrentMemberLoginId());
+        Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
+                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+        return pointQueryRepository.getFundingHistory(member.getId());
     }
 }
 

@@ -22,7 +22,7 @@ public class PointQueryRepository {
     }
 
 
-    public List<FundingHistoryRes> getFundingHistoryByPeriod(String name) {
+    public List<FundingHistoryRes> getFundingHistory(Long memberId) {
         return queryFactory
                 .select(Projections.constructor(FundingHistoryRes.class,
                         fundingHistory.funding.id,
@@ -32,7 +32,7 @@ public class PointQueryRepository {
                 .from(fundingHistory)
                 .join(fundingHistory.funding, funding)
                 .join(fundingHistory.member, member)
-                .where(fundingHistory.member.name.eq(name))
+                .where(fundingHistory.member.id.eq(memberId))
                 .fetch();
     }
 

@@ -1,28 +1,28 @@
-package com.stn.hpdp.service.point;
+package com.stn.hpdp.model.repository;
 
 import com.stn.hpdp.IntegrationTestSupport;
+import com.stn.hpdp.controller.point.response.FundingHistoryRes;
 import com.stn.hpdp.model.entity.Company;
 import com.stn.hpdp.model.entity.Funding;
 import com.stn.hpdp.model.entity.FundingHistory;
 import com.stn.hpdp.model.entity.Member;
-import com.stn.hpdp.model.repository.CompanyRepository;
-import com.stn.hpdp.model.repository.FundingHistoryRepository;
-import com.stn.hpdp.model.repository.FundingRepository;
-import com.stn.hpdp.model.repository.MemberRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.stereotype.Service;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
 
-@Service
-class PointQueryServiceTest extends IntegrationTestSupport {
+class PointQueryRepositoryTest extends IntegrationTestSupport {
 
     @Autowired
-    private PointQueryService pointQueryService;
+    private PointQueryRepository pointQueryRepository;
+
+    @Autowired
+    private FundingHistoryRepository fundingHistoryRepository;
 
     @Autowired
     private MemberRepository memberRepository;
@@ -33,14 +33,10 @@ class PointQueryServiceTest extends IntegrationTestSupport {
     @Autowired
     private FundingRepository fundingRepository;
 
-    @Autowired
-    private FundingHistoryRepository fundingHistoryRepository;
-
-    @DisplayName("사용자는 후원한 총 금액을 조회 할 수 있다.")
+    @DisplayName("사용자는 후원한 내역을 볼 수 있다.")
     @WithMockUser(username = "test")
     @Test
-    void getTotalPrice() throws Exception {
-
+    void getFundingHistories() throws Exception {
         //given
         Member member = createMember(100000);
         Company company = createCompany();
@@ -50,12 +46,13 @@ class PointQueryServiceTest extends IntegrationTestSupport {
         FundingHistory fundingHistory2 = createFundingHistory(funding, member, 10000);
         FundingHistory fundingHistory3 = createFundingHistory(funding, member, 30000);
 
-
         //when
-        int totalPrice = pointQueryService.getTotalPrice();
+        List<FundingHistoryRes> response = pointQueryRepository.getFundingHistory(member.getId());
 
         //then
-        assertThat(totalPrice).isEqualTo(50000);
+        Assertions.assertThat(response).hasSize(3)
+                .extracting("title")
+                .containsExactlyInAnyOrder("test", "test","test");
     }
 
     private FundingHistory createFundingHistory(Funding funding, Member member, int price) {
@@ -71,6 +68,7 @@ class PointQueryServiceTest extends IntegrationTestSupport {
     private Funding createFunding(Company company) {
         Funding funding = Funding.builder()
                 .company(company)
+                .title("test")
                 .targetAmount(100000)
                 .build();
 
@@ -103,4 +101,6 @@ class PointQueryServiceTest extends IntegrationTestSupport {
                 .build();
         return memberRepository.save(member);
     }
+
+
 }

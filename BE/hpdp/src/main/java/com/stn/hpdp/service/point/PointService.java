@@ -59,7 +59,7 @@ public class PointService {
 
         FundingHistory fundingHistory = FundingHistory
                 .builder()
-                .pirce(reqPoint)
+                .price(reqPoint)
                 .member(member)
                 .funding(funding)
                 .build();
