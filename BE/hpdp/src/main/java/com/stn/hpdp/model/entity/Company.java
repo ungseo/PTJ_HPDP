@@ -2,25 +2,22 @@ package com.stn.hpdp.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.stn.hpdp.controller.company.request.UpdateCompanyReq;
-import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name ="company")
+@Table(name = "company")
 @Getter
 @Setter
 @ToString
@@ -30,7 +27,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicInsert
 @DynamicUpdate
-public class Company extends TimeBaseEntity implements UserDetails  {
+public class Company extends TimeBaseEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,11 +71,13 @@ public class Company extends TimeBaseEntity implements UserDetails  {
     private String profile;
     private String banner;
     private String privateKey;
+    private String point;
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream()
@@ -86,7 +85,11 @@ public class Company extends TimeBaseEntity implements UserDetails  {
                 .collect(Collectors.toList());
     }
 
-    public void update(UpdateCompanyReq updateCompanyReq){
+    public void changePoint(int point) {
+        this.point += point;
+    }
+
+    public void update(UpdateCompanyReq updateCompanyReq) {
         this.name = updateCompanyReq.getHashtag();
         this.phoneNumber = updateCompanyReq.getPhoneNumber();
         this.email = updateCompanyReq.getEmail();

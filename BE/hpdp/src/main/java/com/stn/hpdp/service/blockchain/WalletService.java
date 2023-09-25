@@ -96,8 +96,8 @@ public class WalletService {
         try {
             // Nonce와 가스 가격 설정
             BigInteger nonce = web3j.ethGetTransactionCount(adminCredentials.getAddress(), DefaultBlockParameterName.LATEST).send().getTransactionCount();
-            BigInteger gasPrice = BigInteger.valueOf(21000); // 가스 값
-            BigInteger gasLimit = BigInteger.valueOf(21000); // 가스 최댓값
+            BigInteger gasPrice = BigInteger.valueOf(1000000000L); // 가스 값
+            BigInteger gasLimit = BigInteger.valueOf(300000L); // 가스 최댓값
             BigInteger value = Convert.toWei(BigDecimal.valueOf(10L), Convert.Unit.ETHER).toBigInteger(); // 초기 이더리움 값
 
             // RawTransaction 객체 생성
