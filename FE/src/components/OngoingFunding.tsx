@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FundingItem from "./FundingItem";
 import { OutFundingsInfoInterface } from "../interface/apiDataInterface";
+import NullModal from "./common/NullModal";
 
 const OngoingFunding = ({ itemList }: any) => {
   return (
@@ -10,10 +11,10 @@ const OngoingFunding = ({ itemList }: any) => {
           (
             item: OutFundingsInfoInterface,
             idx: React.Key | null | undefined
-          ): any => <FundingItem key={idx} item={item}></FundingItem>
+          ) => <FundingItem key={idx} item={item} />
         )
       ) : (
-        <h1>후원중인 후원이 없습니다 ^^컄ㅋ~!~!</h1>
+        <NullModal text="진행중인 펀딩이 없습니다." />
       )}
     </div>
   );
