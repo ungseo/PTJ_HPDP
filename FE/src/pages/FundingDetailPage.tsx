@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as Interfaces from "../interface/apiDataInterface";
-import { getFundingDetail } from "../api/funding";
+import { getFundingDetail } from "../api/fundings";
 
 import CustomizedTabs from "../components/CustomizedTabs";
 import FundingIntroduce from "../components/fundingdetail/FundingIntroduce";
@@ -19,7 +19,7 @@ const FundingDetailPage = () => {
     useState<Interfaces.OutFundingsInfoInterface>(
       {} as Interfaces.OutFundingsInfoInterface
     );
-  console.log(fundingDetailData)
+  console.log(fundingDetailData);
 
   const { fundingid } = useParams();
 
@@ -69,10 +69,16 @@ const FundingDetailPage = () => {
     }
   };
 
+  const data = {
+    name: fundingDetailData.name,
+    title: fundingDetailData.title,
+    thumbnail: fundingDetailData.thumbnail,
+    companyId: fundingDetailData.companyId,
+  };
+
   return (
     <div className={style.fundingdetailpage}>
-      {/* <DetailPageTop props={fundingDetailData} /> */}
-      <DetailPageTop />
+      <DetailPageTop data={data} />
       <CustomizedTabs tabProps={tabProps} />
       {isBottomSheetOpen && (
         <>

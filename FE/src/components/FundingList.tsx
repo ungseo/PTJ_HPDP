@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import * as Interfaces from "../interface/apiDataInterface";
-import { getFundingTotalList } from "../api/funding";
+import { getFundingTotalList } from "../api/fundings";
 
 import FundingItem from "./FundingItem";
 

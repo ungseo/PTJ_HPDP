@@ -1,5 +1,6 @@
 package com.stn.hpdp.service.bank;
 
+import com.stn.hpdp.common.enums.BankCode;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.jwt.JwtTokenProvider;
 import com.stn.hpdp.common.util.SecurityUtil;
@@ -84,10 +85,20 @@ public class BankService {
         if (saved.isEmpty()) {
             throw new CustomException(CONNECTED_ACCOUNT_NOT_FOUND);
         }
-        if(!saved.get().getAccountPw().equals(transferAccountReq.getAccountPw())){
-            throw new CustomException(ACCOUNT_PASSWORD_BAD_REQUEST);
-        }
 
+        // opponentBankCode 임의 세팅
+        String name = transferAccountReq.getOpponentName();
+        if(name.equals("Americano") || name.equals("americano") || name.equals("아메리카노")){
+            transferAccountReq.setOpponentBankCode(BankCode.KDB);
+        }else if(name.equals("Candy") || name.equals("candy") || name.equals("사탕")){
+            transferAccountReq.setOpponentBankCode(BankCode.IBK);
+        }else if(name.equals("Allowance") || name.equals("allowance") || name.equals("용돈")){
+            transferAccountReq.setOpponentBankCode(BankCode.KB);
+        }else if(name.equals("Salary") || name.equals("salary") || name.equals("월급")){
+            transferAccountReq.setOpponentBankCode(BankCode.NH);
+        }else{
+            transferAccountReq.setOpponentBankCode(BankCode.GJ);
+        }
         Transfer transfer = transferAccountReq.toEntity(saved.get());
         transferRepository.save(transfer);
 

@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Getter
 @Builder
@@ -18,8 +19,7 @@ public class SavePaymentReq {
     @NotNull
     private int amount;
 
-    @NotNull
-    private CardCode cardCompanyCode;
+    private String cardCode;
 
     public PointHistory toEntity(Member member){
         // member point 갱신
@@ -28,7 +28,7 @@ public class SavePaymentReq {
                 .member(member)
                 .flag(false)
                 .paymentPoint(amount)
-                .cardCode(cardCompanyCode)
+                .cardCode(cardCode == null ? CardCode.of("0") : CardCode.of(cardCode))
                 .afterPoint(member.getPoint())
                 .build();
     }

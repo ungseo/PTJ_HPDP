@@ -14,10 +14,14 @@ public class FindCompanyRes {
     private boolean isInterested;
 
     public FindCompanyRes(Long companyId, String profile, String name, String hashtag){
+        this(companyId, profile,name,hashtag,false);
+    }
+
+    public FindCompanyRes(Long companyId, String profile, String name, String hashtag, boolean isInterested){
         this.companyId = companyId;
         this.profile = profile;
         this.name = name;
         this.hashtag = hashtag;
-        this.isInterested = false;
+        this.isInterested = isInterested;
     }
 }
