@@ -37,18 +37,20 @@ public class PointQueryRepository {
     }
 
     public int findTotalPriceByMemberId(Long memberId) {
-        return queryFactory
+        Integer sum = queryFactory
                 .select(fundingHistory.price.sum())
                 .from(fundingHistory)
                 .where(fundingHistory.member.id.eq(memberId))
                 .fetchOne();
+        return sum != null ? sum : 0;
     }
 
     public int findTotalPriceByFundingId(Long fundingId) {
-        return queryFactory
+        Integer sum = queryFactory
                 .select(fundingHistory.price.sum())
                 .from(fundingHistory)
                 .where(fundingHistory.funding.id.eq(fundingId))
                 .fetchOne();
+        return sum != null ? sum : 0;
     }
 }
