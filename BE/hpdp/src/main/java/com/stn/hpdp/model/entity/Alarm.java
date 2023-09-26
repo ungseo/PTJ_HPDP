@@ -1,8 +1,7 @@
 package com.stn.hpdp.model.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.stn.hpdp.common.enums.AlarmType;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,8 +9,10 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class News extends TimeBaseEntity {
+public class Alarm extends TimeBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +27,14 @@ public class News extends TimeBaseEntity {
     @JoinColumn(name = "funding_id")
     private Funding funding;
 
+    @Column(nullable = false)
+    private Boolean isRead;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private AlarmType type;
+
+    private String title;
+    private String content;
 
 }
