@@ -37,7 +37,13 @@ public class PointQueryService {
     }
 
     public int getTotalPriceForSearch(Long fundingId) {
-        return pointQueryRepository.findTotalPriceByMemberId(fundingId);
+        return pointQueryRepository.findTotalPriceByFundingId(fundingId);
+    }
+
+    public int getTotalFundingAmount() {
+        Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
+                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+        return pointQueryRepository.findTotalPriceByMemberId(member.getId());
     }
 
     public List<FundingHistoryRes> getFundingHistories() {

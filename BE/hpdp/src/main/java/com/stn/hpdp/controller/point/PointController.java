@@ -61,8 +61,10 @@ public class PointController {
         List<PointHistoryRes> histories = pointQueryService.getPointHistories();
         // 잔액 조회
         int balance = pointService.getMemberPoint();
+        int totalFundingAmount = pointQueryService.getTotalFundingAmount();
         return ApiResponse.ok(UserPointHistoriesRes.builder()
                 .pointHistoryResList(histories)
+                .totalFundingAmount(totalFundingAmount)
                 .balance(balance)
                 .build());
     }
