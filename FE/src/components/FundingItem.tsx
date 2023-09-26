@@ -7,19 +7,11 @@ import style from "../styles/css/FundingItem.module.css";
 import ProgressBar from "./common/ProgressBar";
 import { OutFundingsInfoInterface } from "../interface/apiDataInterface";
 
-// 진행도 퍼센트 계산
-function calculateProgress(targetAmount: number, totalFunding: number) {
-  const progress = (totalFunding / targetAmount) * 100;
-  return Math.min(100, Math.floor(progress));
-}
-
 const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
   const navigate = useNavigate();
 
   // dday는 마감이거나 숫자이므로 숫자일 경우 'D-'를 넣는다.
   const formatDday = item.dday !== "마감" ? `D-${item.dday}` : item.dday;
-  // 진행도
-  const progress = calculateProgress(item.targetAmount, item.totalFunding);
 
   const handleGoFundingDetail = () => {
     navigate(`/funding/detail/${item.fundingId}`);
@@ -37,10 +29,10 @@ const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
         </div>
         <div className={style.downcontent}>
           <div className={style.remaindate}>{formatDday}</div>
-          <ProgressBar percent={progress} />
+          <ProgressBar percent={item.percent || 0} />
           <div className={style.accountdetail}>
             <div className={style.nowaccount}>{item.totalFunding}원</div>
-            <div className={style.fundingpercent}>{progress}%</div>
+            <div className={style.fundingpercent}>{item.percent}%</div>
           </div>
         </div>
       </Grid>
