@@ -167,6 +167,7 @@ export interface OutFundingsInfoInterface {
   reward_img?: string;
   settlement?: number;
   dday?: number | string;
+  percent?: number;
 }
 
 //펀딩 예산 상세 조회
