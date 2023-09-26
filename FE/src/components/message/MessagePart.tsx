@@ -1,47 +1,90 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import style from "../../styles/css/MessagePart.module.css";
-
+import * as Interfaces from "../../interface/apiDataInterface";
+import MessageContent from "./MessageContent";
+import { getMessageDetail } from "../../api/messages";
 interface MessagePartProps {
   isChecked: boolean;
   onCheckboxChange: () => void;
+  message: Interfaces.MessagesInterface;
+}
+
+function formatDate(inputDate: string) {
+  const date = new Date(inputDate);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}.${month}.${day}`;
 }
 
 const MessagePart = ({
   isChecked = false,
   onCheckboxChange,
+  message,
 }: MessagePartProps) => {
+  console.log(message);
+  const createDay = formatDate(message.createdDate);
+  const [isMessageContent, setMessageContent] = useState(false);
+  const [isMessageDetail, setMessageDetail] =
+    useState<Interfaces.MessagesInterface>({} as Interfaces.MessagesInterface);
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+  const messageId = message.messageId;
+  const handleShowContentClick = () => {
+    setMessageContent(true);
+    getMessageDetail(
+      accessToken,
+      messageId,
+      (res) => {
+        setMessageDetail(res.data.data);
+        console.log("쪽지 상세 API 연결");
+      },
+      (err) => {
+        console.log("쪽지 상세 API 호출 실패", err);
+      }
+    );
+  };
+  const handleCloseModal = () => {
+    setMessageContent(false);
+  };
+  console.log(isMessageDetail);
   return (
-    <Grid container style={{ paddingTop: "1rem" }}>
-      <Grid
-        item
-        xs={1}
-        onClick={(event) => {
-          event.stopPropagation();
-        }}
-      >
-        <input
-          type="checkbox"
-          checked={isChecked}
-          onChange={() => onCheckboxChange()}
-        />
-      </Grid>
-      <Grid item xs={11}>
-        <div className={style.name_date}>
-          <div className={style.name}>
-            <img src="/hpdpLogo.png" alt="Company Logo" />
-            <div className={style.company_name}>noplasticsunday</div>
+    <div>
+      <Grid container style={{ paddingTop: "1rem" }}>
+        <Grid
+          item
+          xs={1}
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
+        >
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={() => onCheckboxChange()}
+          />
+        </Grid>
+        <Grid item xs={11} onClick={handleShowContentClick}>
+          <div className={style.name_date}>
+            <div className={style.name}>
+              <div className={style.company_name}>{message.opponentName}</div>
+            </div>
+            <div className={style.date}>{createDay}</div>
           </div>
-          <div className={style.date}>2023.09.01</div>
-        </div>
-        <div className={style.letter}>
-          안녕하세요, 김웅서 님. NoPlasticSunday입니다. 제주 하르방 키링은
-          세이브제주바다의 바다정화 활동으로 모은 부표, 폐 어망 등의 바다
-          플라스틱 쓰레기를 재활용했어요. 수거한 바다 플라스틱 쓰레기는 분쇄하여
-          재활용 할 수 있는 펠렛으로 소재화해요.
-        </div>
+          <div className={style.letter}>{message.title}</div>
+        </Grid>
       </Grid>
-    </Grid>
+      {isMessageContent && (
+        <div className="modal">
+          <div className={style.modalbackground}></div>
+          <MessageContent
+            onClose={handleCloseModal}
+            isMessageDetail={isMessageDetail}
+          />
+        </div>
+      )}
+    </div>
   );
 };
 

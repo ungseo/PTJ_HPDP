@@ -1,32 +1,39 @@
 import { useSearchParams } from "react-router-dom";
 import { createPayments } from "../../api/payments";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { InCreatePaymentsInterface } from "../../interface/apiDataInterface";
 import { useSelector } from "react-redux";
+import axios from "axios";
 export function SuccessPage() {
   const [searchParams] = useSearchParams();
+  const [d, setD] = useState("");
   // Back에 API쏘기
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
   useEffect(() => {
-    const data: InCreatePaymentsInterface = {
-      header: {
-        accessToken,
-      },
-      body: {
-        amount: searchParams.get("amount"),
-      },
+    const data = {
+      amount: searchParams.get("amount"),
+      orderId: searchParams.get("orderId"),
+      paymentKey: searchParams.get("paymentKey"),
     };
-
-    createPayments(
-      data,
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    const headers = {
+      Authorization:
+        "Basic dGVzdF9za182YkpYbWdvMjhlZEJLb3l3anFFckxBbkdLV3g0Og==",
+    };
+    alert(data);
+    const confirmPayments = () => {
+      axios
+        .post(`https://api.tosspayments.com/v1/payments/confirm`, data, {
+          headers,
+        })
+        .then((res) => {
+          setD(res.data.data);
+          console.log(res.data.data);
+          alert("결제성공");
+        })
+        .catch((err) => alert(err));
+    };
+    confirmPayments();
   }, []);
 
   return (
@@ -36,6 +43,7 @@ export function SuccessPage() {
       <div>{`결제 금액: ${Number(
         searchParams.get("amount")
       ).toLocaleString()}원`}</div>
+      <div>{searchParams}</div>
     </div>
   );
 }

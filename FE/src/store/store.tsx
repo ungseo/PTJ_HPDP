@@ -9,8 +9,9 @@ import { persistReducer, PERSIST, PURGE } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import storageSession from "redux-persist/lib/storage/session";
 import profileEditSlice from "./profileEdit-slice";
-import accountSlice from './account-slice';
-
+import accountSlice from "./account-slice";
+import ReduxThunk from "redux-thunk";
+import companySlice from "./company-slice";
 // test code
 const reducers = combineReducers({
   sample: sampleSlice.reducer,
@@ -21,7 +22,9 @@ const reducers = combineReducers({
   message: messageSlice.reducer,
   profileEdit: profileEditSlice.reducer,
   account: accountSlice.reducer,
+  company: companySlice.reducer,
 });
+export type RootState = ReturnType<typeof reducers>;
 
 const persistConfig = {
   key: "root",
@@ -39,7 +42,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [PERSIST, PURGE],
       },
-    }),
+    }).concat(ReduxThunk),
 });
 
 export default store;

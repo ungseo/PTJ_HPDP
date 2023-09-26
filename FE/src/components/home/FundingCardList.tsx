@@ -2,6 +2,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import style from "../../styles/css/FundingCardList.module.css";
 
+import * as Interfaces from "../../interface/apiDataInterface";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -9,15 +10,12 @@ import "swiper/css/pagination";
 
 import FundingCard from "./FundingCard";
 
-const FundingCardList = () => {
-  const fundingCards = [
-    { id: 1, title: "Funding Card 1" },
-    { id: 2, title: "Funding Card 2" },
-    { id: 3, title: "Funding Card 3" },
-    { id: 4, title: "Funding Card 4" },
-    { id: 5, title: "Funding Card 5" },
-  ];
+interface FundingCardListProps {
+  items: Interfaces.OutFundingsInfoInterface[];
+}
 
+const FundingCardList = (props: FundingCardListProps) => {
+  const { items } = props;
   return (
     <>
       <Swiper
@@ -34,9 +32,9 @@ const FundingCardList = () => {
         }}
         className={style.mySwiper}
       >
-        {fundingCards.map((card) => (
-          <SwiperSlide key={card.id} style={{ width: "unset" }}>
-            <FundingCard />
+        {items.map((card: Interfaces.OutFundingsInfoInterface) => (
+          <SwiperSlide key={card.fundingId} style={{ width: "unset" }}>
+            <FundingCard card={card} />
           </SwiperSlide>
         ))}
       </Swiper>

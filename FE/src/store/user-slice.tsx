@@ -38,6 +38,16 @@ const userSlice = createSlice({
     saveMemberInfo(state, action) {
       return { ...state, info: action.payload };
     },
+    updateTokens(state, action) {
+      return {
+        ...state,
+        auth: {
+          ...state.auth,
+          accessToken: action.payload.accessToken,
+          refreshToken: action.payload.refreshToken,
+        },
+      };
+    },
   },
 });
 

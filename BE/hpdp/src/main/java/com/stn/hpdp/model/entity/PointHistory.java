@@ -32,7 +32,6 @@ public class PointHistory extends TimeBaseEntity {
     @NotFound(action = NotFoundAction.IGNORE)
     private Funding funding;
 
-    @NotNull
     private CardCode cardCode;
 
     @NonNull

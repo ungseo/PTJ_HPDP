@@ -19,16 +19,16 @@ public class FindTransferRes {
     private String opponentName;
     private String opponentAccount;
     private String createdDate;
+    private int depositAmount;
 
     public static FindTransferRes of(Transfer transfer){
-        if(transfer == null) return null;
-
         return FindTransferRes.builder()
                 .flag(transfer.isFlag())
                 .afterBlnc(transfer.getAfterBlnc())
                 .opponentName(transfer.getOpponentName())
                 .opponentAccount(transfer.getOpponentAccount())
                 .createdDate(transfer.getCreatedDate().toString())
+                .depositAmount(transfer.getDepositAmount())
                 .build();
     }
 

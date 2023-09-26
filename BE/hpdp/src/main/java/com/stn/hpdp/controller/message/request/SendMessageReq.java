@@ -24,13 +24,13 @@ public class SendMessageReq {
     @NotNull
     private String content;
 
-    public Message toEntity(Company company, Member member, boolean to){
+    public Message toEntity(Company company, Member member, boolean toWho){
         return Message.builder()
                 .company(company)
                 .member(member)
                 .title(title)
                 .content(content)
-                .to(to)
+                .toWho(toWho)
                 .isRead(false)
                 .build();
     }
