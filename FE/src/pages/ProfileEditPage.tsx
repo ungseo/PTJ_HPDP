@@ -91,7 +91,7 @@ const ProfileEditPage = () => {
         styles={{ width: "9rem", height: "3.5rem" }}
         onClick={saveEditHandler}
       />
-      {modal ? <PwModal modalHandler={setModal}></PwModal> : null}
+      {modal ? <PwModal modalHandler={setModal} /> : null}
     </div>
   );
 };

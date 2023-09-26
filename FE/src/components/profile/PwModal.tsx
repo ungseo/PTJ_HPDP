@@ -24,11 +24,20 @@ const PwModal = ({ modalHandler }: any) => {
       }
     );
   };
+  const closeModal = () => {
+    modalHandler(false);
+  };
+  const [auth, setAuth] = useState(false);
   return (
     <div className={style.wrapper}>
-      <h1>비밀번호변경</h1>
-      <input type="password" value={editPw} onChange={onChange} />
-      <DefaultButton text="변경" onClick={changePw} />
+      <div className={style.modal}>
+        <button className={style.button} onClick={closeModal}>
+          X
+        </button>
+        <h1>비밀번호변경</h1>
+        <input type="password" value={editPw} onChange={onChange} />
+        <DefaultButton text="변경" onClick={changePw} />
+      </div>
     </div>
   );
 };
