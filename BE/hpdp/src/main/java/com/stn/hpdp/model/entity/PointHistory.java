@@ -32,6 +32,8 @@ public class PointHistory extends TimeBaseEntity {
     @NotFound(action = NotFoundAction.IGNORE)
     private Funding funding;
 
+    private String content;
+
     private CardCode cardCode;
 
     @NonNull
@@ -43,4 +45,14 @@ public class PointHistory extends TimeBaseEntity {
     @NotNull
     private int afterPoint;
 
+    @Builder
+    public PointHistory(Member member, Funding funding, String content, CardCode cardCode, boolean flag, int paymentPoint, int afterPoint) {
+        this.member = member;
+        this.funding = funding;
+        this.content = content;
+        this.cardCode = cardCode;
+        this.flag = flag;
+        this.paymentPoint = paymentPoint;
+        this.afterPoint = afterPoint;
+    }
 }

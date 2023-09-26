@@ -6,9 +6,11 @@ import com.stn.hpdp.controller.point.request.FundingByPointReq;
 import com.stn.hpdp.model.entity.Funding;
 import com.stn.hpdp.model.entity.FundingHistory;
 import com.stn.hpdp.model.entity.Member;
+import com.stn.hpdp.model.entity.PointHistory;
 import com.stn.hpdp.model.repository.FundingHistoryRepository;
 import com.stn.hpdp.model.repository.FundingRepository;
 import com.stn.hpdp.model.repository.MemberRepository;
+import com.stn.hpdp.model.repository.PointHistoryRepository;
 import jnr.a64asm.Mem;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+
+import java.util.Optional;
 
 import static com.stn.hpdp.common.exception.ErrorCode.SCARCE_POINT_BAD_REQUEST;
 import static com.stn.hpdp.common.exception.ErrorCode.USER_NOT_FOUND;
@@ -29,6 +33,7 @@ public class PointService {
     private final MemberRepository memberRepository;
     private final FundingHistoryRepository fundingHistoryRepository;
     private final FundingRepository fundingRepository;
+    private final PointHistoryRepository pointHistoryRepository;
 
     // 후원이 가능한지 확인
     public boolean fundingCheck(int reqPoint) {
@@ -44,7 +49,17 @@ public class PointService {
     public void funding(FundingByPointReq fundingByPointReq) {
 
         Member sponsor = registFundingHistory(fundingByPointReq.getFundingId(), fundingByPointReq.getSponsorPoint());
-
+        Optional<Funding> funding = fundingRepository.findById(fundingByPointReq.getFundingId());
+        PointHistory pointHistory = PointHistory.builder(
+                )
+                .member(sponsor)
+                .funding(funding.get())
+                .content(funding.get().getTitle())
+                .flag(true)
+                .paymentPoint(fundingByPointReq.getSponsorPoint())
+                .afterPoint(sponsor.getPoint()- fundingByPointReq.getSponsorPoint())
+                .build();
+        pointHistoryRepository.save(pointHistory);
         pointDeduction(sponsor, fundingByPointReq.getSponsorPoint());
     }
 
