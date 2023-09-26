@@ -161,13 +161,14 @@ export interface OutFundingsInfoInterface {
   state: string; //
   content?: string;
   content_url?: string;
-  reward_name?: string;
-  reward_price?: number;
-  reward_desc?: string;
-  reward_img?: string;
+  rewardName?: string;
+  rewardPrice?: number;
+  rewardDesc?: string;
+  rewardImg?: string;
   settlement?: number;
   dday?: number | string;
   percent?: number;
+  profileImg?: string;
 }
 
 //펀딩 예산 상세 조회
