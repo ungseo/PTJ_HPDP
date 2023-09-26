@@ -288,3 +288,14 @@ export interface InCreatePaymentsInterface {
     retCancleUrl?: string;
   };
 }
+
+// 쪽지
+
+export interface MessagesInterface {
+  messageId: number;
+  title: string;
+  content?: string;
+  opponentName?: string;
+  createdDate: string;
+  to: boolean;
+}

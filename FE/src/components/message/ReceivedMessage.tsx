@@ -4,12 +4,17 @@ import { Grid } from "@mui/material";
 import style from "../../styles/css/ReceivedMessage.module.css";
 import MessagePart from "./MessagePart";
 import MessageContent from "./MessageContent";
-
+import * as Interfaces from "../../interface/apiDataInterface";
 import { useSelector, useDispatch } from "react-redux";
 import { messageSliceActions } from "../../store/message-slice";
+import { getMessage } from "../../api/messages";
 
 const ReceivedMessage = () => {
   const dispatch = useDispatch();
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+  const [messageData, setMessageData] = useState<
+    Interfaces.MessagesInterface[]
+  >([]);
   const isCheckedAll = useSelector(
     (state: { message: { isCheckedAll: boolean } }) =>
       state.message.isCheckedAll
@@ -18,16 +23,6 @@ const ReceivedMessage = () => {
     (state: { message: { isCheckedAll: boolean; isCheckedList: boolean[] } }) =>
       state.message.isCheckedList
   );
-  const [isMessageContent, setMessageContent] = useState(false);
-
-  const messages = [
-    { id: 1, content: "First" },
-    { id: 2, content: "Second" },
-    { id: 3, content: "Third" },
-    { id: 4, content: "Fourth" },
-    { id: 5, content: "Fifth" },
-  ];
-
   const handleCheckboxChangeAll = () => {
     dispatch(messageSliceActions.handleCheckboxChangeAll());
   };
@@ -36,15 +31,21 @@ const ReceivedMessage = () => {
     dispatch(messageSliceActions.handleCheckboxChangeSingle(index));
   };
   useEffect(() => {
-    dispatch(messageSliceActions.initializeIsCheckedList(messages.length));
-  }, [dispatch, messages.length]);
-
-  const handleShowContentClick = () => {
-    setMessageContent(true);
-  };
-  const handleCloseModal = () => {
-    setMessageContent(false);
-  };
+    dispatch(messageSliceActions.initializeIsCheckedList(messageData.length));
+  }, [dispatch, messageData.length]);
+  useEffect(() => {
+    getMessage(
+      accessToken,
+      0,
+      (res) => {
+        setMessageData(res.data.data);
+        console.log("받은 쪽지 API 연결");
+      },
+      (err) => {
+        console.log("받은 쪽지 API 호출 실패", err);
+      }
+    );
+  }, []);
 
   return (
     <div className={style.message}>
@@ -64,22 +65,17 @@ const ReceivedMessage = () => {
         </Grid>
       </Grid>
       <div className={style.down_content}>
-        {messages.map((message, index) => (
-          <div onClick={handleShowContentClick} key={message.id}>
+        {messageData.map((message, index) => (
+          <div key={message.messageId}>
             <MessagePart
-              key={message.id}
+              key={message.messageId}
               isChecked={isCheckedList[index]}
               onCheckboxChange={() => handleCheckboxChangeSingle(index)}
+              message={message}
             />
           </div>
         ))}
       </div>
-      {isMessageContent && (
-        <div className="modal">
-          <div className={style.modalbackground}></div>
-          <MessageContent onClose={handleCloseModal} />
-        </div>
-      )}
     </div>
   );
 };
