@@ -2,8 +2,8 @@ import { AxiosResponse } from "axios";
 import { customApi } from ".";
 import * as Interfaces from "../interface/apiDataInterface";
 
-// 포인트 충전, 소비 내역
-export async function getChargeList(
+// 끝전/충전, 후원 내역
+export async function getPointList(
   accessToken: string | null,
   success: (
     res: AxiosResponse<any, any>
@@ -17,9 +17,10 @@ export async function getChargeList(
 ) {
   const api = customApi("points");
   api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-  await api.get(``).then(success).catch(fail);
+  await api.get(`trade`).then(success).catch(fail);
 }
 
+//
 export async function getSponsor(
   accessToken: string | null,
   fundingId: number | null,

@@ -7,32 +7,37 @@ interface PointHistoryItemProps {
 }
 
 function formatDate(inputDate: string) {
-  const date = new Date(inputDate);
+  const formattedDateStr = inputDate.replace(
+    /(\d+)년 (\d+)월 (\d+)일 (\d+:\d+:\d+)/,
+    "$1-$2-$3T$4"
+  );
+
+  const date = new Date(formattedDateStr);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
+
   return `${year}.${month}.${day}`;
 }
 
 const PointHistoryItem = (props: PointHistoryItemProps) => {
   const { item } = props;
-  console.log(item);
 
-  // const createdDate = formatDate(item.createdDate);
+  const paymentDate = formatDate(item.paymentDate);
 
   return (
     <div className={style.wrapper}>
-      <p className={style.date}>1999.12.32</p>
+      <p className={style.date}>{paymentDate}</p>
       <div className={style.content}>
-        <div className={style.content_title}>끝전/충전 또는 후원</div>
+        <div className={style.content_title}>{item.content}</div>
 
         {/* {flag ? (
           <div className={style.content_withdraw}> 1,000 원</div>
         ) : ( */}
-        <div className={style.content_deposit}> 1,000 원</div>
+        <div className={style.content_deposit}> {item.paymentPoint} 원</div>
         {/* )} */}
       </div>
-      <p className={style.remain_point}>잔액 : 123,000 원</p>
+      <p className={style.remain_point}>{item.afterPoint} 원</p>
     </div>
   );
 };

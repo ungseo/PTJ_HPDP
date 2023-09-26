@@ -12,7 +12,7 @@ import FundingDetailPage from "./pages/FundingDetailPage";
 import CompanyDetailPage from "./pages/CompanyDetailPage";
 import SearchPage from "./pages/SearchPage";
 import ProfileEditPage from "./pages/ProfileEditPage";
-import TransactionHistoryPage from "./pages/TransactionHistoryPage";
+import PointHistoryPage from "./pages/PointHistoryPage";
 import FundingHistoryPage from "./pages/FundingHistoryPage";
 import { CheckoutPage } from "./pages/Toss/CheckoutPage";
 import { SuccessPage } from "./pages/Toss/SuccessPage";
@@ -31,6 +31,7 @@ import RegisterAccountPage from "./pages/RegisterAccountPage";
 import CompanyProfilePage from "./pages/CompanyPage/CompanyProfilePage";
 import CompanyInfoPage from "./pages/CompanyPage/CompanyInfoPage";
 import CompanyFundingPage from "./pages/CompanyPage/CompanyFundingPage";
+
 function App() {
   const dispatch = useDispatch();
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -80,7 +81,7 @@ function App() {
         ></Route>
         <Route
           path="/profile/history/transaction/:userid"
-          Component={TransactionHistoryPage}
+          Component={PointHistoryPage}
         ></Route>
         <Route
           path="/profile/history/funding/:userid"

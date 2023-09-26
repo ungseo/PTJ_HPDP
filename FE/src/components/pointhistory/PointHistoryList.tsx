@@ -1,31 +1,23 @@
-import { useEffect, useState } from "react";
 import style from "../../styles/css/HistoryList.module.css";
 import DefaultButton from "../common/DefaultButton";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { transHistoryActions } from "../../store/transHistory-slice";
-import { getChargeList } from "../../api/points";
 import PointHistoryItem from "../PointHistoryItem";
+import { OutPointHistoryInterface } from "./../../interface/apiDataInterface";
 
-const PointHistoryList = () => {
-  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+interface PointHistoryListProps {
+  pointList: OutPointHistoryInterface[];
+}
 
-  const [pointList, setPointList] = useState([]);
-
-  useEffect(() => {
-    getChargeList(
-      accessToken,
-      (res) => {
-        setPointList(res.data.data.reverse());
-      },
-      (err) => {
-        console.error("API 호출 실패:", err);
-      }
-    );
-  }, []);
+const PointHistoryList = (props: PointHistoryListProps) => {
+  const { pointList } = props;
+  console.log("데헷", pointList);
 
   const dispatch = useDispatch();
+
   const isInsert = useSelector((state: any) => state.transHistory.isInsert);
+
   const onClick = () => {
     dispatch(transHistoryActions.insertSwitchHandler());
   };
@@ -47,23 +39,27 @@ const PointHistoryList = () => {
       <hr />
       {isInsert ? (
         <div>
-          {pointList.map((item, index) => (
-            <div>
-              <PointHistoryItem item={item}></PointHistoryItem>
-              <hr />
-            </div>
-          ))}
+          {pointList.length > 0
+            ? pointList.map((item, index) => (
+                <div>
+                  <PointHistoryItem item={item}></PointHistoryItem>
+                  <hr />
+                </div>
+              ))
+            : null}
         </div>
       ) : (
         <div>
-          {pointList
-            // .filter((item) => item.flag === 1)
-            .map((item, index) => (
-              <div key={index}>
-                <PointHistoryItem item={item}></PointHistoryItem>
-                <hr />
-              </div>
-            ))}
+          #여기
+          {/* {pointList.length > 0
+            ? pointList
+                .map((item, index) => (
+                  <div key={index}>
+                    <PointHistoryItem item={item}></PointHistoryItem>
+                    <hr />
+                  </div>
+                ))
+            : null} */}
         </div>
       )}
     </div>

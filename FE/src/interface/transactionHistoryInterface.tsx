@@ -1,10 +1,4 @@
-export interface transactionHistoryInterface {
+export interface pointHistoryInterface {
   totalPoint: number;
   totalFunding: number;
 }
-
-export interface transactionHistoryModalInterface {
-  color: boolean;
-}
-
-export interface HistoryListInterface {}

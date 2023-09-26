@@ -292,7 +292,11 @@ export interface InCreatePaymentsInterface {
 
 //
 export interface OutPointHistoryInterface {
+  content: string;
   flag: boolean;
+  paymentPoint: number;
+  afterPoint: number;
+  paymentDate: string;
 }
 
 // 쪽지
