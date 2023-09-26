@@ -166,6 +166,7 @@ export interface OutFundingsInfoInterface {
   reward_img?: string;
   settlement?: number;
   dday?: number | string;
+  percent?: number;
 }
 
 //펀딩 예산 상세 조회
@@ -292,4 +293,15 @@ export interface InCreatePaymentsInterface {
 //
 export interface OutPointHistoryInterface {
   flag: boolean;
+}
+
+// 쪽지
+
+export interface MessagesInterface {
+  messageId: number;
+  title: string;
+  content?: string;
+  opponentName?: string;
+  createdDate: string;
+  to: boolean;
 }

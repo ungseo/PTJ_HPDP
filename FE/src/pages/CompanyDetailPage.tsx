@@ -5,18 +5,28 @@ import { useParams } from "react-router-dom";
 import CompanyIntroduce from "../components/CompanyIntroduce";
 import CompanySituation from "../components/CompanySituation";
 import DetailPageTop from "../components/DetailPageTop";
-
+import SendMessageModal from "../components/message/SendMessageModal";
+import { Icon } from "@iconify/react";
 import * as Interfaces from "../interface/apiDataInterface";
 import { getCompanyItem } from "../api/companies";
+import style from "../styles/css/CompanyDetailPage.module.css";
 
 const CompanyDetailPage = () => {
   const [companyItem, setCompanyItem] =
     useState<Interfaces.InSearchCompanyInfoResponseInterface>(
       {} as Interfaces.InSearchCompanyInfoResponseInterface
     );
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const { companyid } = useParams();
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     getCompanyItem(
@@ -40,12 +50,30 @@ const CompanyDetailPage = () => {
   const data = {
     name: companyItem.name,
     profile: companyItem.profile,
+    companyId: Number(companyid),
   };
   return (
-    <>
+    <div className={style.companydetailpage}>
       <DetailPageTop data={data} />
       <CustomizedTabs tabProps={tabProps} />
-    </>
+      <div className={style.message_icon}>
+        <Icon
+          icon="bi:chat-square-dots"
+          style={{
+            width: "1.7rem",
+            height: "1.5rem",
+          }}
+          className={style.Icon_icon}
+          onClick={openModal}
+        ></Icon>
+      </div>
+      {isModalOpen && (
+        <>
+          <div className={style.modalbackground}></div>
+          <SendMessageModal onClose={closeModal} data={data} />
+        </>
+      )}
+    </div>
   );
 };
 

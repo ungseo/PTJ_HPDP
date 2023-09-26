@@ -1,14 +1,19 @@
 import React from "react";
 import style from "../../styles/css/FundingCard.module.css";
+import { OutFundingsInfoInterface } from "../../interface/apiDataInterface";
+import ProgressBar from "../common/ProgressBar";
+const FundingCard = ({ card }: { card: OutFundingsInfoInterface }) => {
+  const cardTotalStyle = {
+    backgroundImage: `url(${card.thumbnail})`,
+  };
 
-const FundingCard = () => {
   return (
-    <div className={style.cardtotal}>
-      <div className={style.fundingcontent}>
-        교통사고로 턱과 다리를 잃은 턱돌이를 도와주세요
+    <div className={style.cardtotal} style={cardTotalStyle}>
+      <div className={style.fundingcontent}>{card.title}</div>
+      <div className={style.companyname}>{card.name}</div>
+      <div className={style.downcontent}>
+        <ProgressBar percent={card.percent || 0} />
       </div>
-      <div className={style.companyname}>한국 유기동물복지협회</div>
-      <div className={style.processing}>진행 표시</div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as Interfaces from "../interface/apiDataInterface";
 import { getFundingDetail } from "../api/fundings";
+import { getSponsor } from "../api/points";
 
 import CustomizedTabs from "../components/CustomizedTabs";
 import FundingIntroduce from "../components/fundingdetail/FundingIntroduce";
@@ -22,7 +23,7 @@ const FundingDetailPage = () => {
   console.log(fundingDetailData);
 
   const { fundingid } = useParams();
-
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
@@ -58,6 +59,17 @@ const FundingDetailPage = () => {
   // bottomsheet는 false, complete는 true로 변경
   const FundingHandler = () => {
     if (isBottomSheetOpen) {
+      getSponsor(
+        accessToken,
+        Number(fundingid),
+        donationAmount,
+        (res) => {
+          console.log("후원하기 API 연결");
+        },
+        (err) => {
+          console.log("후원하기 API 호출 실패", err);
+        }
+      );
       setIsBottomSheetOpen(false);
       setIsFundingCompleteOpen(true);
       // 2초후에 자동으로 complete닫기

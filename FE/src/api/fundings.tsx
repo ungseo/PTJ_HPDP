@@ -48,3 +48,37 @@ export async function getFundingDetail(
 ) {
   await customApi("fundings").get(`/${fundingid}`).then(success).catch(fail);
 }
+
+export async function getRecommendDeadline(
+  success: (
+    res: AxiosResponse<any, any>
+  ) =>
+    | AxiosResponse<any, any>
+    | PromiseLike<AxiosResponse<any, any>>
+    | null
+    | undefined
+    | void,
+  fail: (err: any) => PromiseLike<never> | null | undefined | void
+) {
+  await customApi("fundings")
+    .get("/recommend/deadline")
+    .then(success)
+    .catch(fail);
+}
+
+export async function getRecommendAchievement(
+  success: (
+    res: AxiosResponse<any, any>
+  ) =>
+    | AxiosResponse<any, any>
+    | PromiseLike<AxiosResponse<any, any>>
+    | null
+    | undefined
+    | void,
+  fail: (err: any) => PromiseLike<never> | null | undefined | void
+) {
+  await customApi("fundings")
+    .get("/recommend/achievement")
+    .then(success)
+    .catch(fail);
+}

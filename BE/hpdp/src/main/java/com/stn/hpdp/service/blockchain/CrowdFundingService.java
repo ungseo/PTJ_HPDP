@@ -28,6 +28,7 @@ import org.web3j.tx.gas.DefaultGasProvider;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.concurrent.CompletableFuture;
 
 import static com.stn.hpdp.common.exception.ErrorCode.*;
 
@@ -52,6 +53,9 @@ public class CrowdFundingService {
     private String tokenContractAddress;
 
     private Web3j web3j;
+    private Long GAS_PRICE = 20_000_000_000L;
+    private Long GAS_LIMIT = 4_300_000L;
+
 
     private void init() {
         // Web3j 인스턴스 초기화
@@ -70,11 +74,11 @@ public class CrowdFundingService {
         );
 
         CrowdFunding funding = CrowdFunding.load(
-                fundingContractAddress, web3j, transactionManager, BigInteger.valueOf(210000L), BigInteger.valueOf(3000000L)
+                fundingContractAddress, web3j, transactionManager, BigInteger.valueOf(GAS_PRICE), BigInteger.valueOf(GAS_LIMIT)
         );
         try {
             log.info("id :{}, goal:{}, days:{}", dto.getFundingId(), dto.getGoal(), getFinalDays(dto.getDays()));
-            funding.createFunding(BigInteger.valueOf(dto.getFundingId() + 10L)
+            funding.createFunding(BigInteger.valueOf(dto.getFundingId())
                     , BigInteger.valueOf(dto.getGoal())
                     , BigInteger.valueOf(getFinalDays(dto.getDays()))).send();
 
@@ -98,26 +102,6 @@ public class CrowdFundingService {
 
     }
 
-    private void chargePoint(String address, int sponsorPoint, Credentials credentials) {
-        TransactionManager transactionManager = new RawTransactionManager(
-                web3j,
-                credentials,
-                12345
-        );
-        ERC20Token erc20Token = ERC20Token.load(
-                tokenContractAddress,
-                web3j,
-                transactionManager,
-                BigInteger.valueOf(1000000000L),
-                BigInteger.valueOf(300000L)
-        );
-        try {
-            erc20Token.mint(address, BigInteger.valueOf(sponsorPoint)).send();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 
     public void settle(Long fundingId) {
         init();
@@ -130,10 +114,11 @@ public class CrowdFundingService {
         );
 
         CrowdFunding funding = CrowdFunding.load(
-                fundingContractAddress, web3j, transactionManager, BigInteger.valueOf(210000L), BigInteger.valueOf(3000000L)
+                fundingContractAddress, web3j, transactionManager, BigInteger.valueOf(GAS_PRICE), BigInteger.valueOf(GAS_LIMIT)
         );
         // 정산 금액 확인
         int raiesdAmount = getRaisedAmount(funding, fundingId);
+        log.info("amount :{}",raiesdAmount);
         // 정산 금액 승인
         trxApproval(credentials, raiesdAmount);
         // 정산 금액 인출
@@ -180,7 +165,7 @@ public class CrowdFundingService {
                 12345
         );
         CrowdFunding funding = CrowdFunding.load(
-                fundingContractAddress, web3j, transactionManager, BigInteger.valueOf(210000L), BigInteger.valueOf(300000L));
+                fundingContractAddress, web3j, transactionManager, BigInteger.valueOf(GAS_PRICE), BigInteger.valueOf(GAS_LIMIT));
         try {
             return funding.contribute(BigInteger.valueOf(fundingId), BigInteger.valueOf(amount)).send();
         } catch (Exception e) {
@@ -215,6 +200,27 @@ public class CrowdFundingService {
 
         return Credentials.create(wallet.getPrivateKey());
     }
+
+    private void chargePoint(String address, int sponsorPoint, Credentials credentials) {
+        TransactionManager transactionManager = new RawTransactionManager(
+                web3j,
+                credentials,
+                12345
+        );
+        ERC20Token erc20Token = ERC20Token.load(
+                tokenContractAddress,
+                web3j,
+                transactionManager,
+                BigInteger.valueOf(GAS_PRICE),
+                BigInteger.valueOf(GAS_LIMIT)
+        );
+        try {
+            erc20Token.mint(address, BigInteger.valueOf(sponsorPoint)).send();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
     /*** 후원 기능 ***/
 
     /*** 펀딩 생성 ***/
@@ -228,6 +234,77 @@ public class CrowdFundingService {
 
         return Credentials.create(privateKey);
     }
+
     /*** 펀딩 생성 ***/
 
+
+    //////////////////////////////////////////////
+    public void fundingAsyn(FundingByPointReq fundingByPointReq) {
+        init();
+        Credentials credentials = getSponsorWallet();
+        chargePointAsyn(
+                credentials.getAddress(),
+                fundingByPointReq.getSponsorPoint(),
+                credentials
+        ).thenCompose(chargeReceipt -> {
+            // chargePointAsyn 완료 후 로그 남기기
+            System.out.println("chargePointAsyn completed: " + chargeReceipt);
+            // chargePointAsyn 완료 후 trxApprovalAsync 실행
+            return trxApprovalAsync(credentials, fundingByPointReq.getSponsorPoint());
+        }).thenCompose(approvalReceipt -> {
+            // trxApprovalAsync 완료 후 로그 남기기
+            System.out.println("trxApprovalAsync completed: " + approvalReceipt);
+            // trxApprovalAsync 완료 후 contributeToFundingAsync 실행
+            return contributeToFundingAsync(
+                    credentials,
+                    fundingByPointReq.getFundingId(),
+                    fundingByPointReq.getSponsorPoint()
+            );
+        }).thenAccept(contributionReceipt -> {
+            // contributeToFundingAsync 완료 후 로그 남기기
+            System.out.println("contributeToFundingAsync completed: " + contributionReceipt);
+            // contributeToFundingAsync 완료 후 결과 확인
+            if (contributionReceipt == null) throw new CustomException(FUNDING_FAIL);
+        });
+    }
+
+    private CompletableFuture<TransactionReceipt> trxApprovalAsync(Credentials credentials, long value) {
+        TransactionManager transactionManager = new RawTransactionManager(
+                web3j,
+                credentials,
+                12345
+        );
+        ERC20Token erc20Token = ERC20Token.load(
+                tokenContractAddress, web3j, transactionManager, new DefaultGasProvider()
+        );
+        return erc20Token.approve(fundingContractAddress, BigInteger.valueOf(value)).sendAsync();
+    }
+
+    private CompletableFuture<TransactionReceipt> contributeToFundingAsync(Credentials credentials, long fundingId, long amount) {
+        TransactionManager transactionManager = new RawTransactionManager(
+                web3j,
+                credentials,
+                12345
+        );
+        CrowdFunding funding = CrowdFunding.load(
+                fundingContractAddress, web3j, transactionManager, BigInteger.valueOf(GAS_PRICE), BigInteger.valueOf(GAS_LIMIT)
+        );
+        return funding.contribute(BigInteger.valueOf(fundingId), BigInteger.valueOf(amount)).sendAsync();
+    }
+
+    private CompletableFuture<TransactionReceipt> chargePointAsyn(String address, int sponsorPoint, Credentials credentials) {
+        TransactionManager transactionManager = new RawTransactionManager(
+                web3j,
+                credentials,
+                12345
+        );
+        ERC20Token erc20Token = ERC20Token.load(
+                tokenContractAddress,
+                web3j,
+                transactionManager,
+                BigInteger.valueOf(GAS_PRICE),
+                BigInteger.valueOf(GAS_LIMIT)
+        );
+        return erc20Token.mint(address, BigInteger.valueOf(sponsorPoint)).sendAsync();
+    }
 }

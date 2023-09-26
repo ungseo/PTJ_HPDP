@@ -1,11 +1,13 @@
 .cardtotal {
   height: 20rem;
   width: 13rem;
-  background-color: gray;
   margin: 1rem 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   border-radius: 0.5rem;
   padding: 1rem;
+  background-size: cover;
+  background-position: center;
+  color: white;
 }

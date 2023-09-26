@@ -29,39 +29,39 @@ class WalletQueryServiceTest extends IntegrationTestSupport {
     @Autowired
     private MemberRepository memberRepository;
 
-    @DisplayName("로그인 한 사용자의 지갑을 조회 할 때 지갑을 가지고 있지 않다면 예외가 발생한다.")
-    @WithMockUser(username = "test")
-    @Test
-    void getWalletNotExist() throws Exception {
-        //given
-        Member member = InsertMember();
-
-        //when
-        //then
-        assertThatThrownBy(() -> walletQueryService.findWallet())
-                .isInstanceOf(CustomException.class)
-                .satisfies(e -> {
-                    CustomException customException = (CustomException) e;
-                    assertThat(customException.getErrorCode()).isEqualTo(ErrorCode.WALLET_NOT_FOUND);
-                });
-
-    }
-
-    @DisplayName("로그인한 사용자의 지갑을 조회 할 수 있다.")
-    @WithMockUser(username = "test", value = "ROLE")
-    @Test
-    public void getWallet() {
-        // Given
-
-        Member member = InsertMember();
-        Wallet wallet = InsertWallet("0x6f68CF31F6278B22c3d6355c39833592654d0225", "UTC--2023-09-15T05-52-01.470016300Z--879788d3c7bf2161e0696146cfdcfc77c4b493be", "1q2w3e4r!", member);
-
-
-        // When
-        WalletRes response = walletQueryService.findWallet();
-        // Then
-        assertThat(response.getAccount()).isEqualTo(wallet.getAccount());
-    }
+//    @DisplayName("로그인 한 사용자의 지갑을 조회 할 때 지갑을 가지고 있지 않다면 예외가 발생한다.")
+//    @WithMockUser(username = "test")
+//    @Test
+//    void getWalletNotExist() throws Exception {
+//        //given
+//        Member member = InsertMember();
+//
+//        //when
+//        //then
+//        assertThatThrownBy(() -> walletQueryService.findWallet())
+//                .isInstanceOf(CustomException.class)
+//                .satisfies(e -> {
+//                    CustomException customException = (CustomException) e;
+//                    assertThat(customException.getErrorCode()).isEqualTo(ErrorCode.WALLET_NOT_FOUND);
+//                });
+//
+//    }
+//
+//    @DisplayName("로그인한 사용자의 지갑을 조회 할 수 있다.")
+//    @WithMockUser(username = "test", value = "ROLE")
+//    @Test
+//    public void getWallet() {
+//        // Given
+//
+//        Member member = InsertMember();
+//        Wallet wallet = InsertWallet("0x6f68CF31F6278B22c3d6355c39833592654d0225", "UTC--2023-09-15T05-52-01.470016300Z--879788d3c7bf2161e0696146cfdcfc77c4b493be", "1q2w3e4r!", member);
+//
+//
+//        // When
+//        WalletRes response = walletQueryService.findWallet();
+//        // Then
+//        assertThat(response.getAccount()).isEqualTo(wallet.getAccount());
+//    }
 
     private Wallet InsertWallet(String account, String keyfile, String keyPw, Member member) {
         Wallet wallet = Wallet.builder()

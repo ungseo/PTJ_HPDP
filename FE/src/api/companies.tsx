@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import { customApi, customApiForm } from ".";
 import * as Interfaces from "../interface/apiDataInterface";
+import { async } from "q";
 
 export async function getCompaniesInfo(
   keyword: string | null,
@@ -57,6 +58,25 @@ export async function getMyCompanyInfo(
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
   const api = customApi("companies");
+  if (accessToken) {
+    api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  }
+  await api.get("/info").then(success).catch(fail);
+}
+
+export async function getCompanyFundings(
+  accessToken: string,
+  success: (
+    res: AxiosResponse<any, any>
+  ) =>
+    | AxiosResponse<any, any>
+    | PromiseLike<AxiosResponse<any, any>>
+    | null
+    | undefined
+    | void,
+  fail: (err: any) => PromiseLike<never> | null | undefined | void
+) {
+  const api = customApi("companies");
   api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-  await api.get("").then(success).catch(fail);
+  api.get("/fundings").then(success).catch(fail);
 }
