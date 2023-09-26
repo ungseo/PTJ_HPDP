@@ -34,7 +34,9 @@ import CompanyFundingPage from "./pages/CompanyPage/CompanyFundingPage";
 
 function App() {
   const dispatch = useDispatch();
+
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+
   const refresh = () => {
     getMemberInfo(
       accessToken,
@@ -53,10 +55,11 @@ function App() {
       refresh();
     }
   }, []);
+
   return (
     <div id="app-root" className={style.App}>
       <Routes>
-        {/* <Route path="/" Component={??Page}></Route> */}
+        {/* <Route path="/sample" Component={SamplePage}></Route> */}
         <Route path="/" Component={HomePage}></Route>
         <Route path="/list" Component={ListPage}></Route>
         <Route path="/notification" Component={NotificationPage}></Route>
@@ -91,10 +94,6 @@ function App() {
           path="/profile/company/interest/:userid"
           Component={InterestingCompanyPage}
         ></Route>
-        <Route path="/profile/message/:userid" Component={MessagePage}></Route>
-        <Route path="/payment" Component={CheckoutPage}></Route>
-        <Route path="success" Component={SuccessPage}></Route>
-        <Route path="/fail" Component={FailPage}></Route>
         <Route path="/profile/message/:userid" Component={MessagePage}></Route>
         <Route path="/payment" Component={CheckoutPage}></Route>
         <Route path="success" Component={SuccessPage}></Route>
