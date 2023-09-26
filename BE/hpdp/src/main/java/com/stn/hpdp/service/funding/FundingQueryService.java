@@ -6,7 +6,10 @@ import com.stn.hpdp.controller.funding.response.FindFundingsRes;
 import com.stn.hpdp.controller.funding.response.RecommendFundingsRes;
 import com.stn.hpdp.model.entity.Budget;
 import com.stn.hpdp.model.entity.Funding;
-import com.stn.hpdp.model.repository.*;
+import com.stn.hpdp.model.repository.BudgetRepository;
+import com.stn.hpdp.model.repository.FundingQueryRepository;
+import com.stn.hpdp.model.repository.FundingRepository;
+import com.stn.hpdp.model.repository.PointQueryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -45,8 +48,9 @@ public class FundingQueryService {
         List<Budget> budgets = budgetRepository.findAllByFunding_Id(fundingId);
 
         int totalFunding = pointQueryRepository.findTotalPriceByFundingId(fundingId);
-        int percent = result.get().getTargetAmount() / totalFunding;
-        FindFundingRes findFundingRes = FindFundingRes.of(result.get(), budgets,totalFunding,percent);
+        int percent = 0;
+        if (totalFunding != 0) percent = result.get().getTargetAmount() / totalFunding;
+        FindFundingRes findFundingRes = FindFundingRes.of(result.get(), budgets, totalFunding, percent);
 
         return findFundingRes;
     }
