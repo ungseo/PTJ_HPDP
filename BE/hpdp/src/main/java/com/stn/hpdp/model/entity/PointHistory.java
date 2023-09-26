@@ -36,7 +36,6 @@ public class PointHistory extends TimeBaseEntity {
 
     private CardCode cardCode;
 
-    @NonNull
     private boolean flag;  // 입금 false, 출금 true
 
     @NotNull
