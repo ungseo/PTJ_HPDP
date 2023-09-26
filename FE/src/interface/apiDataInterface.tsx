@@ -310,3 +310,10 @@ export interface MessagesInterface {
   createdDate: string;
   to: boolean;
 }
+
+// 뉴스 조회
+export interface OutCompanyNewsInterface {
+  articleTitle: string;
+  articleProfile: string;
+  articleURL: string;
+}

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import style from "../../styles/css/FundingCard.module.css";
 import { OutFundingsInfoInterface } from "../../interface/apiDataInterface";
 import ProgressBar from "../common/ProgressBar";
+
 const FundingCard = ({ card }: { card: OutFundingsInfoInterface }) => {
   const navigate = useNavigate();
   const cardTotalStyle = {
