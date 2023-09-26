@@ -12,9 +12,12 @@ public class UserPointHistoriesRes {
 
     private int balance;
 
+    private int totalFundingAmount;
+
     @Builder
-    public UserPointHistoriesRes(List<PointHistoryRes> pointHistoryResList, int balance) {
+    public UserPointHistoriesRes(List<PointHistoryRes> pointHistoryResList, int balance, int totalFundingAmount) {
         this.pointHistoryResList = pointHistoryResList;
         this.balance = balance;
+        this.totalFundingAmount = totalFundingAmount;
     }
 }
