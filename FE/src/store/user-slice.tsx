@@ -5,6 +5,7 @@ const initialState = {
     isLogined: false,
     accessToken: "",
     refreshToken: "",
+    type: null,
   },
   info: {
     memberId: "1",
@@ -29,6 +30,7 @@ const userSlice = createSlice({
       state.auth.isLogined = true;
       state.auth.accessToken = action.payload.accessToken;
       state.auth.refreshToken = action.payload.refreshToken;
+      state.auth.type = action.payload.type;
     },
     logoutHandler(state) {
       localStorage.removeItem("persist:root");

@@ -7,6 +7,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function NavigationBar() {
   const [value, setValue] = React.useState("home");
@@ -14,9 +15,9 @@ export default function NavigationBar() {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
-  
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  const loginType = useSelector((state: any) => state.user.auth.type);
   const location = useLocation();
 
   React.useEffect(() => {
@@ -69,7 +70,11 @@ export default function NavigationBar() {
         value="profile"
         icon={<FolderIcon />}
         onClick={() => {
-          navigate("/profile");
+          if (loginType === 1) {
+            navigate("/profile/c");
+          } else {
+            navigate("/profile");
+          }
         }}
       />
     </BottomNavigation>

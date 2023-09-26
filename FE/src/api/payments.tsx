@@ -14,9 +14,11 @@ export async function createPayments(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  customApi("payments").defaults.headers[
-    "accessToken"
-  ] = `Bearer ${data.header.accessToken}`;
+  const api = customApi("payments");
+  api.defaults.headers["accessToken"] = `Bearer ${data.accessToken}`;
 
-  await customApi("payments").post("/payments", data).then(success).catch(fail);
+  await api
+    .post("", { card: data.cardCode, amount: data.amount })
+    .then(success)
+    .catch(fail);
 }
