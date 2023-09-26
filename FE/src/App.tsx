@@ -29,6 +29,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import RegisterAccountPage from "./pages/RegisterAccountPage";
 import CompanyProfilePage from "./pages/CompanyPage/CompanyProfilePage";
+import CompanyInfoPage from "./pages/CompanyPage/CompanyInfoPage";
+import CompanyFundingPage from "./pages/CompanyPage/CompanyFundingPage";
 function App() {
   const dispatch = useDispatch();
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -102,6 +104,11 @@ function App() {
           Component={RegisterAccountPage}
         ></Route>
         <Route path="/profile/c" Component={CompanyProfilePage}></Route>
+        <Route path="/profile/c/info" Component={CompanyInfoPage}></Route>
+        <Route
+          path="/profile/c/fundings"
+          Component={CompanyFundingPage}
+        ></Route>
         <Route path="*" Component={PageNotFound404}></Route>
       </Routes>
       <div className={style.blank}></div>
