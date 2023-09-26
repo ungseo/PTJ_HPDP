@@ -96,10 +96,10 @@ def get_page_info(url):
             link = link_tag['href']
             date = date_tag.text
             page_info.append({
-                "title": title,
-                "image_link": image_link,
-                "link": link,
-                "date": date
+                "articleTitle": title,
+                "articleProfile": image_link,
+                "articleURL": link,
+                "articleDate": date
             })
     return page_info
 

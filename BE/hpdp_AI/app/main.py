@@ -9,14 +9,14 @@ app = FastAPI()
 
 @app.get("/api/articles/news")
 def read_root():
-    return {"news" : get_article_info()}
+    return {"data" : get_article_info()}
 
 @app.get("/api/articles/info/{companyName}")
 async def get_company_info(companyName: str):
     info = fetch_info_from_openai(companyName)
     if info is None:
         raise HTTPException(status_code=500, detail="Failed to retrieve information")
-    return {"info": info}
+    return {"data": info}
 
 
 if __name__ == '__main__':
