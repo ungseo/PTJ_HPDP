@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { getSendingMessage } from "../../api/messages";
+import DefaultButton from "../../components/common/DefaultButton";
 import { Icon } from "@iconify/react";
 import style from "../../styles/css/SendMessageModal.module.css";
-import DefaultButton from "../../components/common/DefaultButton";
 
-import { getSendingMessage } from "../../api/messages";
 interface SendMessageModalProps {
   onClose: () => void;
   data: {

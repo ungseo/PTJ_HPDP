@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
 import { Icon } from "@iconify/react";
 import style from "../../styles/css/BottomSheet.module.css";
-import { useSelector } from "react-redux";
+
 interface BottomSheetProps {
   // 값이 변경될수 있으므로 아래와 같은 형식을 사용,
   // void는 반환하는 값이 없고 형식을 지키기 위해 사용

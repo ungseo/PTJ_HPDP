@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { messageSliceActions } from "../../store/message-slice";
+import * as Interfaces from "../../interface/apiDataInterface";
+import { getMessage } from "../../api/messages";
+import MessagePart from "./MessagePart";
 import { Icon } from "@iconify/react";
 import { Grid } from "@mui/material";
 import style from "../../styles/css/SendingMessage.module.css";
-import MessagePart from "./MessagePart";
-import * as Interfaces from "../../interface/apiDataInterface";
-import { useSelector, useDispatch } from "react-redux";
-import { messageSliceActions } from "../../store/message-slice";
-import { getMessage } from "../../api/messages";
 
 const SendingMessage = () => {
   const dispatch = useDispatch();
@@ -39,7 +39,6 @@ const SendingMessage = () => {
       1,
       (res) => {
         setMessageData(res.data.data);
-
         console.log("보낸 쪽지 API 연결");
       },
       (err) => {
