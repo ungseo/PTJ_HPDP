@@ -283,12 +283,9 @@ export interface OutSearchSendHistoryInterface {
 // 결제
 
 export interface InCreatePaymentsInterface {
-  header: { accessToken: string | null };
-  body: {
-    amount: number | string | null;
-    retUrl?: string;
-    retCancleUrl?: string;
-  };
+  accessToken: string;
+  amount: number | null;
+  cardCode: string | null;
 }
 
 //
@@ -309,4 +306,13 @@ export interface MessagesInterface {
   opponentName?: string;
   createdDate: string;
   to: boolean;
+}
+
+export interface myCompanyInfo {
+  companyId: number;
+  loginId: string;
+  profile: string;
+  banner: string;
+  name: string;
+  hashtag: string;
 }

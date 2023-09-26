@@ -9,8 +9,6 @@ import { logout } from "../../api/auth";
 const ProfileItemList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userId = useSelector((state: any) => state.user.info.memberId);
-  console.log(userId);
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   //router 설정, id = 각 버튼의 id, 버튼 id값에 주소 입력후 navigate에 동적으로 할당
   const onClick = (event: any) => {
@@ -34,43 +32,23 @@ const ProfileItemList = () => {
   };
   return (
     <div className={style.profileItemList}>
-      <div
-        className={style.item}
-        onClick={onClick}
-        id={`message/${userId}`}
-      >
+      <div className={style.item} onClick={onClick} id={`message/`}>
         <p>쪽지내역</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
-      <div
-        className={style.item}
-        id={`history/transaction/${userId}`}
-        onClick={onClick}
-      >
+      <div className={style.item} id={`history/transaction/`} onClick={onClick}>
         <p>거래내역</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
-      <div
-        className={style.item}
-        id={`history/funding/${userId}`}
-        onClick={onClick}
-      >
+      <div className={style.item} id={`history/funding/`} onClick={onClick}>
         <p>후원내역</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
-      <div
-        className={style.item}
-        id={`company/interest/${userId}`}
-        onClick={onClick}
-      >
+      <div className={style.item} id={`company/interest/`} onClick={onClick}>
         <p>관심기업</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
-      <div
-        className={style.item}
-        id="testbank"
-        onClick={onClick}
-      >
+      <div className={style.item} id="testbank" onClick={onClick}>
         <p>시험은행</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>
