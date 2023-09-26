@@ -1,15 +1,26 @@
 import React from "react";
 import FundingCard from "./home/FundingCard";
 import FundingItem from "./FundingItem";
+import { OutFundingsInfoInterface } from "../interface/apiDataInterface";
 
-const ExpiredFunding = () => {
-  const fundingItems = [1, 2, 3, 4, 5, 6];
-
+const ExpiredFunding = ({ itemList }: any) => {
+  console.log(itemList, "만료");
   return (
     <div>
-      {/* {fundingItems.map((item) => (
-        <FundingItem key={item} />
-      ))} */}
+      {itemList.length ? (
+        itemList.map(
+          (
+            item: OutFundingsInfoInterface,
+            idx: React.Key | null | undefined
+          ) => (
+            <div key={idx}>
+              <h1>{item.name}</h1>
+            </div>
+          )
+        )
+      ) : (
+        <h1>끝난펀딩도 없어요 ㅋ</h1>
+      )}
     </div>
   );
 };
