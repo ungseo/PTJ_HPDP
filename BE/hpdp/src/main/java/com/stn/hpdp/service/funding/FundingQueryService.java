@@ -26,8 +26,9 @@ public class FundingQueryService {
     private final FundingRepository fundingRepository;
     private final BudgetRepository budgetRepository;
     private final FundingQueryRepository fundingQueryRepository;
+    private final PointQueryRepository pointQueryRepository;
 
-    public List<FindFundingsRes> findFundings(Long companyId, Integer done, String keyword){
+    public List<FindFundingsRes> findFundings(Long companyId, Integer done, String keyword) {
         List<FindFundingsRes> result = fundingQueryRepository.findFundingsByCompanyIdAndDoneAndKeyword(companyId, done, keyword);
 
         // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
@@ -35,22 +36,22 @@ public class FundingQueryService {
         return result;
     }
 
-    public FindFundingRes findFunding(Long fundingId){
+    public FindFundingRes findFunding(Long fundingId) {
         Optional<Funding> result = fundingRepository.findById(fundingId);
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             throw new CustomException(FUNDING_NOT_FOUND);
         }
 
         List<Budget> budgets = budgetRepository.findAllByFunding_Id(fundingId);
 
-        FindFundingRes findFundingRes = FindFundingRes.of(result.get(), budgets);
-
-        // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
+        int totalFunding = pointQueryRepository.findTotalPriceByFundingId(fundingId);
+        int percent = result.get().getTargetAmount() / totalFunding;
+        FindFundingRes findFundingRes = FindFundingRes.of(result.get(), budgets,totalFunding,percent);
 
         return findFundingRes;
     }
 
-    public List<RecommendFundingsRes> recommendDeadlineFundings(){
+    public List<RecommendFundingsRes> recommendDeadlineFundings() {
         List<RecommendFundingsRes> result = fundingQueryRepository.findFundingsByDeadline();
 
         // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
@@ -58,7 +59,7 @@ public class FundingQueryService {
         return result;
     }
 
-    public List<RecommendFundingsRes> recommendAchievementFundings(){
+    public List<RecommendFundingsRes> recommendAchievementFundings() {
         List<RecommendFundingsRes> result = fundingQueryRepository.findFundingsByAchievement();
 
         // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅

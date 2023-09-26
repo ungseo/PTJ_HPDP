@@ -31,8 +31,8 @@ public class FundingHistory extends TimeBaseEntity {
     private Funding funding;
 
     @Builder
-    public FundingHistory(int pirce, Member member, Funding funding) {
-        this.price = pirce;
+    public FundingHistory(int price, Member member, Funding funding) {
+        this.price = price;
         this.member = member;
         this.funding = funding;
     }
