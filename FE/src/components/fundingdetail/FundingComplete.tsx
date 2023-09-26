@@ -1,5 +1,4 @@
 import React from "react";
-import { createPortal } from "react-dom";
 import style from "../../styles/css/FundingComplete.module.css";
 
 interface FundingCompleteProps {
