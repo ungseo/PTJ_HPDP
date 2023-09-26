@@ -14,7 +14,6 @@ const CompanyFundingPage = () => {
       );
     }
   }, []);
-  useEffect;
   return (
     <div>
       <OptionTopbar text="내 펀딩 정보" />
