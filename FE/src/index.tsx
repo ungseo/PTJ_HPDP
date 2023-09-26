@@ -1,15 +1,15 @@
-import ReactDOM from 'react-dom/client';
+import ReactDOM from "react-dom/client";
 import "./styles/css/index.css";
-import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
+import App from "./App";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
 // test code
-import { persistStore } from 'redux-persist'
+import { persistStore } from "redux-persist";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from "redux-persist/integration/react";
 
 export const persistor = persistStore(store);
 

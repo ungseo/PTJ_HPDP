@@ -4,7 +4,8 @@ import {
   loadPaymentWidget,
   ANONYMOUS,
 } from "@tosspayments/payment-widget-sdk";
-
+import { useSelector } from "react-redux";
+import { nanoid } from "nanoid";
 const clientKey = "test_ck_AQ92ymxN349Yn4oGL7jVajRKXvdk";
 const customerKey = "mKAxcIjSKLI7-kXW5uk-1";
 
@@ -59,7 +60,8 @@ export function CheckoutPage({}) {
       paymentMethodsWidget.UPDATE_REASON.COUPON
     );
   }, [price]);
-
+  const userInfo = useSelector((state: any) => state.user.info);
+  console.log(userInfo);
   return (
     <div>
       <h1>주문서</h1>
@@ -78,10 +80,10 @@ export function CheckoutPage({}) {
             // 더 많은 결제 정보 파라미터는 결제위젯 SDK에서 확인하세요.
             // https://docs.tosspayments.com/reference/widget-sdk#requestpayment결제-정보
             await paymentWidget?.requestPayment({
-              orderId: "yc6MGXlq2XpV91s_srmg4",
-              orderName: "토스 티셔츠 외 2건",
-              customerName: "김토스",
-              customerEmail: "customer123@gmail.com",
+              orderId: nanoid(),
+              orderName: "포인트 충전",
+              customerName: `${userInfo.name}`,
+              customerEmail: `${userInfo.email}`,
               successUrl: `${window.location.origin}/success`,
               failUrl: `${window.location.origin}/fail`,
             });

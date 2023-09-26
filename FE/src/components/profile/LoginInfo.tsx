@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import MyWallet from "./MyWallet";
 import ProfileItemList from "./ProfileItemList";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getAccount } from "../../api/banks";
 import { useDispatch } from "react-redux";
 import { accountActions } from "../../store/account-slice";

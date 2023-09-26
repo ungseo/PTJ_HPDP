@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import * as Interfaces from "../interface/apiDataInterface";
-import { getFundingProgress } from "../api/funding";
+import { getFundingProgress } from "../api/fundings";
 
 import FundingItem from "./FundingItem";
 

@@ -28,6 +28,7 @@ import { userActions } from "./store/user-slice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import RegisterAccountPage from "./pages/RegisterAccountPage";
+import CompanyProfilePage from "./pages/CompanyPage/CompanyProfilePage";
 function App() {
   const dispatch = useDispatch();
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -53,38 +54,14 @@ function App() {
     <div id="app-root" className={style.App}>
       <Routes>
         {/* <Route path="/" Component={??Page}></Route> */}
-        <Route
-          path="/"
-          Component={HomePage}
-        ></Route>
-        <Route
-          path="/list"
-          Component={ListPage}
-        ></Route>
-        <Route
-          path="/notification"
-          Component={NotificationPage}
-        ></Route>
-        <Route
-          path="/profile"
-          Component={ProfilePage}
-        ></Route>
-        <Route
-          path="/login"
-          Component={LogInPage}
-        ></Route>
-        <Route
-          path="/signup"
-          Component={SignUpPage}
-        ></Route>
-        <Route
-          path="/search"
-          Component={SearchPage}
-        ></Route>
-        <Route
-          path="/search/:keyword"
-          Component={SearchResultPage}
-        ></Route>
+        <Route path="/" Component={HomePage}></Route>
+        <Route path="/list" Component={ListPage}></Route>
+        <Route path="/notification" Component={NotificationPage}></Route>
+        <Route path="/profile" Component={ProfilePage}></Route>
+        <Route path="/login" Component={LogInPage}></Route>
+        <Route path="/signup" Component={SignUpPage}></Route>
+        <Route path="/search" Component={SearchPage}></Route>
+        <Route path="/search/:keyword" Component={SearchResultPage}></Route>
         <Route
           path="/funding/detail/:fundingid"
           Component={FundingDetailPage}
@@ -93,14 +70,8 @@ function App() {
           path="/company/detail/:companyid"
           Component={CompanyDetailPage}
         ></Route>
-        <Route
-          path="/profile/edit/:userid"
-          Component={ProfileEditPage}
-        ></Route>
-        <Route
-          path="/profile/testbank"
-          Component={TestBankPage}
-        ></Route>
+        <Route path="/profile/edit/:userid" Component={ProfileEditPage}></Route>
+        <Route path="/profile/testbank" Component={TestBankPage}></Route>
         <Route
           path="/profile/bankstatement/:userid"
           Component={BankStatementPage}
@@ -117,50 +88,21 @@ function App() {
           path="/profile/company/interest/:userid"
           Component={InterestingCompanyPage}
         ></Route>
-        <Route
-          path="/profile/message/:userid"
-          Component={MessagePage}
-        ></Route>
-        <Route
-          path="/payment"
-          Component={CheckoutPage}
-        ></Route>
-        <Route
-          path="success"
-          Component={SuccessPage}
-        ></Route>
-        <Route
-          path="/fail"
-          Component={FailPage}
-        ></Route>
-        <Route
-          path="*"
-          Component={PageNotFound404}
-        ></Route>
-        <Route
-          path="/profile/message/:userid"
-          Component={MessagePage}
-        ></Route>
-        <Route
-          path="/payment"
-          Component={CheckoutPage}
-        ></Route>
-        <Route
-          path="success"
-          Component={SuccessPage}
-        ></Route>
-        <Route
-          path="/fail"
-          Component={FailPage}
-        ></Route>
+        <Route path="/profile/message/:userid" Component={MessagePage}></Route>
+        <Route path="/payment" Component={CheckoutPage}></Route>
+        <Route path="success" Component={SuccessPage}></Route>
+        <Route path="/fail" Component={FailPage}></Route>
+        <Route path="*" Component={PageNotFound404}></Route>
+        <Route path="/profile/message/:userid" Component={MessagePage}></Route>
+        <Route path="/payment" Component={CheckoutPage}></Route>
+        <Route path="success" Component={SuccessPage}></Route>
+        <Route path="/fail" Component={FailPage}></Route>
         <Route
           path="/profile/testbank/register"
           Component={RegisterAccountPage}
         ></Route>
-        <Route
-          path="*"
-          Component={PageNotFound404}
-        ></Route>
+        <Route path="/profile/c" Component={CompanyProfilePage}></Route>
+        <Route path="*" Component={PageNotFound404}></Route>
       </Routes>
       <div className={style.blank}></div>
       <div className={style.navBar}>
