@@ -86,8 +86,9 @@ const FundingDetailPage = () => {
     title: fundingDetailData.title,
     thumbnail: fundingDetailData.thumbnail,
     companyId: fundingDetailData.companyId,
+    profileImg: fundingDetailData.profileImg,
   };
-
+  console.log(fundingDetailData.rewardPrice);
   return (
     <div className={style.fundingdetailpage}>
       <DetailPageTop data={data} />
@@ -98,13 +99,18 @@ const FundingDetailPage = () => {
           <BottomSheet
             setIsBottomSheetOpen={setIsBottomSheetOpen}
             handleDonationAmount={setDonationAmount}
+            title={fundingDetailData.title}
+            rewardPrice={fundingDetailData.rewardPrice || 0}
           />
         </>
       )}
       {isFundingCompleteOpen && (
         <>
           <div className={style.modalbackground}></div>
-          <FundingComplete donationAmount={donationAmount} />
+          <FundingComplete
+            donationAmount={donationAmount}
+            title={fundingDetailData.title}
+          />
         </>
       )}
 

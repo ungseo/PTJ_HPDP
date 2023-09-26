@@ -10,8 +10,8 @@ const LoginInfo = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const dispatch = useDispatch();
 
-  const isRegistered = useSelector((state: any) => state.account.isRegistered)
-  console.log('계좌 등록', isRegistered)
+  const isRegistered = useSelector((state: any) => state.account.isRegistered);
+  console.log("계좌 등록", isRegistered);
 
   useEffect(() => {
     getAccount(
@@ -21,9 +21,9 @@ const LoginInfo = () => {
       },
       (err) => {
         // 404 error only
-        console.log(err)
+        console.log(err);
       }
-    )
+    );
   }, []);
 
   return (

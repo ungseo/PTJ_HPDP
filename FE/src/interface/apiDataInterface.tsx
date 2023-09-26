@@ -122,7 +122,6 @@ export interface InSearchCompanyInfoResponseInterface {
 }
 
 // 기업 펀딩 조회
-
 export interface OutCompanyFundingInfoInterface {
   body: {
     statusCode: number;
@@ -161,13 +160,14 @@ export interface OutFundingsInfoInterface {
   state: string; //
   content?: string;
   content_url?: string;
-  reward_name?: string;
-  reward_price?: number;
-  reward_desc?: string;
-  reward_img?: string;
+  rewardName?: string;
+  rewardPrice?: number;
+  rewardDesc?: string;
+  rewardImg?: string;
   settlement?: number;
   dday?: number | string;
   percent?: number;
+  profileImg?: string;
 }
 
 //펀딩 예산 상세 조회
@@ -272,11 +272,12 @@ export interface OutSendMoneyInterface {
 
 export interface OutSearchSendHistoryInterface {
   flag: boolean;
-  content: string;
   afterBlnc: number;
   opponentName: string;
   opponentAccount: string;
+  content: string;
   createdDate: string;
+  depositAmount: number;
 }
 
 // 결제
@@ -286,6 +287,16 @@ export interface InCreatePaymentsInterface {
   amount: number | null;
   cardCode: string | null;
 }
+
+//
+export interface OutPointHistoryInterface {
+  content: string;
+  flag: boolean;
+  paymentPoint: number;
+  afterPoint: number;
+  paymentDate: string;
+}
+
 // 쪽지
 
 export interface MessagesInterface {

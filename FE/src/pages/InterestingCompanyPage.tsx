@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { OptionTopbar } from "../components/common/TopBar";
-import ImageList from '@mui/material/ImageList';
-import CompanyItem from '../components/CompanyItem';
-import { getInterestingCompany } from '../api/interests';
-import { useSelector } from 'react-redux';
+import ImageList from "@mui/material/ImageList";
+import CompanyItem from "../components/CompanyItem";
+import { getInterestingCompany } from "../api/interests";
+import { useSelector } from "react-redux";
 import * as Interfaces from "../interface/apiDataInterface";
 
 const InterestingCompanyPage = () => {
@@ -13,13 +13,13 @@ const InterestingCompanyPage = () => {
     Interfaces.InSearchCompanyInfoResponseInterface[]
   >([]);
 
-  console.log(interestingCoList)
+  console.log(interestingCoList);
 
   useEffect(() => {
     getInterestingCompany(
       accessToken,
       (res) => {
-        console.log(res.data.data)
+        console.log(res.data.data);
         setInterestingCoList(res.data.data);
       },
       (err) => {
@@ -31,13 +31,17 @@ const InterestingCompanyPage = () => {
   return (
     <div>
       <OptionTopbar text="관심기업" />
-      <ImageList>
-        {interestingCoList.map((item, index) => (
-          <CompanyItem key={index} item={item} />
-        ))}
-      </ImageList>
+      {interestingCoList !== null ? (
+        <ImageList>
+          {interestingCoList.map((item, index) => (
+            <CompanyItem key={index} item={item} />
+          ))}
+        </ImageList>
+      ) : (
+        <div></div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default InterestingCompanyPage
+export default InterestingCompanyPage;

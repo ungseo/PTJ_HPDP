@@ -10,6 +10,7 @@
     font-size: 0.5rem;
     margin-right: auto;
   }
+
   .content {
     display: flex;
     justify-content: space-between;
@@ -18,15 +19,17 @@
     .content_title {
     }
 
-    .content_point {
+    .content_deposit {
+      color: red;
+    }
+    .content_withdraw {
       color: blue;
     }
   }
 
   .remain_point {
     color: gray;
-    margin-left: auto;
     font-size: 0.5rem;
+    margin-left: auto;
   }
-
 }

@@ -1,14 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import style from "../../styles/css/FundingCard.module.css";
 import { OutFundingsInfoInterface } from "../../interface/apiDataInterface";
 import ProgressBar from "../common/ProgressBar";
 const FundingCard = ({ card }: { card: OutFundingsInfoInterface }) => {
+  const navigate = useNavigate();
   const cardTotalStyle = {
     backgroundImage: `url(${card.thumbnail})`,
   };
 
+  const CardClick = () => {
+    navigate(`/funding/detail/${card.fundingId}`);
+  };
+
+  console.log(card);
   return (
-    <div className={style.cardtotal} style={cardTotalStyle}>
+    <div className={style.cardtotal} style={cardTotalStyle} onClick={CardClick}>
       <div className={style.fundingcontent}>{card.title}</div>
       <div className={style.companyname}>{card.name}</div>
       <div className={style.downcontent}>

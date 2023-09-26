@@ -78,7 +78,7 @@ public class CrowdFundingService {
         );
         try {
             log.info("id :{}, goal:{}, days:{}", dto.getFundingId(), dto.getGoal(), getFinalDays(dto.getDays()));
-            funding.createFunding(BigInteger.valueOf(dto.getFundingId() + 1000L)
+            funding.createFunding(BigInteger.valueOf(dto.getFundingId())
                     , BigInteger.valueOf(dto.getGoal())
                     , BigInteger.valueOf(getFinalDays(dto.getDays()))).send();
 
