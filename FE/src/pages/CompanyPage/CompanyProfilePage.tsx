@@ -5,6 +5,7 @@ import { getMyCompanyInfo } from "../../api/companies";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { companyActions } from "../../store/company-slice";
+import ProfileList from "../../components/companyOnly/ProfileList";
 
 const CompanyProfilePage = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -29,7 +30,8 @@ const CompanyProfilePage = () => {
       <div>
         <img src={companyLogo} alt="로고없음" />
       </div>
-      <p>{companyInfo}</p>
+      <p>{companyInfo}이름 ㅋ</p>
+      <ProfileList />
     </div>
   );
 };
