@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import style from '../../src/styles/scss/BankHistoryList.module.scss'
-import BankHistoryItem from './BankHistoryItem';
-import { transDetailAccount } from '../api/banks';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import style from "../../src/styles/scss/BankHistoryList.module.scss";
+import BankHistoryItem from "./BankHistoryItem";
+import { transDetailAccount } from "../api/banks";
+import { useSelector } from "react-redux";
 
 const BankHistoryList = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -35,7 +35,7 @@ const BankHistoryList = () => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default BankHistoryList;

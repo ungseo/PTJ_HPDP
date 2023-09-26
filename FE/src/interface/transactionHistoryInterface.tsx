@@ -1,6 +1,6 @@
 export interface transactionHistoryInterface {
   totalPoint: number;
-  yesterdayPoint: number;
+  totalFunding: number;
 }
 
 export interface transactionHistoryModalInterface {
