@@ -50,16 +50,16 @@ const PointHistoryList = (props: PointHistoryListProps) => {
         </div>
       ) : (
         <div>
-          #여기
-          {/* {pointList.length > 0
+          {pointList.length > 0
             ? pointList
+                .filter((item) => item.flag === true)
                 .map((item, index) => (
                   <div key={index}>
                     <PointHistoryItem item={item}></PointHistoryItem>
                     <hr />
                   </div>
                 ))
-            : null} */}
+            : null}
         </div>
       )}
     </div>

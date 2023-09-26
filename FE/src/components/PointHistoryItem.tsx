@@ -31,11 +31,11 @@ const PointHistoryItem = (props: PointHistoryItemProps) => {
       <div className={style.content}>
         <div className={style.content_title}>{item.content}</div>
 
-        {/* {flag ? (
-          <div className={style.content_withdraw}> 1,000 원</div>
-        ) : ( */}
-        <div className={style.content_deposit}> {item.paymentPoint} 원</div>
-        {/* )} */}
+        {item.flag ? (
+          <div className={style.content_withdraw}> {item.paymentPoint} 원</div>
+        ) : (
+          <div className={style.content_deposit}> {item.paymentPoint} 원</div>
+        )}
       </div>
       <p className={style.remain_point}>{item.afterPoint} 원</p>
     </div>

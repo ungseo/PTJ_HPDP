@@ -6,14 +6,31 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { accountActions } from "../../store/account-slice";
 import { unregisterAccount } from "../../api/banks";
+import { useEffect, useState } from "react";
+import { getPoint } from "../../api/points";
 
 const MyWallet = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const userPoint = useSelector((state: any) => state.user.info.point);
+  // const userPoint = useSelector((state: any) => state.user.info.point);
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const isRegistered = useSelector((state: any) => state.account.isRegistered);
+
+  const [userPoint, getUserPoint] = useState(0);
+
+  useEffect(() => {
+    getPoint(
+      accessToken,
+      (res) => {
+        console.log(res.data.data);
+        getUserPoint(res.data.data);
+      },
+      (err) => {
+        console.error("API 호출 실패:", err);
+      }
+    );
+  }, []);
 
   const onClick = (event: any) => {
     const { id } = event.target;
