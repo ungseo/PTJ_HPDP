@@ -5,10 +5,12 @@ import FolderIcon from "@mui/icons-material/Folder";
 import RestoreIcon from "@mui/icons-material/Restore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-
+import HomeIcon from "@mui/icons-material/Home";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import MarkEmailUnreadIcon from "@mui/icons-material/MarkEmailUnread";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 export default function NavigationBar() {
   const [value, setValue] = React.useState("home");
 
@@ -44,7 +46,7 @@ export default function NavigationBar() {
       <BottomNavigationAction
         label="Home"
         value="home"
-        icon={<RestoreIcon />}
+        icon={<HomeIcon />}
         onClick={() => {
           navigate("/");
         }}
@@ -52,7 +54,7 @@ export default function NavigationBar() {
       <BottomNavigationAction
         label="List"
         value="list"
-        icon={<FavoriteIcon />}
+        icon={<ListAltIcon />}
         onClick={() => {
           navigate("/list");
         }}
@@ -60,7 +62,7 @@ export default function NavigationBar() {
       <BottomNavigationAction
         label="Notification"
         value="notification"
-        icon={<LocationOnIcon />}
+        icon={<MarkEmailUnreadIcon />}
         onClick={() => {
           navigate("/notification");
         }}
@@ -68,7 +70,7 @@ export default function NavigationBar() {
       <BottomNavigationAction
         label="Profile"
         value="profile"
-        icon={<FolderIcon />}
+        icon={<AccountBoxIcon />}
         onClick={() => {
           if (loginType === 1) {
             navigate("/profile/c");
