@@ -7,11 +7,11 @@ from app.article import fetch_info_from_openai
 
 app = FastAPI()
 
-@app.get("/api/articles/news")
+@app.get("/articles/news")
 def read_root():
     return {"data" : get_article_info()}
 
-@app.get("/api/articles/info/{companyName}")
+@app.get("/articles/info/{companyName}")
 async def get_company_info(companyName: str):
     info = fetch_info_from_openai(companyName)
     if info is None:
@@ -20,4 +20,4 @@ async def get_company_info(companyName: str):
 
 
 if __name__ == '__main__':
-    uvicorn.run(debug=False, host='127.0.0.1', port=8000)
+    uvicorn.run(debug=False, host='0.0.0.0', port=8000)

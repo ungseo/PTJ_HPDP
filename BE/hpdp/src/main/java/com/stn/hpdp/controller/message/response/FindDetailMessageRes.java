@@ -17,6 +17,8 @@ public class FindDetailMessageRes {
     private String opponentName;
     private String createdDate;
     private boolean to;
+    private Long opponentId;
+    private Long myId;
 
     public FindDetailMessageRes of(Message message){
         return FindDetailMessageRes.builder()
