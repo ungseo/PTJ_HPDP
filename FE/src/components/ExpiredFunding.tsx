@@ -2,6 +2,7 @@ import React from "react";
 import FundingCard from "./home/FundingCard";
 import FundingItem from "./FundingItem";
 import { OutFundingsInfoInterface } from "../interface/apiDataInterface";
+import NullModal from "./common/NullModal";
 
 const ExpiredFunding = ({ itemList }: any) => {
   console.log(itemList, "만료");
@@ -12,14 +13,10 @@ const ExpiredFunding = ({ itemList }: any) => {
           (
             item: OutFundingsInfoInterface,
             idx: React.Key | null | undefined
-          ) => (
-            <div key={idx}>
-              <h1>{item.name}</h1>
-            </div>
-          )
+          ) => <FundingItem key={idx} item={item} />
         )
       ) : (
-        <h1>끝난펀딩도 없어요 ㅋ</h1>
+        <NullModal text="끝난 펀딩이 없습니다." />
       )}
     </div>
   );

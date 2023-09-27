@@ -11,4 +11,6 @@ public interface FundingHistoryRepository extends JpaRepository<FundingHistory, 
     List<FundingHistory> findAllByMember_Id(Long memberId);
 
     FundingHistory findByFunding_Id(Long fundingId);
+
+    List<FundingHistory> findAllByFunding_Id(Long fundingId);
 }
