@@ -3,14 +3,14 @@ package com.stn.hpdp.model.entity;
 import com.stn.hpdp.common.enums.FundingState;
 import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.FetchType.*;
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
@@ -52,11 +52,17 @@ public class Funding extends TimeBaseEntity {
     @Column(length = 500)
     private String docsUrl;
 
+    @ColumnDefault("0")
+    private int totalFunding;
+
+    @ColumnDefault("0")
+    private int percent;
+
     @OneToMany(mappedBy = "funding", cascade = CascadeType.ALL)
     private List<Budget> budgets = new ArrayList<>();
 
-    public void addBudgets(Budget budget){
-        if(this.budgets == null){
+    public void addBudgets(Budget budget) {
+        if (this.budgets == null) {
             budgets = new ArrayList<>();
         }
         budget.setFunding(this);
@@ -64,7 +70,7 @@ public class Funding extends TimeBaseEntity {
     }
 
     // update method
-    public void update(UpdateFundingReq updateFundingReq){
+    public void update(UpdateFundingReq updateFundingReq) {
         this.hashtag = updateFundingReq.getHashtag();
         this.title = updateFundingReq.getTitle();
         this.targetAmount = Integer.parseInt(updateFundingReq.getTargetAmount());
@@ -74,6 +80,11 @@ public class Funding extends TimeBaseEntity {
         this.rewardPrice = Integer.parseInt(updateFundingReq.getRewardPrice());
         this.rewardDesc = updateFundingReq.getRewardDesc();
         this.budgets = new ArrayList<>();
+    }
+
+    public void changeFunding(int totalFunding, int percent) {
+        this.totalFunding = totalFunding;
+        this.percent = percent;
     }
 
 }
