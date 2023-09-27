@@ -38,6 +38,10 @@ public class Funding extends TimeBaseEntity {
     private String hashtag;
     private String title;
     private int targetAmount;
+    @ColumnDefault("0")
+    private int totalFunding;
+    @ColumnDefault("0")
+    private int percent;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
@@ -52,11 +56,6 @@ public class Funding extends TimeBaseEntity {
     @Column(length = 500)
     private String docsUrl;
 
-    @ColumnDefault("0")
-    private int totalFunding;
-
-    @ColumnDefault("0")
-    private int percent;
 
     @OneToMany(mappedBy = "funding", cascade = CascadeType.ALL)
     private List<Budget> budgets = new ArrayList<>();
