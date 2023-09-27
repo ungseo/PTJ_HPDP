@@ -67,9 +67,9 @@ public class PointService {
 
     private void updateFunding(Funding funding) {
         int totalFunding = pointQueryRepository.findTotalPriceByFundingId(funding.getId());
-        int percent = 0;
-        if (totalFunding != 0) percent = (totalFunding * 100) / funding.getTargetAmount();
-        funding.changeFunding(totalFunding, percent);
+        double percent = 0;
+        if (totalFunding != 0) percent = (totalFunding / funding.getTargetAmount()) *100 ;
+        funding.changeFunding(totalFunding, (int) percent);
 
     }
 
