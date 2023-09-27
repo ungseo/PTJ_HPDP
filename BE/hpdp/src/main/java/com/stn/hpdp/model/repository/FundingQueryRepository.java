@@ -37,7 +37,7 @@ public class FundingQueryRepository {
                         funding.startDate.as("startDate"),
                         funding.endDate.as("endDate"),
                         funding.totalFunding.as("totalFunding"),
-                        funding.totalFunding.as("percent")
+                        funding.percent.as("percent")
                 ))
                 .from(funding)
                 .where(equalCompanyId(companyId), equalDone(done), containsKeyword(keyword))
