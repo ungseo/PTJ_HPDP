@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { OutPointHistoryInterface } from "./../interface/apiDataInterface";
 import style from "../styles/scss/PointHistoryItem.module.scss";
+import BlockChainInfo from "./BlockChainInfo";
 
 interface PointHistoryItemProps {
   item: OutPointHistoryInterface;
@@ -22,15 +23,21 @@ function formatDate(inputDate: string) {
 
 const PointHistoryItem = (props: PointHistoryItemProps) => {
   const { item } = props;
-
   const paymentDate = formatDate(item.paymentDate);
 
+  const [openBlock, setOpenBlock] = useState(false);
+  const OpenBlockModal = () => {
+    setOpenBlock(true);
+  };
+  const CloseBlockModal = () => {
+    setOpenBlock(false);
+  };
   return (
     <div className={style.wrapper}>
       <p className={style.date}>{paymentDate}</p>
       <div className={style.content}>
         <div className={style.content_title}>{item.content}</div>
-
+        {item.flag ? <button onClick={OpenBlockModal}>블록</button> : null}
         {item.flag ? (
           <div className={style.content_withdraw}> {item.paymentPoint} 원</div>
         ) : (
@@ -38,6 +45,12 @@ const PointHistoryItem = (props: PointHistoryItemProps) => {
         )}
       </div>
       <p className={style.remain_point}>{item.afterPoint} 원</p>
+      {openBlock && (
+        <>
+          <div className={style.bottomsheetbackground}></div>
+          <BlockChainInfo onClose={CloseBlockModal} />
+        </>
+      )}
     </div>
   );
 };

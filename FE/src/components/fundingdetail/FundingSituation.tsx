@@ -1,8 +1,7 @@
 import React from "react";
-
 import { OutFundingsInfoInterface } from "../../interface/apiDataInterface";
-import style from "../../styles/css/FundingSituation.module.css";
 import CircleProgressBar from "../common/CircleProgressBar";
+import style from "../../styles/css/FundingSituation.module.css";
 
 // 날짜 형식 변경
 function formatDate(inputDate: string) {
@@ -42,8 +41,6 @@ const FundingSituation = ({ props }: { props: OutFundingsInfoInterface }) => {
           <div className={style.content}>
             <div className={style.total_account}>
               <div>목표금액</div>
-              {/* <div className={style.amount}>{props.targetAmount} 원</div>
-               */}
               <div className={style.amount}>{targetNumber} 원</div>
             </div>
             <div className={style.use_acccount}>
