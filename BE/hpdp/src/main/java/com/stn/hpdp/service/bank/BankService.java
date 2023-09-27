@@ -11,13 +11,12 @@ import com.stn.hpdp.controller.bank.response.FindTransferRes;
 import com.stn.hpdp.controller.bank.response.TransferAccountRes;
 import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
 import com.stn.hpdp.controller.company.response.FindCompanyRes;
-import com.stn.hpdp.model.entity.Account;
-import com.stn.hpdp.model.entity.Company;
-import com.stn.hpdp.model.entity.Member;
-import com.stn.hpdp.model.entity.Transfer;
+import com.stn.hpdp.model.entity.*;
 import com.stn.hpdp.model.repository.*;
+import jnr.a64asm.Mem;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -39,6 +38,7 @@ public class BankService {
     private final AccountRepository accountRepository;
     private final MemberRepository memberRepository;
     private final TransferRepository transferRepository;
+    private final PointHistoryRepository pointHistoryRepository;
 
     public void saveAccount(SaveAccountReq saveAccountReq){
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
@@ -105,9 +105,49 @@ public class BankService {
         saved.get().setBalance(transfer.getAfterBlnc());
         accountRepository.save(saved.get());
 
-        // TODO: 잔돈 자동이체 추가 account -> point로 이동
-
         return TransferAccountRes.of(transfer);
+    }
+
+    @Scheduled(cron = "10 * * * * *") // 10초마다 자동이체
+    public void autopay(){
+        // 1. account 남은 잔액 확인
+        List<Account> accounts = accountRepository.getAccounts();
+        if(accounts.isEmpty()) return;
+
+        for (Account account : accounts){
+            int penny = account.getBalance() % 1000;
+            // 2. 남은 잔액 빼고 account 저장
+            account.setBalance(account.getBalance() - penny);
+            accountRepository.save(account);
+
+            // 3. transfer에 저장
+            Transfer transfer = Transfer.builder()
+                    .account(account)
+                    .uuid(UUID.randomUUID())
+                    .opponentBankCode(BankCode.NH)
+//                    .opponentName("포인트 자동 충전")
+                    .opponentName("point autopay")
+                    .opponentAccount("123-456-78910")
+                    .flag(true)
+                    .depositAmount(penny)
+                    .afterBlnc(account.getBalance())
+                    .build();
+            transferRepository.save(transfer);
+
+            // 4. point에 저장
+            Optional<Member> member = memberRepository.findById(account.getMember().getId());
+            member.get().setPoint(member.get().getPoint() + penny);
+            memberRepository.save(member.get());
+            PointHistory pointHistory = PointHistory.builder()
+                    .member(member.get())
+//                    .content("자동이체")
+                    .content("autopay")
+                    .flag(false)
+                    .paymentPoint(penny)
+                    .afterPoint(member.get().getPoint())
+                    .build();
+            pointHistoryRepository.save(pointHistory);
+        }
     }
 
     public List<FindTransferRes> findTransfer() {

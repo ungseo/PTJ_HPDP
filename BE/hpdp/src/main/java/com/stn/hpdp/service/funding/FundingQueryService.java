@@ -35,8 +35,6 @@ public class FundingQueryService {
     public List<FindFundingsRes> findFundings(Long companyId, Integer done, String keyword) {
         List<FindFundingsRes> result = fundingQueryRepository.findFundingsByCompanyIdAndDoneAndKeyword(companyId, done, keyword);
 
-        // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
-
         return result;
     }
 
@@ -48,19 +46,14 @@ public class FundingQueryService {
 
         List<Budget> budgets = budgetRepository.findAllByFunding_Id(fundingId);
 
-        int totalFunding = pointQueryRepository.findTotalPriceByFundingId(fundingId);
-        int percent = 0;
-        if (totalFunding != 0) percent = result.get().getTargetAmount() / totalFunding;
-        FindFundingRes findFundingRes = FindFundingRes.of(result.get(), budgets, totalFunding, percent);
-
-        return findFundingRes;
+        return FindFundingRes.of(result.get(), budgets);
     }
 
     public List<FindParticipantRes> findParticipant(Long fundingId) {
         List<FundingHistory> fundingHistories = fundingHistoryRepository.findAllByFunding_Id(fundingId);
         List<FindParticipantRes> result = new ArrayList<>();
 
-        for(FundingHistory fundingHistory : fundingHistories){
+        for (FundingHistory fundingHistory : fundingHistories) {
             FindParticipantRes findParticipantRes = FindParticipantRes.of(fundingHistory);
             result.add(findParticipantRes);
         }
@@ -69,20 +62,10 @@ public class FundingQueryService {
     }
 
     public List<RecommendFundingsRes> recommendDeadlineFundings() {
-        List<RecommendFundingsRes> result = fundingQueryRepository.findFundingsByDeadline();
-
-        // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
-
-        return result;
+        return fundingQueryRepository.findFundingsByDeadline();
     }
 
     public List<RecommendFundingsRes> recommendAchievementFundings() {
-        List<RecommendFundingsRes> result = fundingQueryRepository.findFundingsByAchievement();
-
-        // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
-
-        // TODO: percent 세팅 후 높은 순으로 5개
-
-        return result;
+        return fundingQueryRepository.findFundingsByAchievement();
     }
 }

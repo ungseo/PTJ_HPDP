@@ -1,6 +1,7 @@
 package com.stn.hpdp.controller.company.response;
 
 import com.stn.hpdp.common.enums.FundingState;
+import com.stn.hpdp.model.entity.Company;
 import com.stn.hpdp.model.entity.Funding;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,10 +30,10 @@ public class FindMyFundingsRes {
     private String dDay;
     private int totalFunding;
 
-    public static FindMyFundingsRes from(Funding funding){
+    public static FindMyFundingsRes from(Funding funding, Company company){
         return FindMyFundingsRes.builder()
-                .companyId(funding.getCompany().getId())
-                .name(funding.getCompany().getName())
+                .companyId(company.getId())
+                .name(company.getName())
                 .fundingId(funding.getId())
                 .thumbnail(funding.getThumbnailUrl())
                 .hashtag(funding.getHashtag())
