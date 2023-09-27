@@ -11,6 +11,7 @@ interface DetailTopProps {
     thumbnail?: string;
     profile?: string;
     companyId?: number;
+    profileImg?: string;
   };
 }
 
@@ -41,7 +42,11 @@ const DetailPageTop = (props: DetailTopProps) => {
       />
       <div className={style.topcontent}>
         <div className={style.upsection}>
-          <img src={data.profile} alt="Company Logo" className={style.upimg} />
+          <img
+            src={data.profileImg}
+            alt="Company Logo"
+            className={style.upimg}
+          />
           <div className={style.companyname} onClick={handleGoCompany}>
             {data.name}
           </div>

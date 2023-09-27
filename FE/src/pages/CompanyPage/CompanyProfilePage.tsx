@@ -6,10 +6,12 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { companyActions } from "../../store/company-slice";
 import ProfileList from "../../components/companyOnly/ProfileList";
+import { useNavigate } from "react-router-dom";
 
 const CompanyProfilePage = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     getMyCompanyInfo(
       accessToken,
@@ -18,7 +20,12 @@ const CompanyProfilePage = () => {
         dispatch(companyActions.saveMemberInfo(res.data.data));
       },
       (err) => {
-        console.log("내기업조회실패");
+        //기업회원이 아닐때 접근 금지 로직
+        // if (err.message.includes("500")) {
+        //   alert("잘못된 접근입니다.");
+        //   navigate("/");
+        // }
+        console.log(err.message);
       }
     );
   }, []);
@@ -27,11 +34,11 @@ const CompanyProfilePage = () => {
   return (
     <div className={style.wrapper}>
       <OptionTopbar text="프로필페이지(기업용)" />
-      <div>
-        <img src={companyLogo} alt="로고없음" />
+      <div className={style.content}>
+        <img className={style.logo} src={companyLogo} alt="로고없음" />
+        <p>{companyInfo}이름 ㅋ</p>
+        <ProfileList />
       </div>
-      <p>{companyInfo}이름 ㅋ</p>
-      <ProfileList />
     </div>
   );
 };

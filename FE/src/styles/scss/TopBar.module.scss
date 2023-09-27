@@ -4,12 +4,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 7vh;
-  border-bottom: 1px solid $hrcolor;
   position: sticky;
   top: 0;
   z-index: 5;
-  background-color: $white;
   .leftCpnt {
     display: flex;
     .logo {
@@ -37,8 +34,6 @@
 
 .optionTopbar {
   display: flex;
-  height: 7vh;
-  border-bottom: 1px solid $hrcolor;
   justify-content: space-between;
   align-items: center;
   position: sticky;

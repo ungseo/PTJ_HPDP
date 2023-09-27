@@ -1,72 +1,50 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
 import { userActions } from "../store/user-slice";
-import { ThunkAction } from "redux-thunk";
-import { RootState } from "../store/store";
-import { AnyAction, Dispatch } from "redux";
-// export const refreshToken =
-//   (): ThunkAction<Promise<void>, RootState, null, AnyAction> =>
-//   async (dispatch: Dispatch) => {
-//     const storage = sessionStorage.getItem("persist:root");
-//     if (storage) {
-//       const parsedData = JSON.parse(storage);
-//       const userData = JSON.parse(parsedData.user);
-//       const data = {
-//         accessToken: userData.auth.accessToken,
-//         refreshToken: userData.auth.refreshToken,
-//       };
-//       console.log(data);
-//       let Atoken = "";
-//       const api = customApi("auth");
-//       api
-//         .post("/regenerate", data)
-//         .then((res) => {
-//           const tokens = {
-//             accessToken: res.headers["accessToken"],
-//             refreshToken: res.headers["refreshToken"],
-//           };
-//           console.log(tokens, "토큰 재발금 성공");
-//           dispatch(userActions.updateTokens(tokens));
-//           return tokens.accessToken;
-//         })
-//         .catch((err) => {
-//           alert("토큰재발급부터 실패");
-//           return null;
-//         });
-//     }
-//     // 반환 형식을 Promise<void>에 맞게 수정
-//     return dispatch(userActions.updateTokens(Atoken));
-//   };
+import { Dispatch } from "redux";
+
 const refreshToken = () => {
   const storage = sessionStorage.getItem("persist:root");
   if (storage) {
     const parsedData = JSON.parse(storage);
     const userData = JSON.parse(parsedData.user);
+    //만료된토큰
     const data = {
       accessToken: userData.auth.accessToken,
       refreshToken: userData.auth.refreshToken,
     };
-    const response = axios
-      .post(`${process.env.REACT_APP_API_URL}/auth/regenerate`, data)
-      .then((res) => {
-        const data = {
-          accessToken: res.headers.accessToken,
-          refreshToken: res.headers.refreshToken,
-        };
-
-        const saveTokens = () => async (dispatch: Dispatch) => {
-          return dispatch(userActions.updateTokens(data));
-        };
-        saveTokens();
-        return data.accessToken;
-      })
-      .catch((err) => {
-        console.log("alert", err);
-        return null;
-      });
-    return response;
+    //axios 리제너레이트 (재발급)
+    const newToken = async () =>
+      await axios
+        .post(`${process.env.REACT_APP_API_URL}/auth/regenerate`, data)
+        .then((res) => {
+          const data = {
+            accessToken: res.headers.accessToken,
+            refreshToken: res.headers.refreshToken,
+          };
+          console.log(data, "재발급된 토큰값");
+          // 토큰 재발급받은걸 리덕스에 저장
+          const saveTokens =
+            (tokenData: { accessToken: string; refreshToken: string }) =>
+            async (dispatch: Dispatch) => {
+              try {
+                // 비동기 작업 수행
+                // tokenData를 사용하여 액션 생성
+                dispatch(userActions.updateTokens(tokenData));
+              } catch (error) {
+                // 에러 처리
+                console.error("토큰 업데이트 오류:", error);
+              }
+            };
+          saveTokens(data);
+          return data.accessToken;
+        })
+        .catch((err) => {
+          console.log("alert", err);
+          return null;
+        });
+    return newToken;
   }
-  return null;
+  return;
 };
 //
 export const customApi = (baseURL: string) => {
@@ -85,10 +63,12 @@ export const customApi = (baseURL: string) => {
         originalRequest._retry = true;
         // 토큰을 재발급하고 재시도
         const newToken = await refreshToken();
-        const accessToken = newToken;
-        Api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-
-        return Api(originalRequest);
+        if (newToken) {
+          Api.defaults.headers["accessToken"] = `Bearer ${newToken}`;
+          return Api(originalRequest);
+        } else {
+          console.log("가로챘는데 토큰갱신이 안된경우/ 동기/비동기문제인듯");
+        }
       }
       return Promise.reject(error);
     }
@@ -102,10 +82,12 @@ export const customApi = (baseURL: string) => {
         originalRequest._retry = true;
         // 토큰을 재발급하고 재시도
         const newToken = await refreshToken();
-        const accessToken = newToken;
-        Api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-
-        return Api(originalRequest);
+        if (newToken) {
+          Api.defaults.headers["accessToken"] = `Bearer ${newToken}`;
+          return Api(originalRequest);
+        } else {
+          console.log("가로챘는데 토큰갱신이 안된경우/ 동기/비동기문제인듯");
+        }
       }
       return Promise.reject(error);
     }
@@ -128,10 +110,12 @@ export const customApiForm = (baseURL: string) => {
         originalRequest._retry = true;
         // 토큰을 재발급하고 재시도
         const newToken = await refreshToken();
-        const accessToken = newToken;
-        Api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-
-        return Api(originalRequest);
+        if (newToken) {
+          Api.defaults.headers["accessToken"] = `Bearer ${newToken}`;
+          return Api(originalRequest);
+        } else {
+          console.log("가로챘는데 토큰갱신이 안된경우/ 동기/비동기문제인듯");
+        }
       }
       return Promise.reject(error);
     }
@@ -145,10 +129,12 @@ export const customApiForm = (baseURL: string) => {
         originalRequest._retry = true;
         // 토큰을 재발급하고 재시도
         const newToken = await refreshToken();
-        const accessToken = newToken;
-        Api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-
-        return Api(originalRequest);
+        if (newToken) {
+          Api.defaults.headers["accessToken"] = `Bearer ${newToken}`;
+          return Api(originalRequest);
+        } else {
+          console.log("가로챘는데 토큰갱신이 안된경우/ 동기/비동기문제인듯");
+        }
       }
       return Promise.reject(error);
     }

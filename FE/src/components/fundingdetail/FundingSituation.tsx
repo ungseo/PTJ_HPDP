@@ -1,8 +1,7 @@
 import React from "react";
-
 import { OutFundingsInfoInterface } from "../../interface/apiDataInterface";
-import style from "../../styles/css/FundingSituation.module.css";
 import CircleProgressBar from "../common/CircleProgressBar";
+import style from "../../styles/css/FundingSituation.module.css";
 
 // 날짜 형식 변경
 function formatDate(inputDate: string) {

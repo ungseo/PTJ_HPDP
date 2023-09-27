@@ -3,18 +3,18 @@ package com.stn.hpdp.service.funding;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.controller.funding.response.FindFundingRes;
 import com.stn.hpdp.controller.funding.response.FindFundingsRes;
+import com.stn.hpdp.controller.funding.response.FindParticipantRes;
 import com.stn.hpdp.controller.funding.response.RecommendFundingsRes;
 import com.stn.hpdp.model.entity.Budget;
 import com.stn.hpdp.model.entity.Funding;
-import com.stn.hpdp.model.repository.BudgetRepository;
-import com.stn.hpdp.model.repository.FundingQueryRepository;
-import com.stn.hpdp.model.repository.FundingRepository;
-import com.stn.hpdp.model.repository.PointQueryRepository;
+import com.stn.hpdp.model.entity.FundingHistory;
+import com.stn.hpdp.model.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,13 +28,12 @@ public class FundingQueryService {
 
     private final FundingRepository fundingRepository;
     private final BudgetRepository budgetRepository;
+    private final FundingHistoryRepository fundingHistoryRepository;
     private final FundingQueryRepository fundingQueryRepository;
     private final PointQueryRepository pointQueryRepository;
 
     public List<FindFundingsRes> findFundings(Long companyId, Integer done, String keyword) {
         List<FindFundingsRes> result = fundingQueryRepository.findFundingsByCompanyIdAndDoneAndKeyword(companyId, done, keyword);
-
-        // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
 
         return result;
     }
@@ -47,29 +46,26 @@ public class FundingQueryService {
 
         List<Budget> budgets = budgetRepository.findAllByFunding_Id(fundingId);
 
-        int totalFunding = pointQueryRepository.findTotalPriceByFundingId(fundingId);
-        int percent = 0;
-        if (totalFunding != 0) percent = result.get().getTargetAmount() / totalFunding;
-        FindFundingRes findFundingRes = FindFundingRes.of(result.get(), budgets, totalFunding, percent);
+        return FindFundingRes.of(result.get(), budgets);
+    }
 
-        return findFundingRes;
+    public List<FindParticipantRes> findParticipant(Long fundingId) {
+        List<FundingHistory> fundingHistories = fundingHistoryRepository.findAllByFunding_Id(fundingId);
+        List<FindParticipantRes> result = new ArrayList<>();
+
+        for (FundingHistory fundingHistory : fundingHistories) {
+            FindParticipantRes findParticipantRes = FindParticipantRes.of(fundingHistory);
+            result.add(findParticipantRes);
+        }
+
+        return result;
     }
 
     public List<RecommendFundingsRes> recommendDeadlineFundings() {
-        List<RecommendFundingsRes> result = fundingQueryRepository.findFundingsByDeadline();
-
-        // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
-
-        return result;
+        return fundingQueryRepository.findFundingsByDeadline();
     }
 
     public List<RecommendFundingsRes> recommendAchievementFundings() {
-        List<RecommendFundingsRes> result = fundingQueryRepository.findFundingsByAchievement();
-
-        // TODO: 후원하기 기능 완료 후 totalFunding, percent 세팅
-
-        // TODO: percent 세팅 후 높은 순으로 5개
-
-        return result;
+        return fundingQueryRepository.findFundingsByAchievement();
     }
 }

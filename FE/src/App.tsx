@@ -12,7 +12,7 @@ import FundingDetailPage from "./pages/FundingDetailPage";
 import CompanyDetailPage from "./pages/CompanyDetailPage";
 import SearchPage from "./pages/SearchPage";
 import ProfileEditPage from "./pages/ProfileEditPage";
-import TransactionHistoryPage from "./pages/TransactionHistoryPage";
+import PointHistoryPage from "./pages/PointHistoryPage";
 import FundingHistoryPage from "./pages/FundingHistoryPage";
 import { CheckoutPage } from "./pages/Toss/CheckoutPage";
 import { SuccessPage } from "./pages/Toss/SuccessPage";
@@ -31,9 +31,12 @@ import RegisterAccountPage from "./pages/RegisterAccountPage";
 import CompanyProfilePage from "./pages/CompanyPage/CompanyProfilePage";
 import CompanyInfoPage from "./pages/CompanyPage/CompanyInfoPage";
 import CompanyFundingPage from "./pages/CompanyPage/CompanyFundingPage";
+
 function App() {
   const dispatch = useDispatch();
+
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+
   const refresh = () => {
     getMemberInfo(
       accessToken,
@@ -52,10 +55,11 @@ function App() {
       refresh();
     }
   }, []);
+
   return (
     <div id="app-root" className={style.App}>
       <Routes>
-        {/* <Route path="/" Component={??Page}></Route> */}
+        {/* <Route path="/sample" Component={SamplePage}></Route> */}
         <Route path="/" Component={HomePage}></Route>
         <Route path="/list" Component={ListPage}></Route>
         <Route path="/notification" Component={NotificationPage}></Route>
@@ -72,30 +76,26 @@ function App() {
           path="/company/detail/:companyid"
           Component={CompanyDetailPage}
         ></Route>
-        <Route path="/profile/edit/:userid" Component={ProfileEditPage}></Route>
+        <Route path="/profile/edit" Component={ProfileEditPage}></Route>
         <Route path="/profile/testbank" Component={TestBankPage}></Route>
         <Route
-          path="/profile/bankstatement/:userid"
+          path="/profile/bankstatement"
           Component={BankStatementPage}
         ></Route>
         <Route
-          path="/profile/history/transaction/:userid"
-          Component={TransactionHistoryPage}
+          path="/profile/history/transaction"
+          Component={PointHistoryPage}
         ></Route>
         <Route
-          path="/profile/history/funding/:userid"
+          path="/profile/history/funding"
           Component={FundingHistoryPage}
         ></Route>
         <Route
-          path="/profile/company/interest/:userid"
+          path="/profile/company/interest"
           Component={InterestingCompanyPage}
         ></Route>
-        <Route path="/profile/message/:userid" Component={MessagePage}></Route>
-        <Route path="/payment" Component={CheckoutPage}></Route>
-        <Route path="success" Component={SuccessPage}></Route>
-        <Route path="/fail" Component={FailPage}></Route>
         <Route path="*" Component={PageNotFound404}></Route>
-        <Route path="/profile/message/:userid" Component={MessagePage}></Route>
+        <Route path="/profile/message" Component={MessagePage}></Route>
         <Route path="/payment" Component={CheckoutPage}></Route>
         <Route path="success" Component={SuccessPage}></Route>
         <Route path="/fail" Component={FailPage}></Route>

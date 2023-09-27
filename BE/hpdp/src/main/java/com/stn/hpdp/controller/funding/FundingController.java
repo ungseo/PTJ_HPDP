@@ -5,10 +5,7 @@ import com.stn.hpdp.controller.funding.request.ReportFundingReq;
 import com.stn.hpdp.controller.funding.request.SaveFundingReq;
 import com.stn.hpdp.controller.funding.request.SettleFundingReq;
 import com.stn.hpdp.controller.funding.request.UpdateFundingReq;
-import com.stn.hpdp.controller.funding.response.FindFundingRes;
-import com.stn.hpdp.controller.funding.response.FindFundingsRes;
-import com.stn.hpdp.controller.funding.response.RecommendFundingsRes;
-import com.stn.hpdp.controller.funding.response.SettleFundingRes;
+import com.stn.hpdp.controller.funding.response.*;
 import com.stn.hpdp.dto.FundingInfoForContractDTO;
 import com.stn.hpdp.service.blockchain.CrowdFundingService;
 import com.stn.hpdp.service.funding.FundingQueryService;
@@ -80,6 +77,14 @@ public class FundingController {
     public ApiResponse<Object> findFunding(@PathVariable("fundingId") Long fundingId) {
         log.info(logCurrent(getClassName(), getMethodName(), START));
         FindFundingRes result = fundingQueryService.findFunding(fundingId);
+        log.info(logCurrent(getClassName(), getMethodName(), END));
+        return ApiResponse.ok(result);
+    }
+
+    @GetMapping("/participant/{fundingId}") // 펀딩 참여자 목록 조회
+    public ApiResponse<Object> findParticipant(@PathVariable("fundingId") Long fundingId) {
+        log.info(logCurrent(getClassName(), getMethodName(), START));
+        List<FindParticipantRes> result = fundingQueryService.findParticipant(fundingId);
         log.info(logCurrent(getClassName(), getMethodName(), END));
         return ApiResponse.ok(result);
     }
