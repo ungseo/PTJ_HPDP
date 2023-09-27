@@ -33,9 +33,7 @@ public class FundingQueryService {
     private final PointQueryRepository pointQueryRepository;
 
     public List<FindFundingsRes> findFundings(Long companyId, Integer done, String keyword) {
-        List<FindFundingsRes> result = fundingQueryRepository.findFundingsByCompanyIdAndDoneAndKeyword(companyId, done, keyword);
-
-        return result;
+        return fundingQueryRepository.findFundingsByCompanyIdAndDoneAndKeyword(companyId, done, keyword);
     }
 
     public FindFundingRes findFunding(Long fundingId) {

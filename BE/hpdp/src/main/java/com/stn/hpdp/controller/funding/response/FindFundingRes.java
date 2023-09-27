@@ -41,7 +41,7 @@ public class FindFundingRes {
 
     private List<Budget> budgetList = new ArrayList<>();
 
-    public static FindFundingRes of(Funding funding, List<Budget> budgets){
+    public static FindFundingRes of(Funding funding, List<Budget> budgets) {
         return FindFundingRes.builder()
                 .companyId(funding.getCompany().getId())
                 .name(funding.getCompany().getName())
@@ -63,7 +63,7 @@ public class FindFundingRes {
                 .budgetList(budgets)
                 .dDay(funding.getEndDate().isAfter(LocalDateTime.now()) ? Long.toString(ChronoUnit.DAYS.between(LocalDateTime.now(), funding.getEndDate())) : "마감")
                 .totalFunding(funding.getTotalFunding())
-                .percent(funding.getTotalFunding())
+                .percent(funding.getPercent())
                 .build();
     }
 }
