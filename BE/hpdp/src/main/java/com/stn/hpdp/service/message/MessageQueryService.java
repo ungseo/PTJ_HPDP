@@ -52,8 +52,21 @@ public class MessageQueryService {
 
         boolean isUser = SecurityUtil.checkUser();
         FindDetailMessageRes findDetailMessageRes = new FindDetailMessageRes().of(result.get());
-        if(isUser) findDetailMessageRes.setOpponentName(result.get().getCompany().getName());
-        else findDetailMessageRes.setOpponentName(result.get().getMember().getName());
+        if(isUser) {
+            findDetailMessageRes.setOpponentName(result.get().getCompany().getName());
+            findDetailMessageRes.setOpponentId(result.get().getCompany().getId());
+            findDetailMessageRes.setMyId(result.get().getMember().getId());
+        } else {
+            findDetailMessageRes.setOpponentName(result.get().getMember().getName());
+            findDetailMessageRes.setOpponentId(result.get().getMember().getId());
+            findDetailMessageRes.setMyId(result.get().getCompany().getId());
+        }
+
+        // isRead true
+        if(!result.get().isRead()){
+            result.get().setRead(true);
+            messageRepository.save(result.get());
+        }
 
         return findDetailMessageRes;
     }
