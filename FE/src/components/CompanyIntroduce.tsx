@@ -14,23 +14,17 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
 
   const hashtagList = item.hashtag?.split(", ") || [];
 
-  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
-
-  const [responseData, setResponseData] = useState<any>(null);
+  const [responseData, setResponseData] = useState<any>([]);
 
   useEffect(() => {
     axios
-      .get("http://j9c110.p.ssafy.io:8000/articles/news", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
+      .get("http://j9c110.p.ssafy.io:8000/articles/news")
       .then((response) => {
-        console.log(response);
-        setResponseData(response.data);
+        setResponseData(response.data.data);
         console.log("HTTP 요청 성공:", response.data);
       })
       .catch((error) => {
+        console.log("실패애애애애");
         console.error("HTTP 요청 실패:", error);
       });
   }, []);
