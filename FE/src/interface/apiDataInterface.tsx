@@ -308,6 +308,13 @@ export interface MessagesInterface {
   to: boolean;
 }
 
+// 뉴스 조회
+export interface OutCompanyNewsInterface {
+  articleTitle: string;
+  articleProfile: string;
+  articleURL: string;
+}
+
 export interface myCompanyInfo {
   companyId: number;
   loginId: string;
