@@ -316,3 +316,10 @@ export interface myCompanyInfo {
   name: string;
   hashtag: string;
 }
+
+// 후원 참여자
+export interface ParticipantsInfo {
+  memberId: number;
+  name: string;
+  profileImg: string;
+}

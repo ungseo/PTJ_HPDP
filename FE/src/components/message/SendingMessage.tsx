@@ -72,6 +72,7 @@ const SendingMessage = () => {
               isChecked={isCheckedList[index]}
               onCheckboxChange={() => handleCheckboxChangeSingle(index)}
               message={message}
+              flag={1}
             />
           </div>
         ))}

@@ -10,6 +10,7 @@ interface MessagePartProps {
   isChecked: boolean;
   onCheckboxChange: () => void;
   message: Interfaces.MessagesInterface;
+  flag: number;
 }
 
 function formatDate(inputDate: string) {
@@ -24,6 +25,7 @@ const MessagePart = ({
   isChecked = false,
   onCheckboxChange,
   message,
+  flag,
 }: MessagePartProps) => {
   console.log(message);
   const createDay = formatDate(message.createdDate);
@@ -46,6 +48,7 @@ const MessagePart = ({
       }
     );
   };
+  console.log(flag);
   const handleCloseModal = () => {
     setMessageContent(false);
   };
@@ -82,6 +85,7 @@ const MessagePart = ({
           <MessageContent
             onClose={handleCloseModal}
             isMessageDetail={isMessageDetail}
+            flag={flag}
           />
         </div>
       )}

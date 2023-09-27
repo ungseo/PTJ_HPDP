@@ -6,6 +6,7 @@ import style from "../../styles/css/MessageContent.module.css";
 interface MessageProps {
   onClose: () => void;
   isMessageDetail: Interfaces.MessagesInterface;
+  flag: number;
 }
 
 function formatDate(inputDate: string) {
@@ -19,7 +20,7 @@ function formatDate(inputDate: string) {
   return `${year}-${month}-${day} ${hours}:${minutes}`;
 }
 
-const MessageContent = ({ onClose, isMessageDetail }: MessageProps) => {
+const MessageContent = ({ onClose, isMessageDetail, flag }: MessageProps) => {
   const formattedDate = formatDate(isMessageDetail.createdDate);
   return (
     <div className={style.messageModal}>
@@ -54,6 +55,7 @@ const MessageContent = ({ onClose, isMessageDetail }: MessageProps) => {
         <div style={{ marginTop: "1rem", textAlign: "justify" }}>
           {isMessageDetail.content}
         </div>
+        <button>답장하기</button>
       </div>
     </div>
   );

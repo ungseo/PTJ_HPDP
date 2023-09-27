@@ -71,6 +71,7 @@ const ReceivedMessage = () => {
               isChecked={isCheckedList[index]}
               onCheckboxChange={() => handleCheckboxChangeSingle(index)}
               message={message}
+              flag={0}
             />
           </div>
         ))}
