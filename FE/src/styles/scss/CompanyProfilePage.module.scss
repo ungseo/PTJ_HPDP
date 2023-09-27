@@ -1,1 +1,10 @@
 @import "Style";
+
+.content {
+  background-color: red;
+  .logo {
+    margin-top: 2rem;
+    height: 3rem;
+    min-height: 3rem;
+  }
+}

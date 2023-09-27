@@ -1,7 +1,7 @@
 import React from "react";
+import * as Interfaces from "../../interface/apiDataInterface";
 import { Icon } from "@iconify/react";
 import style from "../../styles/css/MessageContent.module.css";
-import * as Interfaces from "../../interface/apiDataInterface";
 
 interface MessageProps {
   onClose: () => void;

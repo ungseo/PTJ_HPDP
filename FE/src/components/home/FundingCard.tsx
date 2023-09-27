@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import style from "../../styles/css/FundingCard.module.css";
 import { OutFundingsInfoInterface } from "../../interface/apiDataInterface";
 import ProgressBar from "../common/ProgressBar";
+import style from "../../styles/css/FundingCard.module.css";
 
 const FundingCard = ({ card }: { card: OutFundingsInfoInterface }) => {
   const navigate = useNavigate();

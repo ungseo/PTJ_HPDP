@@ -1,11 +1,11 @@
 import React from "react";
 import style from "../../styles/css/HomeBanner.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Autoplay } from "swiper/modules";
 
 const HomeBanner = () => {
   const swiperProps = {
@@ -25,45 +25,17 @@ const HomeBanner = () => {
   return (
     <div>
       <Swiper {...swiperProps}>
-        <SwiperSlide
-          style={{
-            backgroundColor: "yellow",
-            height: "15rem",
-            backgroundImage: "url(/1.png)",
-            backgroundSize: "cover",
-          }}
-        >
-          1
+        <SwiperSlide>
+          <img src="/1.png" alt="1" className={style.fullWidthImage} />
         </SwiperSlide>
-        <SwiperSlide
-          style={{
-            backgroundColor: "blue",
-            height: "15rem",
-            backgroundImage: "url(/2.png)",
-            backgroundSize: "cover",
-          }}
-        >
-          2
+        <SwiperSlide>
+          <img src="/2.png" alt="2" className={style.fullWidthImage} />
         </SwiperSlide>
-        <SwiperSlide
-          style={{
-            backgroundColor: "red",
-            height: "15rem",
-            backgroundImage: "url(/3.png)",
-            backgroundSize: "cover",
-          }}
-        >
-          3
+        <SwiperSlide>
+          <img src="/3.png" alt="3" className={style.fullWidthImage} />
         </SwiperSlide>
-        <SwiperSlide
-          style={{
-            backgroundColor: "pink",
-            height: "15rem",
-            backgroundImage: "url(/4.png)",
-            backgroundSize: "cover",
-          }}
-        >
-          4
+        <SwiperSlide>
+          <img src="/4.png" alt="4" className={style.fullWidthImage} />
         </SwiperSlide>
       </Swiper>
     </div>

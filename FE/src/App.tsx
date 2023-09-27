@@ -76,25 +76,26 @@ function App() {
           path="/company/detail/:companyid"
           Component={CompanyDetailPage}
         ></Route>
-        <Route path="/profile/edit/:userid" Component={ProfileEditPage}></Route>
+        <Route path="/profile/edit" Component={ProfileEditPage}></Route>
         <Route path="/profile/testbank" Component={TestBankPage}></Route>
         <Route
-          path="/profile/bankstatement/:userid"
+          path="/profile/bankstatement"
           Component={BankStatementPage}
         ></Route>
         <Route
-          path="/profile/history/transaction/:userid"
+          path="/profile/history/transaction"
           Component={PointHistoryPage}
         ></Route>
         <Route
-          path="/profile/history/funding/:userid"
+          path="/profile/history/funding"
           Component={FundingHistoryPage}
         ></Route>
         <Route
-          path="/profile/company/interest/:userid"
+          path="/profile/company/interest"
           Component={InterestingCompanyPage}
         ></Route>
-        <Route path="/profile/message/:userid" Component={MessagePage}></Route>
+        <Route path="*" Component={PageNotFound404}></Route>
+        <Route path="/profile/message" Component={MessagePage}></Route>
         <Route path="/payment" Component={CheckoutPage}></Route>
         <Route path="success" Component={SuccessPage}></Route>
         <Route path="/fail" Component={FailPage}></Route>

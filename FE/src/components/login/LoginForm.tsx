@@ -29,6 +29,7 @@ const LoginForm = () => {
         const tokens = {
           accessToken: headers.get("accessToken"),
           refreshToken: headers.get("refreshToken"),
+          type,
         };
         dispatch(userActions.loginHandler(tokens));
         navigate("/");

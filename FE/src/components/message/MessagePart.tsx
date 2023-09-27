@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import * as Interfaces from "../../interface/apiDataInterface";
+import { getMessageDetail } from "../../api/messages";
+import MessageContent from "./MessageContent";
 import { Grid } from "@mui/material";
 import style from "../../styles/css/MessagePart.module.css";
-import * as Interfaces from "../../interface/apiDataInterface";
-import MessageContent from "./MessageContent";
-import { getMessageDetail } from "../../api/messages";
+
 interface MessagePartProps {
   isChecked: boolean;
   onCheckboxChange: () => void;
