@@ -16,10 +16,12 @@ import com.stn.hpdp.model.repository.*;
 import jnr.a64asm.Mem;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.tree.TreeNode;
@@ -39,6 +41,7 @@ public class BankService {
     private final MemberRepository memberRepository;
     private final TransferRepository transferRepository;
     private final PointHistoryRepository pointHistoryRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     public void saveAccount(SaveAccountReq saveAccountReq){
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
@@ -108,6 +111,7 @@ public class BankService {
         return TransferAccountRes.of(transfer);
     }
 
+    @Transactional
     @Scheduled(cron = "10 * * * * *") // 10초마다 자동이체
     public void autopay(){
         // 1. account 남은 잔액 확인
