@@ -122,7 +122,8 @@ public class CompanyService {
         List<Funding> fundings = fundingRepository.findAllByCompany_Id(company.get().getId());
         List<FindMyFundingsRes> result = new ArrayList<>();
         for(Funding funding : fundings){
-            result.add(FindMyFundingsRes.from(funding));
+            FindMyFundingsRes findMyFundingsRes = FindMyFundingsRes.from(funding, company.get());
+            result.add(findMyFundingsRes);
         }
 
         return result;

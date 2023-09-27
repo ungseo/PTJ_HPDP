@@ -3,18 +3,18 @@ package com.stn.hpdp.service.funding;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.controller.funding.response.FindFundingRes;
 import com.stn.hpdp.controller.funding.response.FindFundingsRes;
+import com.stn.hpdp.controller.funding.response.FindParticipantRes;
 import com.stn.hpdp.controller.funding.response.RecommendFundingsRes;
 import com.stn.hpdp.model.entity.Budget;
 import com.stn.hpdp.model.entity.Funding;
-import com.stn.hpdp.model.repository.BudgetRepository;
-import com.stn.hpdp.model.repository.FundingQueryRepository;
-import com.stn.hpdp.model.repository.FundingRepository;
-import com.stn.hpdp.model.repository.PointQueryRepository;
+import com.stn.hpdp.model.entity.FundingHistory;
+import com.stn.hpdp.model.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +28,7 @@ public class FundingQueryService {
 
     private final FundingRepository fundingRepository;
     private final BudgetRepository budgetRepository;
+    private final FundingHistoryRepository fundingHistoryRepository;
     private final FundingQueryRepository fundingQueryRepository;
     private final PointQueryRepository pointQueryRepository;
 
@@ -53,6 +54,18 @@ public class FundingQueryService {
         FindFundingRes findFundingRes = FindFundingRes.of(result.get(), budgets, totalFunding, percent);
 
         return findFundingRes;
+    }
+
+    public List<FindParticipantRes> findParticipant(Long fundingId) {
+        List<FundingHistory> fundingHistories = fundingHistoryRepository.findAllByFunding_Id(fundingId);
+        List<FindParticipantRes> result = new ArrayList<>();
+
+        for(FundingHistory fundingHistory : fundingHistories){
+            FindParticipantRes findParticipantRes = FindParticipantRes.of(fundingHistory);
+            result.add(findParticipantRes);
+        }
+
+        return result;
     }
 
     public List<RecommendFundingsRes> recommendDeadlineFundings() {
