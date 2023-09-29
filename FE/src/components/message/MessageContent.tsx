@@ -103,7 +103,7 @@ const MessageContent = ({ onClose, isMessageDetail, flag }: MessageProps) => {
           onClose={() => setShowSendMessageModal(false)}
           data={{
             name: opponentName,
-            companyId: opponentId,
+            receiverId: opponentId,
           }}
         />
       )}

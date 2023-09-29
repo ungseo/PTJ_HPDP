@@ -49,8 +49,7 @@ const CompanyDetailPage = () => {
 
   const data = {
     name: companyItem.name,
-    profile: companyItem.profile,
-    companyId: Number(companyid),
+    receiverId: Number(companyid),
   };
   return (
     <div className={style.companydetailpage}>

@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { messageSliceActions } from "../../store/message-slice";
+import { useSelector } from "react-redux";
 import * as Interfaces from "../../interface/apiDataInterface";
 import { getMessage } from "../../api/messages";
 import MessagePart from "./MessagePart";
-import { Icon } from "@iconify/react";
-import { Grid } from "@mui/material";
 import style from "../../styles/css/ReceivedMessage.module.css";
 
 const ReceivedMessage = () => {
-  const dispatch = useDispatch();
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const [messageData, setMessageData] = useState<
     Interfaces.MessagesInterface[]
