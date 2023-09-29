@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 import MyWallet from "./MyWallet";
-import ProfileItemList from "./ProfileItemList";
+import MyActivity from "./MyActivity";
 import { useEffect } from "react";
 import { getAccount } from "../../api/banks";
 import { useDispatch } from "react-redux";
 import { accountActions } from "../../store/account-slice";
 
-const LoginInfo = () => {
+const ProfileActivity = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const dispatch = useDispatch();
 
@@ -29,9 +29,9 @@ const LoginInfo = () => {
   return (
     <div>
       <MyWallet />
-      <ProfileItemList />
+      <MyActivity />
     </div>
   );
 };
 
-export default LoginInfo;
+export default ProfileActivity;
