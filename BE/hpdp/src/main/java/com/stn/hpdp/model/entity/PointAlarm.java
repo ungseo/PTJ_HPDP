@@ -12,29 +12,21 @@ import static javax.persistence.FetchType.LAZY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Alarm extends TimeBaseEntity {
+public class PointAlarm extends TimeBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "news_id")
+    @Column(name = "point_alarm_id")
     private Long id;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "members_id")
     private Member member;
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "funding_id")
-    private Funding funding;
-
-    @Column(nullable = false)
-    private Boolean isRead;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AlarmType type;
 
-    private String title;
-    private String content;
+    private int point;
 
 }

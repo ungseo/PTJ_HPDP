@@ -1,5 +1,6 @@
 package com.stn.hpdp.service.bank;
 
+import com.stn.hpdp.common.enums.AlarmType;
 import com.stn.hpdp.common.enums.BankCode;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.jwt.JwtTokenProvider;
@@ -13,6 +14,7 @@ import com.stn.hpdp.controller.company.response.FindCompanyDetailRes;
 import com.stn.hpdp.controller.company.response.FindCompanyRes;
 import com.stn.hpdp.model.entity.*;
 import com.stn.hpdp.model.repository.*;
+import com.stn.hpdp.service.alarm.AlarmService;
 import jnr.a64asm.Mem;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +44,7 @@ public class BankService {
     private final TransferRepository transferRepository;
     private final PointHistoryRepository pointHistoryRepository;
     private final ApplicationEventPublisher eventPublisher;
+    private final AlarmService alarmService;
 
     public void saveAccount(SaveAccountReq saveAccountReq){
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
@@ -120,6 +123,8 @@ public class BankService {
 
         for (Account account : accounts){
             int penny = account.getBalance() % 1000;
+            if(penny == 0) continue; // 잔돈이 없다면 pass
+
             // 2. 남은 잔액 빼고 account 저장
             account.setBalance(account.getBalance() - penny);
             accountRepository.save(account);
@@ -151,6 +156,9 @@ public class BankService {
                     .afterPoint(member.get().getPoint())
                     .build();
             pointHistoryRepository.save(pointHistory);
+
+            // 5. 사용자 point 알림
+            alarmService.sendPoint(member.get(), penny, AlarmType.POINT);
         }
     }
 

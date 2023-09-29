@@ -33,32 +33,32 @@ class AlarmServiceTest extends IntegrationTestSupport {
     @Autowired
     private AlarmService alarmService;
 
-//    @Test
-//    @DisplayName("알림을 진행한다.")
-//    @WithMockUser(username = "test")
-//    public void subscribe() throws Exception {
-//        //given
-//        Member member = createMember();
-//        String lastEventId = "";
-//
-//        //when, then
-//        Assertions.assertDoesNotThrow(() -> alarmService.subscribe(lastEventId));
-//    }
-//
-//    @Test
-//    @DisplayName("알림 메세지 전송한다.")
-//    @WithMockUser(username = "test")
-//    public void send() throws Exception {
-//        //given
-//        Long memberId = 1L;
-//        Member member = createMember();
-//        Company company = createCompany();
-//        Funding funding = createFunding(company);
-//        String lastEventId = "";
-//        alarmService.subscribe(lastEventId);
-//        //when, then
-//        Assertions.assertDoesNotThrow(() -> alarmService.send(funding, AlarmType.START, "관심 기업 펀딩이 등록됨"));
-//    }
+    @Test
+    @DisplayName("알림을 진행한다.")
+    @WithMockUser(username = "test")
+    public void subscribe() throws Exception {
+        //given
+        Member member = createMember();
+        String lastEventId = "";
+
+        //when, then
+        Assertions.assertDoesNotThrow(() -> alarmService.subscribe(lastEventId));
+    }
+
+    @Test
+    @DisplayName("알림 메세지 전송한다.")
+    @WithMockUser(username = "test")
+    public void send() throws Exception {
+        //given
+        Long memberId = 1L;
+        Member member = createMember();
+        Company company = createCompany();
+        Funding funding = createFunding(company);
+        String lastEventId = "";
+        alarmService.subscribe(lastEventId);
+        //when, then
+        Assertions.assertDoesNotThrow(() -> alarmService.send(member, funding, AlarmType.START, "관심 기업 펀딩이 등록됨"));
+    }
 
     private Member createMember() {
         Member member = Member.builder()

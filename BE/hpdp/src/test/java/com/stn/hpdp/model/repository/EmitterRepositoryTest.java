@@ -1,22 +1,11 @@
 package com.stn.hpdp.model.repository;
 
 import com.stn.hpdp.IntegrationTestSupport;
-import com.stn.hpdp.common.enums.AlarmType;
-import com.stn.hpdp.model.entity.Alarm;
 import com.stn.hpdp.model.entity.Company;
 import com.stn.hpdp.model.entity.Funding;
 import com.stn.hpdp.model.entity.Member;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
 class EmitterRepositoryTest extends IntegrationTestSupport {

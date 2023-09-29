@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 public class AlarmController {
     private final AlarmService alarmService;
     @GetMapping(produces = "text/event-stream") // produces = MediaType.TEXT_EVENT_STREAM_VALUE
-    public SseEmitter subscribe(@RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId) {
-        return alarmService.subscribe(lastEventId);
+    public SseEmitter alarm(@RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId) {
+        return alarmService.alarm(lastEventId);
     }
 }
