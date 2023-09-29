@@ -11,7 +11,7 @@ export default function CompanyList() {
     Interfaces.InSearchCompanyInfoResponseInterface[]
   >([]);
 
-  const [keyword, setkeyword] = useState('');
+  const [keyword, setkeyword] = useState("");
 
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 

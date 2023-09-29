@@ -6,13 +6,16 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Interfaces from "../interface/apiDataInterface";
-import { registerInterestingCompany, unregisterInterestingCompany } from "../api/interests";
+import {
+  registerInterestingCompany,
+  unregisterInterestingCompany,
+} from "../api/interests";
 
 interface CompanyItemProps {
   item: Interfaces.InSearchCompanyInfoResponseInterface;
 }
 
-const CompanyItem = (props :CompanyItemProps) => {
+const CompanyItem = (props: CompanyItemProps) => {
   const { item } = props;
 
   const companyId = item.companyId;
@@ -25,7 +28,7 @@ const CompanyItem = (props :CompanyItemProps) => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
   const toggleLike = () => {
-    console.log("기업 번호:", companyId, "관심 여부:", isLiked)
+    console.log("기업 번호:", companyId, "관심 여부:", isLiked);
 
     if (isLiked) {
       unregisterInterestingCompany(

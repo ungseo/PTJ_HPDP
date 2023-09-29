@@ -12,37 +12,39 @@ const TestWallet = () => {
   const dispatch = useDispatch();
 
   // 거래 내역
-  const userId = useSelector((state: any) => state.user.info.memberId)
-
   const handleGoStatement = () => {
-    navigate(`/profile/bankstatement/${userId}`);
+    navigate(`/profile/bankstatement`);
   };
 
   // 계좌 해제
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
-  const handleGo = () => {
+  const handleGoUnregister = () => {
     // 계좌 해제 axios
     unregisterAccount(
       accessToken,
       (res) => {
-        console.log('계좌 해제 성공 테월', res)
+        console.log("계좌 해제 성공 테월", res);
       },
       (err) => {
-        console.log('계좌 해제 실패 테월', err)
+        console.log("계좌 해제 실패 테월", err);
       }
-    )
+    );
     // 계좌 해제 redux
-    dispatch(accountActions.unregisterAccount())
+    dispatch(accountActions.unregisterAccount());
   };
 
-  const accountNumber = useSelector((state: any) => state.account.accountNumber);
+  const accountNumber = useSelector(
+    (state: any) => state.account.accountNumber
+  );
   const bankCode = useSelector((state: any) => state.account.bankCode);
   const balance = useSelector((state: any) => state.account.balance);
 
   return (
     <div className={style.wrapper}>
-      <p className={style.account}>{bankCode} {accountNumber}</p>
+      <p className={style.account}>
+        {bankCode} {accountNumber}
+      </p>
       <p className={style.points}>{balance} 원</p>
       <div className={style.buttons}>
         <DeepBlueBtn
@@ -53,7 +55,7 @@ const TestWallet = () => {
         <GreyBtn
           text="계좌 해제"
           styles={{ width: "48%", height: "2.5rem", borderRadius: "0.6rem" }}
-          onClick={handleGo}
+          onClick={handleGoUnregister}
         />
       </div>
     </div>
