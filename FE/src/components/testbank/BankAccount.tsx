@@ -1,9 +1,11 @@
-import React from 'react'
-import style from '../../styles/scss/BankAccount.module.scss'
-import { useSelector } from 'react-redux';
+import React from "react";
+import style from "../../styles/scss/BankAccount.module.scss";
+import { useSelector } from "react-redux";
 
 const BankAccount = () => {
-  const accountNumber = useSelector((state: any) => state.account.accountNumber);
+  const accountNumber = useSelector(
+    (state: any) => state.account.accountNumber
+  );
   const bankCode = useSelector((state: any) => state.account.bankCode);
   const balance = useSelector((state: any) => state.account.balance);
 
@@ -26,7 +28,7 @@ const BankAccount = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BankAccount
+export default BankAccount;

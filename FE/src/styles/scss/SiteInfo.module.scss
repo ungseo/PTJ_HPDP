@@ -1,8 +1,17 @@
+@import "Style";
+
 .totalwarapper {
   padding: 0 1.5rem;
+  padding-bottom: 1.5rem;
+  border-radius: 1rem;
+  margin: auto;
+  .span {
+    text-align: start;
+  }
   .wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+    gap: 0.5rem;
   }
 }

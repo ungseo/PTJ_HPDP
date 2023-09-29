@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
-import style from "../../styles/css/ProfileItemList.module.css";
+import style from "../../styles/css/MyActivity.module.css";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../store/user-slice";
 import { logout } from "../../api/auth";
 
-const ProfileItemList = () => {
+const MyActivity = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -31,7 +31,7 @@ const ProfileItemList = () => {
     navigate(`/profile/${id}`);
   };
   return (
-    <div className={style.profileItemList}>
+    <div className={style.container}>
       <div className={style.item} onClick={onClick} id={`message/`}>
         <p>쪽지내역</p>
         <Icon icon="bi:chevron-right"></Icon>
@@ -65,4 +65,4 @@ const ProfileItemList = () => {
   );
 };
 
-export default ProfileItemList;
+export default MyActivity;

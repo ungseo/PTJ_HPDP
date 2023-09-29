@@ -4,7 +4,7 @@ import DefaultButton from "../common/DefaultButton";
 import UserAddressModal from "./UserAddressModal";
 import { useSelector } from "react-redux";
 import { EditInputInterface } from "../../interface/profilePageInterface";
-
+import style from "../../styles/css/ProfileEditList.module.css";
 const ProfileEditList = ({ editInput, setEditInput }: any) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [inputAddress, setInputAddress] = useState("");

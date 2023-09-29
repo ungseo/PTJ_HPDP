@@ -30,7 +30,7 @@ const AscendingNumber = ({ num, fs, unit }: AscendingNumberInterface) => {
   }, [num]);
   return (
     <div>
-      <span style={{ fontSize: `${fs}` }}>
+      <span style={{ fontSize: `${fs}`, fontWeight: "bold" }}>
         {targetNumber}
         {unit}
       </span>
