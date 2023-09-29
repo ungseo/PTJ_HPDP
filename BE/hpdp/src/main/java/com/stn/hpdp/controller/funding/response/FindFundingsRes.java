@@ -1,7 +1,10 @@
 package com.stn.hpdp.controller.funding.response;
 
 import com.stn.hpdp.common.enums.FundingState;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -18,14 +21,15 @@ public class FindFundingsRes {
     private String hashtag;
     private String title;
     private int targetAmount;
+    private int totalFunding;
+    private int percent;
     private String startDate;
     private String endDate;
     private FundingState state;
     private String dDay;
-    private int totalFunding;
-    private int percent;
 
-    public FindFundingsRes(Long companyId, String name, Long fundingId, String thumbnail, String hashtag, String title, int targetAmount, LocalDateTime startDate, LocalDateTime endDate, FundingState state){
+
+    public FindFundingsRes(Long companyId, String name, Long fundingId, String thumbnail, String hashtag, String title, int targetAmount, int totalFunding, int percent, LocalDateTime startDate, LocalDateTime endDate, FundingState state) {
         this.companyId = companyId;
         this.name = name;
         this.fundingId = fundingId;
@@ -33,13 +37,16 @@ public class FindFundingsRes {
         this.hashtag = hashtag;
         this.title = title;
         this.targetAmount = targetAmount;
+        this.totalFunding = totalFunding;
+        this.percent = percent;
         this.startDate = startDate.toString();
         this.endDate = endDate.toString();
         this.state = state;
-        if(endDate.isAfter(LocalDateTime.now())){
+        if (endDate.isAfter(LocalDateTime.now())) {
             this.dDay = Long.toString(ChronoUnit.DAYS.between(LocalDateTime.now(), endDate));
-        }else{
+        } else {
             this.dDay = "마감";
         }
     }
 }
+

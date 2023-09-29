@@ -79,4 +79,4 @@ out/
 .vscode/
 
 ### log files ###
-**/*.gz
+**/*.gzarticle\

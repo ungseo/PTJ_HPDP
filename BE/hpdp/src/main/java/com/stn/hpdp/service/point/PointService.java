@@ -7,22 +7,15 @@ import com.stn.hpdp.model.entity.Funding;
 import com.stn.hpdp.model.entity.FundingHistory;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.model.entity.PointHistory;
-import com.stn.hpdp.model.repository.FundingHistoryRepository;
-import com.stn.hpdp.model.repository.FundingRepository;
-import com.stn.hpdp.model.repository.MemberRepository;
-import com.stn.hpdp.model.repository.PointHistoryRepository;
-import jnr.a64asm.Mem;
+import com.stn.hpdp.model.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.NotNull;
-
 import java.util.Optional;
 
-import static com.stn.hpdp.common.exception.ErrorCode.SCARCE_POINT_BAD_REQUEST;
-import static com.stn.hpdp.common.exception.ErrorCode.USER_NOT_FOUND;
+import static com.stn.hpdp.common.exception.ErrorCode.*;
 
 @RequiredArgsConstructor
 @Transactional
@@ -34,6 +27,7 @@ public class PointService {
     private final FundingHistoryRepository fundingHistoryRepository;
     private final FundingRepository fundingRepository;
     private final PointHistoryRepository pointHistoryRepository;
+    private final PointQueryRepository pointQueryRepository;
 
     // 후원이 가능한지 확인
     public boolean fundingCheck(int reqPoint) {
@@ -48,19 +42,35 @@ public class PointService {
 
     public void funding(FundingByPointReq fundingByPointReq) {
 
+        // 펀딩 내역 저장
         Member sponsor = registFundingHistory(fundingByPointReq.getFundingId(), fundingByPointReq.getSponsorPoint());
         Optional<Funding> funding = fundingRepository.findById(fundingByPointReq.getFundingId());
-        PointHistory pointHistory = PointHistory.builder(
-                )
+
+        if (funding.isEmpty()) throw new CustomException(FUNDING_NOT_FOUND);
+        // 포인트 내역 저장
+        PointHistory pointHistory = PointHistory.builder()
                 .member(sponsor)
                 .funding(funding.get())
                 .content(funding.get().getTitle())
                 .flag(true)
                 .paymentPoint(fundingByPointReq.getSponsorPoint())
-                .afterPoint(sponsor.getPoint()- fundingByPointReq.getSponsorPoint())
+                .afterPoint(sponsor.getPoint() - fundingByPointReq.getSponsorPoint())
                 .build();
+
         pointHistoryRepository.save(pointHistory);
+        // 사용자 포인트 감소
         pointDeduction(sponsor, fundingByPointReq.getSponsorPoint());
+        // 펀딩의 총 후원 금액 업데이트
+        updateFunding(funding.get());
+
+    }
+
+    private void updateFunding(Funding funding) {
+        int totalFunding = pointQueryRepository.findTotalPriceByFundingId(funding.getId());
+        double percent = 0;
+        if (totalFunding != 0) percent = ((double) totalFunding / (double)funding.getTargetAmount()) *100 ;
+        funding.changeFunding(totalFunding, (int) percent);
+
     }
 
     private void pointDeduction(Member sponsor, int sponsorPoint) {

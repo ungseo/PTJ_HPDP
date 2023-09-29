@@ -301,8 +301,10 @@ export interface OutPointHistoryInterface {
 
 export interface MessagesInterface {
   messageId: number;
+  myId?: number;
   title: string;
   content?: string;
+  opponentId?: number;
   opponentName?: string;
   createdDate: string;
   to: boolean;
@@ -322,4 +324,11 @@ export interface myCompanyInfo {
   banner: string;
   name: string;
   hashtag: string;
+}
+
+// 후원 참여자
+export interface ParticipantsInfo {
+  memberId: number;
+  name: string;
+  profileImg: string;
 }

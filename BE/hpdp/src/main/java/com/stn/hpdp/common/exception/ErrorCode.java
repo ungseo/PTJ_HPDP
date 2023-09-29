@@ -37,6 +37,7 @@ public enum ErrorCode {
     WALLET_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자의 지갑이 존재하지 않습니다."),
     FUNDING_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 펀딩입니다."),
     MESSAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 쪽지입니다."),
+    NEWS_ALARM_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 뉴스 알림입니다."),
 
     /* 409 CONFLICT : Resource 의 현재 상태와 충돌. 보통 중복된 데이터 존재 */
     DUPLICATE_RESOURCE(HttpStatus.CONFLICT, "데이터가 이미 존재합니다"),
@@ -52,7 +53,8 @@ public enum ErrorCode {
     CREATE_FUNDING_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "펀딩을 만드는데 실패하였습니다."),
     FUNDING_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "후원에 실패하였습니다."),
     SEND_ETH_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "이더리움 전송에 실패하였습니다."),
-    APPROVAL_FUNDING_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "승인에 실패하였습니다.");
+    APPROVAL_FUNDING_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "승인에 실패하였습니다."),
+    SSE_CONNECTED_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "SSE 연결이 실패하였습니다.");
 
     private final HttpStatus httpStatus;
     private final String description;

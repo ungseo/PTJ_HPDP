@@ -83,6 +83,23 @@ export async function getRecommendAchievement(
     .catch(fail);
 }
 
+export async function getParticipants(
+  fundingId: number,
+  success: (
+    res: AxiosResponse<any, any>
+  ) =>
+    | AxiosResponse<any, any>
+    | PromiseLike<AxiosResponse<any, any>>
+    | null
+    | undefined
+    | void,
+  fail: (err: any) => PromiseLike<never> | null | undefined | void
+) {
+  await customApi("fundings")
+    .get(`/participant/${fundingId}`)
+    .then(success)
+    .catch(fail);
+}
 export async function settlementFunding(
   accessToken: string,
   fundingId: number,
