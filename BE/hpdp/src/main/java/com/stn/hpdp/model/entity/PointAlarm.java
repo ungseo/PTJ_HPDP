@@ -12,6 +12,7 @@ import static javax.persistence.FetchType.LAZY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "point_alarm")
 public class PointAlarm extends TimeBaseEntity {
 
     @Id

@@ -2,6 +2,8 @@ package com.stn.hpdp.model.entity;
 
 import com.stn.hpdp.common.enums.AlarmType;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -9,9 +11,13 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DynamicInsert
+@DynamicUpdate
+@Table(name = "news_alarm")
 public class NewsAlarm extends TimeBaseEntity {
 
     @Id
@@ -35,5 +41,8 @@ public class NewsAlarm extends TimeBaseEntity {
     private AlarmType type;
 
     private String title;
+    public void changeIsRead() {
+        this.isRead = true;
+    }
 
 }

@@ -12,13 +12,13 @@ import com.stn.hpdp.model.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
 import java.util.Map;
 
-import static com.stn.hpdp.common.exception.ErrorCode.SSE_CONNECTED_FAIL;
-import static com.stn.hpdp.common.exception.ErrorCode.USER_NOT_FOUND;
+import static com.stn.hpdp.common.exception.ErrorCode.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -85,6 +85,7 @@ public class AlarmService {
 
         String memberId = String.valueOf(member.getId());
         String eventId = memberId + "_" + System.currentTimeMillis();
+
         Map<String, SseEmitter> emitters = emitterRepository.findAllEmitterStartWithByMemberId(memberId);
         emitters.forEach(
                 (key, emitter) -> {
@@ -99,6 +100,7 @@ public class AlarmService {
 
         String memberId = String.valueOf(member.getId());
         String eventId = memberId + "_" + System.currentTimeMillis();
+
         Map<String, SseEmitter> emitters = emitterRepository.findAllEmitterStartWithByMemberId(memberId);
         emitters.forEach(
                 (key, emitter) -> {
@@ -106,6 +108,17 @@ public class AlarmService {
                     sendAlarm(emitter, eventId, key, AlarmRes.ofPoint(alarm));
                 }
         );
+    }
+
+    @Transactional
+    public void updateNewsAlarm(long newsAlarmId) {
+        Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
+                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+
+        NewsAlarm newsAlarm = newsAlarmRepository.findByIdAndMember_Id(newsAlarmId, member.getId())
+                .orElseThrow(() -> new CustomException(NEWS_ALARM_NOT_FOUND));
+
+        newsAlarm.changeIsRead();
     }
 
     private NewsAlarm createNewsAlarm(Member member, Funding funding, AlarmType alarmType) {
