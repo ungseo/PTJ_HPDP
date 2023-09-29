@@ -63,6 +63,7 @@ public class PointService {
         // 펀딩의 총 후원 금액 업데이트
         updateFunding(funding.get());
 
+
     }
 
     private void updateFunding(Funding funding) {
