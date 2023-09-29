@@ -37,7 +37,8 @@ public class FundingQueryRepository {
                         funding.totalFunding.as("totalFunding"),
                         funding.percent.as("percent"),
                         funding.startDate.as("startDate"),
-                        funding.endDate.as("endDate")
+                        funding.endDate.as("endDate"),
+                        funding.state.as("state")
 
                 ))
                 .from(funding)

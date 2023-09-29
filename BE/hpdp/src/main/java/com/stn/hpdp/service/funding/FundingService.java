@@ -1,6 +1,7 @@
 package com.stn.hpdp.service.funding;
 
 import com.stn.hpdp.common.AwsS3Uploader;
+import com.stn.hpdp.common.enums.AlarmType;
 import com.stn.hpdp.common.enums.FundingState;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.util.SecurityUtil;
@@ -12,9 +13,11 @@ import com.stn.hpdp.controller.funding.response.SettleFundingRes;
 import com.stn.hpdp.dto.FundingInfoForContractDTO;
 import com.stn.hpdp.model.entity.Company;
 import com.stn.hpdp.model.entity.Funding;
-import com.stn.hpdp.model.repository.BudgetRepository;
-import com.stn.hpdp.model.repository.CompanyRepository;
-import com.stn.hpdp.model.repository.FundingRepository;
+import com.stn.hpdp.model.entity.FundingHistory;
+import com.stn.hpdp.model.entity.Interest;
+import com.stn.hpdp.model.repository.*;
+import com.stn.hpdp.service.alarm.AlarmService;
+import com.stn.hpdp.service.interest.InterestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static com.stn.hpdp.common.exception.ErrorCode.*;
@@ -38,6 +43,10 @@ public class FundingService {
     private final CompanyRepository companyRepository;
 
     private final AwsS3Uploader awsS3Uploader;
+    private final InterestRepository interestRepository;
+    private final InterestService interestService;
+    private final FundingHistoryRepository fundingHistoryRepository;
+    private final AlarmService alarmService;
 
     public FundingInfoForContractDTO saveFunding(SaveFundingReq saveFundingReq) {
         Optional<Company> company = companyRepository.findByLoginId(saveFundingReq.getCompanyLoginId());
@@ -90,6 +99,15 @@ public class FundingService {
         );
 
         fundingRepository.save(funding);
+
+        // 알림 : 관심 기업이 펀딩을 등록한 경우
+        interestService.syncInterests(); // 관심기업 동기화
+        List<Interest> interestList = interestRepository.findByCompany_Id(company.get().getId());
+        if (!interestList.isEmpty()) {
+            for(Interest item : interestList) {
+                alarmService.sendNews(item.getMember(), funding, AlarmType.CREATE);
+            }
+        }
 
         return FundingInfoForContractDTO.builder()
                 .companyId(company.get().getId())
@@ -182,6 +200,13 @@ public class FundingService {
         funding.get().setState(FundingState.SETTLE);
         fundingRepository.save(funding.get());
 
+
+        // 알림 : 후원한 펀딩이 정산된 경우
+        List<FundingHistory> fundingHistories = fundingHistoryRepository.findAllByFunding_Id(funding.get().getId());
+        for(FundingHistory item : fundingHistories) {
+            alarmService.sendNews(item.getMember(), funding.get(), AlarmType.SETTLE);
+        }
+
         return settleFundingRes;
     }
 
@@ -209,6 +234,12 @@ public class FundingService {
         }
 
         fundingRepository.save(funding.get());
+
+        // 알림 : 후원한 펀딩에 보고서가 등록된 경우
+        List<FundingHistory> fundingHistories = fundingHistoryRepository.findAllByFunding_Id(funding.get().getId());
+        for(FundingHistory item : fundingHistories) {
+            alarmService.sendNews(item.getMember(), funding.get(), AlarmType.REPORT);
+        }
     }
 
 }

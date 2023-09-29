@@ -52,7 +52,8 @@ public enum ErrorCode {
     CREATE_FUNDING_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "펀딩을 만드는데 실패하였습니다."),
     FUNDING_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "후원에 실패하였습니다."),
     SEND_ETH_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "이더리움 전송에 실패하였습니다."),
-    APPROVAL_FUNDING_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "승인에 실패하였습니다.");
+    APPROVAL_FUNDING_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "승인에 실패하였습니다."),
+    SSE_CONNECTED_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "SSE 연결이 실패하였습니다.");
 
     private final HttpStatus httpStatus;
     private final String description;
