@@ -22,7 +22,7 @@ const ProfilePhoto = ({ styles, setSelectedImage }: any) => {
       ? userProfile
       : "/nonProfile.png";
   const goToEditPage = () => {
-    navigate(`/profile/edit/${userId}`);
+    navigate(`/profile/edit`);
   };
   const dispatch = useDispatch();
   useEffect(() => {

@@ -16,16 +16,16 @@ const TransactionList = () => {
 
     const [opponentAccount, depositAmount] = (() => {
       switch (id) {
-        case '커피':
-          return ['123456789', -780];
-        case '소주':
-          return ['987654321', -340];
-        case '용돈':
-          return ['1357911', 12570];
-        case '월급':
-          return ['24681012', 123456];
+        case "커피":
+          return ["123456789", -780];
+        case "소주":
+          return ["987654321", -340];
+        case "용돈":
+          return ["1357911", 12570];
+        case "월급":
+          return ["24681012", 123456];
         default:
-          return ['', 0];
+          return ["", 0];
       }
     })();
 
@@ -41,9 +41,9 @@ const TransactionList = () => {
             dispatch(accountActions.registerAccount(res.data.data));
           },
           (err) => {
-            console.log(err)
+            console.log(err);
           }
-        )
+        );
         console.log(res);
       },
       (err) => {

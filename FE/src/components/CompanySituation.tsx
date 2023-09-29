@@ -12,10 +12,10 @@ import style from "../../src/styles/scss/CompanySituation.module.scss";
 import Grid from "@mui/material/Grid";
 
 interface CompanySituationProps {
-    item: Interfaces.InSearchCompanyInfoResponseInterface;
+  item: Interfaces.InSearchCompanyInfoResponseInterface;
 }
 
-const CompanySituation = (props :CompanySituationProps) => {
+const CompanySituation = (props: CompanySituationProps) => {
   const { item } = props;
   const companyId = item.companyId;
 
@@ -27,7 +27,7 @@ const CompanySituation = (props :CompanySituationProps) => {
     Interfaces.OutFundingsInfoInterface[]
   >([]);
 
-  console.log(companyProgressFundingData)
+  console.log(companyProgressFundingData);
 
   useEffect(() => {
     getFundingProgress(
@@ -79,32 +79,24 @@ const CompanySituation = (props :CompanySituationProps) => {
         </Grid>
       </Grid>
 
-      {
-        companyProgressFundingData.length > 0
-        ? (
-          <div className={style.text}>
+      {companyProgressFundingData.length > 0 ? (
+        <div className={style.text}>
           <p>진행 내역</p>
-            <FundingItem
-              key={companyProgressFundingData[0].fundingId}
-              item={companyProgressFundingData[0]}
-            />
-          </div>
-        )
-        : null
-      }
+          <FundingItem
+            key={companyProgressFundingData[0].fundingId}
+            item={companyProgressFundingData[0]}
+          />
+        </div>
+      ) : null}
 
-      {
-        companyCompleteFundingData.length > 0
-        ? (
-      <div className={style.text}>
-        <p>종료 내역</p>
-        {companyCompleteFundingData.map((item) => (
-          <FundingItem key={item.fundingId} item={item} />
-        ))}
-      </div>
-        )
-        : null        
-      }
+      {companyCompleteFundingData.length > 0 ? (
+        <div className={style.text}>
+          <p>종료 내역</p>
+          {companyCompleteFundingData.map((item) => (
+            <FundingItem key={item.fundingId} item={item} />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };
