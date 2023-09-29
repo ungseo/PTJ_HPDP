@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as Interfaces from "../../interface/apiDataInterface";
 import { Icon } from "@iconify/react";
+import SendMessageModal from "../../components/message/SendMessageModal";
 import style from "../../styles/css/MessageContent.module.css";
-
+import DefaultButton from "../../components/common/DefaultButton";
 interface MessageProps {
   onClose: () => void;
   isMessageDetail: Interfaces.MessagesInterface;
+  flag: number;
 }
 
 function formatDate(inputDate: string) {
@@ -19,8 +21,18 @@ function formatDate(inputDate: string) {
   return `${year}-${month}-${day} ${hours}:${minutes}`;
 }
 
-const MessageContent = ({ onClose, isMessageDetail }: MessageProps) => {
+const MessageContent = ({ onClose, isMessageDetail, flag }: MessageProps) => {
   const formattedDate = formatDate(isMessageDetail.createdDate);
+  const [showSendMessageModal, setShowSendMessageModal] = useState(false);
+  const handleOpenSendMessageModal = () => {
+    setShowSendMessageModal(true);
+  };
+  console.log(isMessageDetail);
+  const opponentName = isMessageDetail.opponentName || "";
+  const opponentId =
+    typeof isMessageDetail.opponentId === "number"
+      ? isMessageDetail.opponentId
+      : 0;
   return (
     <div className={style.messageModal}>
       <div className={style.messagecontent}>
@@ -36,25 +48,65 @@ const MessageContent = ({ onClose, isMessageDetail }: MessageProps) => {
           ></Icon>
         </div>
 
-        <div className={style.sending}>
-          <div style={{ marginRight: "0.5rem" }}>보낸사람</div>
-          <div>{isMessageDetail.opponentName}</div>
-        </div>
-        <hr />
-        <div className={style.sending}>
-          <div style={{ marginRight: "0.5rem" }}>받은사람</div>
-          <div>{isMessageDetail.opponentName}</div>
-        </div>
-        <hr />
-        <div className={style.received}>
-          <div style={{ marginRight: "0.5rem" }}>보낸시간</div>
-          <div>{formattedDate}</div>
-        </div>
-        <hr />
-        <div style={{ marginTop: "1rem", textAlign: "justify" }}>
+        {flag === 0 && (
+          <div>
+            <div className={style.received}>
+              <div style={{ marginRight: "0.5rem" }}>보낸사람</div>
+              <div>{isMessageDetail.opponentName}</div>
+            </div>
+
+            <hr />
+            <div className={style.received}>
+              <div style={{ marginRight: "0.5rem" }}>받은시간</div>
+              <div>{formattedDate}</div>
+            </div>
+
+            <hr />
+          </div>
+        )}
+
+        {flag === 1 && (
+          <div>
+            <div className={style.sending}>
+              <div style={{ marginRight: "0.5rem" }}>받는사람</div>
+              <div>{isMessageDetail.opponentName}</div>
+            </div>
+            <hr />
+            <div className={style.sending}>
+              <div style={{ marginRight: "0.5rem" }}>보낸시간</div>
+              <div>{formattedDate}</div>
+            </div>
+            <hr />
+          </div>
+        )}
+
+        <div
+          style={{
+            marginTop: "1rem",
+            textAlign: "justify",
+            marginBottom: "1rem",
+          }}
+        >
           {isMessageDetail.content}
         </div>
+        {flag === 0 && (
+          <DefaultButton
+            text="답장하기"
+            styles={{ width: "40%", height: "2rem" }}
+            type="submit"
+            onClick={handleOpenSendMessageModal}
+          />
+        )}
       </div>
+      {showSendMessageModal && (
+        <SendMessageModal
+          onClose={() => setShowSendMessageModal(false)}
+          data={{
+            name: opponentName,
+            receiverId: opponentId,
+          }}
+        />
+      )}
     </div>
   );
 };

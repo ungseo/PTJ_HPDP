@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import { customApi } from ".";
 
 export async function getSendingMessage(
-  accessToken: string | null,
+  accessToken: string,
   receiverId: number,
   title: string,
   content: string,
