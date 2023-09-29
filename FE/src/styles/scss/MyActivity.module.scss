@@ -1,0 +1,17 @@
+@import "Style";
+
+.container {
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 1px lightgray;
+    padding: 0 1.5rem;
+    p {
+      pointer-events: none;
+    }
+    svg {
+      pointer-events: none;
+    }
+  }
+}
