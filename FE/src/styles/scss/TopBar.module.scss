@@ -1,6 +1,7 @@
 @import "Style";
 
 .logoTopbar {
+  background-color: #d31e1e;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,8 +11,7 @@
   .leftCpnt {
     display: flex;
     .logo {
-      padding: 0 0.5rem 0 0.5rem;
-      width: 4rem;
+      width: 3rem;
       background-size: cover;
     }
     .logoName {

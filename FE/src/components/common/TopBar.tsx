@@ -15,7 +15,7 @@ const LogoTopbar = () => {
     <BottomNavigation className={style.logoTopbar}>
       <div className={style.leftCpnt}>
         <div>
-          <img className={style.logo} src="/hpdpLogo.png" alt="LOGO" />
+          <img className={style.logo} src="/logo.png" alt="LOGO" />
         </div>
         <h1 className={style.logoName}>한푼두푼</h1>
       </div>
