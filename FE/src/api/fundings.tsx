@@ -82,3 +82,39 @@ export async function getRecommendAchievement(
     .then(success)
     .catch(fail);
 }
+
+export async function settlementFunding(
+  accessToken: string,
+  fundingId: number,
+  success: (
+    res: AxiosResponse<any, any>
+  ) =>
+    | AxiosResponse<any, any>
+    | PromiseLike<AxiosResponse<any, any>>
+    | null
+    | undefined
+    | void,
+  fail: (err: any) => PromiseLike<never> | null | undefined | void
+) {
+  const api = customApi(`fundings`);
+  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  await api.post("/settle", { fundingId }).then(success).catch(fail);
+}
+
+export async function registerReport(
+  accessToken: string,
+  data: FormData,
+  success: (
+    res: AxiosResponse<any, any>
+  ) =>
+    | AxiosResponse<any, any>
+    | PromiseLike<AxiosResponse<any, any>>
+    | null
+    | undefined
+    | void,
+  fail: (err: any) => PromiseLike<never> | null | undefined | void
+) {
+  const api = customApiForm("fundings");
+  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  api.post("/report", data).then(success).catch(fail);
+}
