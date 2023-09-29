@@ -1,12 +1,15 @@
 @import "Style";
 
 .profileItemList {
+  padding: 1.5rem;
+  margin-top: 6rem;
   .item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: solid 1px lightgray;
-    padding: 0 1.5rem;
+    border: none;
+    border-bottom: solid 1px lightgray;
+    padding: 0;
     p {
       pointer-events: none;
     }

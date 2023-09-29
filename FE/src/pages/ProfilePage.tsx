@@ -4,6 +4,7 @@ import ProfileWrapper from "../components/profile/ProfileWrapper";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { uiActions } from "../store/ui-slice";
+import style from "../styles/css/ProfilePage.module.css";
 const ProfilePage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -11,8 +12,7 @@ const ProfilePage = () => {
   }, []);
 
   return (
-    <div>
-      <OptionTopbar text="내 정보" />
+    <div className={style.page}>
       <ProfileWrapper />
     </div>
   );
