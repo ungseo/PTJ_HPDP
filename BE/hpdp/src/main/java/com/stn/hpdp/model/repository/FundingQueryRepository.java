@@ -34,10 +34,12 @@ public class FundingQueryRepository {
                         funding.hashtag.as("hashtag"),
                         funding.title.as("title"),
                         funding.targetAmount.as("targetAmount"),
+                        funding.totalFunding.as("totalFunding"),
+                        funding.percent.as("percent"),
                         funding.startDate.as("startDate"),
                         funding.endDate.as("endDate"),
-                        funding.totalFunding.as("totalFunding"),
-                        funding.percent.as("percent")
+                        funding.state.as("state")
+
                 ))
                 .from(funding)
                 .where(equalCompanyId(companyId), equalDone(done), containsKeyword(keyword))
