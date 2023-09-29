@@ -1,3 +1,10 @@
-.fullWidthImage {
-  width: 100%;
+.wrapper {
+  // background-color: tomato;
+  padding: 1.5rem;
+  .fullWidthImage {
+    width: 100%;
+    border-radius: 1rem;
+    // margin-top: 1.5rem;
+    // margin-bottom: 1.5rem;
+  }
 }
