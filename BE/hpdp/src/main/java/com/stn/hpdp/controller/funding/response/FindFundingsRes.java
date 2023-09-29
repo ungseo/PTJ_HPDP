@@ -11,7 +11,6 @@ import java.time.temporal.ChronoUnit;
 
 @Getter
 @Setter
-@Builder
 @ToString
 public class FindFundingsRes {
 
@@ -50,3 +49,4 @@ public class FindFundingsRes {
         }
     }
 }
+

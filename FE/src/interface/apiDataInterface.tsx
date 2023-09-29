@@ -301,8 +301,10 @@ export interface OutPointHistoryInterface {
 
 export interface MessagesInterface {
   messageId: number;
+  myId?: number;
   title: string;
   content?: string;
+  opponentId?: number;
   opponentName?: string;
   createdDate: string;
   to: boolean;

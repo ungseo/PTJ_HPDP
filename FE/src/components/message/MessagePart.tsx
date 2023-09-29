@@ -7,8 +7,6 @@ import { Grid } from "@mui/material";
 import style from "../../styles/css/MessagePart.module.css";
 
 interface MessagePartProps {
-  isChecked: boolean;
-  onCheckboxChange: () => void;
   message: Interfaces.MessagesInterface;
   flag: number;
 }
@@ -21,13 +19,7 @@ function formatDate(inputDate: string) {
   return `${year}.${month}.${day}`;
 }
 
-const MessagePart = ({
-  isChecked = false,
-  onCheckboxChange,
-  message,
-  flag,
-}: MessagePartProps) => {
-  console.log(message);
+const MessagePart = ({ message, flag }: MessagePartProps) => {
   const createDay = formatDate(message.createdDate);
   const [isMessageContent, setMessageContent] = useState(false);
   const [isMessageDetail, setMessageDetail] =
@@ -48,28 +40,18 @@ const MessagePart = ({
       }
     );
   };
-  console.log(flag);
+
   const handleCloseModal = () => {
     setMessageContent(false);
   };
   console.log(isMessageDetail);
+  const data = {
+    companyId: isMessageDetail.myId,
+  };
   return (
     <div>
-      <Grid container style={{ paddingTop: "1rem" }}>
-        <Grid
-          item
-          xs={1}
-          onClick={(event) => {
-            event.stopPropagation();
-          }}
-        >
-          <input
-            type="checkbox"
-            checked={isChecked}
-            onChange={() => onCheckboxChange()}
-          />
-        </Grid>
-        <Grid item xs={11} onClick={handleShowContentClick}>
+      <div style={{ paddingTop: "1rem" }}>
+        <div onClick={handleShowContentClick}>
           <div className={style.name_date}>
             <div className={style.name}>
               <div className={style.company_name}>{message.opponentName}</div>
@@ -77,8 +59,8 @@ const MessagePart = ({
             <div className={style.date}>{createDay}</div>
           </div>
           <div className={style.letter}>{message.title}</div>
-        </Grid>
-      </Grid>
+        </div>
+      </div>
       {isMessageContent && (
         <div className="modal">
           <div className={style.modalbackground}></div>
