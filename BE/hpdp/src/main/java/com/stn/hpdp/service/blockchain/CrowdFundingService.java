@@ -5,9 +5,13 @@ import com.stn.hpdp.common.exception.ErrorCode;
 import com.stn.hpdp.common.util.SecurityUtil;
 import com.stn.hpdp.controller.point.request.FundingByPointReq;
 import com.stn.hpdp.dto.FundingInfoForContractDTO;
-import com.stn.hpdp.model.entity.*;
-import com.stn.hpdp.model.repository.*;
-import lombok.NonNull;
+import com.stn.hpdp.model.entity.Company;
+import com.stn.hpdp.model.entity.Member;
+import com.stn.hpdp.model.entity.Wallet;
+import com.stn.hpdp.model.repository.CompanyRepository;
+import com.stn.hpdp.model.repository.FundingRepository;
+import com.stn.hpdp.model.repository.MemberRepository;
+import com.stn.hpdp.model.repository.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +28,6 @@ import org.web3j.tx.gas.DefaultGasProvider;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 import static com.stn.hpdp.common.exception.ErrorCode.*;
@@ -39,7 +42,6 @@ public class CrowdFundingService {
     private final MemberRepository memberRepository;
     private final WalletRepository walletRepository;
     private final FundingRepository fundingRepository;
-    private final TransactionRepository transactionRepository;
 
     @Value("${ethereum.rpc-url}")
     private String rpcUrl;
@@ -116,7 +118,7 @@ public class CrowdFundingService {
         );
         // 정산 금액 확인
         int raiesdAmount = getRaisedAmount(funding, fundingId);
-        log.info("amount :{}", raiesdAmount);
+        log.info("amount :{}",raiesdAmount);
         // 정산 금액 승인
         trxApproval(credentials, raiesdAmount);
         // 정산 금액 인출
@@ -263,29 +265,7 @@ public class CrowdFundingService {
             System.out.println("contributeToFundingAsync completed: " + contributionReceipt);
             // contributeToFundingAsync 완료 후 결과 확인
             if (contributionReceipt == null) throw new CustomException(FUNDING_FAIL);
-
-            savaTransactionReceipt(contributionReceipt, fundingByPointReq.getFundingId());
-
         });
-    }
-
-    private void savaTransactionReceipt(TransactionReceipt contributionReceipt, Long fundingId) {
-        Optional<Funding> funding = fundingRepository.findById(fundingId);
-        if (funding.isEmpty()) throw new CustomException(FUNDING_NOT_FOUND);
-        transactionRepository.save(TrxReceipt.builder()
-                .blockHash(contributionReceipt.getBlockHash())
-                .blockNumber(contributionReceipt.getBlockNumberRaw())
-                .contractAddress(contributionReceipt.getContractAddress())
-                .cumulativeGasUsed(contributionReceipt.getCumulativeGasUsedRaw())
-                .trxTo(contributionReceipt.getTo())
-                .gasUsed(contributionReceipt.getCumulativeGasUsedRaw())
-                .status(contributionReceipt.getStatus())
-                .transactionHash(contributionReceipt.getTransactionHash())
-                .transactionIndex(contributionReceipt.getTransactionIndexRaw())
-                .trxFrom(contributionReceipt.getFrom())
-                .funding(funding.get())
-                .build());
-
     }
 
     private CompletableFuture<TransactionReceipt> trxApprovalAsync(Credentials credentials, long value) {

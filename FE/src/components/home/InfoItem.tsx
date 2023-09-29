@@ -9,7 +9,7 @@ const InfoItem = ({ imgSrc, text, num, unit }: InfoItemInterface) => {
         {text}
       </span>
       <div>
-        <AscendingNumber num={num} unit={unit} />
+        <AscendingNumber num={num} unit={unit} fs="1.2rem" />
       </div>
     </div>
   );

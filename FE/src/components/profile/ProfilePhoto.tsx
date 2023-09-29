@@ -11,16 +11,12 @@ import { profileEditActions } from "../../store/profileEdit-slice";
 const ProfilePhoto = ({ styles, setSelectedImage }: any) => {
   const navigate = useNavigate();
   const isLogined = useSelector((state: any) => state.user.auth.isLogined);
-  const userName = useSelector((state: any) => state.user.info.name);
+  const userInfo = useSelector((state: any) => state.user.info);
   const isEditPage = useSelector((state: any) => state.ui.isEditPage);
   const userProfile = useSelector((state: any) => state.user.info.profile);
   const editingProfile = useSelector((state: any) => state.profileEdit.fileURL);
   const profilePhotoURL =
-    isEditPage && editingProfile
-      ? editingProfile
-      : !isEditPage && userProfile
-      ? userProfile
-      : "/nonProfile.png";
+    isEditPage && editingProfile ? editingProfile : userProfile;
   const goToEditPage = () => {
     navigate(`/profile/edit`);
   };
@@ -31,9 +27,19 @@ const ProfilePhoto = ({ styles, setSelectedImage }: any) => {
     };
     firstSettings();
   }, []);
-  const userId = useSelector((state: any) => state.user.auth.memberId);
+  const className = !isEditPage ? style.profilePhoto : style.editPhoto;
   return (
-    <div className={style.profilePhoto}>
+    <div className={className}>
+      {isLogined && !isEditPage ? (
+        <div className={style.leftCpnt}>
+          <div className={style.textBox} onClick={goToEditPage}>
+            <p className={style.p}>{userInfo.name}</p>
+            <span className={style.span}>님</span>
+            <Icon icon="bi-pencil-square" />
+          </div>
+          <p className={style.pp}>{userInfo.loginId}</p>
+        </div>
+      ) : null}
       <div className={style.photoWrapper}>
         <img
           className={style.img}
@@ -43,12 +49,6 @@ const ProfilePhoto = ({ styles, setSelectedImage }: any) => {
         />
         {isEditPage && <PhotoEditButton setSelectedImage={setSelectedImage} />}
       </div>
-      {isLogined && !isEditPage ? (
-        <div className={style.p} onClick={goToEditPage}>
-          <p>{userName}</p>
-          <Icon icon="bi:gear-fill" />
-        </div>
-      ) : null}
     </div>
   );
 };

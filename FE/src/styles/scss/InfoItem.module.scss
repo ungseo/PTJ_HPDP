@@ -1,7 +1,10 @@
+@import "Style";
+
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
-  margin-bottom: 2rem;
+  background-color: $bcolor;
+  border-radius: 1rem;
 }

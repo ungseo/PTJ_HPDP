@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import style from "../../styles/css/PhotoEditButton.module.css";
 import { profileEditActions } from "../../store/profileEdit-slice";
+import { Icon } from "@iconify/react";
 
 interface SetFunction {
   setSelectedImage: React.Dispatch<React.SetStateAction<File>>;
@@ -21,7 +22,11 @@ const PhotoEditButton = ({ setSelectedImage }: SetFunction) => {
   return (
     <div className={style.photoEditButton}>
       <label className={style.label} htmlFor="input-file">
-        <img src="/buttons/photoEditButton.png" alt="버튼" />
+        {/* <img src="/buttons/photoEditButton.png" alt="버튼" /> */}
+        <Icon
+          icon={"bi-patch-plus-fill"}
+          style={{ fontSize: "2.5rem", color: "white" }}
+        />
       </label>
       <input
         className={style.input}
