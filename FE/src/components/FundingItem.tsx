@@ -16,7 +16,7 @@ const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
   const handleGoFundingDetail = () => {
     navigate(`/funding/detail/${item.fundingId}`);
   };
-
+  console.log(item);
   return (
     <Grid container className={style.total} onClick={handleGoFundingDetail}>
       <Grid item xs={3}>

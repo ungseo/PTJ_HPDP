@@ -1,23 +1,39 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { OptionTopbar } from "../../components/common/TopBar";
 import { useSelector } from "react-redux";
 import { getCompanyFundings } from "../../api/companies";
+import FundingItem from "../../components/FundingItem";
+import FundingListItem from "../../components/companyOnly/FundingListItem";
 
 const CompanyFundingPage = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+  const [fundings, setFundings] = useState([]);
   useEffect(() => {
     if (accessToken) {
       getCompanyFundings(
         accessToken,
-        (res) => {},
-        (err) => {}
+        (res) => {
+          setFundings(res.data.data);
+          console.log(fundings);
+        },
+        (err) => {
+          console.log("페이지 로드 실패");
+        }
       );
     }
   }, []);
   return (
     <div>
       <OptionTopbar text="내 펀딩 정보" />
-      <div>{}</div>
+      {fundings.length ? (
+        <div>
+          {fundings.map((funding, idx) => (
+            <FundingListItem key={idx} funding={funding} />
+          ))}
+        </div>
+      ) : (
+        <h1>없어요</h1>
+      )}
     </div>
   );
 };

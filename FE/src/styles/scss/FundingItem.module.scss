@@ -2,6 +2,7 @@
 
 .total {
   display: flex;
+  position: relative;
   // margin-bottom: 1rem;
 
   .leftimg {
@@ -55,5 +56,43 @@
         }
       }
     }
+  }
+}
+.clicked {
+  position: absolute;
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 30%;
+
+  background-color: blue;
+
+  .iconButton {
+    color: white;
+    background-color: transparent;
+    border: none;
+    border-right: 2px solid $white;
+    height: 100%;
+  }
+}
+
+.animate {
+  background-color: hotpink;
+  animation-name: Open;
+  transition-duration: 3s;
+  opacity: 1;
+}
+@keyframes Open {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
   }
 }

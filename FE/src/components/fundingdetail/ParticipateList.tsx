@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import * as Interfaces from "../../interface/apiDataInterface";
 import style from "../../styles/css/ParticipateList.module.css";
 import ParticipateItem from "./ParticipateItem";
-
+import { getParticipants } from "../../api/fundings";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -9,25 +10,33 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
-const ParticipateList = () => {
-  const FundingParticipants = [
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-  ];
+interface ParticipateListProps {
+  fundingId: number;
+}
 
+const ParticipateList = ({ fundingId }: ParticipateListProps) => {
+  const [participantData, setParticipantData] = useState<
+    Interfaces.ParticipantsInfo[]
+  >([]);
+
+  useEffect(() => {
+    getParticipants(
+      fundingId,
+      (res) => {
+        setParticipantData(res.data.data);
+        console.log("후원자 API 연결");
+      },
+      (err) => {
+        console.log("후원자 API 호출 실패", err);
+      }
+    );
+  }, [fundingId]);
+  console.log(participantData);
   return (
     <div className={style.participants_list}>
       <div className={style.textcontent}>
         <div className={style.first}>후원 목록</div>
-        <div className={style.second}>전체 10명</div>
+        <div className={style.second}>{participantData.length}명</div>
       </div>
       <div className={style.participants_swiper}>
         <Swiper
@@ -44,9 +53,9 @@ const ParticipateList = () => {
           }}
           className={style.mySwiper}
         >
-          {FundingParticipants.map((item) => (
+          {participantData.map((item) => (
             <SwiperSlide
-              key={item.id}
+              key={item.memberId}
               style={{ width: "unset", zIndex: 1 }}
               className={style.participant_item}
             >

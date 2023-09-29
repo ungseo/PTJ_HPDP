@@ -1,0 +1,14 @@
+@import "Style";
+
+.modal {
+  position: absolute;
+  max-width: 500px;
+  width: 70%;
+  height: 13rem;
+  margin: calc(50% + 6.5rem) auto auto 15%;
+  background-color: tomato;
+  z-index: 5;
+  .xbutton {
+    text-align: end;
+  }
+}

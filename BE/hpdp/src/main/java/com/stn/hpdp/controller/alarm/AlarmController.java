@@ -18,7 +18,7 @@ import static com.stn.hpdp.common.util.LogCurrent.END;
 @Slf4j
 @Api
 @RestController
-    @RequestMapping("/api/alarm")
+@RequestMapping("/api/alarm")
 @RequiredArgsConstructor
 public class AlarmController {
     private final AlarmService alarmService;
