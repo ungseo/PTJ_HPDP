@@ -21,15 +21,16 @@ const StyledTabs = styled((props: StyledTabsProps) => (
     TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
   />
 ))({
+  width: "100%",
   "& .MuiTabs-indicator": {
     display: "flex",
     justifyContent: "center",
     backgroundColor: "transparent",
   },
   "& .MuiTabs-indicatorSpan": {
-    maxWidth: 40,
+    maxWidth: "100%",
     width: "100%",
-    backgroundColor: "#635ee7",
+    backgroundColor: "#cbcbcb",
   },
 });
 
@@ -40,10 +41,11 @@ interface StyledTabProps {
 const StyledTab = styled((props: StyledTabProps) => (
   <Tab disableRipple {...props} />
 ))(({ theme }) => ({
+  width: "50%",
   textTransform: "none",
   fontWeight: theme.typography.fontWeightRegular,
   fontSize: theme.typography.pxToRem(15),
-  marginRight: theme.spacing(1),
+  marginRight: theme.spacing(0),
   // color: 'rgba(255, 255, 255, 0.7)',
   color: "gray",
   "&.Mui-selected": {
