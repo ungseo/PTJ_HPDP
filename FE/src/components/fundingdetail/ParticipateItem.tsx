@@ -5,7 +5,7 @@ const ParticipateItem = () => {
   return (
     <div>
       <img
-        src="/hpdpLogo.png"
+        src="/default_img.png"
         alt="Company Logo"
         className={style.praticipant_img}
       />
