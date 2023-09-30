@@ -48,7 +48,7 @@ public class CompanyService {
 
         interestService.syncInterests(); // redis -> mysql
 
-        if(SecurityUtil.getCurrentMemberLoginId().equals("anonymousUser")) {
+        if(SecurityUtil.getCurrentMemberLoginId().equals("anonymousUser") || SecurityUtil.checkCompany() ) {
             companyResList = companyQueryRepository.findCompanyByKeyword(keyword);
         } else {
             Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
@@ -67,7 +67,7 @@ public class CompanyService {
 
         FindCompanyDetailRes findCompanyDetailRes = FindCompanyDetailRes.from(companyRes.get());
 
-        if(!SecurityUtil.getCurrentMemberLoginId().equals("anonymousUser")) {
+        if(!(SecurityUtil.getCurrentMemberLoginId().equals("anonymousUser") || SecurityUtil.checkCompany())) {
             Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                     .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
