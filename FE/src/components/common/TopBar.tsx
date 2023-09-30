@@ -50,4 +50,4 @@ const DefaultTopbar = (text: string) => {
   );
 };
 
-export { LogoTopbar, OptionTopbar };
+export { LogoTopbar, OptionTopbar, DefaultTopbar };

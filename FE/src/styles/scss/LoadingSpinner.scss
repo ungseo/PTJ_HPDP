@@ -2,6 +2,7 @@
 .loadingSpinner {
   position: fixed;
   width: 100%;
+  max-width: 500px;
   height: calc(100vh - 112px);
   background-color: $white;
   top: 56px;
