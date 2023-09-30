@@ -7,6 +7,7 @@ import com.stn.hpdp.controller.point.request.FundingByPointReq;
 import com.stn.hpdp.dto.FundingInfoForContractDTO;
 import com.stn.hpdp.model.entity.*;
 import com.stn.hpdp.model.repository.*;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,7 @@ import org.web3j.tx.gas.DefaultGasProvider;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 import static com.stn.hpdp.common.exception.ErrorCode.*;

@@ -3,7 +3,7 @@ import { LogoTopbar } from "../components/common/TopBar";
 import HomeBanner from "../components/home/HomeBanner";
 import FundingCardList from "../components/home/FundingCardList";
 import SiteInfo from "../components/home/SiteInfo";
-
+import style from "../styles/css/HomePage.module.css";
 import * as Interfaces from "../interface/apiDataInterface";
 import { getRecommendDeadline, getRecommendAchievement } from "../api/fundings";
 
@@ -36,18 +36,23 @@ const HomePage = () => {
       }
     );
   }, []);
-  console.log(fundingDeadlineData);
+
   return (
     <div>
       <LogoTopbar />
       <HomeBanner />
       <SiteInfo />
+      <div className={style.introduce}>
+        <div className={style.name}>@@@님</div>
+        <div>새로운 펀딩에 참여해 보세요</div>
+      </div>
+
       <div>
-        <h3>곧 종료될 펀딩</h3>
+        <div className={style.title}>마감이 얼마 남지 않았어요!</div>
         <FundingCardList items={fundingDeadlineData} />
       </div>
       <div>
-        <h3>가장 인기있는 펀딩</h3>
+        <div className={style.title}>인기가 많아요!</div>
         <FundingCardList items={fundingAchievementData} />
       </div>
     </div>

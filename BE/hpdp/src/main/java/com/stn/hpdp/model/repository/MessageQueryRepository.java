@@ -21,26 +21,26 @@ public class MessageQueryRepository {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
-    public List<Message> findMessagesByFlag(Integer flag, boolean isUser){
+    public List<Message> findMessagesByFlag(Integer flag, boolean isUser, String loginId){
         return queryFactory
                 .selectFrom(message)
-                .where(equalFlag(flag, isUser))
+                .where(equalFlag(flag, isUser, loginId))
                 .orderBy(message.createdDate.desc())
                 .fetch();
     }
 
-    private BooleanExpression equalFlag(Integer flag, boolean isUser){
+    private BooleanExpression equalFlag(Integer flag, boolean isUser, String loginId){
         if(flag == null || flag == 0){
             if(isUser){
-                return message.toWho.eq(false);
+                return message.toWho.eq(false).and(message.member.loginId.eq(loginId));
             }else{
-                return message.toWho.eq(true);
+                return message.toWho.eq(true).and(message.company.loginId.eq(loginId));
             }
         }else{
             if(isUser){
-                return message.toWho.eq(true);
+                return message.toWho.eq(true).and(message.member.loginId.eq(loginId));
             }else{
-                return message.toWho.eq(false);
+                return message.toWho.eq(false).and(message.company.loginId.eq(loginId));
             }
         }
     }

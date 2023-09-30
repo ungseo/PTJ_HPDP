@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
 
 // specify the type for tabProps object
 interface CustomizedTabsProps {
@@ -21,15 +21,16 @@ const StyledTabs = styled((props: StyledTabsProps) => (
     TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
   />
 ))({
-  '& .MuiTabs-indicator': {
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
+  width: "100%",
+  "& .MuiTabs-indicator": {
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: "transparent",
   },
-  '& .MuiTabs-indicatorSpan': {
-    maxWidth: 40,
-    width: '100%',
-    backgroundColor: '#635ee7',
+  "& .MuiTabs-indicatorSpan": {
+    maxWidth: "100%",
+    width: "100%",
+    backgroundColor: "#cbcbcb",
   },
 });
 
@@ -40,20 +41,21 @@ interface StyledTabProps {
 const StyledTab = styled((props: StyledTabProps) => (
   <Tab disableRipple {...props} />
 ))(({ theme }) => ({
-  textTransform: 'none',
+  width: "50%",
+  textTransform: "none",
   fontWeight: theme.typography.fontWeightRegular,
   fontSize: theme.typography.pxToRem(15),
-  marginRight: theme.spacing(1),
+  marginRight: theme.spacing(0),
   // color: 'rgba(255, 255, 255, 0.7)',
-  color: 'gray',
-  '&.Mui-selected': {
+  color: "gray",
+  "&.Mui-selected": {
     // color: '#fff',
-    color: 'black',
+    color: "black",
   },
   // '&.Mui-focusVisible': {
   //   backgroundColor: 'rgba(100, 95, 228, 0.32)',
   // },
-}))
+}));
 
 export default function CustomizedTabs(props: CustomizedTabsProps) {
   const [value, setValue] = React.useState(0);
@@ -65,9 +67,9 @@ export default function CustomizedTabs(props: CustomizedTabsProps) {
   const { tabProps } = props;
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: "100%" }}>
       {/* <Box sx={{ bgcolor: '#2e1534' }}> */}
-      <Box sx={{ bgcolor: 'white' }}>
+      <Box sx={{ bgcolor: "white" }}>
         <StyledTabs
           value={value}
           onChange={handleChange}
@@ -79,9 +81,7 @@ export default function CustomizedTabs(props: CustomizedTabsProps) {
             <StyledTab key={index} label={key} />
           ))}
         </StyledTabs>
-        <Box>
-          {Object.values(tabProps)[value]}
-        </Box>
+        <Box>{Object.values(tabProps)[value]}</Box>
       </Box>
     </Box>
   );

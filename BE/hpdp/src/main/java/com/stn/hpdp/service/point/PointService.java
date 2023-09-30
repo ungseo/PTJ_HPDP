@@ -6,6 +6,7 @@ import com.stn.hpdp.controller.point.request.FundingByPointReq;
 import com.stn.hpdp.model.entity.Funding;
 import com.stn.hpdp.model.entity.FundingHistory;
 import com.stn.hpdp.model.entity.Member;
+import com.stn.hpdp.model.entity.PointHistory;
 import com.stn.hpdp.model.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

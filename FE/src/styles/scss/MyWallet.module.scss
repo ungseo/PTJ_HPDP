@@ -1,22 +1,31 @@
 @import "Style";
 
 .mywallet {
-  background-color: $pastelPink;
+  background-color: $light;
   border-radius: 15px;
-  padding: 1rem;
-  margin: 1.5rem;
-  p {
-    margin: 0;
+  padding: 0 1rem 1rem 1rem;
+  width: calc(85% - 2rem);
+  position: absolute;
+  top: calc(25vh);
+  left: calc(7.5%);
+  height: 7rem;
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    p {
+      margin: 0.5rem;
+    }
+    .title {
+      text-align: start;
+      font-size: 1.5em;
+    }
+    .point {
+      text-align: end;
+      font-size: 2rem;
+      font-weight: bold;
+    }
   }
-  .title {
-    text-align: start;
-    font-size: 1.5em;
-  }
-  .point {
-    text-align: end;
-    font-size: 3rem;
-  }
-
   .buttons {
     display: flex;
     justify-content: space-between;

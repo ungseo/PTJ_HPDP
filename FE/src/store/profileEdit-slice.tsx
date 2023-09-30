@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const profileEditSlice = createSlice({
   name: "transHistory",
   initialState: {
-    fileURL: "",
+    fileURL: null,
     name: "",
     phoneNumber: "",
     email: "",

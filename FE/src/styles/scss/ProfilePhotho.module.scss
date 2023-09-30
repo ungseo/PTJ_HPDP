@@ -1,20 +1,63 @@
+@import "Style";
+
 .profilePhoto {
-  margin: 2rem 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  background-color: $hotPink;
+  border-radius: 0 0 1.5rem 1.5rem;
+  height: 25vh;
+  .leftCpnt {
+    display: flex;
+    flex-direction: column;
+    color: $white;
+    .textBox {
+      display: flex;
+      align-items: center;
+      font-size: 1.7rem;
+      .p {
+        text-decoration: underline 1px solid;
+        margin: auto;
+      }
+      .span {
+        font-size: 1.2rem;
+      }
+    }
+    .pp {
+      background-color: #fb9f8c;
+      border-radius: 1.5rem;
+      height: 1.5rem;
+    }
+  }
   .photoWrapper {
     width: auto;
     position: relative;
     .img {
-      width: 5rem;
-      height: 5rem;
+      width: 6rem;
+      height: 6rem;
       border-radius: 9999px;
       background-color: lightgray;
     }
   }
-  .p {
-    display: flex;
-    align-items: center;
+}
+.editPhoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: $pastelPink;
+  height: 20vh;
+
+  .photoWrapper {
+    width: auto;
+    position: relative;
+    .img {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 9999px;
+      background-color: lightgray;
+      border: 1px solid $black;
+    }
   }
 }

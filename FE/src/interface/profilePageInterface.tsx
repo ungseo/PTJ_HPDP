@@ -22,4 +22,3 @@ export interface FundingHistoryInterface {
   totalFunding: number;
   state?: string;
 }
-[];

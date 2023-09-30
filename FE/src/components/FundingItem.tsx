@@ -11,7 +11,13 @@ const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
   const navigate = useNavigate();
 
   // dday는 마감이거나 숫자이므로 숫자일 경우 'D-'를 넣는다.
-  const formatDday = item.dday !== "마감" ? `D-${item.dday}` : item.dday;
+  const formatDday =
+    item.dday !== "마감"
+      ? item.dday !== 0
+        ? `D-${item.dday}`
+        : "오늘마감"
+      : item.dday;
+  const clampedPercent = Math.min(item.percent || 0, 100);
 
   const handleGoFundingDetail = () => {
     navigate(`/funding/detail/${item.fundingId}`);
@@ -29,7 +35,7 @@ const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
         </div>
         <div className={style.downcontent}>
           <div className={style.remaindate}>{formatDday}</div>
-          <ProgressBar percent={item.percent || 0} />
+          <ProgressBar percent={clampedPercent} />
           <div className={style.accountdetail}>
             <div className={style.nowaccount}>{item.totalFunding}원</div>
             <div className={style.fundingpercent}>{item.percent}%</div>

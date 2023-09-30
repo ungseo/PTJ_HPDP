@@ -20,12 +20,12 @@ import com.stn.hpdp.service.alarm.AlarmService;
 import com.stn.hpdp.service.interest.InterestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -239,6 +239,37 @@ public class FundingService {
         List<FundingHistory> fundingHistories = fundingHistoryRepository.findAllByFunding_Id(funding.get().getId());
         for(FundingHistory item : fundingHistories) {
             alarmService.sendNews(item.getMember(), funding.get(), AlarmType.REPORT);
+        }
+    }
+
+
+    @Scheduled(cron = "0 0 9,18 * * ?") // 매일 9시, 18시 마다 실행
+    public void updateFundingState(){
+        List<Funding> fundingList = fundingRepository.getAllFundings();
+        for (Funding funding : fundingList){
+            LocalDateTime start = funding.getStartDate();
+            LocalDateTime end = funding.getEndDate();
+            if(end.isBefore(LocalDateTime.now())){
+                funding.setState(FundingState.END);
+
+                // 알림 : 후원한 펀딩이 마감된 경우
+                List<FundingHistory> fundingHistories = fundingHistoryRepository.findAllByFunding_Id(funding.getId());
+                for(FundingHistory item : fundingHistories) {
+                    alarmService.sendNews(item.getMember(), funding, AlarmType.END);
+                }
+
+            }else if(start.isBefore(LocalDateTime.now())){
+                funding.setState(FundingState.ING);
+
+                // 알림 : 관심 기업이 펀딩을 시작한 경우
+                interestService.syncInterests(); // 관심기업 동기화
+                List<Interest> interestList = interestRepository.findByCompany_Id(funding.getCompany().getId());
+                if (!interestList.isEmpty()) {
+                    for(Interest item : interestList) {
+                        alarmService.sendNews(item.getMember(), funding, AlarmType.START);
+                    }
+                }
+            }
         }
     }
 

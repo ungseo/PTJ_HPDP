@@ -57,11 +57,10 @@ const MyWallet = () => {
 
   return (
     <div className={style.mywallet}>
-      <p className={style.title}>
-        포인트
-        <Icon icon="bi:chevron-right"></Icon>
-      </p>
-      <p className={style.point}>{userPoint} P</p>
+      <div className={style.wrapper}>
+        <p className={style.title}>포인트</p>
+        <p className={style.point}>{userPoint} P</p>
+      </div>
       <div className={style.buttons}>
         {isRegistered ? (
           <DefaultButton
@@ -69,9 +68,9 @@ const MyWallet = () => {
             text="계좌 해제"
             styles={{
               width: "48%",
-              height: "3.5rem",
+              height: "3rem",
               borderRadius: "0.5rem",
-              fontSize: "1.5rem",
+              fontSize: "1.2rem",
             }}
             onClick={onClick}
           />
@@ -81,9 +80,9 @@ const MyWallet = () => {
             text="계좌 등록"
             styles={{
               width: "48%",
-              height: "3.5rem",
+              height: "3rem",
               borderRadius: "0.5rem",
-              fontSize: "1.5rem",
+              fontSize: "1.2rem",
             }}
             onClick={onClick}
           />
@@ -93,9 +92,9 @@ const MyWallet = () => {
           text="포인트 충전"
           styles={{
             width: "48%",
-            height: "3.5rem",
+            height: "3rem",
             borderRadius: "0.5rem",
-            fontSize: "1.5rem",
+            fontSize: "1.2rem",
           }}
           onClick={onClick}
         />

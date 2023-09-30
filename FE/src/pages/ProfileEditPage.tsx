@@ -74,24 +74,35 @@ const ProfileEditPage = () => {
         styles={{ width: "8rem", height: "8rem" }}
         setSelectedImage={setSelectedImage}
       />
-      <ProfileEditList setEditInput={setEditInput} editInput={editInput} />
-
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "0 1.5rem",
+          borderRadius: "1.5rem 1.5rem 0 0",
+          backgroundColor: "#f3f3f3",
+          position: "absolute",
+          width: "100%",
+          top: "30vh",
+          height: "70vh",
         }}
       >
-        <span style={{ color: "red" }}>회원탈퇴</span>
-        <DefaultButton text="비밀번호 변경" onClick={modalHandler} />
+        <ProfileEditList setEditInput={setEditInput} editInput={editInput} />
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "0 1.5rem",
+          }}
+        >
+          <span style={{ color: "red" }}>회원탈퇴</span>
+          <DefaultButton text="비밀번호 변경" onClick={modalHandler} />
+        </div>
+        <DefaultButton
+          text="저장"
+          styles={{ width: "9rem", height: "3.5rem" }}
+          onClick={saveEditHandler}
+        />
+        {modal ? <PwModal modalHandler={setModal} /> : null}
       </div>
-      <DefaultButton
-        text="저장"
-        styles={{ width: "9rem", height: "3.5rem" }}
-        onClick={saveEditHandler}
-      />
-      {modal ? <PwModal modalHandler={setModal} /> : null}
     </div>
   );
 };

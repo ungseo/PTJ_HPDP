@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import DeepBlueBtn from "../components/common/DeepBlueBtn";
 import style from "../styles/css/RegisterAccountPage.module.css";
 
-import MenuItem from '@mui/material/MenuItem';
-import { useSelector } from 'react-redux';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { registerAccount } from '../api/banks';
-import { useNavigate } from 'react-router-dom';
+import MenuItem from "@mui/material/MenuItem";
+import { useSelector } from "react-redux";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { registerAccount } from "../api/banks";
+import { useNavigate } from "react-router-dom";
 
 const RegisterAccountPage = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const RegisterAccountPage = () => {
       bankCode,
       (res) => {
         console.log("계좌 등록 성공:", res);
-        navigate('/profile');
+        navigate("/profile");
       },
       (err) => {
         console.error("계좌 등록 실패:", err);
@@ -68,10 +68,10 @@ const RegisterAccountPage = () => {
       />
       <DeepBlueBtn text="계좌 등록" onClick={handleButtonClick} />
     </div>
-  )
-}
+  );
+};
 
-export default RegisterAccountPage
+export default RegisterAccountPage;
 
 const options = [
   { value: "KDB", label: "KDB산업은행" },

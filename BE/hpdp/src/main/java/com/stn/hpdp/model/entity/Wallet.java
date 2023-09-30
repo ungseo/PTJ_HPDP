@@ -13,7 +13,6 @@ import javax.persistence.*;
 public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "wallet_id")
     private Long id;
 
     private String account;
@@ -25,7 +24,7 @@ public class Wallet {
     private String keyPw;
 
     @OneToOne
-    @JoinColumn(name = "members_id")
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @Builder

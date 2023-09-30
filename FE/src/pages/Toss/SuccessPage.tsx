@@ -29,19 +29,22 @@ export function SuccessPage() {
           headers,
         })
         .then((res) => {
+          console.log(res);
           const data = {
             accessToken,
             cardCode: res.data.card,
-            amount: res.data.amount,
+            amount: res.data.balanceAmount,
           };
           console.log(res);
           createPayments(
             data,
             (res) => {
               alert("결제에 성공했습니다!");
+              console.log("성공", data);
             },
             (err) => {
               alert(err.message);
+              console.log("실패");
             }
           );
         })
