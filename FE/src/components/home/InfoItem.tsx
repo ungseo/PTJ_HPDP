@@ -4,7 +4,12 @@ import AscendingNumber from "../common/AscendingNumber";
 const InfoItem = ({ imgSrc, text, num, unit }: InfoItemInterface) => {
   return (
     <div className={style.wrapper}>
-      <img src={imgSrc} alt="info사진" style={{ width: "5rem" }} />
+      <img
+        className={style.image}
+        src={imgSrc}
+        alt="info사진"
+        style={{ width: "5rem" }}
+      />
       <span style={{ color: "gray", fontWeight: "bold", fontSize: "1.2rem" }}>
         {text}
       </span>
