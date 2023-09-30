@@ -7,7 +7,6 @@ import com.stn.hpdp.controller.point.request.FundingByPointReq;
 import com.stn.hpdp.dto.FundingInfoForContractDTO;
 import com.stn.hpdp.model.entity.*;
 import com.stn.hpdp.model.repository.*;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +23,6 @@ import org.web3j.tx.gas.DefaultGasProvider;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 import static com.stn.hpdp.common.exception.ErrorCode.*;
@@ -40,6 +38,7 @@ public class CrowdFundingService {
     private final WalletRepository walletRepository;
     private final FundingRepository fundingRepository;
     private final TransactionRepository transactionRepository;
+    private final PointHistoryRepository pointHistoryRepository;
 
     @Value("${ethereum.rpc-url}")
     private String rpcUrl;
@@ -237,9 +236,11 @@ public class CrowdFundingService {
 
 
     //////////////////////////////////////////////
-    public TransactionReceipt fundingAsyn(FundingByPointReq fundingByPointReq) {
+    public void fundingAsyn(FundingByPointReq fundingByPointReq) {
         init();
-        final TransactionReceipt[] transactionReceipt = new TransactionReceipt[1];
+        Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
+                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+        Funding funding = fundingRepository.findById(fundingByPointReq.getFundingId()).orElseThrow(() -> new CustomException(USER_NOT_FOUND));
         Credentials credentials = getSponsorWallet();
         chargePointAsyn(
                 credentials.getAddress(),
@@ -261,15 +262,54 @@ public class CrowdFundingService {
             );
         }).thenAccept(contributionReceipt -> {
             // contributeToFundingAsync 완료 후 로그 남기기
-            System.out.println("contributeToFundingAsync completed: " + contributionReceipt);
+            log.info("contributeToFundingAsync completed: {}", contributionReceipt);
             // contributeToFundingAsync 완료 후 결과 확인
             if (contributionReceipt == null) throw new CustomException(FUNDING_FAIL);
-//            savaTransactionReceipt(contributionReceipt, fundingByPointReq.getFundingId());
-             transactionReceipt[0] = contributionReceipt;
+            regisTrx(member, funding, fundingByPointReq.getSponsorPoint(), contributionReceipt);
         });
-        return transactionReceipt[0];
     }
 
+    private void regisTrx(Member member, Funding funding, int sponsorPoint, TransactionReceipt contributionReceipt) {
+        PointHistory pointHistory = savePointHistory(funding, member, sponsorPoint);
+        savaTransactionReceipt(contributionReceipt, pointHistory);
+    }
+
+    private PointHistory savePointHistory(Funding funding, Member member, int sponsorPoint) {
+        log.info("savePoint start");
+
+        // 포인트 내역 저장
+        PointHistory pointHistory = PointHistory.builder()
+                .member(member)
+                .funding(funding)
+                .content(funding.getTitle())
+                .flag(true)
+                .paymentPoint(sponsorPoint)
+                .afterPoint(member.getPoint() - sponsorPoint)
+                .build();
+
+        log.info("savePoint end");
+        return pointHistoryRepository.save(pointHistory);
+    }
+
+    private void savaTransactionReceipt(TransactionReceipt contributionReceipt, PointHistory pointHistory) {
+        log.info("saveTrx start");
+        transactionRepository.save(TrxReceipt.builder()
+                .blockHash(contributionReceipt.getBlockHash())
+                .blockNumber(contributionReceipt.getBlockNumberRaw())
+                .contractAddress(contributionReceipt.getContractAddress())
+                .cumulativeGasUsed(contributionReceipt.getCumulativeGasUsedRaw())
+                .trxTo(contributionReceipt.getTo())
+                .gasUsed(contributionReceipt.getCumulativeGasUsedRaw())
+                .status(contributionReceipt.getStatus())
+                .transactionHash(contributionReceipt.getTransactionHash())
+                .transactionIndex(contributionReceipt.getTransactionIndexRaw())
+                .trxFrom(contributionReceipt.getFrom())
+                .pointHistory(pointHistory)
+                .build());
+        log.info("saveTrx end");
+
+
+    }
 
 
     private CompletableFuture<TransactionReceipt> trxApprovalAsync(Credentials credentials, long value) {

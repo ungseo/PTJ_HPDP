@@ -17,6 +17,6 @@ public class BlockChainService {
 
     public TransactionReceiptRes getTransaction(Long fundingId){
 
-        return TransactionReceiptRes.of(transactionRepository.findByFunding_Id(fundingId));
+        return TransactionReceiptRes.of(transactionRepository.findByPointHistoryId(fundingId));
     }
 }

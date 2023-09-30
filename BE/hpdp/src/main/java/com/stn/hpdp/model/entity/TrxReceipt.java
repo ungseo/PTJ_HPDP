@@ -1,13 +1,16 @@
 package com.stn.hpdp.model.entity;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class TrxReceipt {
+public class TrxReceipt extends TimeBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,5 +44,10 @@ public class TrxReceipt {
         this.trxFrom = trxFrom;
         this.trxTo = trxTo;
         this.pointHistory = pointHistory;
+    }
+
+    public void insertHistory(PointHistory pointHistory) {
+        this.pointHistory = pointHistory;
+
     }
 }
