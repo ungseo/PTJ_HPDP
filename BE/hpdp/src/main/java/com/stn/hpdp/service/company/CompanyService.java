@@ -11,6 +11,7 @@ import com.stn.hpdp.controller.company.response.FindMyCompanyRes;
 import com.stn.hpdp.controller.company.response.FindMyFundingsRes;
 import com.stn.hpdp.model.entity.Company;
 import com.stn.hpdp.model.entity.Funding;
+import com.stn.hpdp.model.entity.FundingHistory;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.model.repository.*;
 import com.stn.hpdp.service.interest.InterestService;
@@ -36,9 +37,9 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
     private final CompanyQueryRepository companyQueryRepository;
     private final FundingRepository fundingRepository;
+    private final FundingHistoryRepository fundingHistoryRepository;
     private final MemberRepository memberRepository;
     private final InterestRepository interestRepository;
-    private final InterestQueryRepository interestQueryRepository;
     private final InterestService interestService;
     private final AwsS3Uploader awsS3Uploader;
 
@@ -74,7 +75,19 @@ public class CompanyService {
                 findCompanyDetailRes.setInterested(true);
         }
 
-        // TODO: funding api 개발 후 fundingsNumber, participantsNumber, amount 설정
+        // fundingsNumber, participantsNumber, amount 설정
+        List<Funding> fundings = fundingRepository.findAllByCompany_Id(companyId);
+        findCompanyDetailRes.setFundingsNumber(fundings.size());
+
+        int num = 0, price = 0;
+        for (Funding funding : fundings){
+            List<FundingHistory> fundingHistories = fundingHistoryRepository.findAllByFunding_Id(funding.getId());
+            num += fundingHistories.size();
+            Integer p = fundingHistoryRepository.getSumPriceByFundingId(funding.getId());
+            if(p!=null) price += p;
+        }
+        findCompanyDetailRes.setParticipantsNumber(num);
+        findCompanyDetailRes.setAmount(price);
 
         return findCompanyDetailRes;
     }
