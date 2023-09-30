@@ -21,7 +21,7 @@ const ProfileEditList = ({ editInput, setEditInput }: any) => {
   };
   console.log(editInput);
   return (
-    <div style={{ padding: "1.5rem" }}>
+    <div style={{ padding: "1.5rem" }} className={style.animate}>
       <AnimationLabelInput
         labelTitle="Id"
         type="text"
@@ -52,7 +52,6 @@ const ProfileEditList = ({ editInput, setEditInput }: any) => {
       <div
         style={{
           position: "relative",
-          padding: "0 1.5rem",
           boxSizing: "content-box",
         }}
       >
@@ -72,9 +71,7 @@ const ProfileEditList = ({ editInput, setEditInput }: any) => {
           }}
           onClick={modalOpener}
         />
-        <div style={{ padding: "0 1.5rem" }}>
-          <AnimationLabelInput labelTitle="상세주소" type="text" />
-        </div>
+        <AnimationLabelInput labelTitle="상세주소" type="text" />
       </div>
       {modalOpen && <UserAddressModal />}
     </div>

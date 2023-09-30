@@ -6,6 +6,7 @@ import SiteInfo from "../components/home/SiteInfo";
 import style from "../styles/css/HomePage.module.css";
 import * as Interfaces from "../interface/apiDataInterface";
 import { getRecommendDeadline, getRecommendAchievement } from "../api/fundings";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 
 const HomePage = () => {
   const [fundingDeadlineData, setFundingDeadlineData] = useState<
@@ -55,6 +56,7 @@ const HomePage = () => {
         <div className={style.title}>인기가 많아요!</div>
         <FundingCardList items={fundingAchievementData} />
       </div>
+      <LoadingSpinner />
     </div>
   );
 };

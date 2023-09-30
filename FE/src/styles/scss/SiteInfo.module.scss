@@ -1,5 +1,5 @@
 @import "Style";
-
+@import "Animation";
 .totalwarapper {
   padding: 0 1.5rem;
   padding-bottom: 1.5rem;
@@ -13,5 +13,14 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 0.5rem;
+
+    .animateLeft {
+      animation: LeftStream 1s ease-in-out forwards;
+      opacity: 0;
+    }
+    .animateRight {
+      animation: RightStream 1s ease-in-out forwards;
+      opacity: 0;
+    }
   }
 }
