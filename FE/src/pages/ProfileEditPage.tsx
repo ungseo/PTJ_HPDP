@@ -11,7 +11,7 @@ import { profileEditActions } from "../store/profileEdit-slice";
 import { getMemberInfo, updateMemberInfo } from "../api/members";
 import { userActions } from "../store/user-slice";
 import PwModal from "../components/profile/PwModal";
-
+import style from "../styles/css/ProfileEditPage.module.css";
 const ProfileEditPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -83,6 +83,7 @@ const ProfileEditPage = () => {
           top: "30vh",
           height: "70vh",
         }}
+        className={style.animate}
       >
         <ProfileEditList setEditInput={setEditInput} editInput={editInput} />
 

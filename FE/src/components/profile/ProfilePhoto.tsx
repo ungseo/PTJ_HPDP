@@ -37,6 +37,7 @@ const ProfilePhoto = ({ styles, setSelectedImage }: any) => {
       {isLogined && !isEditPage ? (
         <div className={style.leftCpnt}>
           <div className={style.textBox} onClick={goToEditPage}>
+            <div className={style.angel}></div>
             <p className={style.p}>{userInfo.name}</p>
             <span className={style.span}>님</span>
             <Icon icon="bi-pencil-square" />

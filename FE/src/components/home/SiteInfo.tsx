@@ -33,30 +33,38 @@ const SiteInfo = () => {
         세상은 조금씩 달콤해지고 있습니다.
       </p>
       <div className={style.wrapper}>
-        <InfoItem
-          imgSrc="/dollar-symbol.png"
-          text="후원 금액"
-          num={mainData.price}
-          unit="원"
-        />
-        <InfoItem
-          imgSrc="/heart.png"
-          text="후원 횟수"
-          num={mainData.support}
-          unit="회"
-        />
-        <InfoItem
-          imgSrc="/save_money.png"
-          text="모금 개수"
-          num={mainData.funding}
-          unit="개"
-        />
-        <InfoItem
-          imgSrc="/enterprise.png"
-          text="참여 기업"
-          num={mainData.company}
-          unit="개"
-        />
+        <div className={style.animateLeft}>
+          <InfoItem
+            imgSrc="/dollar-symbol.png"
+            text="후원 금액"
+            num={mainData.price}
+            unit="원"
+          />
+        </div>
+        <div className={style.animateLeft}>
+          <InfoItem
+            imgSrc="/heart.png"
+            text="후원 횟수"
+            num={mainData.support}
+            unit="회"
+          />
+        </div>
+        <div className={style.animateRight}>
+          <InfoItem
+            imgSrc="/save_money.png"
+            text="모금 개수"
+            num={mainData.funding}
+            unit="개"
+          />
+        </div>
+        <div className={style.animateRight}>
+          <InfoItem
+            imgSrc="/enterprise.png"
+            text="참여 기업"
+            num={mainData.company}
+            unit="개"
+          />
+        </div>
       </div>
     </div>
   );

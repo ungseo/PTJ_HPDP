@@ -16,6 +16,15 @@
       display: flex;
       align-items: center;
       font-size: 1.7rem;
+      .angel {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 999px;
+        background-color: $white;
+        background-image: url("/public/angel.png");
+        background-size: cover;
+        margin-right: 0.5rem;
+      }
       .p {
         text-decoration: underline 1px solid;
         margin: auto;
@@ -43,11 +52,12 @@
 }
 .editPhoto {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   padding: 1.5rem;
-  background-color: $pastelPink;
-  height: 20vh;
+  background-color: $hotPink;
+  height: calc(100vh - 168px);
 
   .photoWrapper {
     width: auto;
