@@ -17,6 +17,7 @@ const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
         ? `D-${item.dday}`
         : "오늘마감"
       : item.dday;
+  const clampedPercent = Math.min(item.percent || 0, 100);
 
   const handleGoFundingDetail = () => {
     navigate(`/funding/detail/${item.fundingId}`);
@@ -34,7 +35,7 @@ const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
         </div>
         <div className={style.downcontent}>
           <div className={style.remaindate}>{formatDday}</div>
-          <ProgressBar percent={item.percent || 0} />
+          <ProgressBar percent={clampedPercent} />
           <div className={style.accountdetail}>
             <div className={style.nowaccount}>{item.totalFunding}원</div>
             <div className={style.fundingpercent}>{item.percent}%</div>

@@ -19,7 +19,7 @@ const SiteInfo = () => {
       }
     );
   }, []);
-  console.log(mainData.price);
+  console.log(mainData);
 
   return (
     <div className={style.totalwarapper}>
