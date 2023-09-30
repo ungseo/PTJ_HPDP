@@ -15,9 +15,9 @@ public class BlockChainController {
 
     private final BlockChainService blockChainServcie;
 
-    @GetMapping("/{fundingId}")
-    public ApiResponse<TransactionReceiptRes> getTransaction(@PathVariable Long fundingId) {
-        TransactionReceiptRes transactionReceiptRes = blockChainServcie.getTransaction(fundingId);
+    @GetMapping("/{pointHistoryId}")
+    public ApiResponse<TransactionReceiptRes> getTransaction(@PathVariable Long pointHistoryId) {
+        TransactionReceiptRes transactionReceiptRes = blockChainServcie.getTransaction(pointHistoryId);
         return ApiResponse.ok(transactionReceiptRes);
 
     }

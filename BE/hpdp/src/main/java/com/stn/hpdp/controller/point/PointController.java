@@ -14,6 +14,7 @@ import com.stn.hpdp.service.point.PointService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import java.util.List;
 
@@ -33,8 +34,8 @@ public class PointController {
         // 펀딩 실패
         if (!pointService.fundingCheck(fundingByPointReq.getSponsorPoint()))
             throw new CustomException(ErrorCode.SCARCE_POINT_BAD_REQUEST);
-        crowdFundingService.fundingAsyn(fundingByPointReq);
-        pointService.funding(fundingByPointReq);
+        TransactionReceipt transactionReceipt = crowdFundingService.fundingAsyn(fundingByPointReq);
+        pointService.funding(fundingByPointReq,transactionReceipt);
         return ApiResponse.messageOk("Success");
     }
 

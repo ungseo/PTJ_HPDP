@@ -237,8 +237,9 @@ public class CrowdFundingService {
 
 
     //////////////////////////////////////////////
-    public void fundingAsyn(FundingByPointReq fundingByPointReq) {
+    public TransactionReceipt fundingAsyn(FundingByPointReq fundingByPointReq) {
         init();
+        final TransactionReceipt[] transactionReceipt = new TransactionReceipt[1];
         Credentials credentials = getSponsorWallet();
         chargePointAsyn(
                 credentials.getAddress(),
@@ -263,30 +264,13 @@ public class CrowdFundingService {
             System.out.println("contributeToFundingAsync completed: " + contributionReceipt);
             // contributeToFundingAsync 완료 후 결과 확인
             if (contributionReceipt == null) throw new CustomException(FUNDING_FAIL);
-
-            savaTransactionReceipt(contributionReceipt, fundingByPointReq.getFundingId());
-
+//            savaTransactionReceipt(contributionReceipt, fundingByPointReq.getFundingId());
+             transactionReceipt[0] = contributionReceipt;
         });
+        return transactionReceipt[0];
     }
 
-    private void savaTransactionReceipt(TransactionReceipt contributionReceipt, Long fundingId) {
-        Optional<Funding> funding = fundingRepository.findById(fundingId);
-        if (funding.isEmpty()) throw new CustomException(FUNDING_NOT_FOUND);
-        transactionRepository.save(TrxReceipt.builder()
-                .blockHash(contributionReceipt.getBlockHash())
-                .blockNumber(contributionReceipt.getBlockNumberRaw())
-                .contractAddress(contributionReceipt.getContractAddress())
-                .cumulativeGasUsed(contributionReceipt.getCumulativeGasUsedRaw())
-                .trxTo(contributionReceipt.getTo())
-                .gasUsed(contributionReceipt.getCumulativeGasUsedRaw())
-                .status(contributionReceipt.getStatus())
-                .transactionHash(contributionReceipt.getTransactionHash())
-                .transactionIndex(contributionReceipt.getTransactionIndexRaw())
-                .trxFrom(contributionReceipt.getFrom())
-                .funding(funding.get())
-                .build());
 
-    }
 
     private CompletableFuture<TransactionReceipt> trxApprovalAsync(Credentials credentials, long value) {
         TransactionManager transactionManager = new RawTransactionManager(

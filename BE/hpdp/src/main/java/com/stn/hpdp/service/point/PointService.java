@@ -3,15 +3,13 @@ package com.stn.hpdp.service.point;
 import com.stn.hpdp.common.exception.CustomException;
 import com.stn.hpdp.common.util.SecurityUtil;
 import com.stn.hpdp.controller.point.request.FundingByPointReq;
-import com.stn.hpdp.model.entity.Funding;
-import com.stn.hpdp.model.entity.FundingHistory;
-import com.stn.hpdp.model.entity.Member;
-import com.stn.hpdp.model.entity.PointHistory;
+import com.stn.hpdp.model.entity.*;
 import com.stn.hpdp.model.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import java.util.Optional;
 
@@ -28,6 +26,7 @@ public class PointService {
     private final FundingRepository fundingRepository;
     private final PointHistoryRepository pointHistoryRepository;
     private final PointQueryRepository pointQueryRepository;
+    private final TransactionRepository transactionRepository;
 
     // 후원이 가능한지 확인
     public boolean fundingCheck(int reqPoint) {
@@ -40,7 +39,7 @@ public class PointService {
         return true;
     }
 
-    public void funding(FundingByPointReq fundingByPointReq) {
+    public void funding(FundingByPointReq fundingByPointReq, TransactionReceipt transactionReceipt) {
 
         // 펀딩 내역 저장
         Member sponsor = registFundingHistory(fundingByPointReq.getFundingId(), fundingByPointReq.getSponsorPoint());
@@ -62,7 +61,22 @@ public class PointService {
         pointDeduction(sponsor, fundingByPointReq.getSponsorPoint());
         // 펀딩의 총 후원 금액 업데이트
         updateFunding(funding.get());
-
+        savaTransactionReceipt(transactionReceipt,pointHistory);
+    }
+        private void savaTransactionReceipt(TransactionReceipt contributionReceipt,PointHistory pointHistory ) {
+        transactionRepository.save(TrxReceipt.builder()
+                .blockHash(contributionReceipt.getBlockHash())
+                .blockNumber(contributionReceipt.getBlockNumberRaw())
+                .contractAddress(contributionReceipt.getContractAddress())
+                .cumulativeGasUsed(contributionReceipt.getCumulativeGasUsedRaw())
+                .trxTo(contributionReceipt.getTo())
+                .gasUsed(contributionReceipt.getCumulativeGasUsedRaw())
+                .status(contributionReceipt.getStatus())
+                .transactionHash(contributionReceipt.getTransactionHash())
+                .transactionIndex(contributionReceipt.getTransactionIndexRaw())
+                .trxFrom(contributionReceipt.getFrom())
+                .pointHistory(pointHistory)
+                .build());
 
     }
 

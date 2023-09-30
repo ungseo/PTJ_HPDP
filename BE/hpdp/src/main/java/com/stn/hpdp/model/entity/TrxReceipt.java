@@ -25,11 +25,11 @@ public class TrxReceipt {
     private String trxTo;
 
     @OneToOne
-    @JoinColumn(name = "funding_id")
-    private Funding funding;
+    @JoinColumn(name = "point_history_id")
+    private PointHistory pointHistory;
 
     @Builder
-    public TrxReceipt(String transactionHash, String transactionIndex, String blockHash, String blockNumber, String cumulativeGasUsed, String gasUsed, String contractAddress, String status, String trxFrom, String trxTo, Funding funding) {
+    public TrxReceipt(String transactionHash, String transactionIndex, String blockHash, String blockNumber, String cumulativeGasUsed, String gasUsed, String contractAddress, String status, String trxFrom, String trxTo, PointHistory pointHistory) {
         this.transactionHash = transactionHash;
         this.transactionIndex = transactionIndex;
         this.blockHash = blockHash;
@@ -38,8 +38,8 @@ public class TrxReceipt {
         this.gasUsed = gasUsed;
         this.contractAddress = contractAddress;
         this.status = status;
-        this.trxTo = trxTo;
         this.trxFrom = trxFrom;
-        this.funding = funding;
+        this.trxTo = trxTo;
+        this.pointHistory = pointHistory;
     }
 }
