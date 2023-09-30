@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 @Data
 public class PointHistoryRes {
+    private Long pointHistoryId;
 
     private String content;
 
@@ -20,7 +21,8 @@ public class PointHistoryRes {
     private String paymentDate;
 
     @Builder
-    public PointHistoryRes(String content, boolean flag, int paymentPoint, int afterPoint, String paymentDate) {
+    public PointHistoryRes(Long pointHistoryId,String content, boolean flag, int paymentPoint, int afterPoint, String paymentDate) {
+        this.pointHistoryId = pointHistoryId;
         this.content = content;
         this.flag = flag;
         this.paymentPoint = paymentPoint;
@@ -29,6 +31,7 @@ public class PointHistoryRes {
     }
 
     public PointHistoryRes(PointHistory entity) {
+        this.pointHistoryId = entity.getId();
         this.content = entity.getContent();
         this.flag = entity.isFlag();
         this.paymentPoint = entity.getPaymentPoint();
@@ -38,6 +41,7 @@ public class PointHistoryRes {
 
     public static PointHistoryRes of(PointHistory pointHistory) {
         return PointHistoryRes.builder()
+                .pointHistoryId(pointHistory.getId())
                 .content(pointHistory.getContent())
                 .flag(pointHistory.isFlag())
                 .paymentPoint(pointHistory.getPaymentPoint())

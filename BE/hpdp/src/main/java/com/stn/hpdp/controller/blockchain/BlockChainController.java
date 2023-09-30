@@ -1,31 +1,26 @@
 package com.stn.hpdp.controller.blockchain;
 
-import com.stn.hpdp.service.blockchain.CrowdFundingService;
-import com.stn.hpdp.service.blockchain.TokenService;
-import com.stn.hpdp.service.blockchain.WalletService;
-import io.swagger.annotations.Api;
+import com.stn.hpdp.common.ApiResponse;
+import com.stn.hpdp.controller.blockchain.response.TransactionReceiptRes;
+import com.stn.hpdp.service.blockchain.BlockChainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@Api
 @RequiredArgsConstructor
 @RequestMapping("/api/blockchain")
 @RestController
 public class BlockChainController {
 
-    private final TokenService tokenService;
-    private final WalletService walletService;
-    private final CrowdFundingService crowdFundingService;
+    private final BlockChainService blockChainServcie;
 
-    @PostMapping
-    public String settle() {
+    @GetMapping("/{pointHistoryId}")
+    public ApiResponse<TransactionReceiptRes> getTransaction(@PathVariable Long pointHistoryId) {
+        TransactionReceiptRes transactionReceiptRes = blockChainServcie.getTransaction(pointHistoryId);
+        return ApiResponse.ok(transactionReceiptRes);
 
-        crowdFundingService.settle(1L);
-
-        return "sucess";
     }
+
+
 }
