@@ -20,12 +20,12 @@ import com.stn.hpdp.service.alarm.AlarmService;
 import com.stn.hpdp.service.interest.InterestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -239,6 +239,21 @@ public class FundingService {
         List<FundingHistory> fundingHistories = fundingHistoryRepository.findAllByFunding_Id(funding.get().getId());
         for(FundingHistory item : fundingHistories) {
             alarmService.sendNews(item.getMember(), funding.get(), AlarmType.REPORT);
+        }
+    }
+
+
+    @Scheduled(cron = "0 * * * * ?") // 매분마다 실행
+    public void updateFundingState(){
+        List<Funding> fundingList = fundingRepository.getAllFundings();
+        for (Funding funding : fundingList){
+            LocalDateTime start = funding.getStartDate();
+            LocalDateTime end = funding.getEndDate();
+            if(end.isBefore(LocalDateTime.now())){
+                funding.setState(FundingState.END);
+            }else if(start.isBefore(LocalDateTime.now())){
+                funding.setState(FundingState.ING);
+            }
         }
     }
 
