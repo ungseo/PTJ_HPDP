@@ -16,7 +16,11 @@ const ProfilePhoto = ({ styles, setSelectedImage }: any) => {
   const userProfile = useSelector((state: any) => state.user.info.profile);
   const editingProfile = useSelector((state: any) => state.profileEdit.fileURL);
   const profilePhotoURL =
-    isEditPage && editingProfile ? editingProfile : userProfile;
+    isEditPage && editingProfile
+      ? editingProfile
+      : userProfile
+      ? userProfile
+      : "/default_img.png";
   const goToEditPage = () => {
     navigate(`/profile/edit`);
   };

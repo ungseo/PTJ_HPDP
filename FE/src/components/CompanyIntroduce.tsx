@@ -4,6 +4,7 @@ import DetailHashTag from "./fundingdetail/DetailHashTag";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import NewsCardList from "./NewsCardList";
+import { newsCrolling } from "../api/news";
 
 interface CompanyIntroduceProps {
   item: Interfaces.InSearchCompanyInfoResponseInterface;
@@ -17,16 +18,17 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
   const [responseData, setResponseData] = useState<any>([]);
 
   useEffect(() => {
-    axios
-      .get("http://j9c110.p.ssafy.io:8000/articles/news")
-      .then((response) => {
-        setResponseData(response.data.data);
-        console.log("HTTP 요청 성공:", response.data);
-      })
-      .catch((error) => {
-        console.log("실패애애애애");
-        console.error("HTTP 요청 실패:", error);
-      });
+    const companyId = item.companyId;
+    newsCrolling(
+      companyId,
+      (res) => {
+        console.log("크롤링성공");
+        setResponseData(res.data.data);
+      },
+      (err) => {
+        console.log("크롤링실패");
+      }
+    );
   }, []);
 
   return (
