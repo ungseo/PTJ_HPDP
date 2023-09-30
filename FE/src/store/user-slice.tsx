@@ -14,7 +14,7 @@ const initialState = {
     email: "",
     phoneNumber: "",
     point: 0,
-    profile: "/nonProfile.png",
+    profile: "",
     address: "",
     role: "",
     createDate: "",
