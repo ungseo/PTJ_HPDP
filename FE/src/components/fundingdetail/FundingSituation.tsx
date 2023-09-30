@@ -24,7 +24,7 @@ const FundingSituation = ({ props }: { props: OutFundingsInfoInterface }) => {
 
   // 금액 형식 처리
   const targetNumber = formatNumber(props.targetAmount);
-
+  const totalNumber = formatNumber(props.totalFunding);
   return (
     <div>
       <div className={style.period}>
@@ -35,8 +35,7 @@ const FundingSituation = ({ props }: { props: OutFundingsInfoInterface }) => {
         <div className={style.title}>후원 현황</div>
         <div className={style.graph_content}>
           <div className={style.graph}>
-            {/* {퍼센트 계산은 어쩌지....} */}
-            <CircleProgressBar percent={75} />
+            <CircleProgressBar percent={props.percent || 0} />
           </div>
           <div className={style.content}>
             <div className={style.total_account}>
@@ -45,7 +44,7 @@ const FundingSituation = ({ props }: { props: OutFundingsInfoInterface }) => {
             </div>
             <div className={style.use_acccount}>
               <div>모금금액</div>
-              <div className={style.amount}>{props.totalFunding} 원</div>
+              <div className={style.amount}>{totalNumber} 원</div>
             </div>
           </div>
         </div>

@@ -25,6 +25,7 @@ public class SettleFundingRes {
         return SettleFundingRes.builder()
                 .title(funding.getTitle())
                 .thumbnail(funding.getThumbnailUrl())
+                .totalPoint(funding.getTotalFunding())
                 .build();
     }
 }

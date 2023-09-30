@@ -13,19 +13,20 @@ const SearchBar = () => {
     navigate(`/search/${keyword}`);
   };
   return (
-    <form className={style.searchBar}>
+    <form className={style.searchBar} onSubmit={searchHandler}>
       <input
         className={style.input}
         type="text"
         value={keyword}
         onChange={onChange}
+        placeholder="해쉬태그로 기업을 검색해보세요"
       />
       <img
         className={style.img}
         src="/buttons/searchButton.png"
-        onClick={searchHandler}
         alt="검색버튼"
-      ></img>
+        onClick={searchHandler}
+      />
     </form>
   );
 };

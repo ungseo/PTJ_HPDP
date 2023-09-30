@@ -7,17 +7,19 @@ import { getFundingTotalList } from "../api/fundings";
 
 import FundingItem from "./FundingItem";
 
-const FundingList = () => {
+const FundingList = ({ keyword }: any) => {
   const [fundingTotalData, setFundingTotalData] = useState<
     Interfaces.OutFundingsInfoInterface[]
   >([]);
   console.log(fundingTotalData);
 
   useEffect(() => {
+    const hashKeyword = keyword;
     getFundingTotalList(
+      hashKeyword,
       (res) => {
         setFundingTotalData(res.data.data);
-        console.log("펀딩 전체 조회 API 연결");
+        console.log(hashKeyword);
       },
       (err) => {
         console.error("펀딩 전체 조회 API 호출 실패:", err);

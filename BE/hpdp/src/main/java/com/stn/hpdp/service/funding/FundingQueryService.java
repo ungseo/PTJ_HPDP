@@ -12,6 +12,7 @@ import com.stn.hpdp.model.entity.Funding;
 import com.stn.hpdp.model.entity.FundingHistory;
 import com.stn.hpdp.model.entity.Member;
 import com.stn.hpdp.model.repository.*;
+import jnr.a64asm.Mem;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -62,13 +63,18 @@ public class FundingQueryService {
     }
 
     public List<FindParticipantRes> findParticipant(Long fundingId) {
-        List<FundingHistory> fundingHistories = fundingHistoryRepository.findAllByFunding_Id(fundingId);
+//        List<FundingHistory> fundingHistories = fundingHistoryRepository.findAllByFunding_Id(fundingId);
+        List<Member> members = fundingHistoryRepository.getParticipantByFundingId(fundingId);
         List<FindParticipantRes> result = new ArrayList<>();
 
-        for (FundingHistory fundingHistory : fundingHistories) {
-            FindParticipantRes findParticipantRes = FindParticipantRes.of(fundingHistory);
+        for (Member member : members){
+            FindParticipantRes findParticipantRes = FindParticipantRes.of(member);
             result.add(findParticipantRes);
         }
+//        for (FundingHistory fundingHistory : fundingHistories) {
+//            FindParticipantRes findParticipantRes = FindParticipantRes.of(fundingHistory);
+//            result.add(findParticipantRes);
+//        }
 
         return result;
     }

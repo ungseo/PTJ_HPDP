@@ -28,6 +28,7 @@ public class PointService {
     private final FundingRepository fundingRepository;
     private final PointHistoryRepository pointHistoryRepository;
     private final PointQueryRepository pointQueryRepository;
+    private final TransactionRepository transactionRepository;
 
     // 후원이 가능한지 확인
     public boolean fundingCheck(int reqPoint) {
@@ -47,28 +48,28 @@ public class PointService {
         Optional<Funding> funding = fundingRepository.findById(fundingByPointReq.getFundingId());
 
         if (funding.isEmpty()) throw new CustomException(FUNDING_NOT_FOUND);
-        // 포인트 내역 저장
-        PointHistory pointHistory = PointHistory.builder()
-                .member(sponsor)
-                .funding(funding.get())
-                .content(funding.get().getTitle())
-                .flag(true)
-                .paymentPoint(fundingByPointReq.getSponsorPoint())
-                .afterPoint(sponsor.getPoint() - fundingByPointReq.getSponsorPoint())
-                .build();
-
-        pointHistoryRepository.save(pointHistory);
+//        // 포인트 내역 저장
+//        PointHistory pointHistory = PointHistory.builder()
+//                .member(sponsor)
+//                .funding(funding.get())
+//                .content(funding.get().getTitle())
+//                .flag(true)
+//                .paymentPoint(fundingByPointReq.getSponsorPoint())
+//                .afterPoint(sponsor.getPoint() - fundingByPointReq.getSponsorPoint())
+//                .build();
+//
+//        pointHistoryRepository.save(pointHistory);
         // 사용자 포인트 감소
         pointDeduction(sponsor, fundingByPointReq.getSponsorPoint());
         // 펀딩의 총 후원 금액 업데이트
         updateFunding(funding.get());
-
+        // 영수증 등록
     }
 
     private void updateFunding(Funding funding) {
         int totalFunding = pointQueryRepository.findTotalPriceByFundingId(funding.getId());
         double percent = 0;
-        if (totalFunding != 0) percent = ((double) totalFunding / (double)funding.getTargetAmount()) *100 ;
+        if (totalFunding != 0) percent = ((double) totalFunding / (double) funding.getTargetAmount()) * 100;
         funding.changeFunding(totalFunding, (int) percent);
 
     }
