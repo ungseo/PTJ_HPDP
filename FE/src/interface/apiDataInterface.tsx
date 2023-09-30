@@ -295,6 +295,7 @@ export interface OutPointHistoryInterface {
   paymentPoint: number;
   afterPoint: number;
   paymentDate: string;
+  pointHistoryId: string;
 }
 
 // 쪽지
@@ -340,4 +341,17 @@ export interface MainInfo {
   support: number;
   funding: number;
   company: number;
+}
+
+export interface BlockChainInfo {
+  transactionHash: string;
+  transactionIndex: string;
+  blockHash: string;
+  blockNumber: string;
+  cumulativeGasUsed: string;
+  gasUsed: string;
+  contractAddress: string | null;
+  status: string;
+  trxFrom: string;
+  trxTo: string;
 }

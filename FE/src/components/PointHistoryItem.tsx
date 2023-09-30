@@ -32,6 +32,7 @@ const PointHistoryItem = (props: PointHistoryItemProps) => {
   const CloseBlockModal = () => {
     setOpenBlock(false);
   };
+  console.log(item);
   return (
     <div className={style.wrapper}>
       <p className={style.date}>{paymentDate}</p>
@@ -48,7 +49,12 @@ const PointHistoryItem = (props: PointHistoryItemProps) => {
       {openBlock && (
         <>
           <div className={style.bottomsheetbackground}></div>
-          <BlockChainInfo onClose={CloseBlockModal} />
+          <BlockChainInfo
+            onClose={CloseBlockModal}
+            historyId={Number(item.pointHistoryId)}
+            point={item.paymentPoint}
+            date={item.paymentDate}
+          />
         </>
       )}
     </div>
