@@ -6,18 +6,18 @@ import ImageList from "@mui/material/ImageList";
 import CompanyItem from "./CompanyItem";
 import { getCompaniesInfo } from "../api/companies";
 
-export default function CompanyList() {
+export default function CompanyList({ keyword }: any) {
   const [companyData, setCompanyData] = useState<
     Interfaces.InSearchCompanyInfoResponseInterface[]
   >([]);
 
-  const [keyword, setkeyword] = useState("");
-
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
   useEffect(() => {
+    const hashKeyword = keyword;
+    console.log(hashKeyword);
     getCompaniesInfo(
-      keyword,
+      hashKeyword,
       accessToken,
       (res) => {
         setCompanyData(res.data.data);

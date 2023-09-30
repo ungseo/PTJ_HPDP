@@ -10,7 +10,7 @@ const SearchPage = () => {
   return (
     <div id={style.searchPage}>
       <SearchBar />
-      <h1>추천검색</h1>
+      <h1 className={style.h1}>추천검색</h1>
       <HashTagList />
     </div>
   );
