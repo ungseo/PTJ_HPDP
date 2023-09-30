@@ -28,8 +28,9 @@ public class MessageQueryService {
     private final MessageRepository messageRepository;
 
     public List<FindMessagesRes> getMessages(Integer flag) {
+        String loginId = SecurityUtil.getCurrentMemberLoginId();
         boolean isUser = SecurityUtil.checkUser();
-        List<Message> result = messageQueryRepository.findMessagesByFlag(flag, isUser);
+        List<Message> result = messageQueryRepository.findMessagesByFlag(flag, isUser, loginId);
         log.info("size: {}", result.size());
 
         List<FindMessagesRes> findMessagesResList = new ArrayList<>();
