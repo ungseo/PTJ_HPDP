@@ -7,8 +7,8 @@ const SearchResultPage = () => {
   const { keyword } = useParams();
   console.log(keyword);
   const tabProps = {
-    후원: <FundingList />,
-    기업: <CompanyList />,
+    후원: <FundingList keyword={keyword} />,
+    기업: <CompanyList keyword={keyword} />,
   };
   return (
     <div id="searchResultPage">
