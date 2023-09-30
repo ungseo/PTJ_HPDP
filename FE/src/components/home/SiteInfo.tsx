@@ -1,7 +1,26 @@
 import style from "../../styles/css/SiteInfo.module.css";
 import InfoItem from "./InfoItem";
+import { useState, useEffect } from "react";
+import * as Interfaces from "../../interface/apiDataInterface";
+import { getMain } from "../../api/main";
 
 const SiteInfo = () => {
+  const [mainData, setMainData] = useState<Interfaces.MainInfo>(
+    {} as Interfaces.MainInfo
+  );
+  useEffect(() => {
+    getMain(
+      (res) => {
+        setMainData(res.data.data);
+        console.log("메인 조회 API 연결");
+      },
+      (err) => {
+        console.error("메인 조회 API 호출 실패:", err);
+      }
+    );
+  }, []);
+  console.log(mainData.price);
+
   return (
     <div className={style.totalwarapper}>
       <p
@@ -17,20 +36,25 @@ const SiteInfo = () => {
         <InfoItem
           imgSrc="/dollar-symbol.png"
           text="후원 금액"
-          num={9203292}
+          num={mainData.price}
           unit="원"
         />
-        <InfoItem imgSrc="/heart.png" text="후원 횟수" num={291179} unit="회" />
+        <InfoItem
+          imgSrc="/heart.png"
+          text="후원 횟수"
+          num={mainData.support}
+          unit="회"
+        />
         <InfoItem
           imgSrc="/save_money.png"
           text="모금 개수"
-          num={32}
+          num={mainData.funding}
           unit="개"
         />
         <InfoItem
           imgSrc="/enterprise.png"
           text="참여 기업"
-          num={72}
+          num={mainData.company}
           unit="개"
         />
       </div>

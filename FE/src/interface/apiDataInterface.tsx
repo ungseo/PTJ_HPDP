@@ -332,3 +332,12 @@ export interface ParticipantsInfo {
   name: string;
   profileImg: string;
 }
+
+// 메인
+
+export interface MainInfo {
+  price: number;
+  support: number;
+  funding: number;
+  company: number;
+}
