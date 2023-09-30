@@ -59,7 +59,7 @@ const ParticipateList = ({ fundingId }: ParticipateListProps) => {
               style={{ width: "unset", zIndex: 1 }}
               className={style.participant_item}
             >
-              <ParticipateItem />
+              <ParticipateItem item={item} />
             </SwiperSlide>
           ))}
         </Swiper>

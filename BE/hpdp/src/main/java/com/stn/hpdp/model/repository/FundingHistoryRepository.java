@@ -1,5 +1,6 @@
 package com.stn.hpdp.model.repository;
 
+import com.stn.hpdp.model.entity.Funding;
 import com.stn.hpdp.model.entity.FundingHistory;
 import com.stn.hpdp.model.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,9 @@ import java.util.List;
 @Repository
 public interface FundingHistoryRepository extends JpaRepository<FundingHistory, Long> {
     List<FundingHistory> findAllByMember_Id(Long memberId);
+
+    @Query("SELECT DISTINCT fh.funding FROM FundingHistory fh WHERE fh.member.id = :memberId")
+    List<Funding> findDistinctFundingByMemberId(Long memberId);
 
     FundingHistory findByFunding_Id(Long fundingId);
 

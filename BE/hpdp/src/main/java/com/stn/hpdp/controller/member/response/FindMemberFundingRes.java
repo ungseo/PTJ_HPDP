@@ -1,6 +1,7 @@
 package com.stn.hpdp.controller.member.response;
 
 import com.stn.hpdp.common.enums.FundingState;
+import com.stn.hpdp.controller.funding.response.FindFundingsRes;
 import com.stn.hpdp.model.entity.Funding;
 import lombok.*;
 
@@ -10,35 +11,20 @@ import java.time.temporal.ChronoUnit;
 @Getter
 @Setter
 @ToString
-@Builder
-public class FindMemberFundingRes {
+public class FindMemberFundingRes extends FindFundingsRes {
 
-    private Long companyId;
-    private String name;
-    private Long fundingId;
-    private String thumbnail;
-    private String hashtag;
-    private String title;
-    private int targetAmount;
-    private String startDate;
-    private String endDate;
-    private FundingState state;
-    private String dDay;
-    private int totalFunding;
-
-    public static FindMemberFundingRes of(Funding funding) {
-        return FindMemberFundingRes.builder()
-                .companyId(funding.getCompany().getId())
-                .name(funding.getCompany().getName())
-                .fundingId(funding.getId())
-                .title(funding.getTitle())
-                .thumbnail(funding.getThumbnailUrl())
-                .hashtag(funding.getHashtag())
-                .targetAmount(funding.getTargetAmount())
-                .startDate(funding.getStartDate().toString())
-                .endDate(funding.getEndDate().toString())
-                .state(funding.getState())
-                .dDay(funding.getEndDate().isAfter(LocalDateTime.now()) ? Long.toString(ChronoUnit.DAYS.between(LocalDateTime.now(), funding.getEndDate())) : "마감")
-                .build();
+    private int myTotalFunding;
+    private boolean myReward;
+    private String rewardName;
+    private int rewardPrice;
+    @Builder
+    public FindMemberFundingRes(int myTotalFunding, boolean myReward, String rewardName, int rewardPrice,
+                                Long companyId, String name, Long fundingId, String thumbnail, String hashtag, String title, int targetAmount, int totalFunding,
+                                int percent, LocalDateTime startDate, LocalDateTime endDate, FundingState state) {
+        super(companyId, name, fundingId, thumbnail, hashtag, title, targetAmount, totalFunding, percent, startDate, endDate, state);
+        this.myTotalFunding = myTotalFunding;
+        this.myReward = myReward;
+        this.rewardName = rewardName;
+        this.rewardPrice = rewardPrice;
     }
 }
