@@ -1,6 +1,7 @@
 package com.stn.hpdp.controller.funding.response;
 
 import com.stn.hpdp.common.enums.FundingState;
+import com.stn.hpdp.dto.FundingHistoryInfoForFundingDTO;
 import com.stn.hpdp.model.entity.Budget;
 import com.stn.hpdp.model.entity.Funding;
 import lombok.*;
@@ -39,6 +40,9 @@ public class FindFundingRes {
     private int settlement;
     private int percent;
 
+    private int myTotalFunding;
+    private boolean myReward;
+
     private List<Budget> budgetList = new ArrayList<>();
 
     public static FindFundingRes of(Funding funding, List<Budget> budgets) {
@@ -65,5 +69,11 @@ public class FindFundingRes {
                 .totalFunding(funding.getTotalFunding())
                 .percent(funding.getPercent())
                 .build();
+    }
+    public static FindFundingRes ofMember(Funding funding, List<Budget> budgets, FundingHistoryInfoForFundingDTO fundingHistoryInfoForFundingDTO) {
+        FindFundingRes fundingRes = of(funding, budgets);
+        fundingRes.myTotalFunding = fundingHistoryInfoForFundingDTO.getMyTotalFunding();
+        fundingRes.myReward = fundingHistoryInfoForFundingDTO.isMyReward();
+        return fundingRes;
     }
 }
