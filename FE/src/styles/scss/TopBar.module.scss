@@ -42,9 +42,12 @@
   top: 0;
   z-index: 5;
   background-color: $white;
+  height: 56px;
   .leftCpnt {
+    margin-left: 0.5rem;
     display: flex;
     align-items: center;
+    font-size: 1.3rem;
     .backBtn {
       background-image: url("/public/buttons/backButton.png");
       width: 1.5rem;
@@ -73,4 +76,25 @@
   top: 0;
   z-index: 5;
   background-color: $white;
+}
+
+.backTopbar {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background-color: $white;
+  height: 56px;
+
+  .backBtn {
+    background-image: url("/public/buttons/backButton.png");
+    width: 1.5rem;
+    height: 1.5rem;
+    background-size: cover;
+    background-color: $white;
+    border: none;
+    margin-left: 1rem;
+  }
 }

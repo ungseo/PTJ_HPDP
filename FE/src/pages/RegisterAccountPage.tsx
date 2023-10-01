@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DeepBlueBtn from "../components/common/DeepBlueBtn";
 import style from "../styles/css/RegisterAccountPage.module.css";
 
@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { registerAccount } from "../api/banks";
 import { useNavigate } from "react-router-dom";
+import AnimationLabelInput from "../components/common/Inputs";
+import { BackTopbar, OptionTopbar } from "../components/common/TopBar";
 
 const RegisterAccountPage = () => {
   const navigate = useNavigate();
@@ -40,33 +42,51 @@ const RegisterAccountPage = () => {
   };
 
   return (
-    <div className={style.wrapper}>
-      <h1>계좌 등록</h1>
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={bankCode}
-        onChange={handleChange}
-      >
-        {options.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </Select>
-      <input
-        type="text"
-        placeholder="계좌 번호"
-        value={accountNumber}
-        onChange={(e) => setAccountNumber(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="비밀번호"
-        value={accountPw}
-        onChange={(e) => setAccountPw(e.target.value)}
-      />
-      <DeepBlueBtn text="계좌 등록" onClick={handleButtonClick} />
+    <div>
+      <OptionTopbar text="계좌등록" />
+      <div className={style.wrapper}>
+        {/* <h1>계좌 등록</h1> */}
+        <p>
+          한푼두푼의 서비스 이용을 위해
+          <br />
+          본인의 계좌를 등록해주세요.
+        </p>
+        <div className={style.bank}>
+          <label className={style.label} htmlFor="">
+            은행 선택
+          </label>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={bankCode}
+            placeholder="은행"
+            onChange={handleChange}
+          >
+            {options.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </div>
+        <AnimationLabelInput
+          type="text"
+          labelTitle="계좌 번호"
+          value={accountNumber}
+          onChange={(e: any) => setAccountNumber(e.target.value)}
+        />
+        <AnimationLabelInput
+          type="password"
+          labelTitle="비밀번호"
+          value={accountPw}
+          onChange={(e: any) => setAccountPw(e.target.value)}
+        />
+        <DeepBlueBtn
+          text="계좌 등록"
+          onClick={handleButtonClick}
+          styles={{ width: "90%", height: "2.5rem", marginTop: "1.5rem" }}
+        />
+      </div>
     </div>
   );
 };
