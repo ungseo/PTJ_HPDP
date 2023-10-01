@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import style from "../../styles/css/TopBar.module.css";
+import { Icon } from "@iconify/react";
 
 const LogoTopbar = () => {
   const navigate = useNavigate();
@@ -50,4 +51,16 @@ const DefaultTopbar = (text: string) => {
   );
 };
 
-export { LogoTopbar, OptionTopbar, DefaultTopbar };
+const BackTopbar = () => {
+  const navigate = useNavigate();
+  const goBackHandler = () => {
+    navigate(-1);
+  };
+  return (
+    <div className={style.backTopbar}>
+      <button className={style.backBtn} onClick={goBackHandler}></button>
+    </div>
+  );
+};
+
+export { LogoTopbar, OptionTopbar, DefaultTopbar, BackTopbar };

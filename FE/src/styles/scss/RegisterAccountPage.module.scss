@@ -3,4 +3,24 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  padding: 1.5rem;
+  align-items: center;
+  h1 {
+    margin-right: auto;
+  }
+  p {
+    margin-right: auto;
+  }
+  .bank {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    background-color: beige;
+
+    .label {
+      border: 1px;
+      text-align: center;
+    }
+  }
 }
