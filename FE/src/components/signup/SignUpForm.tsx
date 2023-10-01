@@ -25,8 +25,14 @@ const SignUpForm = () => {
       setSignupInput((prev) => ({ ...prev, [id]: value }));
     }
   };
+  const [dup, setDup] = useState("");
+
   const onSubmit = (event: any) => {
     event.preventDefault();
+    if (dup) {
+      alert("이미 존재하는 아이디입니다!");
+      return;
+    }
     const data = signupInput;
     signup(
       data,
@@ -50,7 +56,7 @@ const SignUpForm = () => {
           value={signupInput.loginId}
           onChange={onChange}
         />
-        <DuplicationBtn checkingId={signupInput.loginId} />
+        <DuplicationBtn checkingId={signupInput.loginId} setDup={setDup} />
       </div>
 
       <AnimationLabelInput

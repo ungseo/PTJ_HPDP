@@ -13,6 +13,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 0.5rem;
+    overflow: hidden;
 
     .animateLeft {
       animation: LeftStream 1s ease-in-out forwards;
