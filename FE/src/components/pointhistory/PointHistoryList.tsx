@@ -41,7 +41,7 @@ const PointHistoryList = (props: PointHistoryListProps) => {
         <div>
           {pointList.length > 0
             ? pointList.map((item, index) => (
-                <div>
+                <div key={index}>
                   <PointHistoryItem item={item}></PointHistoryItem>
                   <hr />
                 </div>
