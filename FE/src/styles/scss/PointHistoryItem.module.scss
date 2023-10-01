@@ -7,7 +7,7 @@
 
   .date {
     color: gray;
-    font-size: 0.5rem;
+    font-size: 0.9rem;
     margin-right: auto;
   }
 
@@ -17,20 +17,32 @@
     font-weight: bold;
 
     .content_title {
+      text-align: left;
+      flex: 7;
+      font-size: 1.1rem;
     }
-
+    .icon {
+      flex: 1;
+      margin-right: 0.2rem;
+    }
     .content_deposit {
       color: red;
+      flex: 2;
+      text-align: right;
     }
     .content_withdraw {
+      flex: 2;
+      text-align: right;
       color: blue;
     }
   }
 
   .remain_point {
     color: gray;
-    font-size: 0.5rem;
+    font-size: 0.9rem;
     margin-left: auto;
+    margin: 0.2rem 0;
+    text-align: right;
   }
 }
 .bottomsheetbackground {
