@@ -19,7 +19,7 @@ const SearchBar = () => {
         type="text"
         value={keyword}
         onChange={onChange}
-        placeholder="해쉬태그로 기업을 검색해보세요"
+        placeholder="해쉬태그로 검색해보세요"
       />
       <img
         className={style.img}

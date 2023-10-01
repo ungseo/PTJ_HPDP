@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { duplicationIdCheck } from "../../api/auth";
 import style from "../../styles/css/DuplicationBtn.module.css";
-const DuplicationBtn = ({ checkingId }: { checkingId: string }) => {
+const DuplicationBtn = ({
+  checkingId,
+  setDup,
+}: {
+  checkingId: string;
+  setDup: any;
+}) => {
   const [duplicated, setDuplicated] = useState("");
   const [checkedId, setChechedId] = useState("");
   const onClick = (event: any) => {
@@ -12,18 +18,20 @@ const DuplicationBtn = ({ checkingId }: { checkingId: string }) => {
         alert(res.data.message);
         setDuplicated("pass");
         setChechedId(checkingId);
+        setDup(false);
       },
       (err) => {
-        console.log(err);
         alert(err.response.data.message);
         setDuplicated("duplicated");
         setChechedId(checkingId);
+        setDup(true);
       }
     );
   };
   useEffect(() => {
     if (checkedId !== checkingId) {
       setDuplicated("");
+      setDup(true);
     }
   }, [checkingId]);
 
