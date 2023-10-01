@@ -3,18 +3,16 @@
 .total {
   display: flex;
   position: relative;
-  // margin-bottom: 1rem;
-
+  padding: 0.3rem 1rem;
   .leftimg {
     width: 100%;
     aspect-ratio: 1/1;
     height: auto;
     border-radius: 1rem;
-    // background-color: gray;
   }
 
   .rightcontent {
-    // padding-left: 1rem;
+    padding-left: 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

@@ -27,7 +27,7 @@ const SendingMessage = () => {
       }
     );
   }, []);
-
+  console.log(messageData);
   return (
     <div className={style.message}>
       <div className={style.down_content}>
