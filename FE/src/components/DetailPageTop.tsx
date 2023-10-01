@@ -29,7 +29,7 @@ const DetailPageTop = (props: DetailTopProps) => {
     }
   };
   const totalStyle = {
-    backgroundImage: `url(${data.thumbnail})`,
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url(${data.thumbnail})`,
   };
 
   return (
