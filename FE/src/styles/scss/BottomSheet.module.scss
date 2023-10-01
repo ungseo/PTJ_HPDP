@@ -15,7 +15,36 @@
     font-size: 1.5rem;
   }
   .bottomsheetcontent {
-    margin: 1rem;
+    margin: 0 2rem;
+    text-align: left;
+    .question {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .cost {
+      .input {
+        font-size: 1.3rem;
+        text-align: right;
+        width: 100%;
+        height: 2rem;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 2px solid black;
+      }
+      input:focus {
+        outline: none; /* 포커스 시 외곽선 없애기 */
+      }
+      .usepoint {
+        margin-top: 0.3rem;
+        text-align: right;
+        color: #a3a3a3;
+      }
+      .reward_alert {
+        margin: 2rem 0;
+        font-size: 0.8rem;
+      }
+    }
   }
 }
 .bottomsheetcontainer.active {

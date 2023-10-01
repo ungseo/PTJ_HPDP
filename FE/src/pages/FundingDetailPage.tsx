@@ -59,23 +59,27 @@ const FundingDetailPage = () => {
   // bottomsheet는 false, complete는 true로 변경
   const FundingHandler = () => {
     if (isBottomSheetOpen) {
-      getSponsor(
-        accessToken,
-        Number(fundingid),
-        donationAmount,
-        (res) => {
-          console.log("후원하기 API 연결");
-        },
-        (err) => {
-          console.log("후원하기 API 호출 실패", err);
-        }
-      );
-      setIsBottomSheetOpen(false);
-      setIsFundingCompleteOpen(true);
-      // 2초후에 자동으로 complete닫기
-      setTimeout(() => {
-        setIsFundingCompleteOpen(false);
-      }, 2000);
+      if (donationAmount === 0) {
+        alert("후원 금액을 입력하세요");
+      } else {
+        getSponsor(
+          accessToken,
+          Number(fundingid),
+          donationAmount,
+          (res) => {
+            console.log("후원하기 API 연결");
+          },
+          (err) => {
+            console.log("후원하기 API 호출 실패", err);
+          }
+        );
+        setIsBottomSheetOpen(false);
+        setIsFundingCompleteOpen(true);
+        // 2초후에 자동으로 complete 닫기
+        // setTimeout(() => {
+        //   setIsFundingCompleteOpen(false);
+        // }, 2000);
+      }
     } else {
       setIsBottomSheetOpen(true);
     }
@@ -88,7 +92,7 @@ const FundingDetailPage = () => {
     companyId: fundingDetailData.companyId,
     profileImg: fundingDetailData.profileImg,
   };
-  console.log(fundingDetailData.rewardPrice);
+
   return (
     <div className={style.fundingdetailpage}>
       <DetailPageTop data={data} />
@@ -110,6 +114,7 @@ const FundingDetailPage = () => {
           <FundingComplete
             donationAmount={donationAmount}
             title={fundingDetailData.title}
+            thumbnail={fundingDetailData.thumbnail}
           />
         </>
       )}
@@ -117,7 +122,7 @@ const FundingDetailPage = () => {
       <div className={style.fixedButton}>
         <DefaultButton
           text="후원하기"
-          styles={{ width: "80%", height: "2rem" }}
+          styles={{ width: "90%", height: "2.5rem" }}
           type="submit"
           onClick={FundingHandler}
         />
