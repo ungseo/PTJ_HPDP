@@ -76,9 +76,9 @@ const FundingDetailPage = () => {
         setIsBottomSheetOpen(false);
         setIsFundingCompleteOpen(true);
         // 2초후에 자동으로 complete 닫기
-        // setTimeout(() => {
-        //   setIsFundingCompleteOpen(false);
-        // }, 2000);
+        setTimeout(() => {
+          setIsFundingCompleteOpen(false);
+        }, 2000);
       }
     } else {
       setIsBottomSheetOpen(true);
