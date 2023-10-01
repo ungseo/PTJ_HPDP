@@ -18,7 +18,7 @@ const TransactionList = () => {
       switch (id) {
         case "커피":
           return ["123456789", -780];
-        case "소주":
+        case "사탕":
           return ["987654321", -340];
         case "용돈":
           return ["1357911", 12570];
@@ -51,7 +51,14 @@ const TransactionList = () => {
       }
     );
   };
-
+  const btnStyle = {
+    width: "65%",
+    borderRadius: "0.6rem",
+    height: "2.5rem",
+    fontSize: "1rem",
+    fontWeight: "bold",
+    marginBottom: "0.5rem",
+  };
   return (
     <div className={style.wrapper}>
       <div className={style.item}>
@@ -60,64 +67,40 @@ const TransactionList = () => {
         <p className={style.price}>780 원</p>
         <DeepBlueBtn
           text="소비하기"
-          styles={{
-            width: "65%",
-            borderRadius: "0.6rem",
-            height: "2.5rem",
-            fontSize: "1rem",
-            fontWeight: "bold",
-          }}
+          styles={btnStyle}
           onClick={onClick}
           id="커피"
         />
       </div>
       <div className={style.item}>
-        <img src="/candy.png" alt="소주" />
-        <p className={style.title}>소주</p>
+        <img src="/candy.png" alt="사탕" />
+        <p className={style.title}>사탕</p>
         <p className={style.price}>340 원</p>
         <DeepBlueBtn
           text="소비하기"
-          styles={{
-            width: "65%",
-            borderRadius: "0.6rem",
-            height: "2.5rem",
-            fontSize: "1rem",
-            fontWeight: "bold",
-          }}
+          styles={btnStyle}
           onClick={onClick}
-          id="소주"
+          id="사탕"
         />
       </div>{" "}
       <div className={style.item}>
-        <img src="/hpdpLogo.png" alt="커피" />
-        <p className={style.title}>용돈... 달다...</p>
+        <img src="/hpdpLogo.png" alt="용돈" />
+        <p className={style.title}>용돈</p>
         <p className={style.price}>12570 원</p>
         <DefaultButton
           text="입금하기"
-          styles={{
-            width: "65%",
-            borderRadius: "0.6rem",
-            height: "2.5rem",
-            fontSize: "1rem",
-            fontWeight: "bold",
-          }}
+          styles={btnStyle}
           onClick={onClick}
           id="용돈"
         />
       </div>
       <div className={style.item}>
-        <img src="/salary.png" alt="커피" />
-        <p className={style.title}>월급... 달다...</p>
+        <img src="/salary.png" alt="월급" />
+        <p className={style.title}>월급</p>
         <p className={style.price}>123456 원</p>
         <DefaultButton
           text="입금하기"
-          styles={{
-            width: "65%",
-            borderRadius: "0.6rem",
-            height: "2.5rem",
-            fontSize: "1rem",
-            fontWeight: "bold",
-          }}
+          styles={btnStyle}
           onClick={onClick}
           id="월급"
         />

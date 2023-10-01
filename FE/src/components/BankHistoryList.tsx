@@ -29,7 +29,7 @@ const BankHistoryList = () => {
       <hr />
       {/* 아이템컴포넌트 map */}
       {transDetails.map((item, index) => (
-        <div>
+        <div key={index}>
           <BankHistoryItem item={item}></BankHistoryItem>
           <hr />
         </div>

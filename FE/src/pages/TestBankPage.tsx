@@ -12,12 +12,12 @@ const TestBankPage = () => {
     <div>
       <OptionTopbar text="test bank" />
       {isRegistered ? (
-        <div>
+        <div style={{ padding: "1.5rem" }}>
           <TestWallet />
           <TransactionList />
         </div>
       ) : (
-        <div>
+        <div style={{ padding: "1.5rem" }}>
           <TestWalletRegistration />
         </div>
       )}

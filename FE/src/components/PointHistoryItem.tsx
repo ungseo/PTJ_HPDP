@@ -33,11 +33,17 @@ const PointHistoryItem = (props: PointHistoryItemProps) => {
     setOpenBlock(false);
   };
   console.log(item);
+  const content =
+    item.content && item.content !== "autopay"
+      ? item.content
+      : item.content === "autopay"
+      ? "끝전 이체"
+      : "포인트 충전";
   return (
     <div className={style.wrapper}>
       <p className={style.date}>{paymentDate}</p>
       <div className={style.content}>
-        <div className={style.content_title}>{item.content}</div>
+        <div className={style.content_title}>{content}</div>
         {item.flag ? <button onClick={OpenBlockModal}>블록</button> : null}
         {item.flag ? (
           <div className={style.content_withdraw}> {item.paymentPoint} 원</div>
