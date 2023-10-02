@@ -14,14 +14,19 @@ function formatDate(inputDate: string) {
   return `${year}.${month}.${day}`;
 }
 
+function formatNumber(number: number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const BankHistoryItem = (props: BankHistoryItemProps) => {
   const { item } = props;
   const flag = item.flag;
 
   const createdDate = formatDate(item.createdDate);
 
-  const depositAmount = Math.abs(item.depositAmount);
+  const depositAmount = formatNumber(Math.abs(item.depositAmount));
 
+  const AfterBalance = formatNumber(item.afterBlnc);
   return (
     <div className={style.wrapper}>
       <p className={style.date}>{createdDate}</p>
@@ -29,12 +34,12 @@ const BankHistoryItem = (props: BankHistoryItemProps) => {
         <div className={style.content_title}>{item.opponentName}</div>
 
         {flag ? (
-          <div className={style.content_withdraw}> {depositAmount}원</div>
+          <div className={style.content_withdraw}> {depositAmount} 원</div>
         ) : (
           <div className={style.content_deposit}> {depositAmount} 원</div>
         )}
       </div>
-      <p className={style.remain_point}>{item.afterBlnc} 원</p>
+      <div className={style.remain_point}>{AfterBalance} 원</div>
     </div>
   );
 };

@@ -1,8 +1,7 @@
 .bottomsheetcontainer {
   position: fixed;
-  width: min(500px, calc(100% - 2rem));
+  width: min(500px, 100%);
   bottom: 0;
-  left: 0;
   border-radius: 1rem 1rem 0 0;
   background-color: white;
   transform: translateY(100%);
@@ -10,7 +9,10 @@
   -webkit-transition: transform 0.3s ease-in-out;
   -moz-transition: transform 0.3s ease-in-out;
   overflow-wrap: break-word;
-  padding: 1rem;
+  .blockchain_content {
+    margin: 0 1.5rem;
+  }
+
   .bottomsheetcontent {
     margin: 0.5rem;
     text-align: left;

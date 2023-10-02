@@ -15,12 +15,13 @@
   }
 }
 .letter {
+  margin: 0.2rem 0;
   color: grey;
-  font-size: 0.9rem;
   width: 98%;
+  font-size: 1.1rem;
   overflow: hidden;
   word-break: break-word;
-
+  text-align: left;
   display: -webkit-box;
   -webkit-line-clamp: 2; // 원하는 라인수
   -webkit-box-orient: vertical;

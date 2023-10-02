@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import { OutPointHistoryInterface } from "./../interface/apiDataInterface";
 import style from "../styles/scss/PointHistoryItem.module.scss";
 import BlockChainInfo from "./BlockChainInfo";
+import { Icon } from "@iconify/react";
 
 interface PointHistoryItemProps {
   item: OutPointHistoryInterface;
+}
+
+function formatNumber(number: number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function formatDate(inputDate: string) {
@@ -24,6 +29,8 @@ function formatDate(inputDate: string) {
 const PointHistoryItem = (props: PointHistoryItemProps) => {
   const { item } = props;
   const paymentDate = formatDate(item.paymentDate);
+  const paymentPoint = formatNumber(item.paymentPoint);
+  const afterPoint = formatNumber(item.afterPoint);
 
   const [openBlock, setOpenBlock] = useState(false);
   const OpenBlockModal = () => {
@@ -44,14 +51,24 @@ const PointHistoryItem = (props: PointHistoryItemProps) => {
       <p className={style.date}>{paymentDate}</p>
       <div className={style.content}>
         <div className={style.content_title}>{content}</div>
-        {item.flag ? <button onClick={OpenBlockModal}>블록</button> : null}
         {item.flag ? (
-          <div className={style.content_withdraw}> {item.paymentPoint} 원</div>
+          <Icon
+            icon="bi:receipt-cutoff"
+            onClick={OpenBlockModal}
+            style={{
+              width: "1.3rem",
+              height: "1.8rem",
+            }}
+            className={style.icon}
+          ></Icon>
+        ) : null}
+        {item.flag ? (
+          <div className={style.content_withdraw}>{paymentPoint} P</div>
         ) : (
-          <div className={style.content_deposit}> {item.paymentPoint} 원</div>
+          <div className={style.content_deposit}> {paymentPoint} P</div>
         )}
       </div>
-      <p className={style.remain_point}>{item.afterPoint} 원</p>
+      <div className={style.remain_point}>{afterPoint} P</div>
       {openBlock && (
         <>
           <div className={style.bottomsheetbackground}></div>

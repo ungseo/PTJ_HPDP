@@ -24,15 +24,22 @@ function formatDate(inputDate: string) {
 const MessageContent = ({ onClose, isMessageDetail, flag }: MessageProps) => {
   const formattedDate = formatDate(isMessageDetail.createdDate);
   const [showSendMessageModal, setShowSendMessageModal] = useState(false);
+
   const handleOpenSendMessageModal = () => {
     setShowSendMessageModal(true);
   };
+
+  const handleSendMessageModalClose = () => {
+    setShowSendMessageModal(false);
+  };
+
   console.log(isMessageDetail);
   const opponentName = isMessageDetail.opponentName || "";
   const opponentId =
     typeof isMessageDetail.opponentId === "number"
       ? isMessageDetail.opponentId
       : 0;
+
   return (
     <div className={style.messageModal}>
       <div className={style.messagecontent}>
@@ -69,7 +76,9 @@ const MessageContent = ({ onClose, isMessageDetail, flag }: MessageProps) => {
           <div>
             <div className={style.sending}>
               <div style={{ marginRight: "0.5rem" }}>받는사람</div>
-              <div>{isMessageDetail.opponentName}</div>
+              <div style={{ fontWeight: "bold" }}>
+                {isMessageDetail.opponentName}
+              </div>
             </div>
             <hr />
             <div className={style.sending}>
@@ -85,22 +94,25 @@ const MessageContent = ({ onClose, isMessageDetail, flag }: MessageProps) => {
             marginTop: "1rem",
             textAlign: "justify",
             marginBottom: "1rem",
+            height: "33vh",
           }}
         >
           {isMessageDetail.content}
         </div>
         {flag === 0 && (
-          <DefaultButton
-            text="답장하기"
-            styles={{ width: "40%", height: "2rem" }}
-            type="submit"
-            onClick={handleOpenSendMessageModal}
-          />
+          <div className={style.return_btn}>
+            <DefaultButton
+              text="답장하기"
+              styles={{ width: "40%", height: "2rem" }}
+              type="submit"
+              onClick={handleOpenSendMessageModal}
+            />
+          </div>
         )}
       </div>
       {showSendMessageModal && (
         <SendMessageModal
-          onClose={() => setShowSendMessageModal(false)}
+          onClose={handleSendMessageModalClose}
           data={{
             name: opponentName,
             receiverId: opponentId,
