@@ -12,6 +12,7 @@ import { getMemberInfo, updateMemberInfo } from "../api/members";
 import { userActions } from "../store/user-slice";
 import PwModal from "../components/profile/PwModal";
 import style from "../styles/css/ProfileEditPage.module.css";
+import { NotOkModal, OkModal } from "../components/common/AlertModals";
 const ProfileEditPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -26,12 +27,9 @@ const ProfileEditPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const token = useSelector((state: any) => state.user.auth.accessToken);
   const saveEditHandler = () => {
-    console.log(selectedImage);
-    console.log(editInput);
     const formData = new FormData();
     formData.append("name", editInput.name);
     if (selectedImage) {
-      console.log("파일들어감");
       formData.append("profile", selectedImage);
     }
     if (editInput.phoneNumber) {
@@ -48,17 +46,16 @@ const ProfileEditPage = () => {
         getMemberInfo(
           token,
           (res) => {
-            console.log("유저정보 불러오기성공");
             dispatch(userActions.saveMemberInfo(res.data.data));
           },
           (err) => {
             console.log(err);
           }
         );
-        alert("정보를 수정했습니다.");
+        OkModal({ title: "성공", text: "정보를 수정했습니다." });
       },
       (err) => {
-        alert("실패" + err);
+        NotOkModal({ title: "실패", text: `정보변경 실패 ${err}` });
       }
     );
   };

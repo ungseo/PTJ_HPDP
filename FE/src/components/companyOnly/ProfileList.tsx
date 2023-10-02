@@ -6,6 +6,7 @@ import { logout } from "../../api/auth";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../store/user-slice";
+import { OkModal } from "../common/AlertModals";
 
 const ProfileList = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -19,13 +20,13 @@ const ProfileList = () => {
         accessToken,
         (res) => {
           dispatch(userActions.logoutHandler());
-          alert("로그아웃 되었습니다.");
+          OkModal({ title: "로그아웃", text: "또 오세요!" });
           navigate("/");
         },
-        (err) => {
-          alert(err.message);
-        }
+        (err) => {}
       );
+      dispatch(userActions.logoutHandler());
+      navigate("/");
       return;
     }
     navigate(`/profile${id}`);

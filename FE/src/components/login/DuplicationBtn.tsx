@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { duplicationIdCheck } from "../../api/auth";
 import style from "../../styles/css/DuplicationBtn.module.css";
+import { NotOkModal, OkModal } from "../common/AlertModals";
 const DuplicationBtn = ({
   checkingId,
   setDup,
@@ -15,13 +16,13 @@ const DuplicationBtn = ({
     duplicationIdCheck(
       checkingId,
       (res) => {
-        alert(res.data.message);
+        OkModal({ title: "성공", text: res.data.message });
         setDuplicated("pass");
         setChechedId(checkingId);
         setDup(false);
       },
       (err) => {
-        alert(err.response.data.message);
+        NotOkModal({ title: "실패", text: "아이디가 중복입니다." });
         setDuplicated("duplicated");
         setChechedId(checkingId);
         setDup(true);

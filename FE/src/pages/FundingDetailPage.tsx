@@ -13,6 +13,7 @@ import FundingComplete from "../components/fundingdetail/FundingComplete";
 import DetailPageTop from "../components/DetailPageTop";
 import DefaultButton from "../components/common/DefaultButton";
 import style from "../styles/css/FundingDetailPage.module.css";
+import { QuestionModal } from "../components/common/AlertModals";
 
 const FundingDetailPage = () => {
   // 디테일이라서 값이 1개라 []는 배열이라 안되고 null은 타입지정이 불가해서 안되서 {}객체로 설정
@@ -60,7 +61,7 @@ const FundingDetailPage = () => {
   const FundingHandler = () => {
     if (isBottomSheetOpen) {
       if (donationAmount === 0) {
-        alert("후원 금액을 입력하세요");
+        QuestionModal({ text: "후원 금액을 입력하세요." });
       } else {
         getSponsor(
           accessToken,

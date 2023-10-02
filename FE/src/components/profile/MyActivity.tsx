@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../store/user-slice";
 import { logout } from "../../api/auth";
+import { OkModal } from "../common/AlertModals";
 
 const MyActivity = () => {
   const dispatch = useDispatch();
@@ -19,13 +20,13 @@ const MyActivity = () => {
         accessToken,
         (res) => {
           dispatch(userActions.logoutHandler());
-          alert("로그 아웃 되었습니다.");
+          OkModal({ title: "로그아웃", text: "또 오세요!" });
           navigate("/");
         },
-        (err) => {
-          alert(err);
-        }
+        (err) => {}
       );
+      dispatch(userActions.logoutHandler());
+      navigate("/");
       return;
     }
     navigate(`/profile/${id}`);
