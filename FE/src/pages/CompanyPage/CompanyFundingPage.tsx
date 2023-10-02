@@ -32,7 +32,7 @@ const CompanyFundingPage = () => {
           ))}
         </div>
       ) : (
-        <h1>없어요</h1>
+        <h1>등록한 펀딩 이력이 없습니다.</h1>
       )}
     </div>
   );

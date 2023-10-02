@@ -51,7 +51,6 @@ function App() {
   };
   useEffect(() => {
     if (accessToken) {
-      console.log("hi");
       refresh();
     }
   }, []);
@@ -66,7 +65,7 @@ function App() {
 
       scrollingTimer = setTimeout(() => {
         setIsScrolling(false);
-      }, 150); // 150 밀리초 후에도 스크롤이 멈춰있으면 false로 설정
+      }, 300); // 300으로변경 밀리초 후에도 스크롤이 멈춰있으면 false로 설정
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -76,7 +75,6 @@ function App() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  console.log(isScrolling);
   return (
     <div id="app-root" className={style.App}>
       <Routes>

@@ -32,8 +32,17 @@ const LoginForm = () => {
           type,
         };
         dispatch(userActions.loginHandler(tokens));
+        getMemberInfo(
+          tokens.accessToken,
+          (res) => {
+            console.log("유저정보 불러오기성공");
+            dispatch(userActions.saveMemberInfo(res.data.data));
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
         navigate("/");
-        window.location.reload();
       },
       (err) => {
         alert("로그인 정보가 일치하지 않습니다!");

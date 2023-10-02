@@ -1,10 +1,17 @@
 @import "Style";
 
 .content {
-  background-color: red;
+  height: calc(100vh - 112px);
+  display: flex;
+  flex-direction: column;
+  background-color: $sinhanBlue;
   .logo {
     margin-top: 2rem;
-    height: 3rem;
-    min-height: 3rem;
+    height: 5rem;
+    width: auto;
+    min-height: 5rem;
+  }
+  .P {
+    color: $white;
   }
 }
