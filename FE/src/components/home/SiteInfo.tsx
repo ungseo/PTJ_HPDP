@@ -19,17 +19,17 @@ const SiteInfo = () => {
       }
     );
   }, []);
-  console.log(mainData);
 
   return (
     <div className={style.totalwarapper}>
       <div
         style={{
-          fontSize: "1.2rem",
+          fontSize: "1.3rem",
           marginBottom: "2rem",
+          marginTop: "1rem",
         }}
       >
-        <div className={style.span}>후원자 여러분 덕분에</div>
+        <div>후원자 여러분 덕분에</div>
         세상은 조금씩 달콤해지고 있습니다.
       </div>
       <div className={style.wrapper}>

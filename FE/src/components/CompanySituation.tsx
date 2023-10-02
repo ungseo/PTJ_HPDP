@@ -59,10 +59,10 @@ const CompanySituation = (props: CompanySituationProps) => {
 
   return (
     <div className={style.wrapper}>
-      <h1 className={style.text}>모금 현황</h1>
+      <h2 className={style.text}>모금 현황</h2>
       <Grid container className={style.container}>
         {/* <Grid item xs={1.5}></Grid> */}
-        <Grid item xs={9} className={style.item}>
+        <Grid item xs={12} className={style.item}>
           <div className={style.divide}>
             <div>프로젝트 개수</div>
             <div>{item.fundingsNumber} 개</div>
@@ -75,13 +75,12 @@ const CompanySituation = (props: CompanySituationProps) => {
             <div>모금 금액</div>
             <div>{item.amount} 원</div>
           </div>
-          {/* <Grid item xs={1.5} className={style.height}></Grid> */}
         </Grid>
       </Grid>
 
       {companyProgressFundingData.length > 0 ? (
         <div className={style.text}>
-          <h1>진행 내역</h1>
+          <h2>진행 내역</h2>
           <FundingItem
             key={companyProgressFundingData[0].fundingId}
             item={companyProgressFundingData[0]}
@@ -91,7 +90,7 @@ const CompanySituation = (props: CompanySituationProps) => {
 
       {companyCompleteFundingData.length > 0 ? (
         <div className={style.text}>
-          <h1>종료 내역</h1>
+          <h2>종료 내역</h2>
           {companyCompleteFundingData.map((item) => (
             <FundingItem key={item.fundingId} item={item} />
           ))}

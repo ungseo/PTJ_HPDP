@@ -55,7 +55,7 @@ const CompanyDetailPage = () => {
     <div className={style.companydetailpage}>
       <DetailPageTop data={data} />
       <CustomizedTabs tabProps={tabProps} />
-      <div className={style.message_icon}>
+      <div className={style.message_icon} onClick={openModal}>
         <Icon
           icon="bi:chat-square-dots"
           style={{
@@ -63,7 +63,6 @@ const CompanyDetailPage = () => {
             height: "1.5rem",
           }}
           className={style.Icon_icon}
-          onClick={openModal}
         ></Icon>
       </div>
       {isModalOpen && (

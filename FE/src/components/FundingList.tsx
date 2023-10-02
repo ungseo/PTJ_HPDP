@@ -32,10 +32,11 @@ const FundingList = ({ keyword }: any) => {
       <div style={{ textAlign: "left", margin: "1rem" }}>
         총 {fundingTotalData.length}개의 펀딩이 진행중 입니다
       </div>
-
-      {fundingTotalData.map((item) => (
-        <FundingItem key={item.fundingId} item={item} />
-      ))}
+      <div style={{ marginLeft: "1rem", marginRight: "1rem" }}>
+        {fundingTotalData.map((item) => (
+          <FundingItem key={item.fundingId} item={item} />
+        ))}
+      </div>
     </div>
   );
 };
