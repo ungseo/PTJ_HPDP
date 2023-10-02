@@ -43,7 +43,9 @@ const ProfileList = () => {
         onClick={onClick}
       />
       <ProfileListItem text="쪽지함" id={"/message"} onClick={onClick} />
-      <ProfileListItem text="로그아웃" id={"logout"} onClick={onClick} />
+      <div style={{ color: "red" }}>
+        <ProfileListItem text="로그아웃" id={"logout"} onClick={onClick} />
+      </div>
     </div>
   );
 };

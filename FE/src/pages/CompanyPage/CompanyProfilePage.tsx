@@ -35,8 +35,12 @@ const CompanyProfilePage = () => {
     <div className={style.wrapper}>
       <OptionTopbar text="프로필페이지(기업용)" />
       <div className={style.content}>
-        <img className={style.logo} src={companyLogo} alt="로고없음" />
-        <p>{companyInfo}이름 ㅋ</p>
+        <div>
+          <img className={style.logo} src={companyLogo} alt="로고없음" />
+          <p className={style.P} style={{ fontSize: "1.2rem" }}>
+            {companyInfo}
+          </p>
+        </div>
         <ProfileList />
       </div>
     </div>

@@ -7,6 +7,7 @@ import CompanyItem from "./CompanyItem";
 import { getCompaniesInfo } from "../api/companies";
 import styled from "@emotion/styled";
 import style from "../styles/css/CompanyList.module.css";
+import LoadingSpinner from "./common/LoadingSpinner";
 
 export default function CompanyList({ keyword }: any) {
   const [companyData, setCompanyData] = useState<
@@ -14,7 +15,7 @@ export default function CompanyList({ keyword }: any) {
   >([]);
 
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const hashKeyword = keyword;
     console.log(hashKeyword);
@@ -23,6 +24,7 @@ export default function CompanyList({ keyword }: any) {
       accessToken,
       (res) => {
         setCompanyData(res.data.data);
+        setIsLoading(false);
       },
       (err) => {
         console.error("API 호출 실패:", err);
@@ -30,7 +32,9 @@ export default function CompanyList({ keyword }: any) {
     );
   }, []);
 
-  return (
+  return isLoading ? (
+    <LoadingSpinner />
+  ) : (
     <ImageList
       style={{ padding: "1.5rem", gap: "10px", margin: "0" }}
       className={style.wrapper}

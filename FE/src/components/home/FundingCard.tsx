@@ -21,7 +21,6 @@ const FundingCard = ({ card }: { card: OutFundingsInfoInterface }) => {
     navigate(`/funding/detail/${card.fundingId}`);
   };
 
-  console.log(card);
   return (
     <div className={style.cardtotal} style={cardTotalStyle} onClick={CardClick}>
       <div className={style.fundingcontent}>{card.title}</div>
