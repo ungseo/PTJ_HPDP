@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import * as Interfaces from "../../interface/apiDataInterface";
 import { getMessageDetail } from "../../api/messages";
 import MessageContent from "./MessageContent";
-import { Grid } from "@mui/material";
 import style from "../../styles/css/MessagePart.module.css";
 
 interface MessagePartProps {
@@ -40,7 +39,7 @@ const MessagePart = ({ message, flag }: MessagePartProps) => {
       }
     );
   };
-
+  console.log(isMessageContent);
   const handleCloseModal = () => {
     setMessageContent(false);
   };

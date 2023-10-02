@@ -23,7 +23,7 @@ import BankStatementPage from "./pages/BankStatementPage";
 import InterestingCompanyPage from "./pages/InterestingCompanyPage";
 import MessagePage from "./pages/MessagePage";
 import PageNotFound404 from "./pages/PageNotFound404";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getMemberInfo } from "./api/members";
 import { userActions } from "./store/user-slice";
 import { useDispatch } from "react-redux";
@@ -56,7 +56,28 @@ function App() {
       refresh();
     }
   }, []);
+  const [isScrolling, setIsScrolling] = useState(false);
 
+  useEffect(() => {
+    let scrollingTimer: any;
+
+    const handleScroll = () => {
+      clearTimeout(scrollingTimer);
+      setIsScrolling(true);
+
+      scrollingTimer = setTimeout(() => {
+        setIsScrolling(false);
+      }, 150); // 150 밀리초 후에도 스크롤이 멈춰있으면 false로 설정
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  console.log(isScrolling);
   return (
     <Paper id="app-root" className={style.App}>
       <Routes>
@@ -113,7 +134,10 @@ function App() {
         <Route path="*" Component={PageNotFound404}></Route>
       </Routes>
       <div className={style.blank}></div>
-      <div className={style.navBar}>
+      <div
+        className={style.navBar}
+        style={{ visibility: isScrolling ? "hidden" : "visible" }}
+      >
         <NavigationBar />
       </div>
     </Paper>

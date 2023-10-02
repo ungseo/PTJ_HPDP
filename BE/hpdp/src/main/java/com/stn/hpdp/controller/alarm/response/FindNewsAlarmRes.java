@@ -4,6 +4,8 @@ import com.stn.hpdp.model.entity.NewsAlarm;
 import com.stn.hpdp.model.entity.PointAlarm;
 import lombok.*;
 
+import java.time.format.DateTimeFormatter;
+
 @Getter
 @Setter
 @Builder
@@ -17,6 +19,9 @@ public class FindNewsAlarmRes {
     private String title;
     private String thumbnail;
     private boolean isRead;
+    private String date;
+    private long companyId;
+    private String companyName;
     public static FindNewsAlarmRes of (NewsAlarm alarm) {
         return FindNewsAlarmRes.builder()
                 .newsAlarmId(alarm.getId())
@@ -25,6 +30,9 @@ public class FindNewsAlarmRes {
                 .title(alarm.getTitle())
                 .thumbnail(alarm.getFunding().getThumbnailUrl())
                 .isRead(alarm.getIsRead())
+                .date(alarm.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH:mm:ss")))
+                .companyId(alarm.getFunding().getCompany().getId())
+                .companyName(alarm.getFunding().getCompany().getName())
                 .build();
     }
 }

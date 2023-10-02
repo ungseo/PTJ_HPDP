@@ -29,7 +29,9 @@ const FundingList = ({ keyword }: any) => {
 
   return (
     <div>
-      <div>총 {fundingTotalData.length}개의 펀딩이 진행중 입니다</div>
+      <div style={{ textAlign: "left", margin: "1rem" }}>
+        총 {fundingTotalData.length}개의 펀딩이 진행중 입니다
+      </div>
 
       {fundingTotalData.map((item) => (
         <FundingItem key={item.fundingId} item={item} />

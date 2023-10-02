@@ -1,9 +1,19 @@
-.companyListContainer {
-    display: flex;
-    flex-wrap: wrap;
-  }
+@import "Animation";
 
-.companyItem {
-    margin: 1rem;
+.wrapper {
+  overflow: hidden;
+  // .box:nth-child(4n + 2),
+  // .box:nth-child(4n + 1) {
+  //   animation: LeftStream 1s ease-in-out forwards;
+  //   opacity: 0;
+  // }
+  // .box:nth-child(4n + 3),
+  // .box:nth-child(4n) {
+  //   animation: RightStream 1s ease-in-out forwards;
+  //   opacity: 0;
+  // }
+  .box {
+    animation: Upstream23 1s ease-in-out forwards;
+    opacity: 0;
+  }
 }
-  

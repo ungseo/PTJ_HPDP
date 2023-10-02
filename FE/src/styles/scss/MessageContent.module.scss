@@ -8,15 +8,12 @@
     border-radius: 0.5rem;
     max-width: 350px;
     width: 75%;
-    height: 70%;
+    font-size: 1.2rem;
     position: fixed;
     padding: 1rem;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    @media (min-height: 680px) {
-      height: 65%;
-    }
     .icon_section {
       position: relative;
       margin-bottom: 2rem;
@@ -32,4 +29,6 @@
       display: flex;
     }
   }
+}
+.return_btn {
 }

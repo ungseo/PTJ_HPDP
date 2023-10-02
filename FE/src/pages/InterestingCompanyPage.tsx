@@ -31,15 +31,17 @@ const InterestingCompanyPage = () => {
   return (
     <div>
       <OptionTopbar text="관심기업" />
-      {interestingCoList !== null ? (
-        <ImageList>
-          {interestingCoList.map((item, index) => (
-            <CompanyItem key={index} item={item} />
-          ))}
-        </ImageList>
-      ) : (
-        <div></div>
-      )}
+      <div style={{ marginRight: "1rem", marginLeft: "1rem" }}>
+        {interestingCoList !== null ? (
+          <ImageList>
+            {interestingCoList.map((item, index) => (
+              <CompanyItem key={index} item={item} />
+            ))}
+          </ImageList>
+        ) : (
+          <div></div>
+        )}
+      </div>
     </div>
   );
 };

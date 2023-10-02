@@ -7,6 +7,10 @@ import style from "../styles/css/FundingItem.module.css";
 import ProgressBar from "./common/ProgressBar";
 import { OutFundingsInfoInterface } from "../interface/apiDataInterface";
 
+function formatNumber(number: number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
   const navigate = useNavigate();
 
@@ -18,7 +22,7 @@ const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
         : "오늘마감"
       : item.dday;
   const clampedPercent = Math.min(item.percent || 0, 100);
-
+  const total_Funding = formatNumber(item.totalFunding);
   const handleGoFundingDetail = () => {
     navigate(`/funding/detail/${item.fundingId}`);
   };
@@ -37,8 +41,8 @@ const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
           <div className={style.remaindate}>{formatDday}</div>
           <ProgressBar percent={clampedPercent} />
           <div className={style.accountdetail}>
-            <div className={style.nowaccount}>{item.totalFunding}원</div>
-            <div className={style.fundingpercent}>{item.percent}%</div>
+            <div className={style.nowaccount}>{total_Funding}원</div>
+            <div className={style.fundingpercent}>{clampedPercent}%</div>
           </div>
         </div>
       </Grid>
