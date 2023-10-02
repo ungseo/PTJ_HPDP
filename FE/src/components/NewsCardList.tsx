@@ -23,9 +23,8 @@ const NewsCardList = (props: NewsCardListProps) => {
         // {TypeScript 타입 체크를 우회하기 위한 목적}
         {...{
           slidesPerView: "auto",
-          spaceBetween: 1,
+          spaceBetween: 10,
           freeMode: true,
-          slidesOffsetBefore: 10,
           slidesOffsetAfter: 10,
           pagination: {
             clickable: true,

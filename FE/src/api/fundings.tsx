@@ -3,6 +3,7 @@ import { customApi, customApiForm } from ".";
 
 export async function getFundingTotalList(
   keyword: string | null,
+  done: number,
   success: (
     res: AxiosResponse<any, any>
   ) =>
@@ -13,10 +14,10 @@ export async function getFundingTotalList(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  await customApi("fundings")
-    .get(keyword ? `?keyword=${keyword}` : "")
-    .then(success)
-    .catch(fail);
+  let apiUrl = "";
+  if (keyword) apiUrl += `?keyword=${keyword}`;
+  else apiUrl += `?done=${done}`;
+  await customApi("fundings").get(apiUrl).then(success).catch(fail);
 }
 
 export async function getFundingProgress(

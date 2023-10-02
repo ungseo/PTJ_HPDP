@@ -17,6 +17,7 @@ const FundingList = ({ keyword }: any) => {
     const hashKeyword = keyword;
     getFundingTotalList(
       hashKeyword,
+      1,
       (res) => {
         setFundingTotalData(res.data.data);
         console.log(hashKeyword);

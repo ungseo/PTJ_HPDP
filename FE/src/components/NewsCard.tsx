@@ -12,7 +12,8 @@ const NewsCard = ({ card }: { card: OutCompanyNewsInterface }) => {
   };
 
   return (
-    <div className={style.cardtotal} style={cardTotalStyle} onClick={CardClick}>
+    <div className={style.cardtotal} onClick={CardClick}>
+      <div className={style.img} style={cardTotalStyle}></div>
       <div className={style.fundingcontent}>{card.articleTitle}</div>
     </div>
   );

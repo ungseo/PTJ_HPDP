@@ -66,7 +66,7 @@ const HomePage = () => {
         </div>
       ) : null}
       {fundingAchievementData ? (
-        <div style={{ marginTop: "2rem" }}>
+        <div style={{ marginTop: "2rem", marginBottom: "1rem" }}>
           <div className={style.title}>인기가 많아요!</div>
           <FundingCardList items={fundingAchievementData} />
         </div>
