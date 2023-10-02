@@ -309,6 +309,7 @@ export interface MessagesInterface {
 
 // 뉴스 조회
 export interface OutCompanyNewsInterface {
+  articleDate: string;
   articleTitle: string;
   articleProfile: string;
   articleURL: string;

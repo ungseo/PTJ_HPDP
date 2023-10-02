@@ -16,7 +16,7 @@ interface NewsCardListProps {
 
 const NewsCardList = (props: NewsCardListProps) => {
   const { items } = props;
-  console.log(items);
+
   return (
     <>
       <Swiper

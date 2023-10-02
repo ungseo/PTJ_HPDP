@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import * as Interfaces from "../interface/apiDataInterface";
 import DetailHashTag from "./fundingdetail/DetailHashTag";
 import NewsCardList from "./NewsCardList";
-import { newsCrolling } from "../api/news";
 import style from "./../styles/scss/CompanyIntroduce.module.scss";
 
 //
@@ -12,6 +11,8 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LinkIcon from "@mui/icons-material/Link";
 import BusinessIcon from "@mui/icons-material/Business";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 interface CompanyIntroduceProps {
   item: Interfaces.InSearchCompanyInfoResponseInterface;
@@ -24,18 +25,22 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
 
   const [responseData, setResponseData] = useState<any>([]);
 
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+
   useEffect(() => {
-    const companyId = item.companyId;
-    newsCrolling(
-      companyId,
-      (res) => {
-        console.log("크롤링성공");
-        setResponseData(res.data.data);
-      },
-      (err) => {
-        console.log("크롤링실패");
-      }
-    );
+    axios
+      .get("http://j9c110.p.ssafy.io:8000/articles/news", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((response) => {
+        setResponseData(response.data.data);
+        console.log("HTTP 요청 성공:", response.data);
+      })
+      .catch((error) => {
+        console.error("HTTP 요청 실패:", error);
+      });
   }, []);
 
   return (
