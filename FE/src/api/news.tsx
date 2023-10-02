@@ -22,6 +22,7 @@ export function newsCrolling(
   console.log(process.env.REACT_APP_NEWS_API_URL);
   api.get("/news").then(success).catch(fail);
 }
+
 export function companyInfoOpenAPI(
   accessToken: string,
   companyId: number,

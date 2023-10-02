@@ -83,81 +83,81 @@ function App() {
     };
   }, []);
 
-  // sse
-  const sse = () => {
-    console.log("permission", Notification.permission);
+  // // sse
+  // const sse = () => {
+  //   console.log("permission", Notification.permission);
 
-    const eventSource = new EventSourcePolyfill(
-      `http://localhost:8080/api/alarm`,
-      {
-        headers: {
-          accessToken: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    console.log("다시 요청하나...?");
+  //   const eventSource = new EventSourcePolyfill(
+  //     `http://localhost:8080/api/alarm`,
+  //     {
+  //       headers: {
+  //         accessToken: `Bearer ${accessToken}`,
+  //       },
+  //     }
+  //   );
+  //   console.log("다시 요청하나...?");
 
-    eventSource.addEventListener("sse", async (event) => {
-      // console.log(event);
+  //   eventSource.addEventListener("sse", async (event) => {
+  //     // console.log(event);
 
-      const data = JSON.parse((event as MessageEvent).data);
-      console.log("꺄륵", data);
+  //     const data = JSON.parse((event as MessageEvent).data);
+  //     console.log("꺄륵", data);
 
-      // 브라우저 알림 허용 권한
-      let granted = false;
-      if (Notification.permission === "granted") {
-        granted = true;
-      } else if (Notification.permission !== "denied") {
-        const permission = await Notification.requestPermission();
-        granted = permission === "granted";
-      }
+  //     // 브라우저 알림 허용 권한
+  //     let granted = false;
+  //     if (Notification.permission === "granted") {
+  //       granted = true;
+  //     } else if (Notification.permission !== "denied") {
+  //       const permission = await Notification.requestPermission();
+  //       granted = permission === "granted";
+  //     }
 
-      // 알림 보여주기
-      if (granted) {
-        // console.log("뭐지", data);
+  //     // 알림 보여주기
+  //     if (granted) {
+  //       // console.log("뭐지", data);
 
-        let message = null;
+  //       let message = null;
 
-        switch (data.type) {
-          case "CREATE":
-            message = "CREATE 메세지";
-            break;
-          case "START":
-            message = "START 메세지";
-            break;
-          case "END":
-            message = "END 메세지";
-            break;
-          case "SETTLE":
-            message = "SETTLE 메세지";
-            break;
-          case "REPORT":
-            message = "REPORT 메세지";
-            break;
-          case "POINT":
-            message = "POINT  메세지";
-            break;
-        }
+  //       switch (data.type) {
+  //         case "CREATE":
+  //           message = "CREATE 메세지";
+  //           break;
+  //         case "START":
+  //           message = "START 메세지";
+  //           break;
+  //         case "END":
+  //           message = "END 메세지";
+  //           break;
+  //         case "SETTLE":
+  //           message = "SETTLE 메세지";
+  //           break;
+  //         case "REPORT":
+  //           message = "REPORT 메세지";
+  //           break;
+  //         case "POINT":
+  //           message = "POINT  메세지";
+  //           break;
+  //       }
 
-        if (message !== null) {
-          const notification = new Notification(message);
+  //       if (message !== null) {
+  //         const notification = new Notification(message);
 
-          setTimeout(() => {
-            notification.close();
-          }, 10 * 1000);
-        }
-      }
-    });
-  };
+  //         setTimeout(() => {
+  //           notification.close();
+  //         }, 10 * 1000);
+  //       }
+  //     }
+  //   });
+  // };
 
-  const isLogined = useSelector((state: any) => state.user.auth.isLogined);
+  // const isLogined = useSelector((state: any) => state.user.auth.isLogined);
 
-  useEffect(() => {
-    if (isLogined) {
-      console.log("가즈아아");
-      sse();
-    }
-  }, [isLogined]);
+  // useEffect(() => {
+  //   if (isLogined) {
+  //     console.log("가즈아아");
+  //     sse();
+  //   }
+  // }, [isLogined]);
 
   return (
     <Paper id="app-root" className={style.App}>
