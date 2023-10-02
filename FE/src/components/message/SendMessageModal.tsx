@@ -4,6 +4,7 @@ import { getSendingMessage } from "../../api/messages";
 import DefaultButton from "../../components/common/DefaultButton";
 import { Icon } from "@iconify/react";
 import style from "../../styles/css/SendMessageModal.module.css";
+import { NotOkModal, OkModal } from "../common/AlertModals";
 
 interface SendMessageModalProps {
   onClose: () => void;
@@ -26,11 +27,11 @@ const SendMessageModal = ({ onClose, data }: SendMessageModalProps) => {
       messageContent,
       (res) => {
         console.log("쪽지보내기 API연결");
-        alert("전송이 완료되었습니다.");
+        OkModal({ title: "성공", text: "전송이 완료되었습니다." });
         onClose();
       },
       (err) => {
-        console.error("쪽지보내기 API 호출 실패:", err);
+        NotOkModal({ title: "실패", text: `전송이 실패했습니다. ${err}` });
       }
     );
   };

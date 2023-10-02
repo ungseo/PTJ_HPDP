@@ -20,11 +20,6 @@ const CompanyProfilePage = () => {
         dispatch(companyActions.saveMemberInfo(res.data.data));
       },
       (err) => {
-        //기업회원이 아닐때 접근 금지 로직
-        // if (err.message.includes("500")) {
-        //   alert("잘못된 접근입니다.");
-        //   navigate("/");
-        // }
         console.log(err.message);
       }
     );

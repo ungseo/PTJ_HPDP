@@ -3,6 +3,7 @@ import style from "../../styles/css/PwModal.module.css";
 import DefaultButton from "../common/DefaultButton";
 import { updatePassword } from "../../api/members";
 import { useSelector } from "react-redux";
+import { NotOkModal, OkModal } from "../common/AlertModals";
 
 const PwModal = ({ modalHandler }: any) => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -17,10 +18,13 @@ const PwModal = ({ modalHandler }: any) => {
       accessToken,
       loginPw,
       (res) => {
-        alert("비밀번호가 변경되었습니다!");
+        OkModal({ title: "성공", text: "비밀번호가 변경되었습니다." });
       },
       (err) => {
-        console.log(err, "비번변경실패");
+        NotOkModal({
+          title: "실패",
+          text: "비밀번호 변경이 실패했습니다. 잠시후 다시 시도해주세요.",
+        });
       }
     );
   };

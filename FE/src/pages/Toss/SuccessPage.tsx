@@ -5,6 +5,7 @@ import { InCreatePaymentsInterface } from "../../interface/apiDataInterface";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import DeepBlueBtn from "../../components/common/DeepBlueBtn";
+import { NotOkModal, OkModal } from "../../components/common/AlertModals";
 export function SuccessPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -39,12 +40,10 @@ export function SuccessPage() {
           createPayments(
             data,
             (res) => {
-              alert("결제에 성공했습니다!");
-              console.log("성공", data);
+              OkModal({ title: "성공", text: "결제에 성공했습니다." });
             },
             (err) => {
-              alert(err.message);
-              console.log("실패");
+              NotOkModal({ title: "실패", text: `${err.message}` });
             }
           );
         })

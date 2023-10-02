@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 import ReportModal from "./ReportModal";
+import { NotOkModal, OkModal } from "../common/AlertModals";
 
 const FundingListItem = ({
   funding,
@@ -37,11 +38,11 @@ const FundingListItem = ({
       accessToken,
       funding.fundingId,
       (res) => {
-        alert("정산이 완료되었습니다.");
+        OkModal({ title: "성공", text: "정산이 완료되었습니다." });
         console.log(res.data.data);
       },
       (err) => {
-        alert("정산에 실패했습니다.");
+        NotOkModal({ title: "실패", text: "정산에 실패했습니다." });
       }
     );
   };
