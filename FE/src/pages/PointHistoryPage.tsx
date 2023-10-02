@@ -12,6 +12,7 @@ const PointHistoryPage = () => {
   const [balance, setBalance] = useState(0);
   const [totalFundingAmount, setTotalFundingAmount] = useState(0);
   const [pointList, setPointList] = useState([]);
+  console.log("찌릿", pointList);
 
   useEffect(() => {
     getPointList(

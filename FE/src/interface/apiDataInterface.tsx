@@ -26,6 +26,7 @@ export interface OutLoginInterface {
     };
   };
 }
+
 //회원가입
 export interface InSignupInterface {
   loginId: string;
@@ -225,7 +226,6 @@ export interface OutSearchInterestCompanyInterface {
 //은행 response, request
 
 //계좌 등록
-
 export interface InRegisterAccountInterface {
   data: {
     accountNumber: string;
@@ -235,7 +235,6 @@ export interface InRegisterAccountInterface {
 }
 
 //계좌 조회
-
 export interface OutSearchAccountInterface {
   body: {
     statusCode: number;
@@ -249,7 +248,6 @@ export interface OutSearchAccountInterface {
 }
 
 //계좌 이체
-
 export interface InSendMoneyInterface {
   data: {
     accountPw: number;
@@ -281,7 +279,6 @@ export interface OutSearchSendHistoryInterface {
 }
 
 // 결제
-
 export interface InCreatePaymentsInterface {
   accessToken: string;
   amount: number | null;
@@ -299,7 +296,6 @@ export interface OutPointHistoryInterface {
 }
 
 // 쪽지
-
 export interface MessagesInterface {
   messageId: number;
   myId?: number;
@@ -335,7 +331,6 @@ export interface ParticipantsInfo {
 }
 
 // 메인
-
 export interface MainInfo {
   price: number;
   support: number;
@@ -354,4 +349,13 @@ export interface BlockChainInfo {
   status: string;
   trxFrom: string;
   trxTo: string;
+}
+
+// 알림 조회
+export interface OutAlarmInfoInterface {
+  fundingId: number;
+  type: string;
+  title: string;
+  isRead: boolean;
+  thumnail: string;
 }
