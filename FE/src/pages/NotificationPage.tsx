@@ -17,8 +17,8 @@ const NotificationPage = () => {
   useEffect(() => {
     if (!isLogined) {
       navigate("/login");
-      setLoading(false);
     }
+    setLoading(false);
   }, []);
 
   return loading ? (
