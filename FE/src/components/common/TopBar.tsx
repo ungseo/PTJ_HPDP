@@ -17,7 +17,11 @@ const LogoTopbar = () => {
         </div>
         <h1 className={style.logoName}>한푼두푼</h1>
       </div>
-      <button className={style.searchBtn} onClick={goToSearchPage}></button>
+      <Icon
+        icon="bi:search"
+        onClick={goToSearchPage}
+        style={{ width: "1.8rem", height: "1.8rem", marginRight: "1rem" }}
+      />
     </div>
   );
 };

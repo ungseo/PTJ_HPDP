@@ -23,10 +23,10 @@
     }
   }
   .searchBtn {
-    width: 2rem;
-    height: 2rem;
+    width: 1.7rem;
+    height: 1.7rem;
     border: none;
-    padding: 3px;
+    padding: 2px;
     background-color: transparent;
     background-image: url("/public/buttons/searchButton.png");
     background-size: cover;
@@ -57,16 +57,16 @@
       border: none;
     }
   }
-  .searchBtn {
-    width: 2rem;
-    height: 2rem;
-    border: none;
-    padding: 3px;
-    background-color: transparent;
-    background-image: url("/public/buttons/searchButton.png");
-    background-size: cover;
-    margin-right: 1rem;
-  }
+  // .searchBtn {
+  //   width: 1.7rem;
+  //   height: 1.7rem;
+  //   border: none;
+  //   padding: 3px;
+  //   background-color: transparent;
+  //   background-image: url("/public/buttons/searchButton.png");
+  //   background-size: cover;
+  //   margin-right: 1rem;
+  // }
 }
 
 .defaultTopbar {

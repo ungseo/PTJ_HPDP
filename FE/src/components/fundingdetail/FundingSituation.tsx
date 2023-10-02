@@ -49,7 +49,9 @@ const FundingSituation = ({ props }: { props: OutFundingsInfoInterface }) => {
           </div>
         </div>
       </div>
-      <div>사용 내역</div>
+      <div className={style.after_use}>
+        <div className={style.title}>사용 내역</div>
+      </div>
     </div>
   );
 };
