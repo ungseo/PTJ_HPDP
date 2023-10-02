@@ -39,7 +39,7 @@ public class FindFundingRes {
     private FundingState state;
     private int settlement;
     private int percent;
-
+    private String docsUrl;
     private int myTotalFunding;
     private boolean myReward;
 
@@ -68,6 +68,7 @@ public class FindFundingRes {
                 .dDay(funding.getEndDate().isAfter(LocalDateTime.now()) ? Long.toString(ChronoUnit.DAYS.between(LocalDateTime.now(), funding.getEndDate())) : "마감")
                 .totalFunding(funding.getTotalFunding())
                 .percent(funding.getPercent())
+                .docsUrl(funding.getDocsUrl())
                 .build();
     }
     public static FindFundingRes ofMember(Funding funding, List<Budget> budgets, FundingHistoryInfoForFundingDTO fundingHistoryInfoForFundingDTO) {
