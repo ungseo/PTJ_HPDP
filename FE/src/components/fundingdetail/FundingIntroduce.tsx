@@ -33,7 +33,9 @@ const FundingIntroduce = ({ props }: { props: OutFundingsInfoInterface }) => {
           className={style.img}
         />
       </div>
-      <DetailHashTag hashtagList={hashtagList} />
+      <div style={{ marginRight: "1rem", marginLeft: "1rem" }}>
+        <DetailHashTag hashtagList={hashtagList} />
+      </div>
       <hr></hr>
       <ParticipateList fundingId={props.fundingId} />
       <div style={{ height: "3rem" }}></div>

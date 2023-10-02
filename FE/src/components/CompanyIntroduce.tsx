@@ -45,13 +45,13 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
 
   return (
     <div className={style.wrapper}>
-      <h1 className={style.container}>벤처 소개</h1>
+      <h2 className={style.container}>벤처 소개</h2>
       <div className={style.field}>
         <div>{item.introduce}</div>
         <DetailHashTag hashtagList={hashtagList} />
       </div>
 
-      <h1 className={style.container}>벤처 정보</h1>
+      <h2 className={style.container}>벤처 정보</h2>
       <Grid container className={style.field}>
         <Grid item xs={1.5} className={style.upper}>
           <WorkOutlineIcon></WorkOutlineIcon>
@@ -86,7 +86,7 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
         </Grid>
       </Grid>
 
-      <h1 className={style.container}>관련기사</h1>
+      <h2 className={style.container}>관련기사</h2>
       <div>
         <NewsCardList items={responseData}></NewsCardList>
       </div>

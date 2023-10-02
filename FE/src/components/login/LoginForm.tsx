@@ -9,6 +9,7 @@ import { userActions } from "../../store/user-slice";
 import { Switch } from "@mui/material";
 import { getMemberInfo } from "../../api/members";
 import DuplicationBtn from "./DuplicationBtn";
+import { NotOkModal, OkModal } from "../../components/common/AlertModals";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const LoginForm = () => {
         navigate("/");
       },
       (err) => {
-        alert("로그인 정보가 일치하지 않습니다!");
+        NotOkModal({ title: "실패", text: "로그인정보를 확인해주세요!" });
       }
     );
   };

@@ -3,7 +3,7 @@
 .total {
   display: flex;
   position: relative;
-  padding: 0.2rem 1rem;
+  margin-bottom: 0.5rem;
   .leftimg {
     width: 100%;
     aspect-ratio: 1/1;
@@ -13,7 +13,7 @@
   }
 
   .rightcontent {
-    padding-left: 0.5rem;
+    padding-left: 0.6rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

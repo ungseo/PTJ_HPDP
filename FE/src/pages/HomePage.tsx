@@ -59,14 +59,18 @@ const HomePage = () => {
         <div>새로운 펀딩에 참여해 보세요</div>
       </div>
 
-      <div>
-        <div className={style.title}>마감이 얼마 남지 않았어요!</div>
-        <FundingCardList items={fundingDeadlineData} />
-      </div>
-      <div>
-        <div className={style.title}>인기가 많아요!</div>
-        <FundingCardList items={fundingAchievementData} />
-      </div>
+      {fundingDeadlineData ? (
+        <div>
+          <div className={style.title}>마감이 얼마 남지 않았어요!</div>
+          <FundingCardList items={fundingDeadlineData} />
+        </div>
+      ) : null}
+      {fundingAchievementData ? (
+        <div style={{ marginTop: "2rem" }}>
+          <div className={style.title}>인기가 많아요!</div>
+          <FundingCardList items={fundingAchievementData} />
+        </div>
+      ) : null}
     </div>
   );
 };

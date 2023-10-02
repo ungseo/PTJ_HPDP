@@ -4,6 +4,8 @@ import AnimationLabelInput from "../common/Inputs";
 import { signup } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import DuplicationBtn from "../login/DuplicationBtn";
+import { NotOkModal, OkModal } from "../common/AlertModals";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -16,7 +18,6 @@ const SignUpForm = () => {
     address: "",
   });
   const [pw2, setPw2] = useState("");
-
   const onChange = (event: any) => {
     const { id, value } = event.target;
     if (id === "loginPw2") {
@@ -30,21 +31,29 @@ const SignUpForm = () => {
   const onSubmit = (event: any) => {
     event.preventDefault();
     if (dup) {
-      alert("이미 존재하는 아이디입니다!");
+      NotOkModal({ title: "실패", text: "아이디가 중복됐습니다" });
       return;
+    } else if (signupInput.loginPw !== pw2) {
+      NotOkModal({ title: "실패", text: "비밀번호를 확인해주세요" });
+      return;
+    } else {
+      const data = signupInput;
+      setWallet(true);
+      signup(
+        data,
+        (res) => {
+          OkModal({ title: "성공", text: "회원가입이 완료되었습니다!" });
+          setWallet(false);
+          navigate("/login");
+        },
+        (err) => {
+          setWallet(false);
+          NotOkModal({ title: "실패", text: err.response.message });
+        }
+      );
     }
-    const data = signupInput;
-    signup(
-      data,
-      (res) => {
-        alert("회원가입이 완료되었습니다.");
-        navigate("/login");
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
   };
+  const [wallet, setWallet] = useState<boolean>(false);
   return (
     <form onSubmit={onSubmit}>
       <div style={{ width: "100%", position: "relative" }}>
@@ -67,6 +76,20 @@ const SignUpForm = () => {
         value={signupInput.loginPw}
         onChange={onChange}
       />
+      <div style={{ position: "relative" }}>
+        <p
+          style={{
+            margin: "0",
+            color: "red",
+            fontSize: "0.5rem",
+            textAlign: "start",
+            position: "absolute",
+            bottom: "1.25rem",
+          }}
+        >
+          특수문자, 대문자, 소문자를 포함하여 10자이상 입력해주세요.
+        </p>
+      </div>
       <AnimationLabelInput
         id="loginPw2"
         labelTitle={"Password Confirmation"}
@@ -103,6 +126,7 @@ const SignUpForm = () => {
         text={"회원가입"}
         styles={{ width: "80%", height: "2rem" }}
       />
+      {wallet && <LoadingSpinner />}
     </form>
   );
 };

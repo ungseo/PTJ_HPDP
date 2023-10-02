@@ -41,6 +41,7 @@
     "sass": "^1.66.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.0.7",
+    "sweetalert2": "^11.7.31",
     "swiper": "^10.0.0",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4",
