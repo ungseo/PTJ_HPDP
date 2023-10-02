@@ -86,7 +86,7 @@ const TransactionList = () => {
       <div className={style.item}>
         <img src="/hpdpLogo.png" alt="용돈" />
         <p className={style.title}>용돈</p>
-        <p className={style.price}>12570 원</p>
+        <p className={style.price}>12,570 원</p>
         <DefaultButton
           text="입금하기"
           styles={btnStyle}
@@ -97,7 +97,7 @@ const TransactionList = () => {
       <div className={style.item}>
         <img src="/salary.png" alt="월급" />
         <p className={style.title}>월급</p>
-        <p className={style.price}>123456 원</p>
+        <p className={style.price}>123,456 원</p>
         <DefaultButton
           text="입금하기"
           styles={btnStyle}

@@ -9,6 +9,10 @@ import { unregisterAccount } from "../../api/banks";
 import { useEffect, useState } from "react";
 import { getPoint } from "../../api/points";
 
+function formatNumber(number: number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const MyWallet = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,7 +22,7 @@ const MyWallet = () => {
   const isRegistered = useSelector((state: any) => state.account.isRegistered);
 
   const [userPoint, getUserPoint] = useState(0);
-
+  const formatuserpoint = formatNumber(userPoint);
   useEffect(() => {
     getPoint(
       accessToken,
@@ -59,7 +63,7 @@ const MyWallet = () => {
     <div className={style.mywallet}>
       <div className={style.wrapper}>
         <p className={style.title}>포인트</p>
-        <p className={style.point}>{userPoint} P</p>
+        <p className={style.point}>{formatuserpoint} P</p>
       </div>
       <div className={style.buttons}>
         {isRegistered ? (
