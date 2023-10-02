@@ -10,4 +10,34 @@
   background-size: cover;
   background-position: center;
   color: white;
+  text-align: left;
+  .fundingcontent {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .companyname {
+    font-size: 0.9rem;
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+  }
+  .downcontent {
+    .remaindate {
+      margin-bottom: 0.2rem;
+    }
+    .accountdetail {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.2rem;
+
+      .fundingpercent {
+        color: white;
+      }
+    }
+  }
 }
