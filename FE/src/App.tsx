@@ -1,4 +1,5 @@
 import style from "./styles/css/App.module.css";
+import Paper from "@mui/material/Paper";
 import { Routes, Route } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import HomePage from "./pages/HomePage";
@@ -57,7 +58,7 @@ function App() {
   }, []);
 
   return (
-    <div id="app-root" className={style.App}>
+    <Paper id="app-root" className={style.App}>
       <Routes>
         {/* <Route path="/sample" Component={SamplePage}></Route> */}
         <Route path="/" Component={HomePage}></Route>
@@ -115,7 +116,7 @@ function App() {
       <div className={style.navBar}>
         <NavigationBar />
       </div>
-    </div>
+    </Paper>
   );
 }
 

@@ -1,23 +1,27 @@
-.text {
-    text-align: start;
-}
+.wrapper {
+  margin: 0 1rem;
+  text-align: start;
 
-.total {
+  .text {
+    text-align: start;
+  }
+
+  .container {
     background-color: gray;
-    
-    .container {
-        margin: 1rem;
-        
+    width: 100%;
+
+    .item {
+      margin: 1rem;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .divide {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        
-        .item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
+        justify-content: space-between;
+        align-items: center;
+      }
     }
-    
+  }
 }

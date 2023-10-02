@@ -59,7 +59,7 @@ const CompanyDetailPage = () => {
         <Icon
           icon="bi:chat-square-dots"
           style={{
-            width: "1.7rem",
+            width: "1.5rem",
             height: "1.5rem",
           }}
           className={style.Icon_icon}

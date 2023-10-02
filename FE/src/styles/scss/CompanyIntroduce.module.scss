@@ -1,0 +1,19 @@
+.wrapper {
+  margin: 0 1rem;
+  text-align: start;
+
+  .container {
+    display: flex;
+    justify-content: start;
+  }
+
+  .field {
+    .gap {
+      line-height: 1.5rem;
+    }
+
+    .upper {
+      align-self: flex-start;
+    }
+  }
+}
