@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import * as Interfaces from "../interface/apiDataInterface";
 import DetailHashTag from "./fundingdetail/DetailHashTag";
-import axios from "axios";
-import { useSelector } from "react-redux";
 import NewsCardList from "./NewsCardList";
 import { newsCrolling } from "../api/news";
+import style from "./../styles/scss/CompanyIntroduce.module.scss";
+
+//
+import Grid from "@mui/material/Grid";
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import LinkIcon from "@mui/icons-material/Link";
+import BusinessIcon from "@mui/icons-material/Business";
 
 interface CompanyIntroduceProps {
   item: Interfaces.InSearchCompanyInfoResponseInterface;
@@ -32,20 +39,52 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
   }, []);
 
   return (
-    <div>
-      <h1>벤처 소개</h1>
-      <div>{item.introduce}</div>
-      <DetailHashTag hashtagList={hashtagList} />
+    <div className={style.wrapper}>
+      <h1 className={style.container}>벤처 소개</h1>
+      <div className={style.field}>
+        <div>{item.introduce}</div>
+        <DetailHashTag hashtagList={hashtagList} />
+      </div>
 
-      <h1>벤처 정보</h1>
-      <div>사업자 등록 번호: {item.registrationNumber}</div>
-      <div>번호: {item.phoneNumber}</div>
-      <div>메일: {item.email}</div>
-      <div>사이트 접속 주소: {item.websiteUrl}</div>
-      <div>주소: {item.address}</div>
+      <h1 className={style.container}>벤처 정보</h1>
+      <Grid container className={style.field}>
+        <Grid item xs={1.5} className={style.upper}>
+          <WorkOutlineIcon></WorkOutlineIcon>
+        </Grid>
+        <Grid item xs={10.5} className={style.gap}>
+          {item.registrationNumber}
+        </Grid>
+        <Grid item xs={1.5} className={style.upper}>
+          <WhatsAppIcon></WhatsAppIcon>
+        </Grid>
+        <Grid item xs={10.5} className={style.gap}>
+          {item.phoneNumber}
+        </Grid>
+        <Grid item xs={1.5} className={style.upper}>
+          <MailOutlineIcon></MailOutlineIcon>
+        </Grid>
+        <Grid item xs={10.5} className={style.gap}>
+          {item.email}
+        </Grid>
 
-      <h1>관련기사</h1>
-      <NewsCardList items={responseData}></NewsCardList>
+        <Grid item xs={1.5} className={style.upper}>
+          <LinkIcon></LinkIcon>
+        </Grid>
+        <Grid item xs={10.5} className={style.gap}>
+          {item.websiteUrl}
+        </Grid>
+        <Grid item xs={1.5} className={style.upper}>
+          <BusinessIcon></BusinessIcon>
+        </Grid>
+        <Grid item xs={10.5} className={style.gap}>
+          {item.address}
+        </Grid>
+      </Grid>
+
+      <h1 className={style.container}>관련기사</h1>
+      <div>
+        <NewsCardList items={responseData}></NewsCardList>
+      </div>
     </div>
   );
 };
