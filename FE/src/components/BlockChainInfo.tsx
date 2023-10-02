@@ -62,8 +62,17 @@ const BlockChainInfo = ({
       }`}
       style={{ zIndex: 5 }}
     >
-      <div>
-        <h3>블록체인 기록 정보</h3>
+      <div className={style.blockchain_content}>
+        <div
+          style={{
+            fontSize: "1.3rem",
+            fontWeight: "600",
+            marginTop: "1rem",
+            marginBottom: "1.2rem",
+          }}
+        >
+          블록체인 기록 정보
+        </div>
         <Grid container className={style.bottomsheetcontent}>
           <Grid item xs={4} className={style.title}>
             TRANSACTION HASH

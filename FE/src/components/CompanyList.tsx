@@ -5,6 +5,8 @@ import * as Interfaces from "../interface/apiDataInterface";
 import ImageList from "@mui/material/ImageList";
 import CompanyItem from "./CompanyItem";
 import { getCompaniesInfo } from "../api/companies";
+import styled from "@emotion/styled";
+import style from "../styles/css/CompanyList.module.css";
 
 export default function CompanyList({ keyword }: any) {
   const [companyData, setCompanyData] = useState<
@@ -29,9 +31,18 @@ export default function CompanyList({ keyword }: any) {
   }, []);
 
   return (
-    <ImageList>
+    <ImageList
+      style={{ padding: "1.5rem", gap: "10px", margin: "0" }}
+      className={style.wrapper}
+    >
       {companyData.map((item, index) => (
-        <CompanyItem key={index} item={item} />
+        <div
+          className={style.box}
+          key={index}
+          style={{ animationDelay: `${index * 100}ms` }}
+        >
+          <CompanyItem item={item} />
+        </div>
       ))}
     </ImageList>
   );

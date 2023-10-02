@@ -7,7 +7,7 @@ import NullModal from "./common/NullModal";
 const ExpiredFunding = ({ itemList }: any) => {
   console.log(itemList, "만료");
   return (
-    <div>
+    <div style={{ marginTop: "1rem" }}>
       {itemList.length ? (
         itemList.map(
           (

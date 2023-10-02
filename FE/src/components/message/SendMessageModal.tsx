@@ -52,7 +52,7 @@ const SendMessageModal = ({ onClose, data }: SendMessageModalProps) => {
 
         <div className={style.sending}>
           <div style={{ marginRight: "0.5rem" }}>받는사람</div>
-          <div>{data.name}</div>
+          <div style={{ fontWeight: "bold" }}>{data.name}</div>
         </div>
         <div className={style.sending}>
           <div style={{ marginRight: "0.5rem" }}>제목</div>
@@ -74,7 +74,7 @@ const SendMessageModal = ({ onClose, data }: SendMessageModalProps) => {
         </div>
         <DefaultButton
           text="쪽지 보내기"
-          styles={{ width: "50%", height: "2rem" }}
+          styles={{ width: "50%", height: "2.5rem" }}
           type="submit"
           onClick={handleSendingMessage}
         />

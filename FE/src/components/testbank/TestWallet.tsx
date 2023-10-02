@@ -7,6 +7,10 @@ import { unregisterAccount } from "../../api/banks";
 import { accountActions } from "../../store/account-slice";
 import { useDispatch } from "react-redux";
 
+function formatNumber(number: number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const TestWallet = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,7 +42,9 @@ const TestWallet = () => {
     (state: any) => state.account.accountNumber
   );
   const bankCode = useSelector((state: any) => state.account.bankCode);
-  const balance = useSelector((state: any) => state.account.balance);
+  const balance = formatNumber(
+    useSelector((state: any) => state.account.balance)
+  );
 
   return (
     <div className={style.wrapper}>

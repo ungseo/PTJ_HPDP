@@ -25,7 +25,7 @@ const SiteInfo = () => {
     <div className={style.totalwarapper}>
       <p
         style={{
-          fontSize: "1.12rem",
+          fontSize: "1.2rem",
           marginBottom: "2rem",
         }}
       >

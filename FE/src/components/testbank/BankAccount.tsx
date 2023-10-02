@@ -5,13 +5,19 @@ import { getAccount } from "../../api/banks";
 import { useDispatch } from "react-redux";
 import { accountActions } from "../../store/account-slice";
 
+function formatNumber(number: number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const BankAccount = () => {
   const dispatch = useDispatch();
   const accountNumber = useSelector(
     (state: any) => state.account.accountNumber
   );
   const bankCode = useSelector((state: any) => state.account.bankCode);
-  const balance = useSelector((state: any) => state.account.balance);
+  const balance = formatNumber(
+    useSelector((state: any) => state.account.balance)
+  );
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
   useEffect(() => {

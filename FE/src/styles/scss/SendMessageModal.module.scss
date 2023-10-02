@@ -8,15 +8,11 @@
     border-radius: 0.5rem;
     max-width: 350px;
     width: 75%;
-    height: 70%;
     position: fixed;
     padding: 1rem;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    @media (min-height: 680px) {
-      height: 65%;
-    }
     .icon_section {
       position: relative;
       margin-bottom: 2rem;
@@ -28,13 +24,15 @@
     .sending {
       display: flex;
       margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      margin-top: 1rem;
     }
     .textareaContainer {
       margin-top: 1rem;
       margin-bottom: 0.5rem;
       .textarea {
         width: 98%;
-        height: 48vh;
+        height: 35vh;
       }
     }
   }

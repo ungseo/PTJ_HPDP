@@ -10,14 +10,14 @@ import {
   registerInterestingCompany,
   unregisterInterestingCompany,
 } from "../api/interests";
-
+import style from "../styles/css/CompanyItem.module.css";
 interface CompanyItemProps {
   item: Interfaces.InSearchCompanyInfoResponseInterface;
 }
 
 const CompanyItem = (props: CompanyItemProps) => {
   const { item } = props;
-
+  console.log(item);
   const companyId = item.companyId;
 
   const isLogined = useSelector((state: any) => state.user.auth.isLogined);
@@ -63,37 +63,36 @@ const CompanyItem = (props: CompanyItemProps) => {
   const handleImageListItemClick = () => {
     navigate(`/company/detail/${item.companyId}`);
   };
-
   return (
-    <div>
-      <ImageListItem key={item.profile} onClick={handleImageListItemClick}>
+    <div className={style.wrapper} onClick={handleImageListItemClick}>
+      <div className={style.img} style={{}}>
         <img
           src={`${item.profile}?w=248&fit=crop&auto=format`}
           srcSet={`${item.profile}?w=248&fit=crop&auto=format&dpr=2 2x`}
           alt={item.name}
           loading="lazy"
+          style={{ width: "100%" }}
         />
+      </div>
+      {isLogined ? (
+        <IconButton
+          aria-label={`like ${item.name}`}
+          onClick={(event) => {
+            event.stopPropagation();
+            toggleLike();
+          }}
+          className={style.iconButton}
+          style={{
+            color: isLiked ? "red" : "lightgray",
+          }}
+        >
+          <FavoriteIcon />
+        </IconButton>
+      ) : null}
 
-        {isLogined ? (
-          <IconButton
-            aria-label={`like ${item.name}`}
-            onClick={(event) => {
-              event.stopPropagation();
-              toggleLike();
-            }}
-            color={isLiked ? "error" : "default"}
-            style={{
-              position: "absolute",
-              top: "0",
-              right: "0",
-            }}
-          >
-            <FavoriteIcon />
-          </IconButton>
-        ) : null}
-
-        <ImageListItemBar title={item.name} position="below" />
-      </ImageListItem>
+      {/* <ImageListItemBar title={item.name} position="below" /> */}
+      <p className={style.cpnName}>{item.name}</p>
+      {/* <ImageListItemBar title={item.name} position="below" /> */}
     </div>
   );
 };
