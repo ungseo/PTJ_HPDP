@@ -16,6 +16,10 @@ interface FundingCardListProps {
 const FundingCardList = (props: FundingCardListProps) => {
   const { items } = props;
   console.log(items);
+
+  if (items === null || items === undefined) {
+    return null;
+  }
   return (
     <>
       <Swiper
