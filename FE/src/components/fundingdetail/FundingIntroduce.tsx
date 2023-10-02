@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { OutFundingsInfoInterface } from "../../interface/apiDataInterface";
 import ParticipateList from "./ParticipateList";
 import DetailHashTag from "./DetailHashTag";
+import { Icon } from "@iconify/react";
 import style from "../../styles/css/FundingIntroduce.module.css";
 
 const FundingIntroduce = ({ props }: { props: OutFundingsInfoInterface }) => {
@@ -23,7 +24,10 @@ const FundingIntroduce = ({ props }: { props: OutFundingsInfoInterface }) => {
     <>
       <div className={style.introduce_total}>
         <div onClick={scrollToRewardImg} className={style.reward}>
-          리워드
+          <Icon
+            icon="bi:gift"
+            style={{ width: "1.5rem", height: "1.5rem", color: "white" }}
+          />
         </div>
         <img src={props.content} alt={props.title} className={style.img} />
         <img
