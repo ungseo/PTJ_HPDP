@@ -49,16 +49,13 @@ const ProfileEditPage = () => {
           token,
           (res) => {
             dispatch(userActions.saveMemberInfo(res.data.data));
-            OkModal({ title: "성공", text: "정보를 수정했습니다." });
           },
-          (err) => {
-            NotOkModal({ title: "실패", text: "정보 수정을 실패했습니다." });
-          }
+          (err) => {}
         );
         OkModal({ title: "성공", text: "정보를 수정했습니다." });
       },
       (err) => {
-        NotOkModal({ title: "실패", text: `정보변경 실패 ${err}` });
+        NotOkModal({ title: "실패", text: `정보수정을 실패 했습니다. ${err}` });
       }
     );
     setOnGoing(false);

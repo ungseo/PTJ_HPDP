@@ -10,11 +10,14 @@ import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 import ReportModal from "./ReportModal";
 import { NotOkModal, OkModal } from "../common/AlertModals";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 const FundingListItem = ({
   funding,
+  refresh,
 }: {
   funding: OutFundingsInfoInterface;
+  refresh: any;
 }) => {
   const [controller, setController] = useState(false);
   const formatDday =
@@ -33,18 +36,22 @@ const FundingListItem = ({
   };
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   //정산하기
+  const [onGoing, setOnGoing] = useState(false);
+
   const settlement = () => {
+    setOnGoing(true);
     settlementFunding(
       accessToken,
       funding.fundingId,
       (res) => {
         OkModal({ title: "성공", text: "정산이 완료되었습니다." });
-        console.log(res.data.data);
+        refresh((prev: number) => ++prev);
       },
       (err) => {
         NotOkModal({ title: "실패", text: "정산에 실패했습니다." });
       }
     );
+    setOnGoing(false);
   };
 
   // 보고서 모달 열고 닫기
@@ -52,7 +59,10 @@ const FundingListItem = ({
   const openReportModal = () => {
     setModalOpen(true);
   };
-
+  // 퍼센트 계산
+  const percent = Math.floor(
+    Number(funding.totalFunding / funding.targetAmount) * 100
+  );
   return (
     <div>
       <Grid container className={style.total} onClick={onClick}>
@@ -71,10 +81,10 @@ const FundingListItem = ({
           </div>
           <div className={style.downcontent}>
             <div className={style.remaindate}>{formatDday}</div>
-            <ProgressBar percent={funding.percent || 0} />
+            <ProgressBar percent={percent || 0} />
             <div className={style.accountdetail}>
               <div className={style.nowaccount}>{funding.totalFunding}원</div>
-              <div className={style.fundingpercent}>{funding.percent}%</div>
+              <div className={style.fundingpercent}>{percent}%</div>
             </div>
           </div>
         </Grid>
@@ -107,6 +117,7 @@ const FundingListItem = ({
           />
         )}
       </Grid>
+      {onGoing && <LoadingSpinner />}
     </div>
   );
 };
