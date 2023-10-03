@@ -33,7 +33,7 @@ export default function CompanyList({ keyword }: any) {
     );
   }, []);
 
-  return !isLoading ? (
+  return isLoading ? (
     <LoadingSpinner />
   ) : companyData.length ? (
     <ImageList
