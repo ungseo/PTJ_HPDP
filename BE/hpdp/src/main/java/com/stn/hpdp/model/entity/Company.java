@@ -63,6 +63,7 @@ public class Company extends TimeBaseEntity implements UserDetails {
     private String websiteUrl;
 
     @NotNull
+    @Column(length = 500)
     private String introduce;
 
     @NotNull
