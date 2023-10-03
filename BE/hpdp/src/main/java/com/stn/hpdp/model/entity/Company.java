@@ -71,7 +71,7 @@ public class Company extends TimeBaseEntity implements UserDetails {
     private String profile;
     private String banner;
     private String privateKey;
-    private String point;
+    private int point;
 
     @Column
     @ElementCollection(fetch = FetchType.EAGER)
