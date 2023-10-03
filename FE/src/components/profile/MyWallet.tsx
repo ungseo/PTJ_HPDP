@@ -8,6 +8,7 @@ import { accountActions } from "../../store/account-slice";
 import { unregisterAccount } from "../../api/banks";
 import { useEffect, useState } from "react";
 import { getPoint } from "../../api/points";
+import { NotOkModal, OkModal } from "../common/AlertModals";
 
 function formatNumber(number: number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -46,10 +47,10 @@ const MyWallet = () => {
       unregisterAccount(
         accessToken,
         (res) => {
-          console.log("계좌 해제 성공 마월", res);
+          OkModal({ title: "성공", text: "계좌등록에 성공했습니다!" });
         },
         (err) => {
-          console.log("계좌 해제 실패 마월", err);
+          NotOkModal({ title: "실패", text: "계좌등록에 실패했습니다." });
         }
       );
       // 계좌 해제 redux

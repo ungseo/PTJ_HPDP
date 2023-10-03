@@ -16,6 +16,7 @@ const initialState = {
     introduce: "",
     createdDate: "",
     modifiedDate: "",
+    point: 0,
   },
 };
 const companySlice = createSlice({

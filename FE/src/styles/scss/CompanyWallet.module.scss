@@ -1,0 +1,27 @@
+@import "Style";
+
+.wrapper {
+  border-radius: 0.9rem;
+  padding: 1rem;
+  width: calc(85% - 2rem);
+  background-color: $bcolor;
+  position: absolute;
+  top: calc(30vh - 2rem);
+  left: calc((7.5%));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .title {
+    margin-bottom: 0;
+    text-align: start;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  .point {
+    text-align: end;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+  }
+}

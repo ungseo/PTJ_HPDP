@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { companyActions } from "../../store/company-slice";
 import ProfileList from "../../components/companyOnly/ProfileList";
 import { useNavigate } from "react-router-dom";
+import CompanyWallet from "../../components/companyOnly/CompanyWallet";
 
 const CompanyProfilePage = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -27,15 +28,19 @@ const CompanyProfilePage = () => {
   const companyInfo = useSelector((state: any) => state.company.info.name);
   const companyLogo = useSelector((state: any) => state.company.info.profile);
   return (
-    <div className={style.wrapper}>
-      <OptionTopbar text="프로필페이지(기업용)" />
-      <div className={style.content}>
-        <div>
-          <img className={style.logo} src={companyLogo} alt="로고없음" />
-          <p className={style.P} style={{ fontSize: "1.2rem" }}>
-            {companyInfo}
-          </p>
-        </div>
+    <div className={style.content}>
+      <div className={style.topInfo}>
+        <img className={style.logo} src={companyLogo} alt="로고없음" />
+        <p className={style.P} style={{ fontSize: "1.2rem" }}>
+          {companyInfo}
+        </p>
+      </div>
+      <CompanyWallet />
+      <div
+        style={{
+          width: "100%",
+        }}
+      >
         <ProfileList />
       </div>
     </div>
