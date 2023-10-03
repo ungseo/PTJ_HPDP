@@ -25,6 +25,7 @@ public class FindMyCompanyRes {
     private String introduce;
     private String createdDate;
     private String modifiedDate;
+    private int point;
 
     public static FindMyCompanyRes from(Company company) {
         return FindMyCompanyRes.builder()
@@ -42,6 +43,7 @@ public class FindMyCompanyRes {
                 .introduce(company.getIntroduce())
                 .createdDate(String.valueOf(company.getCreatedDate()))
                 .modifiedDate(String.valueOf(company.getModifiedDate()))
+                .point(company.getPoint())
                 .build();
     }
 }
