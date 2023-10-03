@@ -44,6 +44,7 @@ export default function NavigationBar() {
   return (
     <BottomNavigation value={value} onChange={handleChange}>
       <BottomNavigationAction
+        style={{ color: value === "home" ? "#fb788e" : "gray" }}
         label="Home"
         value="home"
         icon={<HomeIcon />}
@@ -52,6 +53,7 @@ export default function NavigationBar() {
         }}
       />
       <BottomNavigationAction
+        style={{ color: value === "list" ? "#fb788e" : "gray" }}
         label="List"
         value="list"
         icon={<ListAltIcon />}
@@ -60,6 +62,7 @@ export default function NavigationBar() {
         }}
       />
       <BottomNavigationAction
+        style={{ color: value === "notification" ? "#fb788e" : "gray" }}
         label="Notification"
         value="notification"
         icon={<MarkEmailUnreadIcon />}
@@ -68,6 +71,7 @@ export default function NavigationBar() {
         }}
       />
       <BottomNavigationAction
+        style={{ color: value === "profile" ? "#fb788e" : "gray" }}
         label="Profile"
         value="profile"
         icon={<AccountBoxIcon />}

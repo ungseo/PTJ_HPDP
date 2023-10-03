@@ -11,7 +11,6 @@ const FundingList = ({ keyword }: any) => {
   const [fundingTotalData, setFundingTotalData] = useState<
     Interfaces.OutFundingsInfoInterface[]
   >([]);
-  console.log(fundingTotalData);
 
   useEffect(() => {
     const hashKeyword = keyword;
@@ -20,7 +19,6 @@ const FundingList = ({ keyword }: any) => {
       1,
       (res) => {
         setFundingTotalData(res.data.data);
-        console.log(hashKeyword);
       },
       (err) => {
         console.error("펀딩 전체 조회 API 호출 실패:", err);
@@ -31,12 +29,16 @@ const FundingList = ({ keyword }: any) => {
   return (
     <div>
       <div style={{ textAlign: "left", margin: "1rem" }}>
-        총 {fundingTotalData.length}개의 펀딩이 진행중 입니다
+        현재 {fundingTotalData.length}개 프로젝트를 진행하고 있습니다.
       </div>
       <div style={{ marginLeft: "1rem", marginRight: "1rem" }}>
-        {fundingTotalData.map((item) => (
-          <FundingItem key={item.fundingId} item={item} />
-        ))}
+        {fundingTotalData.length > 0 ? (
+          fundingTotalData.map((item) => (
+            <FundingItem key={item.fundingId} item={item} />
+          ))
+        ) : (
+          <div>프로젝트가 없습니다.</div>
+        )}
       </div>
     </div>
   );
