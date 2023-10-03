@@ -3,6 +3,7 @@ import style from "../../styles/css/ReportModal.module.css";
 import { registerReport } from "../../api/fundings";
 import { useState } from "react";
 import { NotOkModal, OkModal, QuestionModal } from "../common/AlertModals";
+import { useNavigate } from "react-router-dom";
 const ReportModal = ({ cM, fundingId, cC }: any) => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const [file, setFile] = useState(null);
@@ -18,11 +19,14 @@ const ReportModal = ({ cM, fundingId, cC }: any) => {
         accessToken,
         data,
         (res) => {
-          alert("ㅅㄱ");
-          OkModal({ title: "성공", text: "보고서 등록에 성공했습니다." });
+          OkModal({
+            title: "성공",
+            text: "보고서 등록에 성공했습니다.",
+          }).then((res) => {
+            window.location.reload();
+          });
         },
         (err) => {
-          alert("실패.");
           NotOkModal({ title: "실패", text: "보고서 등록에 실패했습니다." });
         }
       );
