@@ -50,6 +50,8 @@ const CompanyDetailPage = () => {
   const data = {
     name: companyItem.name,
     receiverId: Number(companyid),
+    profileImg: companyItem.profile,
+    thumbnail: companyItem.banner,
   };
   return (
     <div className={style.companydetailpage}>

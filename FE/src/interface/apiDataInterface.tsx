@@ -120,6 +120,7 @@ export interface InSearchCompanyInfoResponseInterface {
   fundingsNumber?: number;
   participantsNumber?: number;
   amount?: number;
+  banner?: string | null;
 }
 
 // 기업 펀딩 조회
