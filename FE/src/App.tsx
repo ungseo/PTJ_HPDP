@@ -41,25 +41,6 @@ function App() {
   //
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
-  const refresh = () => {
-    getMemberInfo(
-      accessToken,
-      (res) => {
-        console.log("유저정보 불러오기성공");
-        dispatch(userActions.saveMemberInfo(res.data.data));
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  };
-
-  useEffect(() => {
-    if (accessToken) {
-      refresh();
-    }
-  }, []);
-
   //
   const [isScrolling, setIsScrolling] = useState(false);
 
