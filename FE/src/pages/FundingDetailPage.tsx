@@ -21,7 +21,7 @@ const FundingDetailPage = () => {
     useState<Interfaces.OutFundingsInfoInterface>(
       {} as Interfaces.OutFundingsInfoInterface
     );
-  console.log(fundingDetailData);
+  console.log(fundingDetailData.state);
 
   const { fundingid } = useParams();
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -121,12 +121,14 @@ const FundingDetailPage = () => {
       )}
 
       <div className={style.fixedButton}>
-        <DefaultButton
-          text="후원하기"
-          styles={{ width: "90%", height: "2.5rem" }}
-          type="submit"
-          onClick={FundingHandler}
-        />
+        {fundingDetailData.state === "ING" ? (
+          <DefaultButton
+            text="후원하기"
+            styles={{ width: "90%", height: "2.5rem" }}
+            type="submit"
+            onClick={FundingHandler}
+          />
+        ) : null}
       </div>
     </div>
   );

@@ -25,7 +25,7 @@ public interface FundingHistoryRepository extends JpaRepository<FundingHistory, 
     List<Member> getParticipantByFundingId(@Param(value="fundingId") Long fundingId);
 
     @Query("SELECT SUM(price) FROM FundingHistory")
-    int getSumPrice();
+    Integer getSumPrice();
 
     @Query("SELECT SUM(price) FROM FundingHistory where funding.id = :fundingId")
     Integer getSumPriceByFundingId(@Param(value="fundingId") Long fundingId);
