@@ -31,6 +31,7 @@ const MessageContent = ({ onClose, isMessageDetail, flag }: MessageProps) => {
 
   const handleSendMessageModalClose = () => {
     setShowSendMessageModal(false);
+    onClose();
   };
 
   console.log(isMessageDetail);
