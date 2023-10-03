@@ -26,7 +26,9 @@ public class MainQueryService {
         FindMainInfoRes findMainInfoRes = new FindMainInfoRes();
 
         // 총 후원 금액 -> funding history price 합
-        findMainInfoRes.setPrice(fundingHistoryRepository.getSumPrice());
+        Integer price = fundingHistoryRepository.getSumPrice();
+        if(price != null) findMainInfoRes.setPrice(price);
+        else findMainInfoRes.setPrice(0);
 
         // 총 후원 횟수 -> funding history count
         findMainInfoRes.setSupport((int)fundingHistoryRepository.count());
