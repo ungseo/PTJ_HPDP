@@ -142,7 +142,7 @@ public class CrowdFundingService {
 
     private int getRaisedAmount(CrowdFunding funding, long fundingId) {
         try {
-            return funding.fundings(BigInteger.valueOf(fundingId)).send().component3().intValue();
+            return funding.fundings(BigInteger.valueOf(fundingId)).send().component4().intValue();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
