@@ -8,11 +8,9 @@ interface DetailTopProps {
   data: {
     name: string;
     title?: string;
-    thumbnail?: string;
-    profile?: string;
+    thumbnail?: string | null;
     companyId?: number;
     profileImg?: string;
-    banner?: string;
   };
 }
 
@@ -30,7 +28,7 @@ const DetailPageTop = (props: DetailTopProps) => {
     }
   };
   const totalStyle = {
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url(${data.banner})`,
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url(${data.thumbnail})`,
   };
 
   return (
@@ -43,7 +41,11 @@ const DetailPageTop = (props: DetailTopProps) => {
       />
       <div className={style.topcontent}>
         <div className={style.upsection}>
-          <img src={data.profile} alt="Company Logo" className={style.upimg} />
+          <img
+            src={data.profileImg}
+            alt="Company Logo"
+            className={style.upimg}
+          />
           <div className={style.companyname} onClick={handleGoCompany}>
             {data.name}
           </div>
