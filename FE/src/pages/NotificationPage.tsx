@@ -6,14 +6,11 @@ import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 
 const NotificationPage = () => {
-  // 로그인 Y
-  //   알람 API
-  // 로그인 N
-  //   로그인 페이지 이동
   const navigate = useNavigate();
 
   const isLogined = useSelector((state: any) => state.user.auth.isLogined);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     if (!isLogined) {
       navigate("/login");

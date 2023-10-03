@@ -14,6 +14,7 @@ const ActivityItem = (props: ActivityItemProps) => {
   const navigate = useNavigate();
 
   const { item } = props;
+  console.log("꺄오", item);
 
   const name = useSelector((state: any) => state.user.info.name);
 
