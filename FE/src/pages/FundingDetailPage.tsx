@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as Interfaces from "../interface/apiDataInterface";
 import { getFundingDetail } from "../api/fundings";
 import { getSponsor } from "../api/points";
@@ -28,7 +28,9 @@ const FundingDetailPage = () => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
-
+  const myPoint = useState(
+    (state: any) => state.user.info.point
+  ) as unknown as number;
   const tabProps = {
     소개: <FundingIntroduce props={fundingDetailData} />,
     소식: <FundingSituation props={fundingDetailData} />,
@@ -55,20 +57,22 @@ const FundingDetailPage = () => {
       document.body.classList.remove(style.bodyWithModalOpen);
     }
   }, [isFundingCompleteOpen]);
-
+  const navigate = useNavigate();
   // bottomsheet가 열린 상태에서 버튼이 눌리면
   // bottomsheet는 false, complete는 true로 변경
   const FundingHandler = () => {
     if (isBottomSheetOpen) {
       if (donationAmount === 0) {
         QuestionModal({ text: "후원 금액을 입력하세요." });
+      } else if (myPoint < donationAmount) {
+        QuestionModal({ text: "포인트 잔액이 부족합니다." });
       } else {
         getSponsor(
           accessToken,
           Number(fundingid),
           donationAmount,
           (res) => {
-            console.log("후원하기 API 연결");
+            window.location.reload();
           },
           (err) => {
             console.log("후원하기 API 호출 실패", err);

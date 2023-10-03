@@ -36,8 +36,6 @@ import CompanyFundingPage from "./pages/CompanyPage/CompanyFundingPage";
 import { EventSourcePolyfill } from "event-source-polyfill";
 
 function App() {
-  const dispatch = useDispatch();
-
   //
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
@@ -126,6 +124,12 @@ function App() {
           setTimeout(() => {
             notification.close();
           }, 10 * 1000);
+        } else {
+          const notification = new Notification("줄정보가 없어요");
+
+          setTimeout(() => {
+            notification.close();
+          });
         }
       }
     });
