@@ -157,7 +157,7 @@ export interface OutFundingsInfoInterface {
   targetAmount: number; //
   startDate: string; //
   endDate: string; //
-  dDay: string; //
+  dDay: string | number; //
   totalFunding: number; //
   state: string; //
   content?: string;
