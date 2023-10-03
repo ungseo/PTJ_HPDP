@@ -37,7 +37,7 @@ const FundingList = ({ keyword }: any) => {
             <FundingItem key={item.fundingId} item={item} />
           ))
         ) : (
-          <div>null</div>
+          <div>프로젝트가 없습니다.</div>
         )}
       </div>
     </div>

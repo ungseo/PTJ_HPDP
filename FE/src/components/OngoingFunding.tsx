@@ -14,7 +14,7 @@ const OngoingFunding = ({ itemList }: any) => {
           ) => <FundingItem key={idx} item={item} />
         )
       ) : (
-        <NullModal text="진행중인 펀딩이 없습니다." />
+        <NullModal text="후원하는 프로젝트가 없습니다." />
       )}
     </div>
   );

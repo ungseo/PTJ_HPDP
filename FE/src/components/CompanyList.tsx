@@ -51,6 +51,6 @@ export default function CompanyList({ keyword }: any) {
       ))}
     </ImageList>
   ) : (
-    <h2>0개의 기업이 등록되어있습니다.</h2>
+    <div>소셜벤처가 없습니다.</div>
   );
 }

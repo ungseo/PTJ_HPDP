@@ -26,7 +26,7 @@ const Activity = () => {
       {alarmData.length > 0 ? (
         alarmData.map((item, index) => <ActivityItem key={index} item={item} />)
       ) : (
-        <div>null</div>
+        <div>알림내역이 없습니다.</div>
       )}
     </div>
   );

@@ -16,7 +16,7 @@ const ExpiredFunding = ({ itemList }: any) => {
           ) => <FundingItem key={idx} item={item} />
         )
       ) : (
-        <NullModal text="끝난 펀딩이 없습니다." />
+        <NullModal text="후원하는 프로젝트가 없습니다." />
       )}
     </div>
   );
