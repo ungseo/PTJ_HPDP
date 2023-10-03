@@ -28,13 +28,14 @@ export default function CompanyList({ keyword }: any) {
       },
       (err) => {
         console.error("API 호출 실패:", err);
+        setIsLoading(false);
       }
     );
   }, []);
 
-  return isLoading ? (
+  return !isLoading ? (
     <LoadingSpinner />
-  ) : (
+  ) : companyData.length ? (
     <ImageList
       style={{ padding: "1.5rem", gap: "10px", margin: "0" }}
       className={style.wrapper}
@@ -49,5 +50,7 @@ export default function CompanyList({ keyword }: any) {
         </div>
       ))}
     </ImageList>
+  ) : (
+    <h2>0개의 기업이 등록되어있습니다.</h2>
   );
 }
