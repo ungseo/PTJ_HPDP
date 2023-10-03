@@ -13,20 +13,12 @@ function formatNumber(number: number) {
 
 const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
   const navigate = useNavigate();
-
-  // dday는 마감이거나 숫자이므로 숫자일 경우 'D-'를 넣는다.
-  // const formatDday =
-  //   item.dday !== "마감"
-  //     ? item.dday !== 0
-  //       ? `D-${item.dday}`
-  //       : "오늘마감"
-  //     : item.dday;
   const formatDday =
-    item.dDay === 0
+    item.dday === 0
       ? "오늘마감"
-      : item.dDay !== "마감"
-      ? `D-${item.dDay}`
-      : item.dDay;
+      : item.dday !== "마감"
+      ? `D-${item.dday}`
+      : item.dday;
   const clampedPercent = Math.min(item.percent || 0, 100);
   const total_Funding = formatNumber(item.totalFunding);
   const handleGoFundingDetail = () => {
