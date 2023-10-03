@@ -12,6 +12,7 @@ interface DetailTopProps {
     profile?: string;
     companyId?: number;
     profileImg?: string;
+    banner?: string;
   };
 }
 
@@ -29,7 +30,7 @@ const DetailPageTop = (props: DetailTopProps) => {
     }
   };
   const totalStyle = {
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url(${data.thumbnail})`,
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url(${data.banner})`,
   };
 
   return (
