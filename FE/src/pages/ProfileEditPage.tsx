@@ -13,6 +13,7 @@ import { userActions } from "../store/user-slice";
 import PwModal from "../components/profile/PwModal";
 import style from "../styles/css/ProfileEditPage.module.css";
 import { NotOkModal, OkModal } from "../components/common/AlertModals";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 const ProfileEditPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -24,6 +25,7 @@ const ProfileEditPage = () => {
     email: userInfo.email,
     phoneNumber: userInfo.phoneNumber,
   });
+  const [onGoing, setOnGoing] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const token = useSelector((state: any) => state.user.auth.accessToken);
   const saveEditHandler = () => {
@@ -38,7 +40,7 @@ const ProfileEditPage = () => {
     if (editInput.email) {
       formData.append("email", editInput.email);
     }
-
+    setOnGoing(true);
     updateMemberInfo(
       token,
       formData,
@@ -48,16 +50,15 @@ const ProfileEditPage = () => {
           (res) => {
             dispatch(userActions.saveMemberInfo(res.data.data));
           },
-          (err) => {
-            console.log(err);
-          }
+          (err) => {}
         );
         OkModal({ title: "성공", text: "정보를 수정했습니다." });
       },
       (err) => {
-        NotOkModal({ title: "실패", text: `정보변경 실패 ${err}` });
+        NotOkModal({ title: "실패", text: `정보수정을 실패 했습니다. ${err}` });
       }
     );
+    setOnGoing(false);
   };
   const [modal, setModal] = useState(false);
   const modalHandler = () => {
@@ -101,6 +102,7 @@ const ProfileEditPage = () => {
         />
         {modal ? <PwModal modalHandler={setModal} /> : null}
       </div>
+      {onGoing && <LoadingSpinner />}
     </div>
   );
 };

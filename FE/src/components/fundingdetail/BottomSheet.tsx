@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 
 import { Icon } from "@iconify/react";
 import style from "../../styles/css/BottomSheet.module.css";
+import { getMemberInfo } from "../../api/members";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../store/user-slice";
 
 interface BottomSheetProps {
   // 값이 변경될수 있으므로 아래와 같은 형식을 사용,
@@ -36,11 +39,22 @@ const BottomSheet = ({
     setDonationAmount(e.target.value);
     handleDonationAmount(Number(e.target.value));
   };
-
+  const dispatch = useDispatch();
   // 처음부터 true일 경우 모션을 넣을 수 없음
   // useEffect로 값을 변경
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   useEffect(() => {
     setIsActive(true);
+    //모달열면 그냥 요청 보내기
+    getMemberInfo(
+      accessToken,
+      (res) => {
+        dispatch(userActions.saveMemberInfo(res.data.data));
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }, []);
 
   return (

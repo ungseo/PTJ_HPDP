@@ -8,27 +8,27 @@ import FundingListItem from "../../components/companyOnly/FundingListItem";
 const CompanyFundingPage = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const [fundings, setFundings] = useState([]);
+  const [refresh, setRefresh] = useState(0);
   useEffect(() => {
     if (accessToken) {
       getCompanyFundings(
         accessToken,
         (res) => {
           setFundings(res.data.data);
-          console.log(fundings);
         },
         (err) => {
           console.log("페이지 로드 실패");
         }
       );
     }
-  }, []);
+  }, [refresh]);
   return (
     <div>
       <OptionTopbar text="내 펀딩 정보" />
       {fundings.length ? (
         <div>
           {fundings.map((funding, idx) => (
-            <FundingListItem key={idx} funding={funding} />
+            <FundingListItem key={idx} funding={funding} refresh={setRefresh} />
           ))}
         </div>
       ) : (

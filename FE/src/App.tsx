@@ -36,29 +36,8 @@ import CompanyFundingPage from "./pages/CompanyPage/CompanyFundingPage";
 import { EventSourcePolyfill } from "event-source-polyfill";
 
 function App() {
-  const dispatch = useDispatch();
-
   //
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
-
-  const refresh = () => {
-    getMemberInfo(
-      accessToken,
-      (res) => {
-        console.log("유저정보 불러오기성공");
-        dispatch(userActions.saveMemberInfo(res.data.data));
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  };
-
-  useEffect(() => {
-    if (accessToken) {
-      refresh();
-    }
-  }, []);
 
   //
   const [isScrolling, setIsScrolling] = useState(false);
@@ -154,6 +133,12 @@ function App() {
           setTimeout(() => {
             notification.close();
           }, 10 * 1000);
+        } else {
+          const notification = new Notification("줄정보가 없어요");
+
+          setTimeout(() => {
+            notification.close();
+          });
         }
       }
     });
