@@ -1,9 +1,7 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import style from "../../styles/css/ActivityItem.module.css";
-
 import { OutAlarmInfoInterface } from "./../../interface/apiDataInterface";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 interface ActivityItemProps {
@@ -16,25 +14,29 @@ const ActivityItem = (props: ActivityItemProps) => {
   const { item } = props;
   console.log("꺄오", item);
 
-  const name = useSelector((state: any) => state.user.info.name);
-
-  let content = "";
+  let head = null;
+  let body = undefined;
 
   switch (item.type) {
     case "CREATE":
-      content = "펀딩이 등록되었습니다.";
+      head = `${item.companyName}`;
+      body = `${item.title} 프로젝트가 등록되었습니다.`;
       break;
     case "START":
-      content = "펀딩이 시작되었습니다.";
+      head = `${item.companyName}`;
+      body = `${item.title} 프로젝트가 시작되었습니다.`;
       break;
     case "END":
-      content = "펀딩이 종료되었습니다.";
+      head = `${item.title}`;
+      body = `${item.title} 프로젝트가 종료되었습니다.`;
       break;
     case "SETTLE":
-      content = "펀딩 금액을 정산했습니다.";
+      head = `${item.title}`;
+      body = `프로젝트의 후원 금액이 정산되었습니다.`;
       break;
     case "REPORT":
-      content = "집행 내역을 등록했습니다.";
+      head = `${item.companyName}`;
+      body = `프로젝트의 집행 내역이 등록되었습니다.`;
       break;
   }
 
@@ -43,7 +45,7 @@ const ActivityItem = (props: ActivityItemProps) => {
 
     if (item.type === "CREATE") {
       console.log("드륵");
-      // navigate(`/company/detail/${item.companyId}`);
+      navigate(`/company/detail/${item.companyId}`);
     } else {
       console.log("끼룩");
       navigate(`/funding/detail/${item.fundingId}`);
@@ -57,11 +59,9 @@ const ActivityItem = (props: ActivityItemProps) => {
       </Grid>
       <Grid item xs={9} className={style.contentfield}>
         <div className={style.contentbox}>
-          <div className={style.content}>2023.09.01</div>
-          <div className={style.content}>{item.title}</div>
-          <div className={style.content}>
-            {name} 님. {content}
-          </div>
+          <div className={style.content}>{item.date}</div>
+          <div className={style.content}>{head}</div>
+          <div className={style.content}>{body}</div>
         </div>
       </Grid>
     </Grid>

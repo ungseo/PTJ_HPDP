@@ -113,7 +113,7 @@ function App() {
             break;
           case "SETTLE":
             head = `${data.title}`;
-            body = `프로젝트의 모금 금액이 정산되었습니다.`;
+            body = `프로젝트의 후원 금액이 정산되었습니다.`;
             break;
           case "REPORT":
             head = `${data.companyName}`;
@@ -133,12 +133,6 @@ function App() {
           setTimeout(() => {
             notification.close();
           }, 10 * 1000);
-        } else {
-          const notification = new Notification("줄정보가 없어요");
-
-          setTimeout(() => {
-            notification.close();
-          });
         }
       }
     });

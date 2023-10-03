@@ -23,9 +23,11 @@ const Activity = () => {
 
   return (
     <div>
-      {alarmData.map((item, index) => (
-        <ActivityItem key={index} item={item} />
-      ))}
+      {alarmData.length > 0 ? (
+        alarmData.map((item, index) => <ActivityItem key={index} item={item} />)
+      ) : (
+        <div>null</div>
+      )}
     </div>
   );
 };
