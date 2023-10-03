@@ -29,7 +29,7 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
 
   useEffect(() => {
     axios
-      .get("http://j9c110.p.ssafy.io:8000/articles/news", {
+      .get("https://j9c110.p.ssafy.io/articles/news", {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

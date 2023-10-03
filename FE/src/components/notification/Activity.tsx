@@ -3,23 +3,6 @@ import ActivityItem from "./ActivityItem";
 import { getAlarms } from "../../api/alarms";
 import { useSelector } from "react-redux";
 
-const dummy = [
-  {
-    fundingId: 1,
-    type: "CREATE",
-    title: "후원을 등로오옥 합니다아아아",
-    isRead: false,
-    thumnail: "string",
-  },
-  {
-    fundingId: 1,
-    type: "START",
-    title: "후원을 시자아악 합니다아아아",
-    isRead: false,
-    thumnail: "string",
-  },
-];
-
 const Activity = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
@@ -40,7 +23,7 @@ const Activity = () => {
 
   return (
     <div>
-      {dummy.map((item, index) => (
+      {alarmData.map((item, index) => (
         <ActivityItem key={index} item={item} />
       ))}
     </div>
