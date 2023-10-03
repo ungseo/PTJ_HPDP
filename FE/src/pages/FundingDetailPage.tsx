@@ -28,9 +28,7 @@ const FundingDetailPage = () => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
-  const myPoint = useState(
-    (state: any) => state.user.info.point
-  ) as unknown as number;
+  const myPoint = useSelector((state: any) => state.user.info.point);
   const tabProps = {
     소개: <FundingIntroduce props={fundingDetailData} />,
     소식: <FundingSituation props={fundingDetailData} />,
