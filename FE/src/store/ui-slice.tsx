@@ -5,6 +5,7 @@ const uiSlice = createSlice({
   initialState: {
     isEditPage: false,
     reportModal: false,
+    alarmCount: 0,
   },
   reducers: {
     //함수 작성
@@ -16,6 +17,9 @@ const uiSlice = createSlice({
     },
     changeReportModal(state) {
       state.reportModal = !state.reportModal;
+    },
+    changeAlarmCount(state, action) {
+      state.alarmCount = action.payload;
     },
   },
 });

@@ -1,28 +1,29 @@
-import * as React from "react";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import FolderIcon from "@mui/icons-material/Folder";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import HomeIcon from "@mui/icons-material/Home";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import HomeIcon from "@mui/icons-material/Home";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import MarkEmailUnreadIcon from "@mui/icons-material/MarkEmailUnread";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+
+import Badge from "@mui/material/Badge";
+
 export default function NavigationBar() {
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
   const [value, setValue] = React.useState("home");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
-  const navigate = useNavigate();
   const loginType = useSelector((state: any) => state.user.auth.type);
-  const location = useLocation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     switch (location.pathname) {
       case "/":
         setValue("home");
@@ -40,6 +41,8 @@ export default function NavigationBar() {
         setValue("");
     }
   }, [location.pathname]);
+
+  const alarmCount = useSelector((state: any) => state.ui.alarmCount);
 
   return (
     <BottomNavigation value={value} onChange={handleChange}>
@@ -65,7 +68,11 @@ export default function NavigationBar() {
         style={{ color: value === "notification" ? "#fb788e" : "gray" }}
         label="Notification"
         value="notification"
-        icon={<MarkEmailUnreadIcon />}
+        icon={
+          <Badge badgeContent={alarmCount} color="error">
+            <MarkEmailUnreadIcon />
+          </Badge>
+        }
         onClick={() => {
           navigate("/notification");
         }}
