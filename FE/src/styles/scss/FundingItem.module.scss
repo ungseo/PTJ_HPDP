@@ -13,7 +13,7 @@
   }
 
   .rightcontent {
-    padding-left: 0.6rem;
+    padding-left: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -29,30 +29,37 @@
         overflow: hidden;
         white-space: nowrap;
         font-size: 1.3rem;
-        font-weight: bold;
+        font-weight: 500;
       }
       .companyname {
         color: $grey;
         font-weight: 500;
+        font-size: 0.85rem;
       }
     }
 
     .downcontent {
-      // margin-bottom: 0.2rem;
-      .remaindate {
-        text-align: start;
-        font-weight: bold;
-        color: rgb(37, 37, 37);
-      }
-
-      .accountdetail {
+      .inner_content {
         display: flex;
         justify-content: space-between;
+        .accountdetail {
+          display: flex;
 
-        .fundingpercent {
-          color: $hotPink;
-          font-weight: 600;
+          .fundingpercent {
+            color: $hotPink;
+            font-weight: 600;
+            margin-right: 0.2rem;
+          }
         }
+        .remaindate {
+          text-align: start;
+          font-weight: bold;
+          color: rgb(37, 37, 37);
+        }
+      }
+      // margin-bottom: 0.2rem;
+      .progress_bar {
+        margin: 0.2rem 0 0.4rem;
       }
     }
   }

@@ -122,6 +122,8 @@ public class BankService {
         if(accounts.isEmpty()) return;
 
         for (Account account : accounts){
+            if(account.getMember() == null) continue;
+
             int penny = account.getBalance() % 1000;
             if(penny == 0) continue; // 잔돈이 없다면 pass
 

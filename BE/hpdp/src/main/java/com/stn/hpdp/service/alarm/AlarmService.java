@@ -15,10 +15,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
 import static com.stn.hpdp.common.exception.ErrorCode.*;
+import static com.stn.hpdp.common.util.LogCurrent.*;
+import static com.stn.hpdp.common.util.LogCurrent.START;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -31,15 +34,17 @@ public class AlarmService {
     private final NewsAlarmRepository newsAlarmRepository;
     private final PointAlarmRepository pointAlarmRepository;
 
-    public SseEmitter alarm(String lastEventId) {
+    public SseEmitter alarm(String lastEventId, HttpServletResponse response) {
         Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
         Long memberId = member.getId();
 //        Long memberId = 1L;
         String emitterId = makeTimeIncludeId(memberId);
         SseEmitter emitter = emitterRepository.save(emitterId, new SseEmitter(DEFAULT_TIMEOUT));
+        response.setHeader("X-Accel-Buffering", "no"); // NGINX PROXY 에서의 필요설정 불필요한 버퍼링방지
         emitter.onCompletion(() -> emitterRepository.deleteById(emitterId));
         emitter.onTimeout(() -> emitterRepository.deleteById(emitterId));
+        emitter.onError((e) -> emitterRepository.deleteById(emitterId));
 
         // 503 에러를 방지하기 위한 더미 이벤트 전송
         String eventId = makeTimeIncludeId(memberId);
@@ -64,8 +69,13 @@ public class AlarmService {
                     .name("sse")
                     .data(data));
         } catch (IOException exception) {
-            emitterRepository.deleteById(emitterId);
-            throw new CustomException(SSE_CONNECTED_FAIL);
+            if (exception.getMessage().contains("Broken pipe")) {
+                log.warn("SSE 연결이 끊어짐. 무시됨.", exception); // 경고 메시지로 로그를 기록
+            } else {
+                log.info("SSE 연결 오류 발생", exception);
+                emitterRepository.deleteById(emitterId);
+                throw new CustomException(SSE_CONNECTED_FAIL);
+            }
         }
     }
 
