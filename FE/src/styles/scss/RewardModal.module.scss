@@ -1,0 +1,15 @@
+.reward_modal {
+  background-color: rgb(255, 255, 255);
+  width: 10rem;
+  position: fixed;
+  top: 4rem;
+  right: 0.8rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: left;
+}
+@media (min-width: 501px) {
+  .reward_modal {
+    right: calc((100% - 500px) / 2 + 0.8rem);
+  }
+}

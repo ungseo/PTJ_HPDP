@@ -96,9 +96,9 @@ const FundingDetailPage = () => {
     }
   };
   const handleRewardModalToggle = () => {
-    setIsRewardModalOpen(true);
+    setIsRewardModalOpen(!isRewardModalOpen);
   };
-  console.log(isRewardModalOpen);
+
   const data = {
     name: fundingDetailData.name,
     title: fundingDetailData.title,
@@ -138,7 +138,12 @@ const FundingDetailPage = () => {
           />
         </>
       )}
-
+      {isRewardModalOpen && (
+        <RewardModal
+          rewardPrice={fundingDetailData.rewardPrice || 0}
+          myTotalFunding={fundingDetailData.myTotalFunding}
+        />
+      )}
       <div className={style.fixedButton}>
         {fundingDetailData.state === "ING" ? (
           <DefaultButton
