@@ -4,12 +4,21 @@
   display: flex;
   position: relative;
   margin-bottom: 0.5rem;
-  .leftimg {
-    width: 100%;
-    aspect-ratio: 1/1;
-    height: auto;
-    border-radius: 1rem;
-    border: 1px solid #e9e9e9;
+  .Img_content {
+    position: relative;
+    .reward_icon {
+      position: absolute;
+      background-color: $pastelPink;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+    }
+    .leftimg {
+      width: 100%;
+      aspect-ratio: 1/1;
+      height: auto;
+      border-radius: 0.5rem;
+      border: 1px solid #e9e9e9;
+    }
   }
 
   .rightcontent {
@@ -28,7 +37,7 @@
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         font-weight: 500;
       }
       .companyname {

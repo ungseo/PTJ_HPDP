@@ -20,6 +20,7 @@
       text-align: left;
       flex: 7;
       font-size: 1.1rem;
+      margin-right: 0.2rem;
     }
     .icon {
       flex: 1;
@@ -27,11 +28,11 @@
     }
     .content_deposit {
       color: red;
-      flex: 2;
+      flex: 2.5;
       text-align: right;
     }
     .content_withdraw {
-      flex: 2;
+      flex: 2.5;
       text-align: right;
       color: blue;
     }

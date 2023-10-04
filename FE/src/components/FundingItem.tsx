@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Grid } from "@mui/material";
 import style from "../styles/css/FundingItem.module.css";
-
+import { Icon } from "@iconify/react";
 import ProgressBar from "./common/ProgressBar";
 import { OutFundingsInfoInterface } from "../interface/apiDataInterface";
 
@@ -27,7 +27,12 @@ const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
   console.log(item);
   return (
     <Grid container className={style.total} onClick={handleGoFundingDetail}>
-      <Grid item xs={3}>
+      <Grid item xs={3} className={style.Img_content}>
+        {item.myReward && (
+          <div className={style.reward_icon}>
+            <Icon icon="bi:gift" style={{ color: "white" }} />
+          </div>
+        )}
         <img src={item.thumbnail} alt={item.title} className={style.leftimg} />
       </Grid>
       <Grid item xs={9} className={style.rightcontent}>
