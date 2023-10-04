@@ -5,7 +5,7 @@ import NullModal from "./common/NullModal";
 
 const OngoingFunding = ({ itemList }: any) => {
   return (
-    <div style={{ marginTop: "1rem" }}>
+    <div style={{ marginTop: "1rem", marginLeft: "1rem", marginRight: "1rem" }}>
       {itemList.length ? (
         itemList.map(
           (

@@ -55,7 +55,9 @@ public class FundingQueryRepository {
                         funding.id.as("fundingId"),
                         funding.thumbnailUrl.as("thumbnail"),
                         funding.title.as("title"),
-                        funding.endDate.as("endDate")
+                        funding.endDate.as("endDate"),
+                        funding.totalFunding.as("totalFunding"),
+                        funding.percent.as("percent")
                 ))
                 .from(funding)
                 .where(funding.state.eq(FundingState.ING))
@@ -72,7 +74,9 @@ public class FundingQueryRepository {
                         funding.id.as("fundingId"),
                         funding.thumbnailUrl.as("thumbnail"),
                         funding.title.as("title"),
-                        funding.endDate.as("endDate")
+                        funding.endDate.as("endDate"),
+                        funding.totalFunding.as("totalFunding"),
+                        funding.percent.as("percent")
                 ))
                 .from(funding)
                 .where(funding.state.eq(FundingState.ING))
