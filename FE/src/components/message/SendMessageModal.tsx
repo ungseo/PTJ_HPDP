@@ -10,7 +10,7 @@ interface SendMessageModalProps {
   onClose: () => void;
   data: {
     name: string;
-    receiverId: number;
+    companyId: number;
   };
 }
 
@@ -18,11 +18,11 @@ const SendMessageModal = ({ onClose, data }: SendMessageModalProps) => {
   const [messageTitle, setMessageTitle] = useState("");
   const [messageContent, setMessageContent] = useState("");
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
-  console.log(data);
+
   const handleSendingMessage = () => {
     getSendingMessage(
       accessToken,
-      data.receiverId,
+      data.companyId,
       messageTitle,
       messageContent,
       (res) => {
