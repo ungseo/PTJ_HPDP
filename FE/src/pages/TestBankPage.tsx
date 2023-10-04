@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { OptionTopbar } from "../components/common/TopBar";
 import TestWallet from "../components/testbank/TestWallet";
 import TransactionList from "../components/testbank/TransactionList";

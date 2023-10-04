@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
-import style from "../../styles/css/ProfileList.module.css";
-import ProfileListItem from "./ProfileListItem";
+
+import style from "../../styles/scss/ProfileList.module.scss";
+
 import { useNavigate } from "react-router";
 import { logout } from "../../api/auth";
 import { useSelector } from "react-redux";
@@ -14,13 +15,13 @@ const ProfileList = () => {
   const dispatch = useDispatch();
   const onClick = (event: any) => {
     const { id } = event.target;
+
     if (id === "logout") {
-      //로그아웃함수
       logout(
         accessToken,
         (res) => {
           dispatch(userActions.logoutHandler());
-          OkModal({ title: "로그아웃", text: "또 오세요!" });
+          OkModal({ title: "로그아웃", text: "다음에 만나요!" });
           navigate("/");
         },
         (err) => {}
@@ -29,23 +30,31 @@ const ProfileList = () => {
       navigate("/");
       return;
     }
-    navigate(`/profile${id}`);
+    navigate(`/profile/${id}`);
   };
+
   return (
-    <div className={style.wrapper}>
-      <ProfileListItem
-        text="내(기업) 정보보기"
-        id={"/c/info"}
+    <div className={style.container}>
+      <div className={style.item} id={`c/info/`} onClick={onClick}>
+        <p>기업정보</p>
+        <Icon icon="bi:chevron-right"></Icon>
+      </div>
+      <div className={style.item} id={`c/fundings`} onClick={onClick}>
+        <p>모금내역</p>
+        <Icon icon="bi:chevron-right"></Icon>
+      </div>
+      <div className={style.item} id={`message`} onClick={onClick}>
+        <p>쪽지내역</p>
+        <Icon icon="bi:chevron-right"></Icon>
+      </div>
+      <div
+        className={style.item}
+        id="logout"
+        style={{ color: "red" }}
         onClick={onClick}
-      />
-      <ProfileListItem
-        text="내 펀딩 보기"
-        id={"/c/fundings"}
-        onClick={onClick}
-      />
-      <ProfileListItem text="쪽지함" id={"/message"} onClick={onClick} />
-      <div style={{ color: "red" }}>
-        <ProfileListItem text="로그아웃" id={"logout"} onClick={onClick} />
+      >
+        <p>로그아웃</p>
+        <Icon icon="bi:chevron-right"></Icon>
       </div>
     </div>
   );

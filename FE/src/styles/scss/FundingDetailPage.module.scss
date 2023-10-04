@@ -2,7 +2,16 @@
 
 .fundingdetailpage {
   width: 100%;
-  z-index: 0;
+  position: relative;
+  .reward_icon {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    background-color: $pastelPink;
+    padding: 0.7rem 0.8rem;
+    border-radius: 50%;
+    z-index: 1;
+  }
 }
 
 .fixedButton {
@@ -29,6 +38,7 @@
   width: 100%;
   height: 100%;
   overflow: auto;
+  z-index: 2;
 }
 
 .modalbackground {

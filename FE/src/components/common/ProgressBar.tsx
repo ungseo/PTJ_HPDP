@@ -6,11 +6,12 @@ interface ProgressBarProps {
 }
 
 const ProgressBar = ({ percent }: ProgressBarProps) => {
+  const limitedPercent = Math.min(percent, 100);
   return (
     <div>
       <LinearProgress
         variant="determinate"
-        value={percent}
+        value={limitedPercent}
         sx={{
           height: "0.4rem",
           borderRadius: "1rem",

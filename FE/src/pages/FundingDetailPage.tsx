@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as Interfaces from "../interface/apiDataInterface";
 import { getFundingDetail } from "../api/fundings";
 import { getSponsor } from "../api/points";
-
+import { Icon } from "@iconify/react";
 import CustomizedTabs from "../components/CustomizedTabs";
 import FundingIntroduce from "../components/fundingdetail/FundingIntroduce";
 import FundingSituation from "../components/fundingdetail/FundingSituation";
@@ -13,7 +13,9 @@ import FundingComplete from "../components/fundingdetail/FundingComplete";
 import DetailPageTop from "../components/DetailPageTop";
 import DefaultButton from "../components/common/DefaultButton";
 import style from "../styles/css/FundingDetailPage.module.css";
-import { QuestionModal } from "../components/common/AlertModals";
+import { QuestionModal, NotOkModal } from "../components/common/AlertModals";
+import RewardModal from "../components/fundingdetail/RewardModal";
+import { truncate } from "fs";
 
 const FundingDetailPage = () => {
   // 디테일이라서 값이 1개라 []는 배열이라 안되고 null은 타입지정이 불가해서 안되서 {}객체로 설정
@@ -28,6 +30,7 @@ const FundingDetailPage = () => {
   const isLogined = useSelector((state: any) => state.user.auth.isLogined);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
+  const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
   const myPoint = useSelector((state: any) => state.user.info.point);
   const tabProps = {
@@ -61,13 +64,13 @@ const FundingDetailPage = () => {
   // bottomsheet는 false, complete는 true로 변경
   const FundingHandler = () => {
     if (!isLogined) {
-      alert("로그인이 필요한 서비스입니다.");
+      NotOkModal({ text: "로그인이 필요한 서비스입니다." });
     } else {
       if (isBottomSheetOpen) {
         if (donationAmount === 0) {
-          QuestionModal({ text: "후원 금액을 입력하세요." });
+          QuestionModal({ title: "다시", text: "금액을 입력하세요." });
         } else if (myPoint < donationAmount) {
-          QuestionModal({ text: "포인트 잔액이 부족합니다." });
+          QuestionModal({ title: "다시", text: "잔액이 부족합니다." });
         } else {
           getSponsor(
             accessToken,
@@ -85,14 +88,17 @@ const FundingDetailPage = () => {
           // 2초후에 자동으로 complete 닫기
           setTimeout(() => {
             setIsFundingCompleteOpen(false);
-          }, 2000);
+          }, 3000);
         }
       } else {
         setIsBottomSheetOpen(true);
       }
     }
   };
-
+  const handleRewardModalToggle = () => {
+    setIsRewardModalOpen(true);
+  };
+  console.log(isRewardModalOpen);
   const data = {
     name: fundingDetailData.name,
     title: fundingDetailData.title,
@@ -103,6 +109,12 @@ const FundingDetailPage = () => {
 
   return (
     <div className={style.fundingdetailpage}>
+      <div className={style.reward_icon} onClick={handleRewardModalToggle}>
+        <Icon
+          icon="bi:gift"
+          style={{ width: "1.5rem", height: "1.5rem", color: "white" }}
+        />
+      </div>
       <DetailPageTop data={data} />
       <CustomizedTabs tabProps={tabProps} />
       {isBottomSheetOpen && (

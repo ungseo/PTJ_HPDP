@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import style from "../../styles/css/MyActivity.module.css";
+import style from "../../styles/scss/MyActivity.module.scss";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -20,7 +20,7 @@ const MyActivity = () => {
         accessToken,
         (res) => {
           dispatch(userActions.logoutHandler());
-          OkModal({ title: "로그아웃", text: "또 오세요!" });
+          OkModal({ title: "로그아웃", text: "다음에 만나요!" });
           navigate("/");
         },
         (err) => {}
@@ -31,9 +31,10 @@ const MyActivity = () => {
     }
     navigate(`/profile/${id}`);
   };
+
   return (
     <div className={style.container}>
-      <div className={style.item} onClick={onClick} id={`message/`}>
+      <div className={style.item} id={`message/`} onClick={onClick}>
         <p>쪽지내역</p>
         <Icon icon="bi:chevron-right"></Icon>
       </div>

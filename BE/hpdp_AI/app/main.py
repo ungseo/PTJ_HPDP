@@ -24,9 +24,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/articles/news")
-def read_root():
-    return {"data" : get_article_info()}
+@app.get("/articles/news/{companyName}")
+def read_root(companyName: str):
+    return {"data" : get_article_info(companyName)}
 
 @app.get("/articles/info/{companyName}")
 async def get_company_info(companyName: str):

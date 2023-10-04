@@ -46,7 +46,7 @@ const LoginForm = () => {
         navigate("/");
       },
       (err) => {
-        NotOkModal({ title: "실패", text: "로그인정보를 확인해주세요!" });
+        NotOkModal({ title: "실패", text: "로그인 정보를 확인해주세요!" });
       }
     );
   };

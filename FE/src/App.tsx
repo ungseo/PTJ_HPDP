@@ -24,9 +24,6 @@ import InterestingCompanyPage from "./pages/InterestingCompanyPage";
 import MessagePage from "./pages/MessagePage";
 import PageNotFound404 from "./pages/PageNotFound404";
 import { useEffect, useState } from "react";
-import { getMemberInfo } from "./api/members";
-import { userActions } from "./store/user-slice";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import RegisterAccountPage from "./pages/RegisterAccountPage";
 import CompanyProfilePage from "./pages/CompanyPage/CompanyProfilePage";
@@ -34,6 +31,11 @@ import CompanyInfoPage from "./pages/CompanyPage/CompanyInfoPage";
 import CompanyFundingPage from "./pages/CompanyPage/CompanyFundingPage";
 
 import { EventSourcePolyfill } from "event-source-polyfill";
+import { getAlarms } from "./api/alarms";
+
+import { OutAlarmInfoInterface } from "./interface/apiDataInterface";
+import { uiActions } from "./store/ui-slice";
+import { useDispatch } from "react-redux";
 
 function App() {
   //
@@ -74,7 +76,6 @@ function App() {
         },
       }
     );
-    console.log("다시 요청하나...?");
 
     eventSource.addEventListener("sse", async (event) => {
       // console.log(event);
@@ -93,7 +94,7 @@ function App() {
 
       // 알림 보여주기
       if (granted) {
-        // console.log("뭐지", data);
+        // console.log(data);
 
         let head = null;
         let body = undefined;
@@ -146,6 +147,25 @@ function App() {
       sse();
     }
   }, [isLogined]);
+
+  // alarm
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getAlarms(
+      accessToken,
+      (res) => {
+        const unreadCount = res.data.data.filter(
+          (item: OutAlarmInfoInterface) => item.isRead === false
+        ).length;
+
+        dispatch(uiActions.changeAlarmCount(unreadCount));
+      },
+      (err) => {
+        console.error("API 호출 실패:", err);
+      }
+    );
+  }, []);
 
   return (
     <Paper id="app-root" className={style.App}>

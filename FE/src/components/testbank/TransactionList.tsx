@@ -5,11 +5,14 @@ import { getAccount, transAccount } from "../../api/banks";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { accountActions } from "../../store/account-slice";
+import { NotOkModal } from "../common/AlertModals";
 
 const TransactionList = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
   const dispatch = useDispatch();
+
+  const balance = useSelector((state: any) => state.account.balance);
 
   const onClick = (event: any) => {
     const { id } = event.currentTarget;
@@ -29,28 +32,36 @@ const TransactionList = () => {
       }
     })();
 
-    transAccount(
-      accessToken,
-      id,
-      opponentAccount,
-      depositAmount,
-      (res) => {
-        getAccount(
-          accessToken,
-          (res) => {
-            dispatch(accountActions.registerAccount(res.data.data));
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
-        console.log(res);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    if (balance + depositAmount >= 0) {
+      transAccount(
+        accessToken,
+        id,
+        opponentAccount,
+        depositAmount,
+        (res) => {
+          getAccount(
+            accessToken,
+            (res) => {
+              dispatch(accountActions.registerAccount(res.data.data));
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+          console.log(res);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      NotOkModal({
+        title: "실패",
+        text: "잔액이 부족합니다.",
+      });
+    }
   };
+
   const btnStyle = {
     width: "65%",
     borderRadius: "0.6rem",
@@ -59,6 +70,7 @@ const TransactionList = () => {
     fontWeight: "bold",
     marginBottom: "0.5rem",
   };
+
   return (
     <div className={style.wrapper}>
       <div className={style.item}>
