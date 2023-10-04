@@ -23,7 +23,7 @@ public class RecommendFundingsRes {
     private int totalFunding;
     private int percent;
 
-    public RecommendFundingsRes(Long companyId, String name, Long fundingId, String thumbnail, String title, LocalDateTime endDate){
+    public RecommendFundingsRes(Long companyId, String name, Long fundingId, String thumbnail, String title, LocalDateTime endDate, int totalFunding, int percent){
         this.companyId = companyId;
         this.name = name;
         this.fundingId = fundingId;
@@ -35,5 +35,7 @@ public class RecommendFundingsRes {
         }else{
             this.dDay = "마감";
         }
+        this.totalFunding = totalFunding;
+        this.percent = percent;
     }
 }
