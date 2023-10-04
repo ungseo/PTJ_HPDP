@@ -11,6 +11,7 @@ import com.stn.hpdp.model.entity.PointAlarm;
 import com.stn.hpdp.model.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -34,14 +35,22 @@ public class AlarmService {
     private final NewsAlarmRepository newsAlarmRepository;
     private final PointAlarmRepository pointAlarmRepository;
 
-    public SseEmitter alarm(String lastEventId, HttpServletResponse response) {
-        Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
+    public SseEmitter alarm(UserDetails userDetails, String lastEventId, HttpServletResponse response) {
+//        Member member = memberRepository.findByLoginId(SecurityUtil.getCurrentMemberLoginId())
+//                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
+//        Long memberId = member.getId();
+//        Long memberId = 1L;
+
+        String loginId = userDetails.getUsername();
+        Member member = memberRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
         Long memberId = member.getId();
-//        Long memberId = 1L;
+
         String emitterId = makeTimeIncludeId(memberId);
         SseEmitter emitter = emitterRepository.save(emitterId, new SseEmitter(DEFAULT_TIMEOUT));
         response.setHeader("X-Accel-Buffering", "no"); // NGINX PROXY 에서의 필요설정 불필요한 버퍼링방지
+        response.setHeader("Connection", "keep-alive");
+        response.setHeader("Cache-Control", "no-cache");
         emitter.onCompletion(() -> emitterRepository.deleteById(emitterId));
         emitter.onTimeout(() -> emitterRepository.deleteById(emitterId));
         emitter.onError((e) -> emitterRepository.deleteById(emitterId));
