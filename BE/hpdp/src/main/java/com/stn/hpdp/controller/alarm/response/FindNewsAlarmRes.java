@@ -16,6 +16,7 @@ public class FindNewsAlarmRes {
     private long newsAlarmId;
     private String type;
     private Long fundingId;
+    private String fundingDocs;
     private String title;
     private String thumbnail;
     private boolean isRead;
@@ -26,6 +27,7 @@ public class FindNewsAlarmRes {
         return FindNewsAlarmRes.builder()
                 .newsAlarmId(alarm.getId())
                 .fundingId(alarm.getFunding().getId())
+                .fundingDocs(alarm.getFunding().getDocsUrl())
                 .type(alarm.getType().name())
                 .title(alarm.getTitle())
                 .thumbnail(alarm.getFunding().getThumbnailUrl())
