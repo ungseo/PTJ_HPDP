@@ -13,7 +13,7 @@ import FundingComplete from "../components/fundingdetail/FundingComplete";
 import DetailPageTop from "../components/DetailPageTop";
 import DefaultButton from "../components/common/DefaultButton";
 import style from "../styles/css/FundingDetailPage.module.css";
-import { QuestionModal } from "../components/common/AlertModals";
+import { QuestionModal, NotOkModal } from "../components/common/AlertModals";
 
 const FundingDetailPage = () => {
   // 디테일이라서 값이 1개라 []는 배열이라 안되고 null은 타입지정이 불가해서 안되서 {}객체로 설정
@@ -61,7 +61,7 @@ const FundingDetailPage = () => {
   // bottomsheet는 false, complete는 true로 변경
   const FundingHandler = () => {
     if (!isLogined) {
-      alert("로그인이 필요한 서비스입니다.");
+      NotOkModal({ text: "로그인이 필요한 서비스입니다." });
     } else {
       if (isBottomSheetOpen) {
         if (donationAmount === 0) {

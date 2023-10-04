@@ -170,6 +170,8 @@ export interface OutFundingsInfoInterface {
   dday?: number | string;
   percent?: number;
   profileImg?: string;
+  budgetList?: any;
+  docsUrl?: string;
 }
 
 //펀딩 예산 상세 조회
