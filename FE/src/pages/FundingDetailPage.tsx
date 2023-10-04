@@ -109,12 +109,15 @@ const FundingDetailPage = () => {
 
   return (
     <div className={style.fundingdetailpage}>
-      <div className={style.reward_icon} onClick={handleRewardModalToggle}>
-        <Icon
-          icon="bi:gift"
-          style={{ width: "1.5rem", height: "1.5rem", color: "white" }}
-        />
-      </div>
+      {isLogined && (
+        <div className={style.reward_icon} onClick={handleRewardModalToggle}>
+          <Icon
+            icon="bi:gift"
+            style={{ width: "1.5rem", height: "1.5rem", color: "white" }}
+          />
+        </div>
+      )}
+
       <DetailPageTop data={data} />
       <CustomizedTabs tabProps={tabProps} />
       {isBottomSheetOpen && (
