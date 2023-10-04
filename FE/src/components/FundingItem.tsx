@@ -14,12 +14,12 @@ function formatNumber(number: number) {
 const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
   const navigate = useNavigate();
   const formatDday =
-    item.dday === 0
+    item.dday === "0"
       ? "오늘마감"
       : item.dday !== "마감"
       ? `D-${item.dday}`
       : item.dday;
-  const clampedPercent = Math.min(item.percent || 0, 100);
+
   const total_Funding = formatNumber(item.totalFunding);
   const handleGoFundingDetail = () => {
     navigate(`/funding/detail/${item.fundingId}`);
@@ -36,11 +36,15 @@ const FundingItem = ({ item }: { item: OutFundingsInfoInterface }) => {
           <div className={style.companyname}>{item.name}</div>
         </div>
         <div className={style.downcontent}>
-          <div className={style.remaindate}>{formatDday}</div>
-          <ProgressBar percent={clampedPercent} />
-          <div className={style.accountdetail}>
-            <div className={style.nowaccount}>{total_Funding}원</div>
-            <div className={style.fundingpercent}>{clampedPercent}%</div>
+          <div className={style.inner_content}>
+            <div className={style.accountdetail}>
+              <div className={style.fundingpercent}>{item.percent}%</div>
+              <div className={style.nowaccount}>{total_Funding}원</div>
+            </div>
+            <div className={style.remaindate}>{formatDday}</div>
+          </div>
+          <div className={style.progress_bar}>
+            <ProgressBar percent={item.percent || 0} />
           </div>
         </div>
       </Grid>
