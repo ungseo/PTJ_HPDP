@@ -6,12 +6,13 @@ import * as Interfaces from "../interface/apiDataInterface";
 import { getFundingTotalList } from "../api/fundings";
 
 import FundingItem from "./FundingItem";
+import LoadingSpinner from "./common/LoadingSpinner";
 
 const FundingList = ({ keyword }: any) => {
   const [fundingTotalData, setFundingTotalData] = useState<
     Interfaces.OutFundingsInfoInterface[]
   >([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const hashKeyword = keyword;
     getFundingTotalList(
@@ -19,14 +20,18 @@ const FundingList = ({ keyword }: any) => {
       1,
       (res) => {
         setFundingTotalData(res.data.data);
+        setLoading(false);
       },
       (err) => {
         console.error("펀딩 전체 조회 API 호출 실패:", err);
+        setLoading(false);
       }
     );
   }, []);
 
-  return (
+  return loading ? (
+    <LoadingSpinner />
+  ) : (
     <div>
       <div style={{ textAlign: "left", margin: "1rem" }}>
         현재 {fundingTotalData.length}개 프로젝트를 진행하고 있습니다.
