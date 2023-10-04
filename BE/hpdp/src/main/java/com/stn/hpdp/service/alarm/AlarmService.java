@@ -69,9 +69,13 @@ public class AlarmService {
                     .name("sse")
                     .data(data));
         } catch (IOException exception) {
-            log.info("SSE 연결 오류 발생", exception);
-            emitterRepository.deleteById(emitterId);
-            throw new CustomException(SSE_CONNECTED_FAIL);
+            if (exception.getMessage().contains("Broken pipe")) {
+                log.warn("SSE 연결이 끊어짐. 무시됨.", exception); // 경고 메시지로 로그를 기록
+            } else {
+                log.info("SSE 연결 오류 발생", exception);
+                emitterRepository.deleteById(emitterId);
+                throw new CustomException(SSE_CONNECTED_FAIL);
+            }
         }
     }
 

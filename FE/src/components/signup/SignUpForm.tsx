@@ -31,7 +31,7 @@ const SignUpForm = () => {
   const onSubmit = (event: any) => {
     event.preventDefault();
     if (dup) {
-      NotOkModal({ title: "실패", text: "아이디가 중복됐습니다" });
+      NotOkModal({ title: "실패", text: "존재하는 아이디입니다." });
       return;
     } else if (signupInput.loginPw !== pw2) {
       NotOkModal({ title: "실패", text: "비밀번호를 확인해주세요" });
@@ -42,7 +42,7 @@ const SignUpForm = () => {
       signup(
         data,
         (res) => {
-          OkModal({ title: "성공", text: "회원가입이 완료되었습니다!" });
+          OkModal({ title: "성공", text: "회원가입이 완료되었습니다" });
           setWallet(false);
           navigate("/login");
         },

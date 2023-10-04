@@ -1,10 +1,20 @@
 @import "Animation";
 
-.wrapper {
-  padding: 1.5rem;
-  background-color: #f3f3f3;
-  border-radius: 1.5rem 1.5rem 0 0;
-  width: calc(100% - 3rem);
-  height: calc(55vh - 56px);
-  animation: Upstream 0.7s ease-in-out forwards;
+.container {
+  margin-top: 2.5rem;
+  padding: 0 1.5rem;
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    border-bottom: 1px lightgray solid;
+    padding: 0 1.5rem;
+    p {
+      pointer-events: none;
+    }
+    svg {
+      pointer-events: none;
+    }
+  }
 }

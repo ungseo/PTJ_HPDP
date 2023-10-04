@@ -7,12 +7,12 @@ const PageNotFound404 = () => {
   };
   return (
     <div>
-      <h1>404: 페이지를 찾을 수 없습니다!</h1>
+      <h1>404: pageNotFound</h1>
       <img src="/pageNotFound.png" alt="페이지를 찾을 수 없습니다." />
       <div>
         <DefaultButton
           text="뒤로가기"
-          styles={{ width: "80%", height: "3vh" }}
+          styles={{ width: "80%", height: "5vh" }}
           onClick={onClick}
         />
       </div>
