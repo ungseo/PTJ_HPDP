@@ -18,13 +18,13 @@
 
     &:focus,
     &:not(:placeholder-shown) {
-      border-bottom-color: darksalmon;
+      border-bottom-color: $pastelPink;
       outline: none;
     }
 
     &:focus + .label .span,
     &:not(:placeholder-shown) + .label .span {
-      color: darksalmon;
+      color: $pastelPink;
       transform: translateY(-30px);
     }
   }
