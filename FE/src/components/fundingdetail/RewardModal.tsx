@@ -28,7 +28,7 @@ const RewardModal = ({ rewardPrice, myTotalFunding }: RewardModalProps) => {
     content = (
       <div>
         <div>지금까지 {formatNumber(myTotalFunding)}P를 후원했습니다.</div>
-        <div>리워드 획득!</div>;
+        <div>리워드 획득!</div>
       </div>
     );
   }
