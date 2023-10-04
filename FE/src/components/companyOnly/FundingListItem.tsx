@@ -12,6 +12,10 @@ import ReportModal from "./ReportModal";
 import { NotOkModal, OkModal } from "../common/AlertModals";
 import LoadingSpinner from "../common/LoadingSpinner";
 
+function formatNumber(number: number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const FundingListItem = ({
   funding,
   refresh,
@@ -37,7 +41,7 @@ const FundingListItem = ({
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   //정산하기
   const [onGoing, setOnGoing] = useState(false);
-
+  const Total_Funding = formatNumber(funding.totalFunding);
   const settlement = () => {
     setOnGoing(true);
     settlementFunding(
@@ -85,7 +89,7 @@ const FundingListItem = ({
             <ProgressBar percent={percent || 0} />
             <div className={style.accountdetail}>
               <div className={style.nowaccount}>
-                총 모인 금액:{funding.totalFunding}원
+                총 모인 금액:{Total_Funding}원
               </div>
               <div className={style.fundingpercent}>{percent}%</div>
             </div>
