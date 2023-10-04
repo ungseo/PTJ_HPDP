@@ -41,14 +41,14 @@ const DetailPageTop = (props: DetailTopProps) => {
         onClick={handleGoList}
       />
       <div className={style.topcontent}>
-        <div className={style.downsection}>
+        <div className={style.upsection}>
           {data.title && <div className={style.fundingtitle}>{data.title}</div>}
         </div>
-        <div className={style.upsection}>
+        <div className={style.downsection}>
           <img
             src={data.profileImg}
             alt="Company Logo"
-            className={style.upimg}
+            className={style.downimg}
           />
           <div className={style.companyname} onClick={handleGoCompany}>
             {data.name}
