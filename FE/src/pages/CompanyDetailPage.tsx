@@ -18,6 +18,7 @@ const CompanyDetailPage = () => {
     );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+  const isLogined = useSelector((state: any) => state.user.auth.isLogined);
   const { companyid } = useParams();
 
   const openModal = () => {
@@ -57,16 +58,19 @@ const CompanyDetailPage = () => {
     <div className={style.companydetailpage}>
       <DetailPageTop data={data} />
       <CustomizedTabs tabProps={tabProps} />
-      <div className={style.message_icon} onClick={openModal}>
-        <Icon
-          icon="bi:chat-square-dots"
-          style={{
-            width: "1.5rem",
-            height: "1.5rem",
-          }}
-          className={style.Icon_icon}
-        ></Icon>
-      </div>
+      {isLogined ? (
+        <div className={style.message_icon} onClick={openModal}>
+          <Icon
+            icon="bi:chat-square-dots"
+            style={{
+              width: "1.5rem",
+              height: "1.5rem",
+            }}
+            className={style.Icon_icon}
+          ></Icon>
+        </div>
+      ) : null}
+
       {isModalOpen && (
         <>
           <div className={style.modalbackground}></div>

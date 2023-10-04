@@ -95,7 +95,7 @@ const MessageContent = ({ onClose, isMessageDetail, flag }: MessageProps) => {
             marginTop: "1rem",
             textAlign: "justify",
             marginBottom: "1rem",
-            height: "33vh",
+            height: "35vh",
           }}
         >
           {isMessageDetail.content}

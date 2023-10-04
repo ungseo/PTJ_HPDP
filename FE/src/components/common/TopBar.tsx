@@ -39,11 +39,11 @@ const OptionTopbar = ({ text }: { text: string }) => {
         <button className={style.backBtn} onClick={goBackHandler}></button>
         <h3>{text}</h3>
       </div>
-      <Icon
+      {/* <Icon
         icon="bi:search"
         onClick={goToSearchPage}
         style={{ width: "1.8rem", height: "1.8rem", marginRight: "1rem" }}
-      />
+      /> */}
     </div>
   );
 };

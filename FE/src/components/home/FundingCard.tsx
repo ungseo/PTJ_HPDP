@@ -4,9 +4,13 @@ import { OutFundingsInfoInterface } from "../../interface/apiDataInterface";
 import ProgressBar from "../common/ProgressBar";
 import style from "../../styles/css/FundingCard.module.css";
 
+function formatNumber(number: number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const FundingCard = ({ card }: { card: OutFundingsInfoInterface }) => {
   const navigate = useNavigate();
-
+  const total_cost = formatNumber(card.totalFunding);
   const formatDday =
     card.dday !== "마감"
       ? card.dday !== 0
@@ -29,7 +33,7 @@ const FundingCard = ({ card }: { card: OutFundingsInfoInterface }) => {
         <div className={style.remaindate}>{formatDday}</div>
         <ProgressBar percent={card.percent || 0} />
         <div className={style.accountdetail}>
-          <div className={style.nowaccount}>{card.totalFunding}원</div>
+          <div className={style.nowaccount}>{total_cost}원</div>
           <div className={style.fundingpercent}>{card.percent}%</div>
         </div>
       </div>
