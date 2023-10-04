@@ -16,7 +16,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    background-color: beige;
+    background-color: $pastelBlue;
+    opacity: 0.7;
+    border-radius: 0.5rem;
 
     .label {
       border: 1px;
