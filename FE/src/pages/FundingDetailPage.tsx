@@ -15,7 +15,6 @@ import DefaultButton from "../components/common/DefaultButton";
 import style from "../styles/css/FundingDetailPage.module.css";
 import { QuestionModal, NotOkModal } from "../components/common/AlertModals";
 import RewardModal from "../components/fundingdetail/RewardModal";
-import { truncate } from "fs";
 
 const FundingDetailPage = () => {
   // 디테일이라서 값이 1개라 []는 배열이라 안되고 null은 타입지정이 불가해서 안되서 {}객체로 설정
@@ -41,6 +40,7 @@ const FundingDetailPage = () => {
   useEffect(() => {
     getFundingDetail(
       Number(fundingid),
+      accessToken,
       (res) => {
         setFundingDetailData(res.data.data);
         console.log(fundingDetailData);
