@@ -15,28 +15,16 @@ import DefaultButton from "../components/common/DefaultButton";
 import style from "../styles/css/FundingDetailPage.module.css";
 import { QuestionModal, NotOkModal } from "../components/common/AlertModals";
 import RewardModal from "../components/fundingdetail/RewardModal";
-import { truncate } from "fs";
 
 const FundingDetailPage = () => {
-  // 디테일이라서 값이 1개라 []는 배열이라 안되고 null은 타입지정이 불가해서 안되서 {}객체로 설정
+  // 상세 조회
+  const { fundingid } = useParams();
+
   const [fundingDetailData, setFundingDetailData] =
     useState<Interfaces.OutFundingsInfoInterface>(
       {} as Interfaces.OutFundingsInfoInterface
     );
   console.log(fundingDetailData.state);
-
-  const { fundingid } = useParams();
-  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
-  const isLogined = useSelector((state: any) => state.user.auth.isLogined);
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-  const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
-  const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
-  const [donationAmount, setDonationAmount] = useState(0);
-  const myPoint = useSelector((state: any) => state.user.info.point);
-  const tabProps = {
-    소개: <FundingIntroduce props={fundingDetailData} />,
-    소식: <FundingSituation props={fundingDetailData} />,
-  };
 
   useEffect(() => {
     getFundingDetail(
@@ -51,7 +39,21 @@ const FundingDetailPage = () => {
       }
     );
   }, []);
-  console.log(fundingDetailData);
+
+  const tabProps = {
+    소개: <FundingIntroduce props={fundingDetailData} />,
+    소식: <FundingSituation props={fundingDetailData} />,
+  };
+
+  // 기타
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+  const isLogined = useSelector((state: any) => state.user.auth.isLogined);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
+  const [isRewardModalOpen, setIsRewardModalOpen] = useState(false);
+  const [donationAmount, setDonationAmount] = useState(0);
+  const myPoint = useSelector((state: any) => state.user.info.point);
+
   useEffect(() => {
     if (isFundingCompleteOpen) {
       document.body.classList.add(style.bodyWithModalOpen);
@@ -59,9 +61,11 @@ const FundingDetailPage = () => {
       document.body.classList.remove(style.bodyWithModalOpen);
     }
   }, [isFundingCompleteOpen]);
+
   const navigate = useNavigate();
   // bottomsheet가 열린 상태에서 버튼이 눌리면
   // bottomsheet는 false, complete는 true로 변경
+
   const FundingHandler = () => {
     if (!isLogined) {
       NotOkModal({ text: "로그인이 필요한 서비스입니다." });
@@ -95,16 +99,21 @@ const FundingDetailPage = () => {
       }
     }
   };
+
+  // 보상 모달
   const handleRewardModalToggle = () => {
     setIsRewardModalOpen(true);
   };
+
   console.log(isRewardModalOpen);
+
+  // 상속 정보
   const data = {
-    name: fundingDetailData.name,
-    title: fundingDetailData.title,
-    thumbnail: fundingDetailData.thumbnail,
     companyId: fundingDetailData.companyId,
+    name: fundingDetailData.name,
     profileImg: fundingDetailData.profileImg,
+    thumbnail: fundingDetailData.thumbnail,
+    title: fundingDetailData.title,
   };
 
   return (

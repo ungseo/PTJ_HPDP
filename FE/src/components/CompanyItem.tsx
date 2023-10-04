@@ -92,9 +92,9 @@ const CompanyItem = (props: CompanyItemProps) => {
         </IconButton>
       ) : null}
 
-      {/* <ImageListItemBar title={item.name} position="below" /> */}
+      {/* <ImageListItemBar title={item.name} position="below"> */}
       <p className={style.cpnName}>{item.name}</p>
-      {/* <ImageListItemBar title={item.name} position="below" /> */}
+      {/* </ImageListItemBar> */}
     </div>
   );
 };
