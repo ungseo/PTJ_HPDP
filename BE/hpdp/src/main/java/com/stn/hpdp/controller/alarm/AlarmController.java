@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 import static com.stn.hpdp.common.util.LogCurrent.*;
@@ -24,8 +25,9 @@ public class AlarmController {
     private final AlarmService alarmService;
     private final AlarmQueryService alarmQueryService;
     @GetMapping(produces = "text/event-stream") // produces = MediaType.TEXT_EVENT_STREAM_VALUE
-    public SseEmitter alarm(@RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId) {
-        return alarmService.alarm(lastEventId);
+    public SseEmitter alarm(@RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId,
+                            HttpServletResponse response) {
+        return alarmService.alarm(lastEventId, response);
     }
 
     @PutMapping("/news/{newsAlarmId}")
