@@ -9,40 +9,33 @@
   padding: 0 1.2em;
   color: white;
   text-align: left;
-}
+  .icon {
+    position: absolute;
+    top: 1rem;
+    left: 0.5rem;
+    color: white;
+  }
 
-.icon {
-  position: absolute;
-  top: 1rem;
-  left: 0.5rem;
-  color: white;
-}
-
-.upsection {
-  display: flex;
-  align-items: center;
-}
-
-.upimg {
-  height: 2rem;
-  width: 2rem;
-  background-color: #969696;
-  border-radius: 50px;
-  margin-top: 0;
-}
-
-.companyname {
-  font-size: 0.9rem;
-  margin-left: 0.5rem;
-}
-
-.downsection {
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  display: flex;
-}
-
-.fundingtitle {
-  font-size: 1.3rem;
-  font-weight: 530;
+  .upsection {
+    .fundingtitle {
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+  }
+  .downsection {
+    display: flex;
+    margin: 0.5rem 0 1rem;
+    align-items: center;
+    .downimg {
+      height: 2rem;
+      width: 2rem;
+      background-color: #969696;
+      border-radius: 50px;
+      margin-top: 0;
+      margin-right: 0.5rem;
+      .companyname {
+        font-size: 0.9rem;
+      }
+    }
+  }
 }

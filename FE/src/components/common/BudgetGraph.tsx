@@ -20,7 +20,7 @@ const BudgetGraph = ({ target, budgetList }: BudgetListProps) => {
   console.log(budgetList[0]);
   const processedBudgetList = budgetList.map((item) => ({
     content: item.content,
-    price: parseFloat(item.price),
+    price: parseInt(item.price),
   }));
 
   const totalBudget = processedBudgetList.reduce(
@@ -52,13 +52,13 @@ const BudgetGraph = ({ target, budgetList }: BudgetListProps) => {
       </div>
       {processedBudgetList.map((item, index) => {
         const ratio = (item.price / totalBudget) * totalRatio;
-
+        const truncatedRatio = Math.floor(ratio);
         return (
           <div className={style.number} key={item.content}>
             <div className={style.layer}>
               <div>{item.content}</div>
               <div>
-                {formatNumber(item.price)} 원({ratio}%)
+                {formatNumber(item.price)} 원({truncatedRatio}%)
               </div>
             </div>
           </div>

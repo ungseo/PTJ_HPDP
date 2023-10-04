@@ -76,6 +76,11 @@ const FundingDetailPage = () => {
           QuestionModal({ title: "다시", text: "금액을 입력하세요." });
         } else if (myPoint < donationAmount) {
           QuestionModal({ title: "다시", text: "잔액이 부족합니다." });
+        } else if (donationAmount < 100) {
+          QuestionModal({
+            title: "다시",
+            text: "100P이상부터 후원이 가능합니다",
+          });
         } else {
           getSponsor(
             accessToken,
