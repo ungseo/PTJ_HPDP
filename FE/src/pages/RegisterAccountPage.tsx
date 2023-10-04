@@ -9,6 +9,8 @@ import { registerAccount } from "../api/banks";
 import { useNavigate } from "react-router-dom";
 import AnimationLabelInput from "../components/common/Inputs";
 import { BackTopbar, OptionTopbar } from "../components/common/TopBar";
+import SecurityPwInput from "../components/testbank/SecurityPwInput";
+import { NotOkModal, OkModal } from "../components/common/AlertModals";
 
 const RegisterAccountPage = () => {
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ const RegisterAccountPage = () => {
   const [accountNumber, setAccountNumber] = useState("");
   const [accountPw, setAccountPw] = useState("");
   const [bankCode, setBankCode] = useState("");
-
+  console.log(accountPw);
   const handleChange = (event: SelectChangeEvent) => {
     setBankCode(event.target.value as string);
   };
@@ -26,21 +28,29 @@ const RegisterAccountPage = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
   const handleButtonClick = () => {
-    registerAccount(
-      accessToken,
-      accountNumber,
-      accountPw,
-      bankCode,
-      (res) => {
-        console.log("계좌 등록 성공:", res);
-        navigate("/profile");
-      },
-      (err) => {
-        console.error("계좌 등록 실패:", err);
-      }
-    );
+    if (accountPw.length === 4 && accountNumber && bankCode) {
+      registerAccount(
+        accessToken,
+        accountNumber,
+        accountPw,
+        bankCode,
+        (res) => {
+          OkModal({ title: "성공", text: "계좌 등록에 성공했습니다." }).then(
+            (res) => navigate("/profile")
+          );
+        },
+        (err) => {
+          NotOkModal({ title: "실패", text: "계좌 등록에 실패했습니다." });
+        }
+      );
+    } else {
+      NotOkModal({ title: "실패", text: "계좌정보를 정확히 입력해주세요." });
+    }
   };
-
+  const [isInput, setIsInput] = useState(false);
+  const pwInputHandler = () => {
+    setIsInput(true);
+  };
   return (
     <div>
       <OptionTopbar text="계좌등록" />
@@ -75,12 +85,29 @@ const RegisterAccountPage = () => {
           value={accountNumber}
           onChange={(e: any) => setAccountNumber(e.target.value)}
         />
-        <AnimationLabelInput
-          type="password"
-          labelTitle="비밀번호"
-          value={accountPw}
-          onChange={(e: any) => setAccountPw(e.target.value)}
-        />
+        <div
+          onClick={pwInputHandler}
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-evenly",
+            marginBottom: "2rem",
+          }}
+        >
+          <button>비밀번호입력</button>
+          <input
+            type="password"
+            value={accountPw}
+            disabled={true}
+            onChange={(e: any) => setAccountPw(String(e.target.value))}
+          />
+        </div>
+        {isInput && (
+          <SecurityPwInput
+            setIsInput={setIsInput}
+            setAccountPw={setAccountPw}
+          />
+        )}
         <DeepBlueBtn
           text="계좌 등록"
           onClick={handleButtonClick}

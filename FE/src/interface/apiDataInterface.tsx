@@ -157,7 +157,6 @@ export interface OutFundingsInfoInterface {
   targetAmount: number; //
   startDate: string; //
   endDate: string; //
-  dDay: string | number; //
   totalFunding: number; //
   state: string; //
   content?: string;
@@ -172,6 +171,8 @@ export interface OutFundingsInfoInterface {
   profileImg?: string;
   budgetList?: any;
   docsUrl?: string;
+  myReward: boolean;
+  myTotalFunding: number;
 }
 
 //펀딩 예산 상세 조회

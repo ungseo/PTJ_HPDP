@@ -1,13 +1,11 @@
 .introduce_total {
-  position: relative;
   max-width: 500px;
   .reward {
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
     padding: 0.7rem;
-    border-radius: 50%;
-    background-color: #faa7ba;
+    text-align: left;
+    text-decoration: underline;
+    color: grey;
+    font-size: 1.1rem;
   }
   .img {
     width: 100%;

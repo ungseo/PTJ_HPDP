@@ -1,0 +1,62 @@
+@import "Style", "Animation";
+
+.wrapper {
+  background-color: $sinhanBlue;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .xButton {
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    padding: 0;
+    margin-left: auto;
+  }
+  .inputBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .box {
+      width: 100%;
+      height: 2rem;
+      border: 1px solid $white;
+      background-color: $pastelBlue;
+      line-height: 2rem;
+    }
+  }
+  .keypad {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    height: 100%;
+    .key {
+      color: beige;
+      width: calc(100% - 2px);
+      height: 100%;
+      background-color: $sinhanBlue;
+      line-height: 3rem;
+      border: 0.1px solid beige;
+    }
+
+    .k1 {
+      color: beige;
+      width: calc(100% - 2px);
+
+      height: 100%;
+      background-color: $deepBlue;
+      line-height: 3rem;
+      border: 0.1px solid beige;
+    }
+    .k2 {
+      color: beige;
+      width: calc(100% - 2px);
+
+      height: 100%;
+      background-color: $sinhanBlue;
+      line-height: 3rem;
+      border: 0.1px solid beige;
+    }
+  }
+}
