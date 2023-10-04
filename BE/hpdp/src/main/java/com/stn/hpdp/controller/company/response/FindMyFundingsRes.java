@@ -43,6 +43,7 @@ public class FindMyFundingsRes {
                 .endDate(funding.getEndDate().toString())
                 .state(funding.getState())
                 .dDay(funding.getEndDate().isAfter(LocalDateTime.now()) ? Long.toString(ChronoUnit.DAYS.between(LocalDateTime.now(), funding.getEndDate())) : "마감")
+                .totalFunding(funding.getTotalFunding())
                 .build();
     }
 }
