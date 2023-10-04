@@ -10,27 +10,33 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 def fetch_info_from_openai(word, retry_limit=2):
-    openai.api_key = os.environ["OPENAI_API_KEY"]
-    retries = 0
-    while retries < retry_limit:  # Keep trying until successful or retry limit is reached
-        try:
-            response = openai.Completion.create(
-                engine="davinci",
-                prompt=f"{word} 에 대한 다음 정보 제공을 해줘 : 1) 창립일, 2) 주력제품, 3) 현 대표이사 등등",
-                max_tokens=280,
-                temperature=0.3
-            )
-            info = response['choices'][0]['text'].strip()
-            return info
-        except Exception as e:
-            print(f"An error occurred: {e}")
-            retries += 1
-            if retries < retry_limit:
-                print(f"Retrying {retries}/{retry_limit} in 60 seconds...")
-                time.sleep(60)  # Wait for 60 seconds before retrying
-            else:
-                print("Reached retry limit. Exiting.")
-                return None
+    if word == 'ssafy' or word == 'samsung': 
+        messages = [
+            {"role": "system", "content": "You are a helpful assistant that speaks Korean."},
+            {"role": "user", "content": word},
+        ]
+        openai.api_key = os.environ["OPENAI_API_KEY"]
+        retries = 0
+        while retries < retry_limit:  # Keep trying until successful or retry limit is reached
+            try:
+                response = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo", 
+                    messages=messages
+                )
+                info = response.choices[0].message.content
+                # info = response['choices'][0]['text'].strip()
+                return info
+            except Exception as e:
+                print(f"An error occurred: {e}")
+                retries += 1
+                if retries < retry_limit:
+                    print(f"Retrying {retries}/{retry_limit} in 60 seconds...")
+                    time.sleep(60)  # Wait for 60 seconds before retrying
+                else:
+                    print("Reached retry limit. Exiting.")
+                    return None
+    else :
+        return []
 
 def summarize_text(text, api_key, retry_limit=2):
     openai.api_key = api_key
@@ -113,19 +119,11 @@ def get_all_info(start_page, end_page):
     return all_info
 
 # Usage
-def get_article_info() :
+def get_article_info(companyName) :
     start_page = 1
     end_page = 2
-    info = get_all_info(start_page, end_page)
-    # for idx, article_info in enumerate(info, 1):
-    #     print(f"Article {idx}:")
-    #     print(f"Title: {article_info['title']}")
-    #     print(f"Image Link: {article_info['image_link']}")
-    #     print(f"Link: {article_info['link']}")
-    #     print(f"Date: {article_info['date']}")
-        # news_info = scrape_news(article_info['link'])
-        # print(f"news_info: {news_info}")
-        # summary = summarize_text(news_info, api_key)
-        # print(f"summary: {summary}")
-        # print('-' * 50)  # Prints a separator line
-    return info
+    if companyName == 'ssafy' : 
+        info = get_all_info(start_page, end_page)
+        return info
+    else :
+        return []
