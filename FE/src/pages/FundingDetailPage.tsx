@@ -65,9 +65,9 @@ const FundingDetailPage = () => {
     } else {
       if (isBottomSheetOpen) {
         if (donationAmount === 0) {
-          QuestionModal({ text: "후원 금액을 입력하세요." });
+          QuestionModal({ title: "다시", text: "금액을 입력하세요." });
         } else if (myPoint < donationAmount) {
-          QuestionModal({ text: "포인트 잔액이 부족합니다." });
+          QuestionModal({ title: "다시", text: "잔액이 부족합니다." });
         } else {
           getSponsor(
             accessToken,

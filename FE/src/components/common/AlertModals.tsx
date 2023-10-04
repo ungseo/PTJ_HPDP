@@ -14,10 +14,6 @@ export const OkModal = ({ title, text, footer }: LibModalInterface) => {
   return Swal.fire({ icon: "success", title, text, footer });
 };
 
-export const QuestionModal = ({
-  title = "???",
-  text,
-  footer,
-}: LibModalInterface) => {
+export const QuestionModal = ({ title, text, footer }: LibModalInterface) => {
   return Swal.fire({ icon: "question", title, text, footer });
 };

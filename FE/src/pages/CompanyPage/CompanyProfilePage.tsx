@@ -1,18 +1,15 @@
 import { useEffect } from "react";
-import { OptionTopbar } from "../../components/common/TopBar";
 import style from "../../styles/css/CompanyProfilePage.module.css";
 import { getMyCompanyInfo } from "../../api/companies";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { companyActions } from "../../store/company-slice";
 import ProfileList from "../../components/companyOnly/ProfileList";
-import { useNavigate } from "react-router-dom";
 import CompanyWallet from "../../components/companyOnly/CompanyWallet";
 
 const CompanyProfilePage = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   useEffect(() => {
     getMyCompanyInfo(
       accessToken,

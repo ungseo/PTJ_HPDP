@@ -55,7 +55,10 @@ const ProfileEditPage = () => {
         OkModal({ title: "성공", text: "정보를 수정했습니다." });
       },
       (err) => {
-        NotOkModal({ title: "실패", text: `정보수정을 실패 했습니다. ${err}` });
+        NotOkModal({
+          title: "실패",
+          text: `정보를 수정하지 못했습니다. 다시 시도해주세요. ${err}`,
+        });
       }
     );
     setOnGoing(false);

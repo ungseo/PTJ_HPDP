@@ -23,7 +23,7 @@ const PointHistoryList = (props: PointHistoryListProps) => {
   };
   const buttonProps = {
     text: isInsert ? "후원내역" : "전체내역",
-    style: { backgroundColor: "#25228C" },
+    style: { backgroundColor: "#fb788e" },
   };
 
   return (

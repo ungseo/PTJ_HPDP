@@ -9,7 +9,7 @@ function formatNumber(number: number) {
 
 const PointHistory = ({ totalPoint, totalFunding }: pointHistoryInterface) => {
   const isInsert = useSelector((state: any) => state.transHistory.isInsert);
-  const styles = { backgroundColor: "#25228C" };
+  const styles = { backgroundColor: "#fb788e" };
   const total_Point = formatNumber(totalPoint);
   const total_Funding = formatNumber(totalFunding);
 
