@@ -1,0 +1,104 @@
+@import "Style";
+
+.total {
+  display: flex;
+  position: relative;
+  margin-bottom: 0.5rem;
+  .leftimg {
+    width: 100%;
+    aspect-ratio: 1/1;
+    height: auto;
+    border-radius: 1rem;
+    border: 1px solid #e9e9e9;
+  }
+
+  .rightcontent {
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+
+    .upcontent {
+      text-align: left;
+      // margin-top: 0.2rem;
+      .fundingcontent {
+        display: block;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 1.3rem;
+        font-weight: 500;
+      }
+      .companyname {
+        color: $grey;
+        font-weight: 500;
+        font-size: 0.85rem;
+      }
+    }
+
+    .downcontent {
+      .inner_content {
+        display: flex;
+        justify-content: space-between;
+        .accountdetail {
+          display: flex;
+
+          .fundingpercent {
+            color: $hotPink;
+            font-weight: 600;
+            margin-right: 0.2rem;
+          }
+        }
+        .remaindate {
+          text-align: start;
+          font-weight: bold;
+          color: rgb(37, 37, 37);
+        }
+      }
+      // margin-bottom: 0.2rem;
+      .progress_bar {
+        margin: 0.2rem 0 0.4rem;
+      }
+    }
+  }
+}
+.clicked {
+  position: absolute;
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 30%;
+
+  background-color: blue;
+
+  .iconButton {
+    color: white;
+    background-color: transparent;
+    border: none;
+    border-right: 2px solid $white;
+    height: 100%;
+  }
+}
+
+.animate {
+  background-color: hotpink;
+  animation-name: Open;
+  transition-duration: 3s;
+  opacity: 1;
+}
+@keyframes Open {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}

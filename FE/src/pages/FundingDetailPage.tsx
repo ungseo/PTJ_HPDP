@@ -29,6 +29,7 @@ const FundingDetailPage = () => {
   useEffect(() => {
     getFundingDetail(
       Number(fundingid),
+      accessToken,
       (res) => {
         setFundingDetailData(res.data.data);
         console.log(fundingDetailData);
@@ -102,7 +103,7 @@ const FundingDetailPage = () => {
 
   // 보상 모달
   const handleRewardModalToggle = () => {
-    setIsRewardModalOpen(true);
+    setIsRewardModalOpen(!isRewardModalOpen);
   };
 
   console.log(isRewardModalOpen);
@@ -147,7 +148,12 @@ const FundingDetailPage = () => {
           />
         </>
       )}
-
+      {isRewardModalOpen && (
+        <RewardModal
+          rewardPrice={fundingDetailData.rewardPrice || 0}
+          myTotalFunding={fundingDetailData.myTotalFunding}
+        />
+      )}
       <div className={style.fixedButton}>
         {fundingDetailData.state === "ING" ? (
           <DefaultButton

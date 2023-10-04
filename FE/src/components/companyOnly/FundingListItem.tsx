@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { OutFundingsInfoInterface } from "../../interface/apiDataInterface";
 import ProgressBar from "../common/ProgressBar";
-import style from "../../styles/css/FundingItem.module.css";
+import style from "../../styles/css/FundingListItem.module.css";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { registerReport, settlementFunding } from "../../api/fundings";
@@ -59,6 +59,7 @@ const FundingListItem = ({
   const openReportModal = () => {
     setModalOpen(true);
   };
+  console.log(funding);
   // 퍼센트 계산
   const percent = Math.floor(
     Number(funding.totalFunding / funding.targetAmount) * 100
@@ -83,7 +84,9 @@ const FundingListItem = ({
             <div className={style.remaindate}>{formatDday}</div>
             <ProgressBar percent={percent || 0} />
             <div className={style.accountdetail}>
-              <div className={style.nowaccount}>{funding.totalFunding}원</div>
+              <div className={style.nowaccount}>
+                총 모인 금액:{funding.totalFunding}원
+              </div>
               <div className={style.fundingpercent}>{percent}%</div>
             </div>
           </div>

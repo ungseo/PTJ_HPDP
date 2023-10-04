@@ -1,10 +1,16 @@
 import React from "react";
+import style from "../../styles/css/RewardModal.module.css";
 
-const RewardModal = () => {
+interface RewardModalProps {
+  rewardPrice: number;
+  myTotalFunding: number;
+}
+
+const RewardModal = ({ rewardPrice, myTotalFunding }: RewardModalProps) => {
   return (
-    <div>
-      <div>리워드 상세입니다.....</div>
-      <div>얼마남았지???</div>
+    <div className={style.reward_modal}>
+      <div>{rewardPrice}</div>
+      <div>{myTotalFunding}</div>
     </div>
   );
 };
