@@ -35,9 +35,9 @@ const MyActivity = () => {
     <div className={style.container}>
       <div
         className={style.item}
+        id={`message/`}
         onClick={onClick}
         style={{ borderTop: "1px solid lightgray" }}
-        id={`message/`}
       >
         <p>쪽지내역</p>
         <Icon icon="bi:chevron-right"></Icon>
