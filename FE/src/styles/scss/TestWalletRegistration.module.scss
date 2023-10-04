@@ -1,17 +1,17 @@
 @import "Style";
 
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    background-color:   lightgray;
-    align-items: center;
-    padding: 4rem;
-    border-radius: 0.5rem;
-    p {
-        font-size: 2rem;
-        margin: 0;
-    }
-    svg {
-        font-size: 2rem;
-    }
+  display: flex;
+  flex-direction: column;
+  background-color: lightgray;
+  align-items: center;
+  padding: 4rem 2rem;
+  border-radius: 0.5rem;
+  p {
+    font-size: 1.8rem;
+    margin: 0.3rem;
+  }
+  svg {
+    font-size: 2rem;
+  }
 }

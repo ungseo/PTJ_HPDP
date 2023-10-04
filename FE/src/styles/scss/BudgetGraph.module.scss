@@ -1,0 +1,17 @@
+.budget_container {
+  margin: 1rem 1.5rem;
+  .budget_bar {
+    width: 100%;
+    height: 0.7rem;
+    border-radius: 0.7rem;
+    display: flex;
+    margin-bottom: 0.5rem;
+  }
+}
+.layer {
+  margin: 0 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
+}

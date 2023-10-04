@@ -25,6 +25,7 @@ const FundingDetailPage = () => {
 
   const { fundingid } = useParams();
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+  const isLogined = useSelector((state: any) => state.user.auth.isLogined);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [isFundingCompleteOpen, setIsFundingCompleteOpen] = useState(false);
   const [donationAmount, setDonationAmount] = useState(0);
@@ -47,7 +48,7 @@ const FundingDetailPage = () => {
       }
     );
   }, []);
-
+  console.log(fundingDetailData);
   useEffect(() => {
     if (isFundingCompleteOpen) {
       document.body.classList.add(style.bodyWithModalOpen);
@@ -59,32 +60,36 @@ const FundingDetailPage = () => {
   // bottomsheet가 열린 상태에서 버튼이 눌리면
   // bottomsheet는 false, complete는 true로 변경
   const FundingHandler = () => {
-    if (isBottomSheetOpen) {
-      if (donationAmount === 0) {
-        QuestionModal({ text: "후원 금액을 입력하세요." });
-      } else if (myPoint < donationAmount) {
-        QuestionModal({ text: "포인트 잔액이 부족합니다." });
-      } else {
-        getSponsor(
-          accessToken,
-          Number(fundingid),
-          donationAmount,
-          (res) => {
-            window.location.reload();
-          },
-          (err) => {
-            console.log("후원하기 API 호출 실패", err);
-          }
-        );
-        setIsBottomSheetOpen(false);
-        setIsFundingCompleteOpen(true);
-        // 2초후에 자동으로 complete 닫기
-        setTimeout(() => {
-          setIsFundingCompleteOpen(false);
-        }, 2000);
-      }
+    if (!isLogined) {
+      alert("로그인이 필요한 서비스입니다.");
     } else {
-      setIsBottomSheetOpen(true);
+      if (isBottomSheetOpen) {
+        if (donationAmount === 0) {
+          QuestionModal({ text: "후원 금액을 입력하세요." });
+        } else if (myPoint < donationAmount) {
+          QuestionModal({ text: "포인트 잔액이 부족합니다." });
+        } else {
+          getSponsor(
+            accessToken,
+            Number(fundingid),
+            donationAmount,
+            (res) => {
+              window.location.reload();
+            },
+            (err) => {
+              console.log("후원하기 API 호출 실패", err);
+            }
+          );
+          setIsBottomSheetOpen(false);
+          setIsFundingCompleteOpen(true);
+          // 2초후에 자동으로 complete 닫기
+          setTimeout(() => {
+            setIsFundingCompleteOpen(false);
+          }, 2000);
+        }
+      } else {
+        setIsBottomSheetOpen(true);
+      }
     }
   };
 

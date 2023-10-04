@@ -24,16 +24,19 @@ const BankHistoryList = () => {
   return (
     <div className={style.wrapper}>
       <div className={style.label}>
-        <div className={style.text}>입출내역 (최신순)</div>
+        <div className={style.text}>입출내역</div>
       </div>
       <hr />
-      {/* 아이템컴포넌트 map */}
-      {transDetails.map((item, index) => (
-        <div key={index}>
-          <BankHistoryItem item={item}></BankHistoryItem>
-          <hr />
-        </div>
-      ))}
+      {transDetails.length > 0 ? (
+        transDetails.map((item, index) => (
+          <div key={index}>
+            <BankHistoryItem item={item}></BankHistoryItem>
+            <hr />
+          </div>
+        ))
+      ) : (
+        <div>거래내역이 없습니다.</div>
+      )}
     </div>
   );
 };

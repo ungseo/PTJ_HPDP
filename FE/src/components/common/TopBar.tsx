@@ -12,10 +12,7 @@ const LogoTopbar = () => {
   return (
     <div className={style.logoTopbar}>
       <div className={style.leftCpnt}>
-        <div>
-          <img className={style.logo} src="/logo.png" alt="LOGO" />
-        </div>
-        <h1 className={style.logoName}>한푼두푼</h1>
+        <div className={style.logoName}>한푼두푼</div>
       </div>
       <Icon
         icon="bi:search"
@@ -42,11 +39,11 @@ const OptionTopbar = ({ text }: { text: string }) => {
         <button className={style.backBtn} onClick={goBackHandler}></button>
         <h3>{text}</h3>
       </div>
-      <Icon
+      {/* <Icon
         icon="bi:search"
         onClick={goToSearchPage}
         style={{ width: "1.8rem", height: "1.8rem", marginRight: "1rem" }}
-      />
+      /> */}
     </div>
   );
 };

@@ -360,4 +360,7 @@ export interface OutAlarmInfoInterface {
   title: string;
   isRead: boolean;
   thumnail: string;
+  date: string;
+  companyId: string;
+  companyName: string;
 }

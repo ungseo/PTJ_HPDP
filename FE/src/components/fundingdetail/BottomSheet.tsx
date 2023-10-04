@@ -7,6 +7,10 @@ import { getMemberInfo } from "../../api/members";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../store/user-slice";
 
+function formatNumber(number: number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 interface BottomSheetProps {
   // 값이 변경될수 있으므로 아래와 같은 형식을 사용,
   // void는 반환하는 값이 없고 형식을 지키기 위해 사용
@@ -24,7 +28,10 @@ const BottomSheet = ({
 }: BottomSheetProps) => {
   const [donationAmount, setDonationAmount] = useState("");
   const [isActive, setIsActive] = useState(false);
-  const userPoint = useSelector((state: any) => state.user.info.point);
+  const userPoint = formatNumber(
+    useSelector((state: any) => state.user.info.point)
+  );
+  const reward_price = formatNumber(rewardPrice);
   // bottomsheet를 닫을 수 있게 함
   const handleClose = () => {
     setIsActive(false);
@@ -84,7 +91,7 @@ const BottomSheet = ({
           />
           <div className={style.usepoint}>사용 가능 포인트 : {userPoint} P</div>
           <div className={style.reward_alert}>
-            {rewardPrice}P 이상 후원시 리워드가 지급됩니다
+            {reward_price}P 이상 후원시 리워드가 지급됩니다
           </div>
         </div>
       </div>

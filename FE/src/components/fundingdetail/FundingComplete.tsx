@@ -1,6 +1,10 @@
 import React from "react";
 import style from "../../styles/css/FundingComplete.module.css";
 
+function formatNumber(number: number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 interface FundingCompleteProps {
   donationAmount: number;
   title: string;
@@ -15,6 +19,7 @@ const FundingComplete = ({
   const totalStyle = {
     backgroundImage: `url(${thumbnail})`,
   };
+  const donation_account = formatNumber(donationAmount);
 
   return (
     <div className={style.completemodal}>
@@ -27,7 +32,7 @@ const FundingComplete = ({
             </span>{" "}
             펀딩에
           </div>
-          <div className={style.fundingcnt}>{donationAmount}P</div>
+          <div className={style.fundingcnt}>{donation_account}P</div>
           <div className={style.fundingcomplete}>후원이 완료되었습니다.</div>
         </div>
       </div>

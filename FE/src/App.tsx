@@ -95,41 +95,44 @@ function App() {
       if (granted) {
         // console.log("뭐지", data);
 
-        let message = null;
+        let head = null;
+        let body = undefined;
 
         switch (data.type) {
           case "CREATE":
-            message = "CREATE 메세지";
+            head = `${data.companyName}`;
+            body = `${data.title} 프로젝트가 등록되었습니다.`;
             break;
           case "START":
-            message = "START 메세지";
+            head = `${data.companyName}`;
+            body = `${data.title} 프로젝트가 시작되었습니다.`;
             break;
           case "END":
-            message = "END 메세지";
+            head = `${data.title}`;
+            body = `${data.title} 프로젝트가 종료되었습니다.`;
             break;
           case "SETTLE":
-            message = "SETTLE 메세지";
+            head = `${data.title}`;
+            body = `프로젝트의 후원 금액이 정산되었습니다.`;
             break;
           case "REPORT":
-            message = "REPORT 메세지";
+            head = `${data.companyName}`;
+            body = `프로젝트의 집행 내역이 등록되었습니다.`;
             break;
           case "POINT":
-            message = "POINT  메세지";
+            head = `끝전`;
+            body = `${data.point}이 이체되었습니다.`;
             break;
         }
 
-        if (message !== null) {
-          const notification = new Notification(message);
+        if (head !== null) {
+          const notification = new Notification(head, {
+            body: body,
+          });
 
           setTimeout(() => {
             notification.close();
           }, 10 * 1000);
-        } else {
-          const notification = new Notification("줄정보가 없어요");
-
-          setTimeout(() => {
-            notification.close();
-          });
         }
       }
     });
