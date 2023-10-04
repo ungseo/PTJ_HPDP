@@ -14,8 +14,8 @@ const HashTagList = () => {
     "#공예",
     "#뮤지컬",
     "#화장품",
-    "#기타등등",
-    "#더미2",
+    "#재활용",
+    "#자연",
   ];
   return (
     <div className={style.hashTagList}>
