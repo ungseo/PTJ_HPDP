@@ -1,4 +1,4 @@
-@import "Style";
+@import "Style", "Animation";
 
 .total {
   display: flex;
@@ -39,66 +39,46 @@
     }
 
     .downcontent {
-      .inner_content {
+      display: flex;
+      flex-direction: column;
+      .downDetail {
         display: flex;
         justify-content: space-between;
-        .accountdetail {
+        .downLeft {
           display: flex;
-
-          .fundingpercent {
-            color: $hotPink;
-            font-weight: 600;
-            margin-right: 0.2rem;
-          }
-        }
-        .remaindate {
-          text-align: start;
-          font-weight: bold;
-          color: rgb(37, 37, 37);
+          justify-content: space-between;
         }
       }
-      // margin-bottom: 0.2rem;
-      .progress_bar {
-        margin: 0.2rem 0 0.4rem;
+      .fundingpercent {
+        color: $hotPink;
+        font-weight: 600;
+        margin-right: 0.2rem;
       }
     }
+    .remaindate {
+      text-align: start;
+      font-weight: bold;
+      color: rgb(37, 37, 37);
+    }
+  }
+  // margin-bottom: 0.2rem;
+  .progress_bar {
+    margin: 0.2rem 0 0.4rem;
   }
 }
-.clicked {
-  position: absolute;
-  width: 70%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: 30%;
+.settlement {
+  background-color: $deepBlue;
+  color: $white;
 
-  background-color: blue;
-
-  .iconButton {
-    color: white;
-    background-color: transparent;
-    border: none;
-    border-right: 2px solid $white;
-    height: 100%;
+  &:disabled {
+    background-color: $pastelBlue;
   }
 }
+.report {
+  background-color: $deepBlue;
+  color: $white;
 
-.animate {
-  background-color: hotpink;
-  animation-name: Open;
-  transition-duration: 3s;
-  opacity: 1;
-}
-@keyframes Open {
-  0% {
-    transform: translateX(-100%);
-  }
-  50% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(100%);
-    opacity: 0;
+  &:disabled {
+    background-color: $pastelBlue;
   }
 }

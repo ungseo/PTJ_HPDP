@@ -41,7 +41,6 @@ const ReportModal = ({ cM, fundingId, cC }: any) => {
   };
   const closeModalHandler = (event: any) => {
     event.stopPropagation();
-    cC(false);
     cM(false);
     console.log("hi");
   };
