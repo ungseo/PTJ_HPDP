@@ -74,7 +74,7 @@ const TransactionList = () => {
   return (
     <div className={style.wrapper}>
       <div className={style.item}>
-        <img src="/am-remov.png" alt="커피" />
+        <img src="/coffee.png" alt="커피" />
         <p className={style.title}>커피</p>
         <p className={style.price}>780 원</p>
         <DeepBlueBtn
@@ -85,7 +85,7 @@ const TransactionList = () => {
         />
       </div>
       <div className={style.item}>
-        <img src="/candy-remove.png" alt="사탕" />
+        <img src="/lollipop.png" alt="사탕" />
         <p className={style.title}>사탕</p>
         <p className={style.price}>340 원</p>
         <DeepBlueBtn
@@ -96,7 +96,7 @@ const TransactionList = () => {
         />
       </div>{" "}
       <div className={style.item}>
-        <img src="/hpdpLogo.png" alt="용돈" />
+        <img src="/heart.png" alt="용돈" />
         <p className={style.title}>용돈</p>
         <p className={style.price}>12,570 원</p>
         <DefaultButton
