@@ -36,8 +36,14 @@ const OptionTopbar = ({ text }: { text: string }) => {
   return (
     <div className={style.optionTopbar}>
       <div className={style.leftCpnt}>
-        <button className={style.backBtn} onClick={goBackHandler}></button>
-        <h3>{text}</h3>
+        <Icon
+          icon="bi:chevron-left"
+          className={style.icon}
+          width="1.9rem"
+          color="black"
+          onClick={goBackHandler}
+        />
+        <div className={style.title_name}>{text}</div>
       </div>
       {/* <Icon
         icon="bi:search"

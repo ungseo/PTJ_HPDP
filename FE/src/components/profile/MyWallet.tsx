@@ -47,10 +47,10 @@ const MyWallet = () => {
       unregisterAccount(
         accessToken,
         (res) => {
-          OkModal({ title: "성공", text: "계좌등록에 성공했습니다!" });
+          OkModal({ title: "성공", text: "계좌가 해제 되었습니다." });
         },
         (err) => {
-          NotOkModal({ title: "실패", text: "계좌등록에 실패했습니다." });
+          NotOkModal({ title: "실패", text: "계좌해제에 실패했습니다!" });
         }
       );
       // 계좌 해제 redux

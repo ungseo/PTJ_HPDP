@@ -44,6 +44,11 @@ const HomePage = () => {
     setIsLoading(false);
   }, []);
 
+  const top5FundingAchievementData = fundingAchievementData
+    .slice()
+    .sort((a, b) => b.totalFunding - a.totalFunding)
+    .slice(0, 5);
+
   return isLoading ? (
     <div>
       <LogoTopbar />
@@ -65,10 +70,10 @@ const HomePage = () => {
           <FundingCardList items={fundingDeadlineData} />
         </div>
       ) : null}
-      {fundingAchievementData ? (
+      {top5FundingAchievementData.length > 0 ? (
         <div style={{ marginTop: "2rem", marginBottom: "1rem" }}>
           <div className={style.title}>인기가 많아요!</div>
-          <FundingCardList items={fundingAchievementData} />
+          <FundingCardList items={top5FundingAchievementData} />
         </div>
       ) : null}
     </div>

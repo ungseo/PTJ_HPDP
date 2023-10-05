@@ -8,7 +8,7 @@
     width: calc(100% - 1rem);
     border-radius: 10px;
     border: none;
-    background-color: #e0e4f7;
+    background-color: $bcolor;
     padding: 0 0 0 1rem;
     font-size: 1.2rem;
     &::placeholder {

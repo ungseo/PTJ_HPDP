@@ -23,6 +23,7 @@ const FundingSituation = ({ props }: { props: OutFundingsInfoInterface }) => {
   const startDay = formatDate(props.startDate);
   const endDay = formatDate(props.endDate);
   console.log(props);
+  console.log(props.docsUrl);
   // 금액 형식 처리
   const targetNumber = formatNumber(props.targetAmount);
   const totalNumber = formatNumber(props.totalFunding);
@@ -52,10 +53,18 @@ const FundingSituation = ({ props }: { props: OutFundingsInfoInterface }) => {
       </div>
       <hr></hr>
       <div className={style.budget}>
-        <div className={style.title}>예산</div>
-        <BudgetGraph target={props.targetAmount} />
+        <div className={style.title}>사용 계획</div>
+        <BudgetGraph
+          target={props.targetAmount}
+          budgetList={props.budgetList || []}
+        />
       </div>
-      <div style={{ height: "3rem" }}></div>
+      <hr></hr>
+      <div className={style.report}>
+        <div className={style.title}>보고서</div>
+        <img src={props.docsUrl} alt="보고서" className={style.report_img} />
+      </div>
+      <div style={{ height: "6rem" }}></div>
     </div>
   );
 };

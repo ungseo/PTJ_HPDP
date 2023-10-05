@@ -1,7 +1,25 @@
+.walletIcon {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  background-color: #ffa7ba;
+  border-radius: 50px;
+  padding: 0.6rem 0.7rem;
+  z-index: 1;
+}
+
 .companydetailpage {
   width: 100%;
   max-width: 500px;
   word-break: break-word;
+
+  .iconButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+  }
+
   .message_icon {
     position: fixed;
     bottom: 4rem;

@@ -11,6 +11,10 @@ import FundingItem from "./FundingItem";
 import style from "../../src/styles/scss/CompanySituation.module.scss";
 import Grid from "@mui/material/Grid";
 
+function formatNumber(number: number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 interface CompanySituationProps {
   item: Interfaces.InSearchCompanyInfoResponseInterface;
 }
@@ -26,7 +30,7 @@ const CompanySituation = (props: CompanySituationProps) => {
   const [companyCompleteFundingData, setcompanyCompleteFundingData] = useState<
     Interfaces.OutFundingsInfoInterface[]
   >([]);
-
+  const total_cost = formatNumber(item.amount || 0);
   console.log(companyProgressFundingData);
 
   useEffect(() => {
@@ -73,7 +77,7 @@ const CompanySituation = (props: CompanySituationProps) => {
           </div>
           <div className={style.divide}>
             <div>모금 금액</div>
-            <div>{item.amount} 원</div>
+            <div>{total_cost} 원</div>
           </div>
         </Grid>
       </Grid>

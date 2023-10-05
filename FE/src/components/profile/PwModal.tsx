@@ -23,7 +23,7 @@ const PwModal = ({ modalHandler }: any) => {
       (err) => {
         NotOkModal({
           title: "실패",
-          text: "비밀번호 변경이 실패했습니다. 잠시후 다시 시도해주세요.",
+          text: "비밀번호가 변경되지 않았습니다. 다시 시도해주세요.",
         });
       }
     );

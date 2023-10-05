@@ -20,7 +20,7 @@ const ProfileList = () => {
         accessToken,
         (res) => {
           dispatch(userActions.logoutHandler());
-          OkModal({ title: "로그아웃", text: "또 오세요!" });
+          OkModal({ title: "로그아웃", text: "다음에 만나요!" });
           navigate("/");
         },
         (err) => {}

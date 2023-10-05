@@ -30,7 +30,12 @@ const CompanyProfilePage = () => {
   return (
     <div className={style.content}>
       <div className={style.topInfo}>
-        <img className={style.logo} src={companyLogo} alt="로고없음" />
+        <img
+          className={style.logo}
+          src={companyLogo}
+          alt="로고없음"
+          style={{ maxWidth: "100%" }}
+        />
         <p className={style.P} style={{ fontSize: "1.2rem" }}>
           {companyInfo}
         </p>

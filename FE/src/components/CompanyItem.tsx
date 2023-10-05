@@ -11,18 +11,19 @@ import {
   unregisterInterestingCompany,
 } from "../api/interests";
 import style from "../styles/css/CompanyItem.module.css";
+
 interface CompanyItemProps {
   item: Interfaces.InSearchCompanyInfoResponseInterface;
 }
 
 const CompanyItem = (props: CompanyItemProps) => {
   const { item } = props;
-  console.log(item);
+
   const companyId = item.companyId;
 
+  // 관심 기업 등록(삭제)
   const isLogined = useSelector((state: any) => state.user.auth.isLogined);
 
-  // 관심 기업 등록(삭제)
   const [isLiked, setIsLiked] = useState(item.interested);
 
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -63,6 +64,7 @@ const CompanyItem = (props: CompanyItemProps) => {
   const handleImageListItemClick = () => {
     navigate(`/company/detail/${item.companyId}`);
   };
+
   return (
     <div className={style.wrapper} onClick={handleImageListItemClick}>
       <div className={style.img} style={{}}>
@@ -90,9 +92,9 @@ const CompanyItem = (props: CompanyItemProps) => {
         </IconButton>
       ) : null}
 
-      {/* <ImageListItemBar title={item.name} position="below" /> */}
+      {/* <ImageListItemBar title={item.name} position="below"> */}
       <p className={style.cpnName}>{item.name}</p>
-      {/* <ImageListItemBar title={item.name} position="below" /> */}
+      {/* </ImageListItemBar> */}
     </div>
   );
 };

@@ -55,7 +55,10 @@ const ProfileEditPage = () => {
         OkModal({ title: "성공", text: "정보를 수정했습니다." });
       },
       (err) => {
-        NotOkModal({ title: "실패", text: `정보수정을 실패 했습니다. ${err}` });
+        NotOkModal({
+          title: "실패",
+          text: `정보를 수정하지 못했습니다. 다시 시도해주세요. ${err}`,
+        });
       }
     );
     setOnGoing(false);
@@ -72,19 +75,8 @@ const ProfileEditPage = () => {
         styles={{ width: "8rem", height: "8rem" }}
         setSelectedImage={setSelectedImage}
       />
-      <div
-        style={{
-          borderRadius: "1.5rem 1.5rem 0 0",
-          backgroundColor: "#f3f3f3",
-          position: "absolute",
-          width: "100%",
-          top: "30vh",
-          height: "70vh",
-        }}
-        className={style.animate}
-      >
+      <div className={style.animate}>
         <ProfileEditList setEditInput={setEditInput} editInput={editInput} />
-
         <div
           style={{
             display: "flex",
@@ -97,7 +89,7 @@ const ProfileEditPage = () => {
         </div>
         <DefaultButton
           text="저장"
-          styles={{ width: "9rem", height: "3.5rem" }}
+          styles={{ width: "7rem", height: "3rem", fontSize: "1.3rem" }}
           onClick={saveEditHandler}
         />
         {modal ? <PwModal modalHandler={setModal} /> : null}

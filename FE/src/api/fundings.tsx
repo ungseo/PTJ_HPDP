@@ -41,6 +41,7 @@ export async function getFundingProgress(
 
 export async function getFundingDetail(
   fundingid: number,
+  accessToken: string | undefined | null,
   success: (
     res: AxiosResponse<any, any>
   ) =>
@@ -51,7 +52,14 @@ export async function getFundingDetail(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  await customApi("fundings").get(`/${fundingid}`).then(success).catch(fail);
+  const api = customApi(`fundings`);
+
+  // accessToken이 null이 아닌 경우에만 헤더를 설정
+  if (accessToken) {
+    api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  }
+
+  await api.get(`/${fundingid}`).then(success).catch(fail);
 }
 
 export async function getRecommendDeadline(

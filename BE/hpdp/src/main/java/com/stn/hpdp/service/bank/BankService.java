@@ -115,13 +115,16 @@ public class BankService {
     }
 
     @Transactional
-    @Scheduled(cron = "10 * * * * *") // 10초마다 자동이체
+//    @Scheduled(cron = "10 * * * * *") // 10초마다 자동이체
+    @Scheduled(fixedDelay = 10000)
     public void autopay(){
         // 1. account 남은 잔액 확인
         List<Account> accounts = accountRepository.getAccounts();
         if(accounts.isEmpty()) return;
 
         for (Account account : accounts){
+            if(account.getMember() == null) continue;
+
             int penny = account.getBalance() % 1000;
             if(penny == 0) continue; // 잔돈이 없다면 pass
 

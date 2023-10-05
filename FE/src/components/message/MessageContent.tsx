@@ -116,7 +116,7 @@ const MessageContent = ({ onClose, isMessageDetail, flag }: MessageProps) => {
           onClose={handleSendMessageModalClose}
           data={{
             name: opponentName,
-            receiverId: opponentId,
+            companyId: opponentId,
           }}
         />
       )}

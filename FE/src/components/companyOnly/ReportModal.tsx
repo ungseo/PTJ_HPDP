@@ -32,7 +32,7 @@ const ReportModal = ({ cM, fundingId, cC }: any) => {
       );
     } else {
       alert("파일을 등록해주세요!");
-      QuestionModal({ text: "파일을 올려주세요!" });
+      QuestionModal({ title: "다시", text: "파일을 올려주세요!" });
     }
   };
   const fileUploadHandler = (event: any) => {
@@ -41,7 +41,6 @@ const ReportModal = ({ cM, fundingId, cC }: any) => {
   };
   const closeModalHandler = (event: any) => {
     event.stopPropagation();
-    cC(false);
     cM(false);
     console.log("hi");
   };
