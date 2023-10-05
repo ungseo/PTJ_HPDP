@@ -12,7 +12,6 @@ interface PointHistoryListProps {
 
 const PointHistoryList = (props: PointHistoryListProps) => {
   const { pointList } = props;
-  console.log("데헷", pointList);
 
   const dispatch = useDispatch();
 

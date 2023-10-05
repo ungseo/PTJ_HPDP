@@ -26,7 +26,6 @@ const SendMessageModal = ({ onClose, data }: SendMessageModalProps) => {
       messageTitle,
       messageContent,
       (res) => {
-        console.log("쪽지보내기 API연결");
         OkModal({ title: "성공", text: "전송이 완료되었습니다." });
         onClose();
       },

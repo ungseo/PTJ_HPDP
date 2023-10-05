@@ -40,7 +40,6 @@ export async function getSponsor(
     sponsorPoint: sponsorPoint,
   };
   const api = customApi("points");
-  console.log(accessToken);
   api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
   await api.post("", data).then(success).catch(fail);
 }

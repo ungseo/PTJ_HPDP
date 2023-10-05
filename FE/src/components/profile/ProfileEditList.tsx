@@ -19,7 +19,7 @@ const ProfileEditList = ({ editInput, setEditInput }: any) => {
     const { id, value } = event.target;
     setEditInput((prev: EditInputInterface) => ({ ...prev, [id]: value }));
   };
-  console.log(editInput);
+
   return (
     <div style={{ padding: "1.5rem" }} className={style.animate}>
       <AnimationLabelInput

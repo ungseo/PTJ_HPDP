@@ -11,9 +11,7 @@ const ProfileWrapper = () => {
 
   useEffect(() => {
     if (isLogined) {
-      console.log("로그인 Y");
     } else {
-      console.log("로그인 N");
       navigate("/login");
     }
     setLoading(false);

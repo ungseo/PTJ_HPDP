@@ -22,8 +22,7 @@ const FundingSituation = ({ props }: { props: OutFundingsInfoInterface }) => {
   // 시작일, 마감일 형식을 변경해 출력
   const startDay = formatDate(props.startDate);
   const endDay = formatDate(props.endDate);
-  console.log(props);
-  console.log(props.docsUrl);
+
   // 금액 형식 처리
   const targetNumber = formatNumber(props.targetAmount);
   const totalNumber = formatNumber(props.totalFunding);

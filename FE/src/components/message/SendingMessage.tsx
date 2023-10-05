@@ -21,10 +21,9 @@ const SendingMessage = () => {
       1,
       (res) => {
         setMessageData(res.data.data);
-        console.log("보낸 쪽지 API 연결");
       },
       (err) => {
-        console.log("보낸 쪽지 API 호출 실패", err);
+        console.log(err);
       }
     );
   }, []);

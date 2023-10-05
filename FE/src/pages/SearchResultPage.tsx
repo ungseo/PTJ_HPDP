@@ -5,7 +5,6 @@ import FundingList from "../components/FundingList";
 import CompanyList from "../components/CompanyList";
 const SearchResultPage = () => {
   const { keyword } = useParams();
-  console.log(keyword);
   const tabProps = {
     후원: <FundingList keyword={keyword} />,
     기업: <CompanyList keyword={keyword} />,

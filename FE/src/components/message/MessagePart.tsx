@@ -32,18 +32,17 @@ const MessagePart = ({ message, flag }: MessagePartProps) => {
       messageId,
       (res) => {
         setMessageDetail(res.data.data);
-        console.log("쪽지 상세 API 연결");
       },
       (err) => {
-        console.log("쪽지 상세 API 호출 실패", err);
+        console.log(err);
       }
     );
   };
-  console.log(isMessageContent);
+
   const handleCloseModal = () => {
     setMessageContent(false);
   };
-  console.log(isMessageDetail);
+
   const data = {
     companyId: isMessageDetail.myId,
   };

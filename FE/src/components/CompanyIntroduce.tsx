@@ -27,17 +27,14 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
 
   const [aiData, setAiData] = useState<any>([]);
 
-  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
-  console.log(item.name);
   useEffect(() => {
     axios
       .get(`https://j9c110.p.ssafy.io/articles/news/${item.name}`, {})
       .then((response) => {
         setResponseData(response.data.data);
-        console.log("HTTP 요청 성공:", response.data);
       })
       .catch((error) => {
-        console.error("HTTP 요청 실패:", error);
+        console.error(error);
       });
   }, []);
 
@@ -46,10 +43,9 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
       .get(`https://j9c110.p.ssafy.io/articles/info/${item.name}`, {})
       .then((response) => {
         setAiData(response.data.data);
-        console.log("AI 정보 요청 성공:", response.data);
       })
       .catch((error) => {
-        console.error("AI 정보 요청 실패:", error);
+        console.error(error);
       });
   }, []);
 

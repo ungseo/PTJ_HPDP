@@ -29,6 +29,7 @@ const FundingListItem = ({
   // 컨트롤러 모달 열고 닫기 함수
 
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+
   //정산하기
   const [onGoing, setOnGoing] = useState(false);
   const Total_Funding = formatNumber(funding.totalFunding);
@@ -48,18 +49,18 @@ const FundingListItem = ({
       }
     );
   };
-  console.log(funding.state === "SETTLE");
+
   // 보고서 모달 열고 닫기
   const [modalOpen, setModalOpen] = useState(false);
   const openReportModal = () => {
     setModalOpen(true);
   };
-  console.log(funding);
+
   // 퍼센트 계산
   const percent = Math.floor(
     Number(funding.totalFunding / funding.targetAmount) * 100
   );
-  console.log(funding);
+
   return (
     <div>
       <Grid container className={style.total}>

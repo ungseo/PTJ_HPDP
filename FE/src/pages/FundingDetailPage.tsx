@@ -32,11 +32,9 @@ const FundingDetailPage = () => {
       accessToken,
       (res) => {
         setFundingDetailData(res.data.data);
-        console.log(fundingDetailData);
-        console.log("펀딩 상세 API 연결");
       },
       (err) => {
-        console.log("펀딩상세 API 호출 실패", err);
+        console.log(err);
       }
     );
   }, []);
@@ -90,7 +88,7 @@ const FundingDetailPage = () => {
               window.location.reload();
             },
             (err) => {
-              console.log("후원하기 API 호출 실패", err);
+              console.log(err);
             }
           );
           setIsBottomSheetOpen(false);
@@ -110,8 +108,6 @@ const FundingDetailPage = () => {
   const handleRewardModalToggle = () => {
     setIsRewardModalOpen(!isRewardModalOpen);
   };
-
-  console.log(isRewardModalOpen);
 
   // 상속 정보
   const data = {

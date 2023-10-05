@@ -24,17 +24,13 @@ const TestWallet = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
   const handleGoUnregister = () => {
-    // 계좌 해제 axios
     unregisterAccount(
       accessToken,
-      (res) => {
-        console.log("계좌 해제 성공 테월", res);
-      },
+      (res) => {},
       (err) => {
-        console.log("계좌 해제 실패 테월", err);
+        console.log(err);
       }
     );
-    // 계좌 해제 redux
     dispatch(accountActions.unregisterAccount());
   };
 

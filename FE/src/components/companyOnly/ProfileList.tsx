@@ -15,7 +15,6 @@ const ProfileList = () => {
   const onClick = (event: any) => {
     const { id } = event.target;
     if (id === "logout") {
-      //로그아웃함수
       logout(
         accessToken,
         (res) => {

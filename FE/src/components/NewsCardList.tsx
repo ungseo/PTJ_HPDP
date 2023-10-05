@@ -20,7 +20,6 @@ const NewsCardList = (props: NewsCardListProps) => {
   return (
     <>
       <Swiper
-        // {TypeScript 타입 체크를 우회하기 위한 목적}
         {...{
           slidesPerView: "auto",
           spaceBetween: 10,

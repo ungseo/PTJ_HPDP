@@ -2,8 +2,6 @@ import { customApi, customApiForm } from ".";
 import { AxiosResponse } from "axios";
 import * as Interfaces from "../interface/apiDataInterface";
 
-//내 정보 조회
-
 export async function getMemberInfo(
   accessToken: string | null,
   success: (

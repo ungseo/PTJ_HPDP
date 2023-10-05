@@ -61,7 +61,7 @@ export function CheckoutPage({}) {
     );
   }, [price]);
   const userInfo = useSelector((state: any) => state.user.info);
-  console.log(userInfo);
+
   return (
     <div>
       <h1>주문서</h1>

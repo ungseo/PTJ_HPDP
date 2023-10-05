@@ -43,6 +43,7 @@ export default function NavigationBar() {
   }, [location.pathname]);
 
   const alarmCount = useSelector((state: any) => state.ui.alarmCount);
+  console.log("test", alarmCount);
 
   return (
     <BottomNavigation value={value} onChange={handleChange}>

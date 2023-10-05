@@ -48,7 +48,6 @@ const TransactionList = () => {
               console.log(err);
             }
           );
-          console.log(res);
         },
         (err) => {
           console.log(err);

@@ -34,7 +34,6 @@ const MessageContent = ({ onClose, isMessageDetail, flag }: MessageProps) => {
     onClose();
   };
 
-  console.log(isMessageDetail);
   const opponentName = isMessageDetail.opponentName || "";
   const opponentId =
     typeof isMessageDetail.opponentId === "number"

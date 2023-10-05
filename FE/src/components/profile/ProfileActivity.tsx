@@ -7,11 +7,9 @@ import { useDispatch } from "react-redux";
 import { accountActions } from "../../store/account-slice";
 
 const ProfileActivity = () => {
-  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const dispatch = useDispatch();
 
-  const isRegistered = useSelector((state: any) => state.account.isRegistered);
-  console.log("계좌 등록", isRegistered);
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
   useEffect(() => {
     getAccount(
@@ -20,7 +18,6 @@ const ProfileActivity = () => {
         dispatch(accountActions.registerAccount(res.data.data));
       },
       (err) => {
-        // 404 error only
         console.log(err);
       }
     );

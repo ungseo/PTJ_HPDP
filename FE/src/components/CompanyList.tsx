@@ -19,7 +19,7 @@ export default function CompanyList({ keyword }: any) {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const hashKeyword = keyword;
-    console.log(hashKeyword);
+
     getCompaniesInfo(
       hashKeyword,
       accessToken,

@@ -5,7 +5,6 @@ import { OutFundingsInfoInterface } from "../interface/apiDataInterface";
 import NullModal from "./common/NullModal";
 
 const ExpiredFunding = ({ itemList }: any) => {
-  console.log(itemList, "만료");
   return (
     <div style={{ marginTop: "1rem", marginLeft: "1rem", marginRight: "1rem" }}>
       {itemList.length ? (

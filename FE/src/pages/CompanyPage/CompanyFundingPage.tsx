@@ -17,7 +17,7 @@ const CompanyFundingPage = () => {
           setFundings(res.data.data);
         },
         (err) => {
-          console.log("페이지 로드 실패");
+          console.log(err);
         }
       );
     }

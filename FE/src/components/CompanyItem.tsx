@@ -29,15 +29,12 @@ const CompanyItem = (props: CompanyItemProps) => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
   const toggleLike = () => {
-    console.log("기업 번호:", companyId, "관심 여부:", isLiked);
-
     if (isLiked) {
       unregisterInterestingCompany(
         accessToken,
         companyId,
         (res) => {
           setIsLiked(!isLiked);
-          console.log("관심 기업 삭제", res);
         },
         (err) => {
           console.log(err);
@@ -49,7 +46,6 @@ const CompanyItem = (props: CompanyItemProps) => {
         companyId,
         (res) => {
           setIsLiked(!isLiked);
-          console.log("관심 기업 등록", res);
         },
         (err) => {
           console.log(err);

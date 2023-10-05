@@ -8,7 +8,7 @@ const Activity = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
   const [alarmData, setAlarmData] = useState([]);
-  console.log("헤헤", alarmData);
+  console.log("test", alarmData);
 
   useEffect(() => {
     getAlarms(
