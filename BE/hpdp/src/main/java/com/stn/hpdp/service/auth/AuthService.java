@@ -229,9 +229,9 @@ public class AuthService {
         }
 
         // 4. 해당 Access Token 유효시간 가지고 와서 BlackList 로 저장하기
-        Long expiration = jwtTokenProvider.getExpiration(token);
-        redisTemplate.opsForValue()
-                .set(token, "logout", expiration, TimeUnit.MILLISECONDS);
+//        Long expiration = jwtTokenProvider.getExpiration(token);
+//        redisTemplate.opsForValue()
+//                .set(token, "logout", expiration, TimeUnit.MILLISECONDS);
 
         return ApiResponse.messageOk("로그아웃 되었습니다.");
     }
