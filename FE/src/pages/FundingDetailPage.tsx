@@ -74,10 +74,10 @@ const FundingDetailPage = () => {
           QuestionModal({ title: "다시", text: "금액을 입력하세요." });
         } else if (myPoint < donationAmount) {
           QuestionModal({ title: "다시", text: "잔액이 부족합니다." });
-        } else if (donationAmount < 100) {
+        } else if (donationAmount < 1000) {
           QuestionModal({
             title: "다시",
-            text: "100P이상부터 후원이 가능합니다",
+            text: "1000P이상부터 후원이 가능합니다",
           });
         } else {
           getSponsor(
@@ -87,11 +87,11 @@ const FundingDetailPage = () => {
             (res) => {
               setIsBottomSheetOpen(false);
               setIsFundingCompleteOpen(true);
-              // 2초후에 자동으로 complete 닫기
+              // 자동으로 complete 닫기
               setTimeout(() => {
                 setIsFundingCompleteOpen(false);
                 window.location.reload();
-              }, 3000);
+              }, 2500);
             },
             (err) => {
               console.log(err);
