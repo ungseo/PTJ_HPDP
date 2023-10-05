@@ -81,7 +81,10 @@ const CompanyDetailPage = () => {
       <div
         className={style.walletIcon}
         onClick={handleWalletButtonClick}
-        style={{ color: "white" }}
+        style={{
+          color: "white",
+          zIndex: modalStatus ? 0 : 1,
+        }}
       >
         <Icon icon="bi-wallet2" />
       </div>
