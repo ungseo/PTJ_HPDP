@@ -1,0 +1,57 @@
+@import "Style";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 1.5rem;
+
+  .date {
+    color: gray;
+    font-size: 0.9rem;
+    margin-right: auto;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+
+    .content_title {
+      text-align: left;
+      flex: 7;
+      font-size: 1.1rem;
+      margin-right: 0.2rem;
+    }
+    .icon {
+      flex: 1;
+      margin-right: 0.2rem;
+    }
+    .content_deposit {
+      color: red;
+      flex: 2.5;
+      text-align: right;
+    }
+    .content_withdraw {
+      flex: 2.5;
+      text-align: right;
+      color: blue;
+    }
+  }
+
+  .remain_point {
+    color: gray;
+    font-size: 0.9rem;
+    margin-left: auto;
+    margin: 0.2rem 0;
+    text-align: right;
+  }
+}
+.bottomsheetbackground {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}

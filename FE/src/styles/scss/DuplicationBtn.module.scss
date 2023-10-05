@@ -1,0 +1,32 @@
+@import "Style";
+
+.Button {
+  button {
+    background-color: $hotPink;
+    border-radius: 0.25rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
+    border: none;
+    color: $white;
+  }
+
+  .pass {
+    background-color: $deepBlue;
+    border-radius: 0.25rem;
+    position: absolute;
+    top: 1.95rem;
+    right: 0;
+    border: none;
+    color: $white;
+  }
+  .duplicated {
+    background-color: red;
+    border-radius: 0.25rem;
+    position: absolute;
+    top: 1.95rem;
+    right: 0;
+    border: none;
+    color: $white;
+  }
+}

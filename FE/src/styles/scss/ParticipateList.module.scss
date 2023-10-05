@@ -1,0 +1,25 @@
+@import "Style";
+
+.participants_list {
+  margin: 1rem;
+  .textcontent {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    .first {
+      margin-left: 0.3rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    .second {
+      margin: auto 0;
+      font-size: 0.9rem;
+      color: $grey;
+      margin-right: 0.3rem;
+    }
+  }
+}
+
+.participants_swiper {
+  height: 4rem;
+}

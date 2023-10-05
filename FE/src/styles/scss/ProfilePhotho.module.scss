@@ -1,0 +1,86 @@
+@import "Style";
+.walletIcon {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  background-color: #ffa7ba;
+  border-radius: 50px;
+  padding: 0.6rem 0.7rem;
+}
+.profilePhoto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem 3rem;
+  background-color: $hotPink;
+  // background: linear-gradient(90deg, #ff606096 50%, #8860ff28 100%);
+  border-radius: 0 0 1.5rem 1.5rem;
+  height: 25vh;
+  .leftCpnt {
+    display: flex;
+    flex-direction: column;
+    color: $white;
+    max-width: 50%;
+    .textBox {
+      display: flex;
+      align-items: center;
+      font-size: 1.7rem;
+      max-width: 100%;
+      .p {
+        text-decoration: underline 1px solid;
+        margin: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+        width: auto;
+        text-align: start;
+      }
+      .span {
+        font-size: 1.2rem;
+      }
+    }
+    .pp {
+      background-color: #fb9f8c;
+      border-radius: 1.5rem;
+      height: 1.5rem;
+      width: auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      min-width: 6rem;
+      white-space: nowrap;
+    }
+  }
+  .photoWrapper {
+    width: auto;
+    position: relative;
+    .img {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 9999px;
+      background-color: lightgray;
+    }
+  }
+}
+.editPhoto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 1.5rem;
+  background-color: $hotPink;
+  height: calc(100vh - 168px);
+
+  .photoWrapper {
+    width: auto;
+    position: relative;
+    .img {
+      margin-top: 0.5rem;
+      width: 6rem;
+      height: 6rem;
+      border-radius: 9999px;
+      background-color: lightgray;
+    }
+  }
+}

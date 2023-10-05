@@ -1,0 +1,24 @@
+@import "Style";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  border: solid 1px $black;
+  padding: 1rem;
+  .account {
+    margin: 0 auto 1rem 0;
+    font-weight: bold;
+  }
+  .points {
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 0;
+    margin-left: auto;
+  }
+  .buttons {
+    display: flex;
+    margin: 1rem 0 0 0;
+    justify-content: space-between;
+  }
+}

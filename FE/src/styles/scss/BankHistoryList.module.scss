@@ -1,0 +1,16 @@
+@import "Style";
+
+.wrapper {
+  
+  .label {
+    margin: 1rem 1.5rem;
+
+    display: flex;
+    justify-content: space-between;
+
+    .text {
+      font-weight: bold;
+    }
+  }
+
+}

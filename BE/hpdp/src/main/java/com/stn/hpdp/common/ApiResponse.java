@@ -3,6 +3,9 @@ package com.stn.hpdp.common;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+
 import static org.springframework.http.HttpStatus.OK;
 
 @Getter
@@ -28,4 +31,11 @@ public class ApiResponse<T> {
         return of(OK, "SUCCESS", data);
     }
 
+    public static <T> ApiResponse<T> messageDataOk(String message, T date) {
+        return of(OK, message, date);
+    }
+
+    public static <T> ApiResponse<T> messageOk(String message) {
+        return of(OK, message, null);
+    }
 }

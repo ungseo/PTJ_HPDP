@@ -1,0 +1,10 @@
+@import "Style";
+
+.wrapper {
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  .header {
+    text-align: start;
+  }
+}

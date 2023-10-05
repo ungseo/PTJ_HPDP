@@ -1,0 +1,43 @@
+@import "Style";
+
+.wrapper {
+  color: $white;
+  .account {
+    width: 100%;
+    background-color: #25228c;
+
+    .bank {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 0 1.5rem;
+      padding-top: 1rem;
+      padding-bottom: 0.5rem;
+
+      .name {
+        display: flex;
+        justify-content: start;
+      }
+
+      .addr {
+        display: flex;
+        justify-content: start;
+      }
+    }
+
+    .amount {
+      margin: 0 1.5rem;
+      padding-top: 0.5rem;
+      padding-bottom: 1rem;
+
+      .remain1 {
+        font-size: 1.2rem;
+        display: flex;
+        justify-content: space-between;
+      }
+      .remain2 {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

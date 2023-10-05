@@ -1,0 +1,37 @@
+@import "Style";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 1.5rem;
+
+  .date {
+    color: gray;
+    font-size: 0.9rem;
+    margin-right: auto;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 1.1rem;
+    .content_title {
+    }
+
+    .content_deposit {
+      color: red;
+    }
+    .content_withdraw {
+      color: blue;
+    }
+  }
+
+  .remain_point {
+    color: gray;
+    font-size: 0.9rem;
+    margin-left: auto;
+    margin: 0.2rem 0;
+    text-align: right;
+  }
+}

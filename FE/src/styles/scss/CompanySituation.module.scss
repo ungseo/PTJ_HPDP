@@ -1,0 +1,29 @@
+.wrapper {
+  margin: 0 1rem;
+  text-align: start;
+
+  .text {
+    text-align: start;
+  }
+
+  .container {
+    background-color: #e9e9e9;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 0.3rem 1rem;
+    .item {
+      margin: 1rem;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .divide {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0.1rem 0;
+      }
+    }
+  }
+}

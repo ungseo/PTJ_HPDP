@@ -1,0 +1,28 @@
+@import "Style";
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  img {
+    height: 5rem;
+  }
+  .item {
+    padding-top: 0.5rem;
+    border: 1px solid $black;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .title {
+      font-size: 1.7rem;
+      margin: 0;
+    }
+    .price {
+      font-size: 1.3rem;
+      margin: 0 0 0.5rem 0;
+    }
+  }
+}

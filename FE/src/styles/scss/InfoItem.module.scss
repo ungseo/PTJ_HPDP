@@ -1,0 +1,25 @@
+@import "Style";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: $bcolor;
+  border-radius: 1rem;
+
+  aspect-ratio: 1/1;
+
+  .image {
+    width: 5rem;
+    height: auto;
+    aspect-ratio: 1/1;
+  }
+
+  .text {
+    color: gray;
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+}

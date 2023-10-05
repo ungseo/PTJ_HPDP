@@ -1,0 +1,19 @@
+@import "Style";
+
+.pointHistory {
+  color: $white;
+  padding: 1rem;
+  font-size: 1.2rem;
+  .totalPoint {
+    display: flex;
+    justify-content: space-between;
+  }
+  .yesterdayPoint {
+    display: flex;
+    justify-content: space-between;
+  }
+  .modalIcon {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

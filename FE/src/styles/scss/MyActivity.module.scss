@@ -1,0 +1,20 @@
+@import "Style";
+
+.container {
+  margin-top: 5rem;
+  padding: 0 1.5rem;
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    border-bottom: 1px lightgray solid;
+    padding: 0 1.5rem;
+    p {
+      pointer-events: none;
+    }
+    svg {
+      pointer-events: none;
+    }
+  }
+}

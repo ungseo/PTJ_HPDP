@@ -1,0 +1,16 @@
+@import "Style";
+
+.modal {
+  position: fixed;
+  max-width: 500px;
+  width: 70%;
+  height: 13rem;
+  background-color: $bcolor;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .xbutton {
+    text-align: end;
+  }
+}
