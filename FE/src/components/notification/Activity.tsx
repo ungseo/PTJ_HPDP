@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ActivityItem from "./ActivityItem";
 import { getAlarms } from "../../api/alarms";
 import { useSelector } from "react-redux";
+import NullModal from "../common/NullModal";
 
 const Activity = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -26,7 +27,7 @@ const Activity = () => {
       {alarmData.length > 0 ? (
         alarmData.map((item, index) => <ActivityItem key={index} item={item} />)
       ) : (
-        <div>알림내역이 없습니다.</div>
+        <NullModal text="알림내역이 없습니다." />
       )}
     </div>
   );

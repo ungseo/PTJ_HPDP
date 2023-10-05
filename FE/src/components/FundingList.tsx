@@ -7,6 +7,7 @@ import { getFundingTotalList } from "../api/fundings";
 
 import FundingItem from "./FundingItem";
 import LoadingSpinner from "./common/LoadingSpinner";
+import NullModal from "./common/NullModal";
 
 const FundingList = ({ keyword }: any) => {
   const [fundingTotalData, setFundingTotalData] = useState<
@@ -33,16 +34,18 @@ const FundingList = ({ keyword }: any) => {
     <LoadingSpinner />
   ) : (
     <div>
-      <div style={{ textAlign: "left", margin: "1rem" }}>
-        현재 {fundingTotalData.length}개 프로젝트를 진행하고 있습니다.
-      </div>
+      {fundingTotalData.length > 0 ? (
+        <div style={{ textAlign: "left", margin: "1rem" }}>
+          현재 {fundingTotalData.length}개 프로젝트를 진행하고 있습니다.
+        </div>
+      ) : null}
       <div style={{ marginLeft: "1rem", marginRight: "1rem" }}>
         {fundingTotalData.length > 0 ? (
           fundingTotalData.map((item) => (
             <FundingItem key={item.fundingId} item={item} />
           ))
         ) : (
-          <div>프로젝트가 없습니다.</div>
+          <NullModal text="프로젝트가 없습니다." />
         )}
       </div>
     </div>

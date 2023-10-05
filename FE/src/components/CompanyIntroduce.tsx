@@ -25,21 +25,31 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
 
   const [responseData, setResponseData] = useState<any>([]);
 
-  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+  const [aiData, setAiData] = useState<any>([]);
 
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+  console.log(item.name);
   useEffect(() => {
     axios
-      .get("https://j9c110.p.ssafy.io/articles/news", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
+      .get(`https://j9c110.p.ssafy.io/articles/news/${item.name}`, {})
       .then((response) => {
         setResponseData(response.data.data);
         console.log("HTTP 요청 성공:", response.data);
       })
       .catch((error) => {
         console.error("HTTP 요청 실패:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`https://j9c110.p.ssafy.io/articles/info/${item.name}`, {})
+      .then((response) => {
+        setAiData(response.data.data);
+        console.log("AI 정보 요청 성공:", response.data);
+      })
+      .catch((error) => {
+        console.error("AI 정보 요청 실패:", error);
       });
   }, []);
 
@@ -85,10 +95,15 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
           {item.address}
         </Grid>
       </Grid>
-
-      <h2 className={style.container}>관련기사</h2>
       <div>
-        <NewsCardList items={responseData}></NewsCardList>
+        <h2>GPT 소개</h2>
+        <div>{aiData}</div>
+      </div>
+      <div>
+        <h2 className={style.container}>관련기사</h2>
+        <div>
+          <NewsCardList items={responseData}></NewsCardList>
+        </div>
       </div>
     </div>
   );

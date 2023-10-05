@@ -16,19 +16,42 @@ const RewardModal = ({ rewardPrice, myTotalFunding }: RewardModalProps) => {
   let content;
 
   if (myTotalFunding === 0) {
-    content = <div>해당 후원에 참여한 기록이 없습니다.</div>;
+    content = (
+      <div>
+        해당 후원에 참여한<div> 기록이 없습니다.</div>
+      </div>
+    );
   } else if (remain > 0) {
     content = (
       <div>
-        <div>지금까지 {formatNumber(myTotalFunding)}P를 후원했습니다.</div>
-        <div>리워드 획득까지 {formatNumber(remain)}P남았습니다.</div>
+        <div>
+          리워드 획득까지{" "}
+          <span style={{ fontWeight: "600", fontSize: "1.2rem" }}>
+            {formatNumber(remain)}
+          </span>
+          P
+        </div>
       </div>
     );
   } else {
     content = (
       <div>
-        <div>지금까지 {formatNumber(myTotalFunding)}P를 후원했습니다.</div>
-        <div>리워드 획득!</div>
+        <div
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            marginBottom: "0.3rem",
+          }}
+        >
+          리워드 획득!
+        </div>{" "}
+        <div>
+          지금까지{" "}
+          <span style={{ fontWeight: "600" }}>
+            {formatNumber(myTotalFunding)}
+          </span>
+          P를 후원했습니다.
+        </div>
       </div>
     );
   }
