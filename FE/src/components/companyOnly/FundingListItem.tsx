@@ -11,6 +11,7 @@ import { uiActions } from "../../store/ui-slice";
 import ReportModal from "./ReportModal";
 import { NotOkModal, OkModal } from "../common/AlertModals";
 import LoadingSpinner from "../common/LoadingSpinner";
+import { useNavigate } from "react-router";
 
 function formatNumber(number: number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -60,32 +61,38 @@ const FundingListItem = ({
   const percent = Math.floor(
     Number(funding.totalFunding / funding.targetAmount) * 100
   );
+  const navigate = useNavigate();
+  const goDetail = () => {
+    navigate(`/funding/detail/${funding.fundingId}`);
+  };
 
   return (
     <div>
       <Grid container className={style.total}>
-        <Grid item xs={3}>
-          <img
-            src={funding.thumbnail}
-            alt={funding.title}
-            className={style.leftimg}
-          />
-        </Grid>
-        <Grid item xs={9} className={style.rightcontent}>
-          <div className={style.upcontent}>
-            <div className={style.fundingcontent}>{funding.title}</div>
-            <div className={style.companyname}>{funding.name}</div>
-          </div>
-          <div className={style.downcontent}>
-            <div className={style.downDetail}>
-              <div className={style.downLeft}>
-                <div className={style.fundingpercent}>{percent}%</div>
-                <div className={style.nowaccount}>{Total_Funding}원</div>
-              </div>
-              <div className={style.remaindate}>{formatDday}</div>
+        <Grid container onClick={goDetail}>
+          <Grid item xs={3}>
+            <img
+              src={funding.thumbnail}
+              alt={funding.title}
+              className={style.leftimg}
+            />
+          </Grid>
+          <Grid item xs={9} className={style.rightcontent}>
+            <div className={style.upcontent}>
+              <div className={style.fundingcontent}>{funding.title}</div>
+              <div className={style.companyname}>{funding.name}</div>
             </div>
-            <ProgressBar percent={percent || 0} />
-          </div>
+            <div className={style.downcontent}>
+              <div className={style.downDetail}>
+                <div className={style.downLeft}>
+                  <div className={style.fundingpercent}>{percent}%</div>
+                  <div className={style.nowaccount}>{Total_Funding}원</div>
+                </div>
+                <div className={style.remaindate}>{formatDday}</div>
+              </div>
+              <ProgressBar percent={percent || 0} />
+            </div>
+          </Grid>
         </Grid>
         <Grid container>
           <Grid item xs={3} className={style.state_info}>
