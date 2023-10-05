@@ -98,7 +98,7 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
       </Grid>
       <div>
         <h2>GPT 소개</h2>
-        {!newsOngoing ? (
+        {newsOngoing ? (
           <div className={style.loadingSpinner}>
             <LoadingSpinnerMini />{" "}
           </div>
@@ -108,7 +108,7 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
       </div>
       <div>
         <h2 className={style.container}>관련기사</h2>
-        {!gptOngoing ? (
+        {gptOngoing ? (
           <div className={style.loadingSpinner}>
             <LoadingSpinnerMini />
           </div>
