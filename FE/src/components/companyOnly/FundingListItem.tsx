@@ -40,12 +40,13 @@ const FundingListItem = ({
       (res) => {
         OkModal({ title: "성공", text: "정산이 완료되었습니다." });
         refresh((prev: number) => ++prev);
+        setOnGoing(false);
       },
       (err) => {
         NotOkModal({ title: "실패", text: "정산에 실패했습니다." });
+        setOnGoing(false);
       }
     );
-    await setOnGoing(false);
   };
   console.log(funding.state === "SETTLE");
   // 보고서 모달 열고 닫기
@@ -79,7 +80,7 @@ const FundingListItem = ({
               <div className={style.downLeft}>
                 <div className={style.fundingpercent}>{percent}%</div>
                 <div className={style.nowaccount}>
-                  총 모인 금액:{funding.totalFunding}원
+                  총 모인 금액:{Total_Funding}원
                 </div>
               </div>
               <div className={style.remaindate}>{formatDday}</div>
