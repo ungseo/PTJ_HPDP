@@ -80,33 +80,52 @@ const FundingListItem = ({
             <div className={style.downDetail}>
               <div className={style.downLeft}>
                 <div className={style.fundingpercent}>{percent}%</div>
-                <div className={style.nowaccount}>
-                  총 모인 금액:{Total_Funding}원
-                </div>
+                <div className={style.nowaccount}>{Total_Funding}원</div>
               </div>
               <div className={style.remaindate}>{formatDday}</div>
             </div>
             <ProgressBar percent={percent || 0} />
           </div>
         </Grid>
-        {(funding.state === "END" || funding.state === "SETTLE") && (
-          <div>
-            <button
-              className={style.settlement}
-              onClick={settlement}
-              disabled={funding.state === "SETTLE"}
-            >
-              정산하기
-            </button>
-            <button
-              className={style.report}
-              onClick={openReportModal}
-              disabled={funding.state === "END"}
-            >
-              보고서
-            </button>
-          </div>
-        )}
+        <Grid container>
+          <Grid item xs={3} className={style.state_info}>
+            <div>
+              {funding.state === "SETTLE"
+                ? "정산완료"
+                : funding.state === "END"
+                ? "정산대기"
+                : funding.state === "ING"
+                ? "진행 중"
+                : funding.state}
+            </div>
+          </Grid>
+          <Grid item xs={9}>
+            <div className={style.btn_part}>
+              {funding.state === "END" ? (
+                <div
+                  style={{ backgroundColor: "#031888", color: "white" }}
+                  className={style.btn1}
+                  onClick={settlement}
+                >
+                  정산하기
+                </div>
+              ) : (
+                <div className={style.btn2}>정산하기</div>
+              )}
+              {funding.state === "SETTLE" ? (
+                <div
+                  style={{ backgroundColor: "#031888", color: "white" }}
+                  className={style.btn2}
+                  onClick={openReportModal}
+                >
+                  보고서 등록
+                </div>
+              ) : (
+                <div className={style.btn2}>보고서 등록</div>
+              )}
+            </div>
+          </Grid>
+        </Grid>
 
         {modalOpen && (
           <ReportModal cM={setModalOpen} fundingId={funding.fundingId} />

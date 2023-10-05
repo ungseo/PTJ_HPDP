@@ -61,7 +61,11 @@ const FundingSituation = ({ props }: { props: OutFundingsInfoInterface }) => {
       <hr></hr>
       <div className={style.report}>
         <div className={style.title}>보고서</div>
-        <img src={props.docsUrl} alt="보고서" className={style.report_img} />
+        {props.docsUrl ? (
+          <img src={props.docsUrl} alt="" className={style.report_img} />
+        ) : (
+          <div style={{ marginTop: "1.5rem" }}>등록된 보고서가 없습니다.</div>
+        )}
       </div>
       <div style={{ height: "6rem" }}></div>
     </div>

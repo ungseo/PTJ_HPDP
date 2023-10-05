@@ -20,19 +20,25 @@ const SendMessageModal = ({ onClose, data }: SendMessageModalProps) => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
 
   const handleSendingMessage = () => {
-    getSendingMessage(
-      accessToken,
-      data.companyId,
-      messageTitle,
-      messageContent,
-      (res) => {
-        OkModal({ title: "성공", text: "전송이 완료되었습니다." });
-        onClose();
-      },
-      (err) => {
-        NotOkModal({ title: "실패", text: `전송이 실패했습니다. ${err}` });
-      }
-    );
+    if (!messageTitle) {
+      NotOkModal({ title: "다시", text: "제목을 입력해주세요." });
+    } else if (!messageContent) {
+      NotOkModal({ title: "다시", text: "내용을 입력해주세요." });
+    } else {
+      getSendingMessage(
+        accessToken,
+        data.companyId,
+        messageTitle,
+        messageContent,
+        (res) => {
+          OkModal({ title: "성공", text: "전송이 완료되었습니다." });
+          onClose();
+        },
+        (err) => {
+          NotOkModal({ title: "실패", text: `전송이 실패했습니다. ${err}` });
+        }
+      );
+    }
   };
 
   return (
