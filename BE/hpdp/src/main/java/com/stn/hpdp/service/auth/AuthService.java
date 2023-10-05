@@ -54,8 +54,8 @@ public class AuthService {
     private final AwsS3Uploader awsS3Uploader;
 
     public ApiResponse<Object> signUp(SignUpReq signUpReq) {
-        if (memberRepository.existsByLoginId(signUpReq.getLoginId())) {
-            throw new CustomException(ID_ALREADY_EXIST);
+        if (memberRepository.existsByLoginId(signUpReq.getLoginId()) || companyRepository.existsByLoginId(signUpReq.getLoginId())) {
+            throw new CustomException(USER_ALREADY_EXIST);
         }
 
         Member member = Member.builder()
@@ -75,7 +75,7 @@ public class AuthService {
     }
 
     public ApiResponse<Object> signUpCompany(SignUpCompanyReq signUpReq) {
-        if (companyRepository.existsByLoginId(signUpReq.getLoginId())) {
+        if (companyRepository.existsByLoginId(signUpReq.getLoginId()) || memberRepository.existsByLoginId(signUpReq.getLoginId())) {
             throw new CustomException(USER_ALREADY_EXIST);
         }
 
@@ -120,7 +120,7 @@ public class AuthService {
     }
 
     public ApiResponse<Object> checkLoginId(String loginId) {
-        if (memberRepository.countByLoginId(loginId) > 0) {
+        if (memberRepository.countByLoginId(loginId) > 0 || companyRepository.countByLoginId(loginId) > 0) {
             throw new CustomException(ID_ALREADY_EXIST);
         }
         return ApiResponse.messageOk("사용 가능한 아이디입니다.");
@@ -229,9 +229,9 @@ public class AuthService {
         }
 
         // 4. 해당 Access Token 유효시간 가지고 와서 BlackList 로 저장하기
-        Long expiration = jwtTokenProvider.getExpiration(token);
-        redisTemplate.opsForValue()
-                .set(token, "logout", expiration, TimeUnit.MILLISECONDS);
+//        Long expiration = jwtTokenProvider.getExpiration(token);
+//        redisTemplate.opsForValue()
+//                .set(token, "logout", expiration, TimeUnit.MILLISECONDS);
 
         return ApiResponse.messageOk("로그아웃 되었습니다.");
     }
