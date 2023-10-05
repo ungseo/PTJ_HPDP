@@ -32,10 +32,9 @@ const CompanyDetailPage = () => {
       Number(companyid),
       (res) => {
         setCompanyItem(res.data.data);
-        console.log("기업 상세 API연결");
       },
       (err) => {
-        console.error("기업 상세 API 호출 실패:", err);
+        console.error(err);
       }
     );
   }, []);

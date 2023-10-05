@@ -12,10 +12,9 @@ const SiteInfo = () => {
     getMain(
       (res) => {
         setMainData(res.data.data);
-        console.log("메인 조회 API 연결");
       },
       (err) => {
-        console.error("메인 조회 API 호출 실패:", err);
+        console.error(err);
       }
     );
   }, []);

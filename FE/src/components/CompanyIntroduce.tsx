@@ -30,17 +30,14 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
   const [newsOngoing, setNewsOngoing] = useState(true);
   const [gptOngoing, setGptOngoing] = useState(true);
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
-  console.log(item.name);
   useEffect(() => {
     axios
       .get(`https://j9c110.p.ssafy.io/articles/news/${item.name}`, {})
       .then((response) => {
         setResponseData(response.data.data);
-        console.log("HTTP 요청 성공:", response.data);
         setNewsOngoing(false);
       })
       .catch((error) => {
-        console.error("HTTP 요청 실패:", error);
         setNewsOngoing(false);
       });
   }, []);
@@ -50,11 +47,9 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
       .get(`https://j9c110.p.ssafy.io/articles/info/${item.name}`, {})
       .then((response) => {
         setAiData(response.data.data);
-        console.log("AI 정보 요청 성공:", response.data);
         setGptOngoing(false);
       })
       .catch((error) => {
-        console.error("AI 정보 요청 실패:", error);
         setGptOngoing(false);
       });
   }, []);

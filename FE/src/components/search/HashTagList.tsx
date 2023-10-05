@@ -6,7 +6,6 @@ const HashTagList = () => {
   const searchHandler = (event: any) => {
     const { id } = event.target;
     const keyword = id.replace("#", "");
-    console.log(keyword);
     navigate(`/search/${keyword}`);
   };
   const hashTagList = [

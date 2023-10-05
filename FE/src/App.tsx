@@ -40,7 +40,6 @@ import { useDispatch } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import Grid from "@mui/material/Grid";
-import { maxWidth } from "@mui/system";
 
 function App() {
   //
@@ -105,7 +104,7 @@ function App() {
       // console.log(event);
 
       const data = JSON.parse((event as MessageEvent).data);
-      console.log("꺄륵", data);
+      // console.log(data);
 
       // 브라우저 알림 허용 권한
       let granted = false;
@@ -168,7 +167,6 @@ function App() {
 
   useEffect(() => {
     if (isLogined) {
-      console.log("가즈아아");
       sse();
     }
   }, [isLogined]);

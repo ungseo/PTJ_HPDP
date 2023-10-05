@@ -30,13 +30,11 @@ export function SuccessPage() {
           headers,
         })
         .then((res) => {
-          console.log(res);
           const data = {
             accessToken,
             cardCode: res.data.card,
             amount: res.data.balanceAmount,
           };
-          console.log(res);
           createPayments(
             data,
             (res) => {

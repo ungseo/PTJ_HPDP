@@ -2,7 +2,6 @@ import axios from "axios";
 import { userActions } from "../store/user-slice";
 import { Dispatch } from "redux";
 
-//
 export const customApi = (baseURL: string) => {
   const Api = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/${baseURL}`,
@@ -12,6 +11,7 @@ export const customApi = (baseURL: string) => {
   });
   return Api;
 };
+
 export const customApiForm = (baseURL: string) => {
   const Api = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/${baseURL}`,

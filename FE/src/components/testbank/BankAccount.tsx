@@ -27,7 +27,6 @@ const BankAccount = () => {
         dispatch(accountActions.registerAccount(res.data.data));
       },
       (err) => {
-        // 404 error only
         console.log(err);
       }
     );

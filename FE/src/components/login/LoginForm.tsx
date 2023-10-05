@@ -21,7 +21,7 @@ const LoginForm = () => {
       loginId: id,
       loginPw: pw,
     };
-    console.log(data);
+
     login(
       type,
       data,
@@ -36,7 +36,6 @@ const LoginForm = () => {
         getMemberInfo(
           tokens.accessToken,
           (res) => {
-            console.log("유저정보 불러오기성공");
             dispatch(userActions.saveMemberInfo(res.data.data));
           },
           (err) => {

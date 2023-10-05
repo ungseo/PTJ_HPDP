@@ -4,11 +4,10 @@ import { registerReport } from "../../api/fundings";
 import { useState } from "react";
 import { NotOkModal, OkModal, QuestionModal } from "../common/AlertModals";
 import { useNavigate } from "react-router-dom";
+
 const ReportModal = ({ cM, fundingId, cC }: any) => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const [file, setFile] = useState(null);
-
-  // 보고서 등록하기
 
   const regReport = () => {
     const data = new FormData();
@@ -42,7 +41,6 @@ const ReportModal = ({ cM, fundingId, cC }: any) => {
   const closeModalHandler = (event: any) => {
     event.stopPropagation();
     cM(false);
-    console.log("hi");
   };
   return (
     <div className={style.modal}>

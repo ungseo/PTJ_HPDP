@@ -12,7 +12,6 @@ const PhotoEditButton = ({ setSelectedImage }: SetFunction) => {
   //파일 선택후 직렬화, 리덕스에 직렬화된 데이터 저장
   const fileHandler = (event: any) => {
     const file = event.target.files[0];
-    console.log(file);
     //이미지 파일 스테이트로 올리기
     setSelectedImage(file);
     // 파일 URL 리덕스에 저장, 프리뷰 보여주기용

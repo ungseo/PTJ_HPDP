@@ -39,7 +39,7 @@ const PointHistoryItem = (props: PointHistoryItemProps) => {
   const CloseBlockModal = () => {
     setOpenBlock(false);
   };
-  console.log(item);
+
   const content =
     item.content && item.content !== "point autopay"
       ? item.content

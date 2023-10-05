@@ -12,7 +12,6 @@ const ActivityItem = (props: ActivityItemProps) => {
   const navigate = useNavigate();
 
   const { item } = props;
-  console.log("꺄오", item);
 
   let head = null;
   let body = undefined;
@@ -41,13 +40,9 @@ const ActivityItem = (props: ActivityItemProps) => {
   }
 
   const onClick = () => {
-    console.log("데헷", item);
-
     if (item.type === "CREATE") {
-      console.log("드륵");
       navigate(`/company/detail/${item.companyId}`);
     } else {
-      console.log("끼룩");
       navigate(`/funding/detail/${item.fundingId}`);
     }
   };

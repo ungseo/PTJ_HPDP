@@ -10,7 +10,6 @@ const profileEditSlice = createSlice({
   reducers: {
     //함수 작성
     changeFile(state, action) {
-      console.log(action.payload);
       return { ...state, fileURL: action.payload };
     },
   },

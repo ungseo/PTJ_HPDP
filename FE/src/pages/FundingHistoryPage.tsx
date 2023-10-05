@@ -25,8 +25,6 @@ const FundingHistoryPage = () => {
           );
           setOngoingFunding(IngFunding);
           setEndFunding(expiredFunding);
-          console.log(res.data.data);
-          console.log(IngFunding, expiredFunding);
         },
         (err) => {
           console.log(err);

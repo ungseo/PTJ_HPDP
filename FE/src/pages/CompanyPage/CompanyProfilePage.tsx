@@ -6,22 +6,20 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { companyActions } from "../../store/company-slice";
 import ProfileList from "../../components/companyOnly/ProfileList";
-import { useNavigate } from "react-router-dom";
 import CompanyWallet from "../../components/companyOnly/CompanyWallet";
 
 const CompanyProfilePage = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   useEffect(() => {
     getMyCompanyInfo(
       accessToken,
       (res) => {
-        console.log("기업정보불러오기 성공");
         dispatch(companyActions.saveMemberInfo(res.data.data));
       },
       (err) => {
-        console.log(err.message);
+        console.log(err);
       }
     );
   }, []);

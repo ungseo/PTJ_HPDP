@@ -17,7 +17,6 @@ interface BudgetListProps {
 }
 
 const BudgetGraph = ({ target, budgetList }: BudgetListProps) => {
-  console.log(budgetList[0]);
   const processedBudgetList = budgetList.map((item) => ({
     content: item.content,
     price: parseInt(item.price),
