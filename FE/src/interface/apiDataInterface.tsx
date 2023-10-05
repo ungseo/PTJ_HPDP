@@ -358,12 +358,14 @@ export interface BlockChainInfo {
 
 // 알림 조회
 export interface OutAlarmInfoInterface {
-  fundingId: number;
-  type: string;
-  title: string;
-  isRead: boolean;
-  thumnail: string;
-  date: string;
-  companyId: string;
+  companyId: number;
   companyName: string;
+  date: string;
+  fundingsDocs: string | null;
+  fundingId: number;
+  newsAlarmId: number;
+  read: boolean;
+  thumbnail: string;
+  title: string;
+  type: string;
 }

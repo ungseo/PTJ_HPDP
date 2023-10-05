@@ -179,7 +179,7 @@ function App() {
       accessToken,
       (res) => {
         const unreadCount = res.data.data.filter(
-          (item: OutAlarmInfoInterface) => item.isRead === false
+          (item: OutAlarmInfoInterface) => item.read === false
         ).length;
 
         dispatch(uiActions.changeAlarmCount(unreadCount));
@@ -192,7 +192,6 @@ function App() {
 
   return (
     <Paper id="app-root" className={style.App}>
-      {/* <button onClick={notify}>Make me a toast</button> */}
       <Toaster
         toastOptions={{
           className: "",

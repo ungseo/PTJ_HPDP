@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import style from "../../styles/css/ActivityItem.module.css";
 import { OutAlarmInfoInterface } from "./../../interface/apiDataInterface";
 import { useNavigate } from "react-router-dom";
+import { readAlarms } from "../../api/alarms";
+import { useSelector } from "react-redux";
 
 interface ActivityItemProps {
   item: OutAlarmInfoInterface;
@@ -39,7 +41,25 @@ const ActivityItem = (props: ActivityItemProps) => {
       break;
   }
 
+  const [read, setRead] = useState(item.read);
+
+  const accessToken = useSelector((state: any) => state.user.auth.accessToken);
+
   const onClick = () => {
+    if (!read) {
+      readAlarms(
+        accessToken,
+        item.newsAlarmId,
+        (res) => {
+          console.log("응애");
+          setRead(true);
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
+    }
+
     if (item.type === "CREATE") {
       navigate(`/company/detail/${item.companyId}`);
     } else {
@@ -47,10 +67,14 @@ const ActivityItem = (props: ActivityItemProps) => {
     }
   };
 
+  const wrapperStyle = {
+    backgroundColor: read ? "white" : "#f3f3f3",
+  };
+
   return (
-    <Grid container onClick={onClick}>
+    <Grid container onClick={onClick} style={wrapperStyle}>
       <Grid item xs={3} className={style.imgfield}>
-        <img src={item.thumnail} alt="" />
+        <img src={item.thumbnail} alt="unavailable" className={style.img} />
       </Grid>
       <Grid item xs={9} className={style.contentfield}>
         <div className={style.contentbox}>
