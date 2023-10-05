@@ -4,4 +4,16 @@
   animation-name: Upstream;
   animation-duration: 1s;
   opacity: 1;
+  border-radius: 1.5rem 1.5rem 0 0;
+  background-color: #f3f3f3;
+  position: absolute;
+  width: 100%;
+  top: 30vh;
+  height: 70vh;
+}
+
+@media (max-height: 850px) {
+  .animate {
+    height: 90vh;
+  }
 }

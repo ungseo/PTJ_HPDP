@@ -35,7 +35,7 @@ const SiteInfo = () => {
       <div className={style.wrapper}>
         <div className={style.animateLeft}>
           <InfoItem
-            imgSrc="/dollar-symbol.png"
+            imgSrc="/money-remove.png"
             text="후원 금액"
             num={mainData.price}
             unit="원"
@@ -43,7 +43,7 @@ const SiteInfo = () => {
         </div>
         <div className={style.animateLeft}>
           <InfoItem
-            imgSrc="/heart.png"
+            imgSrc="/heart-remove.png"
             text="후원 횟수"
             num={mainData.support}
             unit="회"

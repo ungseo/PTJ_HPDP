@@ -7,6 +7,7 @@ import MessagePart from "./MessagePart";
 import { Icon } from "@iconify/react";
 import { Grid } from "@mui/material";
 import style from "../../styles/css/SendingMessage.module.css";
+import NullModal from "../common/NullModal";
 
 const SendingMessage = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -27,15 +28,19 @@ const SendingMessage = () => {
       }
     );
   }, []);
-  console.log(messageData);
+
   return (
     <div className={style.message}>
       <div className={style.down_content}>
-        {messageData.map((message, index) => (
-          <div key={message.messageId}>
-            <MessagePart key={message.messageId} message={message} flag={1} />
-          </div>
-        ))}
+        {messageData.length > 0 ? (
+          messageData.map((message, index) => (
+            <div key={message.messageId}>
+              <MessagePart key={message.messageId} message={message} flag={1} />
+            </div>
+          ))
+        ) : (
+          <NullModal text="보낸 쪽지가 없습니다." />
+        )}
       </div>
     </div>
   );

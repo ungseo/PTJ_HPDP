@@ -11,11 +11,11 @@ const HashTagList = () => {
   };
   const hashTagList = [
     "#사회공헌",
-    "#공예",
+    "#친환경",
     "#뮤지컬",
     "#화장품",
     "#재활용",
-    "#자연",
+    "#업사이클링",
   ];
   return (
     <div className={style.hashTagList}>
