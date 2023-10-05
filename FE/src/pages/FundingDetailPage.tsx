@@ -87,18 +87,18 @@ const FundingDetailPage = () => {
             Number(fundingid),
             donationAmount,
             (res) => {
-              window.location.reload();
+              setIsBottomSheetOpen(false);
+              setIsFundingCompleteOpen(true);
+              // 2초후에 자동으로 complete 닫기
+              setTimeout(() => {
+                setIsFundingCompleteOpen(false);
+                window.location.reload();
+              }, 3000);
             },
             (err) => {
               console.log("후원하기 API 호출 실패", err);
             }
           );
-          setIsBottomSheetOpen(false);
-          setIsFundingCompleteOpen(true);
-          // 2초후에 자동으로 complete 닫기
-          setTimeout(() => {
-            setIsFundingCompleteOpen(false);
-          }, 3000);
         }
       } else {
         setIsBottomSheetOpen(true);

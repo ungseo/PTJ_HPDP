@@ -45,11 +45,11 @@ const OptionTopbar = ({ text }: { text: string }) => {
         />
         <div className={style.title_name}>{text}</div>
       </div>
-      {/* <Icon
+      <Icon
         icon="bi:search"
         onClick={goToSearchPage}
         style={{ width: "1.8rem", height: "1.8rem", marginRight: "1rem" }}
-      /> */}
+      />
     </div>
   );
 };

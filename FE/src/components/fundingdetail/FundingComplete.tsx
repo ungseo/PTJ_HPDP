@@ -1,5 +1,6 @@
 import React from "react";
 import style from "../../styles/css/FundingComplete.module.css";
+import { Icon } from "@iconify/react";
 
 function formatNumber(number: number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
