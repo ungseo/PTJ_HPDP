@@ -7,7 +7,6 @@ import HomeIcon from "@mui/icons-material/Home";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import MarkEmailUnreadIcon from "@mui/icons-material/MarkEmailUnread";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-
 import Badge from "@mui/material/Badge";
 
 export default function NavigationBar() {
@@ -42,7 +41,17 @@ export default function NavigationBar() {
     }
   }, [location.pathname]);
 
+  const isLogined = useSelector((state: any) => state.user.auth.isLogined);
+
   const alarmCount = useSelector((state: any) => state.ui.alarmCount);
+
+  const notificationIcon = isLogined ? (
+    <Badge badgeContent={alarmCount} color="error">
+      <MarkEmailUnreadIcon />
+    </Badge>
+  ) : (
+    <MarkEmailUnreadIcon />
+  );
 
   return (
     <BottomNavigation value={value} onChange={handleChange}>
@@ -68,11 +77,7 @@ export default function NavigationBar() {
         style={{ color: value === "notification" ? "#fb788e" : "gray" }}
         label="Notification"
         value="notification"
-        icon={
-          <Badge badgeContent={alarmCount} color="error">
-            <MarkEmailUnreadIcon />
-          </Badge>
-        }
+        icon={notificationIcon}
         onClick={() => {
           navigate("/notification");
         }}
