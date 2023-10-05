@@ -51,16 +51,16 @@ const SecurityPwInput = ({ setIsInput, setAccountPw }: any) => {
       </button>
       <div className={style.inputBox}>
         <div className={style.box} id="1">
-          {display[0]}
+          {display[0] && "*"}
         </div>
         <div className={style.box} id="2">
-          {display[1]}
+          {display[1] && "*"}
         </div>
         <div className={style.box} id="3">
-          {display[2]}
+          {display[2] && "*"}
         </div>
         <div className={style.box} id="4">
-          {display[3]}
+          {display[3] && "*"}
         </div>
       </div>
       <div className={style.keypad}>

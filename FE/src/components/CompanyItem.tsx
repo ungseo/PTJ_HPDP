@@ -27,7 +27,7 @@ const CompanyItem = (props: CompanyItemProps) => {
   const [isLiked, setIsLiked] = useState(item.interested);
 
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
-
+  const userType = useSelector((state: any) => state.user.auth.type);
   const toggleLike = () => {
     console.log("기업 번호:", companyId, "관심 여부:", isLiked);
 
@@ -76,7 +76,8 @@ const CompanyItem = (props: CompanyItemProps) => {
           style={{ width: "100%" }}
         />
       </div>
-      {isLogined ? (
+      {/* 기업좋아요 안되면 여기수정~ */}
+      {isLogined && userType === 0 ? (
         <IconButton
           aria-label={`like ${item.name}`}
           onClick={(event) => {

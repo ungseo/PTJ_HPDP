@@ -41,9 +41,9 @@ const PointHistoryItem = (props: PointHistoryItemProps) => {
   };
   console.log(item);
   const content =
-    item.content && item.content !== "autopay"
+    item.content && item.content !== "point autopay"
       ? item.content
-      : item.content === "autopay"
+      : item.content === "point autopay"
       ? "끝전 이체"
       : "포인트 충전";
   return (
