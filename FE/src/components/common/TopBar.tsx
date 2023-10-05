@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import style from "../../styles/css/TopBar.module.css";
+import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
 const LogoTopbar = () => {
@@ -45,11 +46,11 @@ const OptionTopbar = ({ text }: { text: string }) => {
         />
         <div className={style.title_name}>{text}</div>
       </div>
-      {/* <Icon
+      <Icon
         icon="bi:search"
         onClick={goToSearchPage}
         style={{ width: "1.8rem", height: "1.8rem", marginRight: "1rem" }}
-      /> */}
+      />
     </div>
   );
 };

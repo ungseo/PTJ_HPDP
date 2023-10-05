@@ -46,15 +46,13 @@ const BlockChainInfo = ({
       historyId,
       (res) => {
         setBlockChainData(res.data.data);
-        console.log("블록체인 API 연결");
       },
       (err) => {
-        console.log("블록체인 호출 실패", err);
+        console.log(err);
       }
     );
   }, []);
-  console.log(blockChainData);
-  console.log(date);
+
   return (
     <div
       className={`${style.bottomsheetcontainer} ${

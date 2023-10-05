@@ -14,13 +14,10 @@ const InterestingCompanyPage = () => {
     Interfaces.InSearchCompanyInfoResponseInterface[]
   >([]);
 
-  console.log(interestingCoList);
-
   useEffect(() => {
     getInterestingCompany(
       accessToken,
       (res) => {
-        console.log(res.data.data);
         setInterestingCoList(res.data.data);
       },
       (err) => {

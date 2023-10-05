@@ -1,19 +1,20 @@
-@import "Style";
+@import "Style", "Animation";
 
 .total {
   display: flex;
   position: relative;
   margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
   .leftimg {
     width: 100%;
     aspect-ratio: 1/1;
     height: auto;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     border: 1px solid #e9e9e9;
   }
 
   .rightcontent {
-    padding-left: 1rem;
+    padding-left: 0.8rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -39,66 +40,86 @@
     }
 
     .downcontent {
-      .inner_content {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 0.3rem;
+      .downDetail {
         display: flex;
         justify-content: space-between;
-        .accountdetail {
+        .downLeft {
           display: flex;
-
-          .fundingpercent {
-            color: $hotPink;
-            font-weight: 600;
-            margin-right: 0.2rem;
-          }
-        }
-        .remaindate {
-          text-align: start;
-          font-weight: bold;
-          color: rgb(37, 37, 37);
+          justify-content: space-between;
         }
       }
-      // margin-bottom: 0.2rem;
-      .progress_bar {
-        margin: 0.2rem 0 0.4rem;
+      .fundingpercent {
+        color: $hotPink;
+        font-weight: 600;
+        margin-right: 0.2rem;
       }
     }
+    .remaindate {
+      text-align: start;
+      font-weight: bold;
+      color: rgb(37, 37, 37);
+    }
+  }
+  // margin-bottom: 0.2rem;
+  .progress_bar {
+    margin: 0.2rem 0 0.4rem;
   }
 }
-.clicked {
-  position: absolute;
-  width: 70%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: 30%;
+.settlement {
+  background-color: $deepBlue;
+  color: $white;
 
-  background-color: blue;
+  &:disabled {
+    background-color: $pastelBlue;
+  }
+}
+.report {
+  background-color: $deepBlue;
+  color: $white;
 
-  .iconButton {
-    color: white;
-    background-color: transparent;
-    border: none;
-    border-right: 2px solid $white;
+  &:disabled {
+    background-color: $pastelBlue;
+  }
+}
+.state_info {
+  height: 2.5rem;
+  border: #818181 solid 1px;
+  border-radius: 0.5rem;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
+    font-size: 1.3rem;
   }
 }
-
-.animate {
-  background-color: hotpink;
-  animation-name: Open;
-  transition-duration: 3s;
-  opacity: 1;
-}
-@keyframes Open {
-  0% {
-    transform: translateX(-100%);
+.btn_part {
+  display: flex;
+  padding-left: 0.8rem;
+  height: 2.5rem;
+  .btn1 {
+    flex: 1;
+    background-color: #e9e9e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1.2rem;
+    border-radius: 0.3rem;
+    margin-right: 0.15rem;
   }
-  50% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(100%);
-    opacity: 0;
+  .btn2 {
+    margin-left: 0.15rem;
+    flex: 1;
+    background-color: #e9e9e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1.2rem;
+    border-radius: 0.3rem;
   }
 }

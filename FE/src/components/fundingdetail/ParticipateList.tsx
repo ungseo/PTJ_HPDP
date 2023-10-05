@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import * as Interfaces from "../../interface/apiDataInterface";
 import style from "../../styles/css/ParticipateList.module.css";
+import * as Interfaces from "../../interface/apiDataInterface";
 import ParticipateItem from "./ParticipateItem";
 import { getParticipants } from "../../api/fundings";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
@@ -24,14 +22,13 @@ const ParticipateList = ({ fundingId }: ParticipateListProps) => {
       fundingId,
       (res) => {
         setParticipantData(res.data.data);
-        console.log("후원자 API 연결");
       },
       (err) => {
-        console.log("후원자 API 호출 실패", err);
+        console.log(err);
       }
     );
   }, [fundingId]);
-  console.log(participantData);
+
   return (
     <div className={style.participants_list}>
       <div className={style.textcontent}>
@@ -40,7 +37,6 @@ const ParticipateList = ({ fundingId }: ParticipateListProps) => {
       </div>
       <div className={style.participants_swiper}>
         <Swiper
-          // {TypeScript 타입 체크를 우회하기 위한 목적}
           {...{
             slidesPerView: "auto",
             spaceBetween: 10,

@@ -32,11 +32,9 @@ const FundingDetailPage = () => {
       accessToken,
       (res) => {
         setFundingDetailData(res.data.data);
-        console.log(fundingDetailData);
-        console.log("펀딩 상세 API 연결");
       },
       (err) => {
-        console.log("펀딩상세 API 호출 실패", err);
+        console.log(err);
       }
     );
   }, []);
@@ -76,10 +74,10 @@ const FundingDetailPage = () => {
           QuestionModal({ title: "다시", text: "금액을 입력하세요." });
         } else if (myPoint < donationAmount) {
           QuestionModal({ title: "다시", text: "잔액이 부족합니다." });
-        } else if (donationAmount < 100) {
+        } else if (donationAmount < 1000) {
           QuestionModal({
             title: "다시",
-            text: "100P이상부터 후원이 가능합니다",
+            text: "1000P이상부터 후원이 가능합니다",
           });
         } else {
           getSponsor(
@@ -87,18 +85,18 @@ const FundingDetailPage = () => {
             Number(fundingid),
             donationAmount,
             (res) => {
-              window.location.reload();
+              setIsBottomSheetOpen(false);
+              setIsFundingCompleteOpen(true);
+              // 자동으로 complete 닫기
+              setTimeout(() => {
+                setIsFundingCompleteOpen(false);
+                window.location.reload();
+              }, 2500);
             },
             (err) => {
-              console.log("후원하기 API 호출 실패", err);
+              console.log(err);
             }
           );
-          setIsBottomSheetOpen(false);
-          setIsFundingCompleteOpen(true);
-          // 2초후에 자동으로 complete 닫기
-          setTimeout(() => {
-            setIsFundingCompleteOpen(false);
-          }, 3000);
         }
       } else {
         setIsBottomSheetOpen(true);
@@ -110,8 +108,6 @@ const FundingDetailPage = () => {
   const handleRewardModalToggle = () => {
     setIsRewardModalOpen(!isRewardModalOpen);
   };
-
-  console.log(isRewardModalOpen);
 
   // 상속 정보
   const data = {

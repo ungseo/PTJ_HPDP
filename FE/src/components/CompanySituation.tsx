@@ -1,7 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 
 import * as Interfaces from "../interface/apiDataInterface";
 import { getFundingProgress } from "../api/fundings";
@@ -31,7 +29,6 @@ const CompanySituation = (props: CompanySituationProps) => {
     Interfaces.OutFundingsInfoInterface[]
   >([]);
   const total_cost = formatNumber(item.amount || 0);
-  console.log(companyProgressFundingData);
 
   useEffect(() => {
     getFundingProgress(
@@ -39,7 +36,6 @@ const CompanySituation = (props: CompanySituationProps) => {
       1, // 진행중
       (res) => {
         setcompanyProgressFundingData(res.data.data);
-        console.log("진행 펀딩API연결");
       },
       (err) => {
         console.error("진행 API 호출 실패:", err);
@@ -53,10 +49,9 @@ const CompanySituation = (props: CompanySituationProps) => {
       2, // 종료됨
       (res) => {
         setcompanyCompleteFundingData(res.data.data);
-        console.log("종료 펀딩API연결");
       },
       (err) => {
-        console.error("종료 API 호출 실패:", err);
+        console.error(err);
       }
     );
   }, []);

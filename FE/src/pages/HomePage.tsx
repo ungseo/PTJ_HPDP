@@ -24,19 +24,17 @@ const HomePage = () => {
       await getRecommendDeadline(
         (res) => {
           setFundingDeadlineData(res.data.data);
-          console.log("펀딩 DL API 연결");
         },
         (err) => {
-          console.log("펀딩 DL API 호출 실패", err);
+          console.log(err);
         }
       );
       await getRecommendAchievement(
         (res) => {
           setFundingAchievementData(res.data.data);
-          console.log("펀딩 AC API 연결");
         },
         (err) => {
-          console.log("펀딩 AC API 호출 실패", err);
+          console.log(err);
         }
       );
     };

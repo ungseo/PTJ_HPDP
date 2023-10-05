@@ -1,0 +1,66 @@
+@import "Style";
+
+@keyframes lens {
+  0% {
+    transform: translate(1px, 1px);
+  }
+  33.33% {
+    transform: translate(51px, 1px);
+  }
+  66.66% {
+    transform: translate(21px, 51px);
+  }
+  100% {
+    transform: translate(1px, 1px);
+  }
+}
+
+.lens > div {
+  transform: scale(0.4); /* 절반 크기로 조정 */
+  transform-origin: 50px 50px;
+}
+
+.lens > div > div {
+  animation: lens 1.282051282051282s linear infinite;
+  position: absolute;
+}
+
+.lens > div > div div:nth-child(1) {
+  width: 36px; /* 반으로 줄임 */
+  height: 36px; /* 반으로 줄임 */
+  border-radius: 50%;
+  border: 6px solid #fb788e;
+  background: #ffffff00;
+}
+
+.lens > div > div div:nth-child(2) {
+  width: 8.5px; /* 반으로 줄임 */
+  height: 25.5px; /* 반으로 줄임 */
+  transform: rotate(-45deg);
+  background: #fb788e;
+  border-radius: 0 0 4px 4px;
+  position: absolute;
+  top: 34px; /* 절반으로 조절 */
+  left: 42.5px; /* 절반으로 조절 */
+}
+
+.loadingioSpinner {
+  width: 100px; /* 전체 크기 조절 */
+  height: 100px; /* 전체 크기 조절 */
+  display: inline-block;
+  overflow: hidden;
+  background: #ffffff00;
+}
+
+.lens {
+  width: 50%; /* 전체 크기 조절 */
+  height: 50%; /* 전체 크기 조절 */
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+}
+
+.lens div {
+  box-sizing: content-box;
+}

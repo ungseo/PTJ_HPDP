@@ -1,20 +1,15 @@
-import style from "../../styles/css/InfoItem.module.css";
+import React from "react";
 import { InfoItemInterface } from "../../interface/homePageInterface";
+import style from "../../styles/css/InfoItem.module.css";
 import AscendingNumber from "../common/AscendingNumber";
+
 const InfoItem = ({ imgSrc, text, num, unit }: InfoItemInterface) => {
   return (
     <div className={style.wrapper}>
-      <img
-        className={style.image}
-        src={imgSrc}
-        alt="info사진"
-        style={{ width: "5rem", marginTop: "0.8rem" }}
-      />
-      <span style={{ color: "gray", fontWeight: "bold", fontSize: "1.2rem" }}>
-        {text}
-      </span>
+      <img className={style.image} src={imgSrc} alt="info사진" />
+      <div className={style.text}>{text}</div>
       <div>
-        <AscendingNumber num={num} unit={unit} fs="1.2rem" />
+        <AscendingNumber num={num} unit={unit} fs="1.25rem" />
       </div>
     </div>
   );

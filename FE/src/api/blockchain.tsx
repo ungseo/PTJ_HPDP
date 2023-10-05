@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 import { customApi } from ".";
+import * as Interfaces from "../interface/apiDataInterface";
 
 export async function getBlockchainInfo(
   accessToken: string,
@@ -18,4 +19,37 @@ export async function getBlockchainInfo(
     .get(`/${pointHistoryId}`)
     .then(success)
     .catch(fail);
+}
+export async function getMemberBlockchainInfo(
+  accessToken: string,
+  success: (
+    res: AxiosResponse<any, any>
+  ) =>
+    | AxiosResponse<any, any>
+    | PromiseLike<AxiosResponse<any, any>>
+    | null
+    | undefined
+    | void,
+  fail: (err: any) => PromiseLike<never> | null | undefined | void
+) {
+  const api = customApi(`blockchain`);
+  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  await api.get("/member").then(success).catch(fail);
+}
+export async function getCompanyBlockchainInfo(
+  accessToken: string,
+  companyId: number,
+  success: (
+    res: AxiosResponse<any, any>
+  ) =>
+    | AxiosResponse<any, any>
+    | PromiseLike<AxiosResponse<any, any>>
+    | null
+    | undefined
+    | void,
+  fail: (err: any) => PromiseLike<never> | null | undefined | void
+) {
+  const api = customApi(`blockchain`);
+  api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
+  await api.get(`/company/${companyId}`).then(success).catch(fail);
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AscendingNumberInterface } from "../../interface/commonInterface";
 
 const AscendingNumber = ({ num, fs, unit }: AscendingNumberInterface) => {
@@ -33,7 +33,7 @@ const AscendingNumber = ({ num, fs, unit }: AscendingNumberInterface) => {
   return (
     <div>
       <span style={{ fontSize: `${fs}`, fontWeight: "bold" }}>
-        {targetNumber}
+        {targetNumber.toLocaleString()}
         {unit}
       </span>
     </div>

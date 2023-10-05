@@ -1,7 +1,7 @@
-import { Icon } from "@iconify/react";
+import React from "react";
+import { useSelector } from "react-redux";
 import { pointHistoryInterface } from "./../../interface/transactionHistoryInterface";
 import style from "../../styles/css/PointHistory.module.css";
-import { useSelector } from "react-redux";
 
 function formatNumber(number: number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

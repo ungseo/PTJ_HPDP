@@ -1,4 +1,3 @@
-import React from "react";
 import style from "../../styles/css/TestWalletRegistration.module.css";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";

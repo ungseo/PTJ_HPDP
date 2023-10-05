@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import style from "../../styles/css/SecurityPwInput.module.css";
 import { useEffect, useState } from "react";
+import { QuestionModal } from "../common/AlertModals";
 
 const SecurityPwInput = ({ setIsInput, setAccountPw }: any) => {
   const closeModal = () => {
@@ -42,7 +43,15 @@ const SecurityPwInput = ({ setIsInput, setAccountPw }: any) => {
   };
 
   const confirmation = () => {
-    setAccountPw(display.join(""));
+    if (display.length === 4) {
+      setAccountPw(display.join(""));
+      setIsInput(false);
+    } else {
+      QuestionModal({
+        title: "비밀번호",
+        text: "비밀번호 4자리를 입력해주세요!",
+      });
+    }
   };
   return (
     <div className={style.wrapper}>
@@ -51,16 +60,16 @@ const SecurityPwInput = ({ setIsInput, setAccountPw }: any) => {
       </button>
       <div className={style.inputBox}>
         <div className={style.box} id="1">
-          {display[0]}
+          {display[0] && "*"}
         </div>
         <div className={style.box} id="2">
-          {display[1]}
+          {display[1] && "*"}
         </div>
         <div className={style.box} id="3">
-          {display[2]}
+          {display[2] && "*"}
         </div>
         <div className={style.box} id="4">
-          {display[3]}
+          {display[3] && "*"}
         </div>
       </div>
       <div className={style.keypad}>

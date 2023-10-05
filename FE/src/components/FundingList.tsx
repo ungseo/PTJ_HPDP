@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 
 import * as Interfaces from "../interface/apiDataInterface";
 import { getFundingTotalList } from "../api/fundings";
@@ -8,7 +7,7 @@ import { getFundingTotalList } from "../api/fundings";
 import FundingItem from "./FundingItem";
 import LoadingSpinner from "./common/LoadingSpinner";
 import NullModal from "./common/NullModal";
-
+import style from "../styles/css/FundingList.module.css";
 const FundingList = ({ keyword }: any) => {
   const [fundingTotalData, setFundingTotalData] = useState<
     Interfaces.OutFundingsInfoInterface[]
@@ -39,7 +38,10 @@ const FundingList = ({ keyword }: any) => {
           현재 {fundingTotalData.length}개 프로젝트를 진행하고 있습니다.
         </div>
       ) : null}
-      <div style={{ marginLeft: "1rem", marginRight: "1rem" }}>
+      <div
+        style={{ marginLeft: "1rem", marginRight: "1rem" }}
+        className={style.wrapper}
+      >
         {fundingTotalData.length > 0 ? (
           fundingTotalData.map((item) => (
             <FundingItem key={item.fundingId} item={item} />

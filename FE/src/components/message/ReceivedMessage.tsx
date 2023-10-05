@@ -17,10 +17,9 @@ const ReceivedMessage = () => {
       0,
       (res) => {
         setMessageData(res.data.data);
-        console.log("받은 쪽지 API 연결");
       },
       (err) => {
-        console.log("받은 쪽지 API 호출 실패", err);
+        console.log(err);
       }
     );
   }, []);

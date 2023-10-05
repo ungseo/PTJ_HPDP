@@ -37,6 +37,10 @@ import { OutAlarmInfoInterface } from "./interface/apiDataInterface";
 import { uiActions } from "./store/ui-slice";
 import { useDispatch } from "react-redux";
 
+import toast, { Toaster } from "react-hot-toast";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import Grid from "@mui/material/Grid";
+
 function App() {
   //
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -64,7 +68,26 @@ function App() {
     };
   }, []);
 
-  // sse
+  // hot toast
+  const notify = (head: any, body: any) =>
+    toast((t) => (
+      <Grid container className={style.container}>
+        <Grid item xs={10.5} className={style.item}>
+          <b>{head}</b>
+        </Grid>
+        <Grid item xs={1.5}>
+          <HighlightOffIcon
+            onClick={() => toast.dismiss(t.id)}
+          ></HighlightOffIcon>
+        </Grid>
+        <Grid item xs={10.5} className={style.item}>
+          {body}
+        </Grid>
+        <Grid item xs={1.5}></Grid>
+      </Grid>
+    ));
+
+  // sse function
   const sse = () => {
     console.log("permission", Notification.permission);
 
@@ -81,7 +104,7 @@ function App() {
       // console.log(event);
 
       const data = JSON.parse((event as MessageEvent).data);
-      console.log("꺄륵", data);
+      // console.log(data);
 
       // 브라우저 알림 허용 권한
       let granted = false;
@@ -127,13 +150,14 @@ function App() {
         }
 
         if (head !== null) {
-          const notification = new Notification(head, {
-            body: body,
-          });
+          notify(head, body);
 
-          setTimeout(() => {
-            notification.close();
-          }, 10 * 1000);
+          // const notification = new Notification(head, {
+          //   body: body,
+          // });
+          // setTimeout(() => {
+          //   notification.close();
+          // }, 10 * 1000);
         }
       }
     });
@@ -143,7 +167,6 @@ function App() {
 
   useEffect(() => {
     if (isLogined) {
-      console.log("가즈아아");
       sse();
     }
   }, [isLogined]);
@@ -156,7 +179,7 @@ function App() {
       accessToken,
       (res) => {
         const unreadCount = res.data.data.filter(
-          (item: OutAlarmInfoInterface) => item.isRead === false
+          (item: OutAlarmInfoInterface) => item.read === false
         ).length;
 
         dispatch(uiActions.changeAlarmCount(unreadCount));
@@ -169,6 +192,16 @@ function App() {
 
   return (
     <Paper id="app-root" className={style.App}>
+      <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            width: "80%",
+            maxWidth: "500px",
+          },
+        }}
+      />
+
       <Routes>
         {/* <Route path="/sample" Component={SamplePage}></Route> */}
         <Route path="/" Component={HomePage}></Route>
@@ -221,6 +254,7 @@ function App() {
         ></Route>
         <Route path="*" Component={PageNotFound404}></Route>
       </Routes>
+
       <div className={style.blank}></div>
       <div
         className={style.navBar}

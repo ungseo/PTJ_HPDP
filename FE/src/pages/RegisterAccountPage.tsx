@@ -19,7 +19,7 @@ const RegisterAccountPage = () => {
   const [accountNumber, setAccountNumber] = useState("");
   const [accountPw, setAccountPw] = useState("");
   const [bankCode, setBankCode] = useState("");
-  console.log(accountPw);
+
   const handleChange = (event: SelectChangeEvent) => {
     setBankCode(event.target.value as string);
   };
@@ -49,6 +49,7 @@ const RegisterAccountPage = () => {
   };
   const [isInput, setIsInput] = useState(false);
   const pwInputHandler = () => {
+    setAccountPw("");
     setIsInput(true);
   };
   return (

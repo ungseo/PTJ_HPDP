@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
@@ -27,17 +25,14 @@ const CompanyItem = (props: CompanyItemProps) => {
   const [isLiked, setIsLiked] = useState(item.interested);
 
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
-
+  const userType = useSelector((state: any) => state.user.auth.type);
   const toggleLike = () => {
-    console.log("기업 번호:", companyId, "관심 여부:", isLiked);
-
     if (isLiked) {
       unregisterInterestingCompany(
         accessToken,
         companyId,
         (res) => {
           setIsLiked(!isLiked);
-          console.log("관심 기업 삭제", res);
         },
         (err) => {
           console.log(err);
@@ -49,7 +44,6 @@ const CompanyItem = (props: CompanyItemProps) => {
         companyId,
         (res) => {
           setIsLiked(!isLiked);
-          console.log("관심 기업 등록", res);
         },
         (err) => {
           console.log(err);
@@ -76,7 +70,8 @@ const CompanyItem = (props: CompanyItemProps) => {
           style={{ width: "100%" }}
         />
       </div>
-      {isLogined ? (
+      {/* 기업좋아요 안되면 여기수정~ */}
+      {isLogined && userType === 0 ? (
         <IconButton
           aria-label={`like ${item.name}`}
           onClick={(event) => {

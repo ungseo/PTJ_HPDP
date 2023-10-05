@@ -1,8 +1,8 @@
 import React from "react";
 import { OutFundingsInfoInterface } from "../../interface/apiDataInterface";
+import style from "../../styles/css/FundingSituation.module.css";
 import CircleProgressBar from "../common/CircleProgressBar";
 import BudgetGraph from "../common/BudgetGraph";
-import style from "../../styles/css/FundingSituation.module.css";
 
 // 날짜 형식 변경
 function formatDate(inputDate: string) {
@@ -22,8 +22,7 @@ const FundingSituation = ({ props }: { props: OutFundingsInfoInterface }) => {
   // 시작일, 마감일 형식을 변경해 출력
   const startDay = formatDate(props.startDate);
   const endDay = formatDate(props.endDate);
-  console.log(props);
-  console.log(props.docsUrl);
+
   // 금액 형식 처리
   const targetNumber = formatNumber(props.targetAmount);
   const totalNumber = formatNumber(props.totalFunding);
@@ -62,7 +61,11 @@ const FundingSituation = ({ props }: { props: OutFundingsInfoInterface }) => {
       <hr></hr>
       <div className={style.report}>
         <div className={style.title}>보고서</div>
-        <img src={props.docsUrl} alt="보고서" className={style.report_img} />
+        {props.docsUrl ? (
+          <img src={props.docsUrl} alt="" className={style.report_img} />
+        ) : (
+          <div style={{ marginTop: "1.5rem" }}>등록된 보고서가 없습니다.</div>
+        )}
       </div>
       <div style={{ height: "6rem" }}></div>
     </div>

@@ -1,5 +1,4 @@
 import style from "../../styles/css/MyWallet.module.css";
-import { Icon } from "@iconify/react";
 import DefaultButton from "../common/DefaultButton";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +17,6 @@ const MyWallet = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const userPoint = useSelector((state: any) => state.user.info.point);
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   const isRegistered = useSelector((state: any) => state.account.isRegistered);
 
@@ -28,11 +26,10 @@ const MyWallet = () => {
     getPoint(
       accessToken,
       (res) => {
-        console.log(res.data.data);
         getUserPoint(res.data.data);
       },
       (err) => {
-        console.error("API 호출 실패:", err);
+        console.error(err);
       }
     );
   }, []);
@@ -40,10 +37,8 @@ const MyWallet = () => {
   const onClick = (event: any) => {
     const { id } = event.target;
     if (id === "reg") {
-      // 계좌 등록 화면 이동
       navigate("/profile/testbank/register");
     } else if (id === "unreg") {
-      // 계좌 해제 axios
       unregisterAccount(
         accessToken,
         (res) => {

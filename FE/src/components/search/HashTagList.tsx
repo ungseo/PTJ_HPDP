@@ -1,12 +1,12 @@
 import HashTagButton from "./HashTagButton";
 import style from "../../styles/css/HashTagList.module.css";
 import { useNavigate } from "react-router-dom";
+
 const HashTagList = () => {
   const navigate = useNavigate();
   const searchHandler = (event: any) => {
     const { id } = event.target;
     const keyword = id.replace("#", "");
-    console.log(keyword);
     navigate(`/search/${keyword}`);
   };
   const hashTagList = [

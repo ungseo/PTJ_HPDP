@@ -39,13 +39,14 @@ const PointHistoryItem = (props: PointHistoryItemProps) => {
   const CloseBlockModal = () => {
     setOpenBlock(false);
   };
-  console.log(item);
+
   const content =
     item.content && item.content !== "autopay"
       ? item.content
       : item.content === "autopay"
       ? "끝전 이체"
       : "포인트 충전";
+
   return (
     <div className={style.wrapper}>
       <p className={style.date}>{paymentDate}</p>

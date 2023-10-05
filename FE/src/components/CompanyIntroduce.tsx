@@ -13,6 +13,7 @@ import LinkIcon from "@mui/icons-material/Link";
 import BusinessIcon from "@mui/icons-material/Business";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import LoadingSpinnerMini from "./common/LoadingSpinnerMini";
 
 interface CompanyIntroduceProps {
   item: Interfaces.InSearchCompanyInfoResponseInterface;
@@ -26,18 +27,18 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
   const [responseData, setResponseData] = useState<any>([]);
 
   const [aiData, setAiData] = useState<any>([]);
-
+  const [newsOngoing, setNewsOngoing] = useState(true);
+  const [gptOngoing, setGptOngoing] = useState(true);
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
-  console.log(item.name);
   useEffect(() => {
     axios
       .get(`https://j9c110.p.ssafy.io/articles/news/${item.name}`, {})
       .then((response) => {
         setResponseData(response.data.data);
-        console.log("HTTP 요청 성공:", response.data);
+        setNewsOngoing(false);
       })
       .catch((error) => {
-        console.error("HTTP 요청 실패:", error);
+        setNewsOngoing(false);
       });
   }, []);
 
@@ -46,10 +47,10 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
       .get(`https://j9c110.p.ssafy.io/articles/info/${item.name}`, {})
       .then((response) => {
         setAiData(response.data.data);
-        console.log("AI 정보 요청 성공:", response.data);
+        setGptOngoing(false);
       })
       .catch((error) => {
-        console.error("AI 정보 요청 실패:", error);
+        setGptOngoing(false);
       });
   }, []);
 
@@ -97,13 +98,25 @@ const CompanyIntroduce = (props: CompanyIntroduceProps) => {
       </Grid>
       <div>
         <h2>GPT 소개</h2>
-        <div>{aiData}</div>
+        {newsOngoing ? (
+          <div className={style.loadingSpinner}>
+            <LoadingSpinnerMini />{" "}
+          </div>
+        ) : (
+          <div>{aiData}</div>
+        )}
       </div>
       <div>
         <h2 className={style.container}>관련기사</h2>
-        <div>
-          <NewsCardList items={responseData}></NewsCardList>
-        </div>
+        {gptOngoing ? (
+          <div className={style.loadingSpinner}>
+            <LoadingSpinnerMini />
+          </div>
+        ) : (
+          <div>
+            <NewsCardList items={responseData}></NewsCardList>
+          </div>
+        )}
       </div>
     </div>
   );

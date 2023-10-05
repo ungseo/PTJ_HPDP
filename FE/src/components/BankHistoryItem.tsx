@@ -27,11 +27,19 @@ const BankHistoryItem = (props: BankHistoryItemProps) => {
   const depositAmount = formatNumber(Math.abs(item.depositAmount));
 
   const AfterBalance = formatNumber(item.afterBlnc);
+
+  const opponentName =
+    item.opponentName && item.opponentName !== "point autopay"
+      ? item.opponentName
+      : item.opponentName === "point autopay"
+      ? "끝전 이체"
+      : "포인트 충전";
+
   return (
     <div className={style.wrapper}>
       <p className={style.date}>{createdDate}</p>
       <div className={style.content}>
-        <div className={style.content_title}>{item.opponentName}</div>
+        <div className={style.content_title}>{opponentName}</div>
 
         {flag ? (
           <div className={style.content_withdraw}> {depositAmount} 원</div>

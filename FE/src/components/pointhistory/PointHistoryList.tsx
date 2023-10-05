@@ -1,3 +1,4 @@
+import React from "react";
 import style from "../../styles/css/HistoryList.module.css";
 import DefaultButton from "../common/DefaultButton";
 import { useSelector } from "react-redux";
@@ -12,7 +13,6 @@ interface PointHistoryListProps {
 
 const PointHistoryList = (props: PointHistoryListProps) => {
   const { pointList } = props;
-  console.log("데헷", pointList);
 
   const dispatch = useDispatch();
 

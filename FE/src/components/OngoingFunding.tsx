@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import FundingItem from "./FundingItem";
 import { OutFundingsInfoInterface } from "../interface/apiDataInterface";
 import NullModal from "./common/NullModal";
