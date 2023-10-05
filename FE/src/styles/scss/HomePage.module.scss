@@ -6,6 +6,9 @@
   margin-top: 2rem;
   margin-bottom: 3rem;
   .name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
     font-size: 1.8rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
