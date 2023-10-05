@@ -33,7 +33,7 @@ const AscendingNumber = ({ num, fs, unit }: AscendingNumberInterface) => {
   return (
     <div>
       <span style={{ fontSize: `${fs}`, fontWeight: "bold" }}>
-        {targetNumber}
+        {targetNumber.toLocaleString()}
         {unit}
       </span>
     </div>
