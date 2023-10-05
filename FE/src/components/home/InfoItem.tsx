@@ -8,7 +8,7 @@ const InfoItem = ({ imgSrc, text, num, unit }: InfoItemInterface) => {
         className={style.image}
         src={imgSrc}
         alt="info사진"
-        style={{ width: "5rem" }}
+        style={{ width: "5rem", marginTop: "0.8rem" }}
       />
       <span style={{ color: "gray", fontWeight: "bold", fontSize: "1.2rem" }}>
         {text}

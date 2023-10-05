@@ -74,7 +74,7 @@ const TransactionList = () => {
   return (
     <div className={style.wrapper}>
       <div className={style.item}>
-        <img src="/americano.png" alt="커피" />
+        <img src="/am-remov.png" alt="커피" />
         <p className={style.title}>커피</p>
         <p className={style.price}>780 원</p>
         <DeepBlueBtn
@@ -85,7 +85,7 @@ const TransactionList = () => {
         />
       </div>
       <div className={style.item}>
-        <img src="/candy.png" alt="사탕" />
+        <img src="/candy-remove.png" alt="사탕" />
         <p className={style.title}>사탕</p>
         <p className={style.price}>340 원</p>
         <DeepBlueBtn
