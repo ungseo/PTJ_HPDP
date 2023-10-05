@@ -35,7 +35,7 @@ const SiteInfo = () => {
       <div className={style.wrapper}>
         <div className={style.animateLeft}>
           <InfoItem
-            imgSrc="/money-remove.png"
+            imgSrc="/coin (1).png"
             text="후원 금액"
             num={mainData.price}
             unit="원"
@@ -43,7 +43,7 @@ const SiteInfo = () => {
         </div>
         <div className={style.animateLeft}>
           <InfoItem
-            imgSrc="/heart-remove.png"
+            imgSrc="/hearts.png"
             text="후원 횟수"
             num={mainData.support}
             unit="회"
@@ -51,7 +51,7 @@ const SiteInfo = () => {
         </div>
         <div className={style.animateRight}>
           <InfoItem
-            imgSrc="/save_money.png"
+            imgSrc="/coins.png"
             text="모금 개수"
             num={mainData.funding}
             unit="개"
@@ -59,7 +59,7 @@ const SiteInfo = () => {
         </div>
         <div className={style.animateRight}>
           <InfoItem
-            imgSrc="/enterprise.png"
+            imgSrc="/office-building (2).png"
             text="참여 기업"
             num={mainData.company}
             unit="개"
