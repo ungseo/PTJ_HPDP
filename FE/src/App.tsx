@@ -40,6 +40,7 @@ import { useDispatch } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import Grid from "@mui/material/Grid";
+import { maxWidth } from "@mui/system";
 
 function App() {
   //
@@ -194,7 +195,15 @@ function App() {
   return (
     <Paper id="app-root" className={style.App}>
       {/* <button onClick={notify}>Make me a toast</button> */}
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            width: "80%",
+            maxWidth: "500px",
+          },
+        }}
+      />
 
       <Routes>
         {/* <Route path="/sample" Component={SamplePage}></Route> */}
