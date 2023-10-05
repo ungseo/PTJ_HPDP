@@ -1,10 +1,9 @@
-import { Icon } from "@iconify/react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import style from "../../styles/css/ProfileList.module.css";
 import ProfileListItem from "./ProfileListItem";
 import { useNavigate } from "react-router";
 import { logout } from "../../api/auth";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { userActions } from "../../store/user-slice";
 import { OkModal } from "../common/AlertModals";
 

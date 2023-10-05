@@ -1,6 +1,4 @@
 import axios from "axios";
-import { userActions } from "../store/user-slice";
-import { Dispatch } from "redux";
 
 export const customApi = (baseURL: string) => {
   const Api = axios.create({

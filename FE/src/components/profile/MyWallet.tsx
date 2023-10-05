@@ -1,5 +1,4 @@
 import style from "../../styles/css/MyWallet.module.css";
-import { Icon } from "@iconify/react";
 import DefaultButton from "../common/DefaultButton";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";

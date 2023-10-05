@@ -1,7 +1,6 @@
 import { AxiosResponse } from "axios";
 import { customApi, customApiForm } from ".";
 import * as Interfaces from "../interface/apiDataInterface";
-import { async } from "q";
 
 export async function getCompaniesInfo(
   keyword: string | null,

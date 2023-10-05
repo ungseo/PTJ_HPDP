@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import style from "../../styles/css/PwModal.module.css";
 import DefaultButton from "../common/DefaultButton";
 import { updatePassword } from "../../api/members";

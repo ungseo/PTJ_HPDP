@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { OutFundingsInfoInterface } from "../../interface/apiDataInterface";
-import ProgressBar from "../common/ProgressBar";
 import style from "../../styles/css/FundingCard.module.css";
+import ProgressBar from "../common/ProgressBar";
 
 function formatNumber(number: number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

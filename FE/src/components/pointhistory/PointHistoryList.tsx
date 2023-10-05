@@ -1,3 +1,4 @@
+import React from "react";
 import style from "../../styles/css/HistoryList.module.css";
 import DefaultButton from "../common/DefaultButton";
 import { useSelector } from "react-redux";

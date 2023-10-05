@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "@iconify/react";
 import style from "../../styles/css/BottomSheet.module.css";
 import { getMemberInfo } from "../../api/members";
-import { useDispatch } from "react-redux";
 import { userActions } from "../../store/user-slice";
 
 function formatNumber(number: number) {

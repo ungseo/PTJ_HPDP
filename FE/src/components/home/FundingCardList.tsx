@@ -1,10 +1,8 @@
 import React from "react";
 import * as Interfaces from "../../interface/apiDataInterface";
 import FundingCard from "./FundingCard";
-
 import style from "../../styles/css/FundingCardList.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";

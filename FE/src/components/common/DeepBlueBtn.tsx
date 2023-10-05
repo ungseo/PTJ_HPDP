@@ -1,5 +1,6 @@
-import ButtonInterface from "../../interface/commonInterface";
 import style from "../../styles/css/Buttons.module.css";
+import ButtonInterface from "../../interface/commonInterface";
+
 const DeepBlueBtn = ({
   text,
   disabled,

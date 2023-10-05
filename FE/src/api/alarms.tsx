@@ -36,5 +36,5 @@ export async function readAlarms(
 ) {
   const api = customApi("alarm");
   api.defaults.headers["accessToken"] = `Bearer ${accessToken}`;
-  await api.get(`/${newsAlarmId}}`).then(success).catch(fail);
+  await api.put(`/${newsAlarmId}}`).then(success).catch(fail);
 }

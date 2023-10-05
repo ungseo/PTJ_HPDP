@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import style from "../../styles/scss/BankAccount.module.scss";
 import { useSelector } from "react-redux";
 import { getAccount } from "../../api/banks";

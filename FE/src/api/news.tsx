@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import * as Interfaces from "../interface/apiDataInterface";
 
 const api = axios.create({
   baseURL: `${process.env.REACT_APP_NEWS_API_URL}`,

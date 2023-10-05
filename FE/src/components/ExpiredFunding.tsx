@@ -1,5 +1,4 @@
 import React from "react";
-import FundingCard from "./home/FundingCard";
 import FundingItem from "./FundingItem";
 import { OutFundingsInfoInterface } from "../interface/apiDataInterface";
 import NullModal from "./common/NullModal";

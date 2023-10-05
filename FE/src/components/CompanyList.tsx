@@ -5,7 +5,6 @@ import * as Interfaces from "../interface/apiDataInterface";
 import ImageList from "@mui/material/ImageList";
 import CompanyItem from "./CompanyItem";
 import { getCompaniesInfo } from "../api/companies";
-import styled from "@emotion/styled";
 import style from "../styles/css/CompanyList.module.css";
 import LoadingSpinner from "./common/LoadingSpinner";
 import NullModal from "./common/NullModal";

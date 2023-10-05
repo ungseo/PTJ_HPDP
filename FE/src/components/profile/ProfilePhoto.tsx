@@ -4,7 +4,6 @@ import style from "../../styles/css/ProfilePhotho.module.css";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import PhotoEditButton from "./PhotoEditButton";
-import { ProfilePhotoInterFace } from "../../interface/profilePageInterface";
 import { getMemberBlockchainInfo } from "../../api/blockchain";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";

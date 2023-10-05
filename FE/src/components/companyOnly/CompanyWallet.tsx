@@ -1,6 +1,5 @@
-import { Icon } from "@iconify/react";
+import React from "react";
 import style from "../../styles/css/CompanyWallet.module.css";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 function formatNumber(number: number) {

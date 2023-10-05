@@ -18,7 +18,6 @@ export async function registerAccount(
     | void,
   fail: (err: any) => PromiseLike<never> | null | undefined | void
 ) {
-  // 요청할 화면에서 객체로 정의하고 params로 전달하는 방법도 있다
   const data = {
     accountNumber: accountNumber,
     accountPw: accountPw,
