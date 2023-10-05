@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import style from "../../styles/css/SecurityPwInput.module.css";
 import { useEffect, useState } from "react";
+import { QuestionModal } from "../common/AlertModals";
 
 const SecurityPwInput = ({ setIsInput, setAccountPw }: any) => {
   const closeModal = () => {
@@ -42,7 +43,15 @@ const SecurityPwInput = ({ setIsInput, setAccountPw }: any) => {
   };
 
   const confirmation = () => {
-    setAccountPw(display.join(""));
+    if (display.length === 4) {
+      setAccountPw(display.join(""));
+      setIsInput(false);
+    } else {
+      QuestionModal({
+        title: "비밀번호",
+        text: "비밀번호 4자리를 입력해주세요!",
+      });
+    }
   };
   return (
     <div className={style.wrapper}>
