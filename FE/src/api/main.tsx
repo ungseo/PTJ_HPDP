@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
-import { customApi, customApiForm } from ".";
+import { customApi } from ".";
+import * as Interfaces from "../interface/apiDataInterface";
 
 export async function getMain(
   success: (

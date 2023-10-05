@@ -1,7 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 
 import * as Interfaces from "../interface/apiDataInterface";
 import { getFundingProgress } from "../api/fundings";

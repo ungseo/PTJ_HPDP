@@ -1,3 +1,4 @@
+import React from "react";
 import style from "../../styles/css/NullModal.module.css";
 
 const NullModal = ({ text }: { text: string }) => {

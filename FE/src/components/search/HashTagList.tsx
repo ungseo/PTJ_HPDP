@@ -1,6 +1,7 @@
 import HashTagButton from "./HashTagButton";
 import style from "../../styles/css/HashTagList.module.css";
 import { useNavigate } from "react-router-dom";
+
 const HashTagList = () => {
   const navigate = useNavigate();
   const searchHandler = (event: any) => {

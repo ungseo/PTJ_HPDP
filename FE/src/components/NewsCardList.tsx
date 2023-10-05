@@ -1,9 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import style from "../styles/css/NewsCardList.module.css";
-
 import * as Interfaces from "../interface/apiDataInterface";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";

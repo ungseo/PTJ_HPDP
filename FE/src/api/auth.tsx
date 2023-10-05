@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
-import * as Interfaces from "../interface/apiDataInterface";
 import { customApi } from "./index";
+import * as Interfaces from "../interface/apiDataInterface";
 
 export async function signup(
   data: Interfaces.InSignupInterface,

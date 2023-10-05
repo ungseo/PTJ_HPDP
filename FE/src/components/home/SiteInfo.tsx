@@ -1,7 +1,7 @@
+import React, { useState, useEffect } from "react";
+import * as Interfaces from "../../interface/apiDataInterface";
 import style from "../../styles/css/SiteInfo.module.css";
 import InfoItem from "./InfoItem";
-import { useState, useEffect } from "react";
-import * as Interfaces from "../../interface/apiDataInterface";
 import { getMain } from "../../api/main";
 
 const SiteInfo = () => {

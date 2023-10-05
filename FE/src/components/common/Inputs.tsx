@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { InputInterface } from "../../interface/commonInterface";
+import React from "react";
 import style from "../../styles/css/Inputs.module.css";
+import { InputInterface } from "../../interface/commonInterface";
 
 const AnimationLabelInput = ({
   value,

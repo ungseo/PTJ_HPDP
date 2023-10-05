@@ -1,9 +1,8 @@
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import style from "../../styles/css/ReportModal.module.css";
 import { registerReport } from "../../api/fundings";
-import { useState } from "react";
 import { NotOkModal, OkModal, QuestionModal } from "../common/AlertModals";
-import { useNavigate } from "react-router-dom";
 
 const ReportModal = ({ cM, fundingId, cC }: any) => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);

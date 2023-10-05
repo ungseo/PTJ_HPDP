@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AscendingNumberInterface } from "../../interface/commonInterface";
 
 const AscendingNumber = ({ num, fs, unit }: AscendingNumberInterface) => {

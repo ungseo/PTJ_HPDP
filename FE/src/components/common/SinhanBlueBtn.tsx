@@ -1,5 +1,7 @@
-import ButtonInterface from "../../interface/commonInterface";
+import React from "react";
 import style from "../../styles/css/Buttons.module.css";
+import ButtonInterface from "../../interface/commonInterface";
+
 const SinhanBlueBtn = ({
   text,
   disabled,

@@ -1,5 +1,6 @@
-import style from "../../styles/css/InfoItem.module.css";
+import React from "react";
 import { InfoItemInterface } from "../../interface/homePageInterface";
+import style from "../../styles/css/InfoItem.module.css";
 import AscendingNumber from "../common/AscendingNumber";
 
 const InfoItem = ({ imgSrc, text, num, unit }: InfoItemInterface) => {

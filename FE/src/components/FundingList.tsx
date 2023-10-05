@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 
 import * as Interfaces from "../interface/apiDataInterface";
 import { getFundingTotalList } from "../api/fundings";

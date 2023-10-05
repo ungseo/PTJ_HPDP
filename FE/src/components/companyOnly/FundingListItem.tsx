@@ -1,17 +1,14 @@
+import React, { useState } from "react";
 import { Grid } from "@mui/material";
+import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 import { OutFundingsInfoInterface } from "../../interface/apiDataInterface";
 import ProgressBar from "../common/ProgressBar";
-import style from "../../styles/css/FundingListItem.module.css";
-import { Icon } from "@iconify/react";
-import { useState } from "react";
-import { registerReport, settlementFunding } from "../../api/fundings";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { uiActions } from "../../store/ui-slice";
+import { settlementFunding } from "../../api/fundings";
 import ReportModal from "./ReportModal";
 import { NotOkModal, OkModal } from "../common/AlertModals";
 import LoadingSpinner from "../common/LoadingSpinner";
-import { useNavigate } from "react-router";
+import style from "../../styles/css/FundingListItem.module.css";
 
 function formatNumber(number: number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

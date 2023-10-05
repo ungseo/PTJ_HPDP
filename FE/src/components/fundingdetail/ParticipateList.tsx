@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import * as Interfaces from "../../interface/apiDataInterface";
 import style from "../../styles/css/ParticipateList.module.css";
+import * as Interfaces from "../../interface/apiDataInterface";
 import ParticipateItem from "./ParticipateItem";
 import { getParticipants } from "../../api/fundings";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";

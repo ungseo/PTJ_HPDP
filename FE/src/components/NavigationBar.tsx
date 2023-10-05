@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import BottomNavigation from "@mui/material/BottomNavigation";
@@ -43,7 +43,6 @@ export default function NavigationBar() {
   }, [location.pathname]);
 
   const alarmCount = useSelector((state: any) => state.ui.alarmCount);
-  console.log("test", alarmCount);
 
   return (
     <BottomNavigation value={value} onChange={handleChange}>

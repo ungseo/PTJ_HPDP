@@ -1,5 +1,6 @@
 import React from "react";
 import style from "../../styles/css/LoadingSpinnerMini.module.css";
+
 const LodingSpinnerMini = () => {
   return (
     <div className={style.loadingioSpinner}>

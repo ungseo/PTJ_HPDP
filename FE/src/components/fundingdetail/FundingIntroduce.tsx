@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { OutFundingsInfoInterface } from "../../interface/apiDataInterface";
+import style from "../../styles/css/FundingIntroduce.module.css";
 import ParticipateList from "./ParticipateList";
 import DetailHashTag from "./DetailHashTag";
-import style from "../../styles/css/FundingIntroduce.module.css";
 
 const FundingIntroduce = ({ props }: { props: OutFundingsInfoInterface }) => {
   // 원래 props.hashtag는 string으로 들어옴 배열로 넘기기 위해 split
