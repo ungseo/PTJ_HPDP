@@ -8,6 +8,7 @@ import { getCompaniesInfo } from "../api/companies";
 import styled from "@emotion/styled";
 import style from "../styles/css/CompanyList.module.css";
 import LoadingSpinner from "./common/LoadingSpinner";
+import NullModal from "./common/NullModal";
 
 export default function CompanyList({ keyword }: any) {
   const [companyData, setCompanyData] = useState<
@@ -51,6 +52,6 @@ export default function CompanyList({ keyword }: any) {
       ))}
     </ImageList>
   ) : (
-    <div>소셜벤처가 없습니다.</div>
+    <NullModal text="소셜벤처가 없습니다." />
   );
 }

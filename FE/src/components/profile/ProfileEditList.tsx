@@ -65,7 +65,7 @@ const ProfileEditList = ({ editInput, setEditInput }: any) => {
           styles={{
             position: "absolute",
             top: "0",
-            right: "1.5rem",
+            right: "0",
             margin: "1rem auto auto auto",
             width: "4rem",
           }}

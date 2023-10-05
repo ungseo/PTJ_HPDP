@@ -12,6 +12,10 @@ import ReportModal from "./ReportModal";
 import { NotOkModal, OkModal } from "../common/AlertModals";
 import LoadingSpinner from "../common/LoadingSpinner";
 
+function formatNumber(number: number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const FundingListItem = ({
   funding,
   refresh,
@@ -27,10 +31,10 @@ const FundingListItem = ({
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
   //정산하기
   const [onGoing, setOnGoing] = useState(false);
-
-  const settlement = async () => {
-    await setOnGoing(true);
-    await settlementFunding(
+  const Total_Funding = formatNumber(funding.totalFunding);
+  const settlement = () => {
+    setOnGoing(true);
+    settlementFunding(
       accessToken,
       funding.fundingId,
       (res) => {

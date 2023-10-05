@@ -19,8 +19,18 @@ public class BlockChainController {
     public ApiResponse<TransactionReceiptRes> getTransaction(@PathVariable Long pointHistoryId) {
         TransactionReceiptRes transactionReceiptRes = blockChainServcie.getTransaction(pointHistoryId);
         return ApiResponse.ok(transactionReceiptRes);
-
     }
 
+    @GetMapping("/member")
+    public ApiResponse<String> getWalletAddress(){
+        String address = blockChainServcie.getWalletAddressForMember();
+        return ApiResponse.ok(address);
+    }
+
+    @GetMapping("/company/{companyId}")
+    public ApiResponse<String> getWalletAddress(@PathVariable Long companyId){
+        String address = blockChainServcie.getWalletAddressForCompany(companyId);
+        return ApiResponse.ok(address);
+    }
 
 }

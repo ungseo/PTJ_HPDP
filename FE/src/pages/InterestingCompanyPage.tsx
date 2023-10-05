@@ -5,6 +5,7 @@ import CompanyItem from "../components/CompanyItem";
 import { getInterestingCompany } from "../api/interests";
 import { useSelector } from "react-redux";
 import * as Interfaces from "../interface/apiDataInterface";
+import NullModal from "../components/common/NullModal";
 
 const InterestingCompanyPage = () => {
   const accessToken = useSelector((state: any) => state.user.auth.accessToken);
@@ -39,7 +40,7 @@ const InterestingCompanyPage = () => {
             ))}
           </ImageList>
         ) : (
-          <div></div>
+          <NullModal text="등록된 관심기업이 없습니다." />
         )}
       </div>
     </div>
