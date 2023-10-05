@@ -49,6 +49,7 @@ const RegisterAccountPage = () => {
   };
   const [isInput, setIsInput] = useState(false);
   const pwInputHandler = () => {
+    setAccountPw("");
     setIsInput(true);
   };
   return (
