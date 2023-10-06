@@ -8,7 +8,7 @@
 
 ---
 
-**일상에서 생기는 짠든으로 소셜벤처에 후원해주세요!** ❤
+**일상에서 생기는 잔돈으로 소셜벤처에 후원해주세요!** ❤ **[UCC보러가기](https://youtu.be/pNRrlDQ1Il0)** ❤
 
 한푼두푼(HPDP)은 크라우드 펀딩을 활용한 소셜 벤처 자금 후원 서비스 플랫폼입니다.
 
@@ -16,7 +16,7 @@
 
 ![home](README_assets/a3259c9fbac9f9cfbe70287ea989edc5c956b44a.png)
 
-`[UCC보러가기](https://youtu.be/Vp1Wu1rdZpE)`
+
 
 ## 서비스 특징
 
@@ -48,7 +48,7 @@
 
 #### OpenAPI를 이용한 기업 정보제공
 
-- OpenAPI(ChatGPT)를 활용해 소셜벤처에 대한 요약 정보를 제공합니다.
+- OpenAI(ChatGPT)를 활용해 소셜벤처에 대한 요약 정보를 제공합니다.
 
 - 후원자에게는 해당 기업에 대한 정보와 후원에 대한 신뢰를, 소셜벤처에게는 기업에 대한 정보를 전달하고 홍보효과를 줄 수 있습니다.
 
@@ -60,7 +60,7 @@
 
 ---
 
-- Open API(ChatGPT)
+- OpenAI(ChatGPT)
 
 - Web3 API
 
@@ -175,28 +175,28 @@ frontend
 
 ```
 backend
-├─ main
+└─ main
   ├─ config
   ├─ controller
   │  └─ member
   │     ├─ request 
-  │     |     └─ MemberReq
-    |          └─ response
-  │           └─ MemberRes
+  │     |    └─ MemberReq
+  |     └─ response
+  │          └─ MemberRes
   ├─ service
   │  └─ member
   │     └─ MemberService
   │     └─ MemberQueryService 
   │        # @ReadOnly 조회때 사용
   ├─ common # dao
-  ├  ├─ auth
+  │  ├─ auth
   │  ├─ exception
   │  └─ util
   └─ model
      ├─ entity
      |  └─ Member
      └─ repository
-            ├─ MemberRepository
+        ├─ MemberRepository
         └─ MemberQueryRepository
 ```
 
