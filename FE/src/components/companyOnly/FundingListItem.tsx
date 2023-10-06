@@ -40,7 +40,11 @@ const FundingListItem = ({
       accessToken,
       funding.fundingId,
       (res) => {
-        OkModal({ title: "성공", text: "정산이 완료되었습니다." });
+        OkModal({
+          title: "성공",
+          text: "정산이 완료되었습니다.",
+          footer: `${res.data.data.totalPoint} 포인트를 후원받았습니다.`,
+        });
         refresh((prev: number) => ++prev);
         setOnGoing(false);
       },
