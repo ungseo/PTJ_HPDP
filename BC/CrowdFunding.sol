@@ -13,6 +13,7 @@ contract CrowdFunding {
 
     // 각 펀딩 프로젝트에 대한 정보 구조
     struct Funding {
+        uint256 id; // 추가된 id 필드
         address beneficiary; // 기업 주소
         uint256 goal; // 목표 금액
         uint256 raisedAmount; // 펀딩 활성화 상태
@@ -22,28 +23,29 @@ contract CrowdFunding {
 
     }
 
-    Funding[] public fundings; // 펀딩 목록
+    mapping(uint256 => Funding) public fundings; // 배열에서 매핑으로 변경
 
     constructor(address _tokenAddress, address _serviceWallet) {
         token = IERC20(_tokenAddress); // ERC20 토큰 설정
         owner = msg.sender; // 컨트랙트 소유자
         serviceWallet = _serviceWallet; // 서비스 지갑 주소
     }
-
+    
     // 새 펀딩 생성
-    function createFunding(uint256 _goal ,uint256 _durationInDays) external returns(uint256) {
+     function createFunding(uint256 _fundingId, uint256 _goal, uint256 _durationInDays) external {
+        require(fundings[_fundingId].beneficiary == address(0), "Funding ID already exists"); // 중복 ID 확인
+
         uint256 deadline = block.timestamp + _durationInDays * 1 days;
 
-        fundings.push(Funding({
-            beneficiary: msg.sender,
+        fundings[_fundingId] = Funding({
+            id: _fundingId, // 지정한 ID 사용
+            beneficiary: msg.sender,    
             goal: _goal,
             raisedAmount: 0,
             isActive: true,
             isWithdrawn: false,
             deadline: deadline
-        }));
-
-        return fundings.length - 1;
+        });
     }
 
     // 펀딩에 기여
