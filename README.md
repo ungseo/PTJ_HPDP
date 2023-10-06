@@ -207,5 +207,9 @@ backend
 ![Team](README_assets/daf0d72f7c4c917be4435ffb7e222953d5e77f95.png)
 
 ## 맡은 역할
+|   이름   |    역할     | 설명                                                      |
+|------|---------|--------------------------------------------------------|
+| 홍승준 |   백엔드, 블록체인 담당   | geth를 이용한 private network 구축, 솔리디티 크라우드 펀딩 스마트컨트랙트 구현, web3j를 이용하여 spring boot와 private network 통신, 포인트 API                               |
+
 
 ---
