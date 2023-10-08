@@ -1,12 +1,4 @@
-# 💰한푼두푼(HPDP) 💰
-
-프로젝트 기간: 2023.08.21 ~ 2023.10.06
-
----
-
-## 서비스 소개
-
----
+# 💰 한푼두푼(HPDP) - 소셜 벤처 크라우드 펀딩 플랫폼 💰
 
 **일상에서 생기는 잔돈으로 소셜벤처에 후원해주세요!** ❤ **[UCC보러가기](https://youtu.be/pNRrlDQ1Il0)** ❤
 
@@ -14,13 +6,31 @@
 
 일상에서 발생하는 끝전으로 당신이 관심을 가지는 기업과 프로젝트에 후원하세요.
 
-![home](README_assets/a3259c9fbac9f9cfbe70287ea989edc5c956b44a.png)
+![home](ReadmeAssets/main.png)
 
 
+# Contents
 
-## 서비스 특징
+1. [개발기간](#📅개발기간)<br/>
+2. [서비스 특징](#📄서비스-특징)<br/>
+3. [주요기능](#📑주요-기능) <br/>
+4. [서비스 화면](#📱서비스-화면) <br/>
+5. [사용한 외부 서비스](#🔌사용한-외부-서비스) <br/>
+6. [시스템 아키텍쳐](#시스템-아키텍쳐) <br/>
+7. [ERD](#erd-다이어그램) <br/>
+8. [기타](#문서-링크) <br/>
+9. [팀원 및 담당파트](#👨‍👧‍👧팀원-및-담당파트) <br/>
 
----
+<br /><br />
+
+## 📅개발기간
+
+2023.08.21 ~ 2023.10.06 (7주)
+
+<br /><br />
+
+
+## 📄서비스 특징
 
 1. 끝전을 활용한 소셜 벤처 크라우드 펀딩 플랫폼
 
@@ -30,9 +40,10 @@
 
 4. 한푼두푼만의 블록체인 코인으로 후원금액이 전달되는 과정을 투명하게 관리합니다.
 
-## 주요 기능
+<br /><br />
 
----
+
+## 📑주요 기능
 
 #### 끝전 자동이체
 
@@ -52,68 +63,148 @@
 
 - 후원자에게는 해당 기업에 대한 정보와 후원에 대한 신뢰를, 소셜벤처에게는 기업에 대한 정보를 전달하고 홍보효과를 줄 수 있습니다.
 
-## 기능별 화면
+<br /><br />
 
----
 
-## 사용한 외부 서비스
+## 📱서비스 화면
 
----
+### 메인 페이지
+
+<div style="display : flex; flex-direction : row; gap:10px;">
+  <img src="./ReadmeAssets/홈.gif" width=150px/>
+</div>
+
+### 로그인 및 회원가입 페이지
+
+<div style="display : flex; flex-direction : row; gap:10px;">
+  <img src="./ReadmeAssets/로그인.gif" width=150px/>
+  <img src="./ReadmeAssets/회원가입.gif" width=150px/>
+</div>
+
+### 회원 정보 수정 페이지
+
+<div style="display : flex; flex-direction : row; gap:10px;">
+  <img src="./ReadmeAssets/회원정보수정.gif" width=150px/>
+</div>
+
+### 후원 관련 페이지
+
+<div style="display : flex; flex-direction : row; gap:10px;">
+  <img src="./ReadmeAssets/후원리스트.gif" width=150px/>
+  <img src="./ReadmeAssets/후원하기.gif" width=150px/>
+  <img src="./ReadmeAssets/후원내역 확인.gif" width=150px/>
+</div>
+
+### 기업 관련 페이지
+
+<div style="display : flex; flex-direction : row; gap:10px;">
+  <img src="./ReadmeAssets/기업 리스트 조회.gif" width=150px/>
+  <img src="./ReadmeAssets/관심기업.gif" width=150px/>
+</div>
+
+### 계좌 등록 및 끝전 이체  및 토스 결제 페이지
+
+<div style="display : flex; flex-direction : row; gap:10px;">
+  <img src="./ReadmeAssets/계좌 등록.gif" width=150px/>
+  <img src="./ReadmeAssets/끝전 알림.gif" width=150px/>
+  <img src="./ReadmeAssets/토스.gif" width=150px/>
+</div>
+
+### 블록체인 확인 페이지
+
+<div style="display : flex; flex-direction : row; gap:10px;">
+  <img src="./ReadmeAssets/블록체인 확인.gif" width=150px/>
+</div>
+
+### 쪽지 페이지
+
+<div style="display : flex; flex-direction : row; gap:10px;">
+  <img src="./ReadmeAssets/기업 쪽지 보내기.gif" width=150px/>
+</div>
+
+### 알림 페이지
+
+<div style="display : flex; flex-direction : row; gap:10px;">
+  <img src="./ReadmeAssets/알림 확인.gif" width=150px/>
+</div>
+
+### 정산 페이지
+
+<div style="display : flex; flex-direction : row; gap:10px;">
+  <img src="./ReadmeAssets/기업 정산.gif" width=150px/>
+</div>
+
+<br /><br />
+
+
+## 🔌사용한 외부 서비스
 
 - OpenAI(ChatGPT)
 
 - Web3 API
 
+<br /><br />
+
+
 ## 시스템 아키텍쳐
 
----
+![Architecture](ReadmeAssets/system_architecture%20.png)
 
-![Architecture](README_assets/c7ce3cfa4da0cea82de18fa00017ff61f2ec5945.png)
+<br /><br />
+
 
 ## ERD 다이어그램
 
----
+![ERD](ReadmeAssets/ERD.png)
 
-![ERD](README_assets/e47495e7471ddf38aec7f0152037683f68f513c0.png)
+<br /><br />
 
-## 문서 링크
 
----
+## 📄문서 링크
 
-- [팀노션]([Notion – The all-in-one workspace for your notes, tasks, wikis, and databases.](https://nonstop-basil-8e5.notion.site/fintech-d8bbd29d3ca24a36aef3a09bdabd5e28))
+
+- [팀노션](https://nonstop-basil-8e5.notion.site/fintech-d8bbd29d3ca24a36aef3a09bdabd5e28)
 
 - [API명세서](https://nonstop-basil-8e5.notion.site/API-dc66a4b230534c7c8091f42aa53ec28f)
 
 - [기능명세서](https://nonstop-basil-8e5.notion.site/986107c1b0e146edaa73ebf37f1298be)
 
-## Git-flow
+<br /><br />
 
----
+## 📄Git-flow
 
 - 기능 개발이 완료되면 feature branch를 develop branch로 merge한다.
 
 - branch 규칙
 
 > master : 운영 서버로 배포하기 위한 branch
+>
 > develop : 다음 출시 기능을 개발하는 branch
 > 
 > BC: blockchain branch
+>
 > BE: backend branch
+>
 > FE: frontend branch
+>
 > feature : 세부 기능을 개발하는 branch, branch 이름은 각 기능명으로 작성
 
 - feature branch 이름 규칙
 
 > feature/[FE/BE/BC]/[기능명]
+>
 > ex) feature/BE/member
+>
 > ex) feature/FE/webrtc
 
-## commit conventions
+<br /><br />
+
+## 📄commit conventions
 
 ```javascript
 [커밋타입] - 작업내용_한눈에_알아보게_적기_최대한_자세하게
 ex)[INIT](띄어쓰기) 초기화
-- INIT: 초기화 (이건 쓸일 거의 없어여 -> 맨처음에 ㄱㄱ)
+- INIT: 초기화
 - FEAT: 새로운 기능을 추가할 경우
 - MODIFY: 코드를 수정한 경우
 - DESIGN or STYLE: 기능에 영향을 주지 않는 커밋, 코드 순서, CSS등의 포맷에 관한 커밋
@@ -130,9 +221,9 @@ ex)[INIT](띄어쓰기) 초기화
 - CHORE: 위에 해당되지 않는 나머지 (기타 등등)
 ```
 
-## JIRA 규칙
+<br /><br />
 
----
+## 📄JIRA 규칙
 
 ```javascript
 기준
@@ -150,27 +241,27 @@ ex)[INIT](띄어쓰기) 초기화
 - 컴포넌트 선택 [ BE | FE ]
 ```
 
-## 폴더 구조
+<br /><br />
 
----
+## 📁폴더 구조
 
 ```
 frontend
     ├── docker
     ├── assets
-  ├── node_modules
-  ├── public
-  └── src
-            ├── api
-      ├── components
-            ├── interface
-      ├── pages
-      ├── store
-      ├── style
-            │        ├─ css
-            │        ├─ fonts
-            │        └─ scss
-            └── types
+    ├── node_modules
+    ├── public
+    └── src
+        ├── api
+        ├── components
+        ├── interface
+        ├── pages
+        ├── store
+        ├── style
+        │    ├─ css
+        │    ├─ fonts
+        │    └─ scss
+        └── types
 ```
 
 ```
@@ -200,12 +291,18 @@ backend
         └─ MemberQueryRepository
 ```
 
-## 팀원 소개
+<br /><br />
 
----
+## 👨‍👧‍👧팀원 및 담당파트
 
-![Team](README_assets/daf0d72f7c4c917be4435ffb7e222953d5e77f95.png)
+- 홍승준
 
-## 맡은 역할
+- 김정훈
 
----
+- 변영채
+
+- 김웅서
+
+- 박태규
+
+- 장혜원
