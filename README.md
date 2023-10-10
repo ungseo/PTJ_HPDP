@@ -14,7 +14,8 @@
 
 일상에서 발생하는 끝전으로 당신이 관심을 가지는 기업과 프로젝트에 후원하세요.
 
-![home](README_assets/a3259c9fbac9f9cfbe70287ea989edc5c956b44a.png)
+<!-- ![home](README_assets/a3259c9fbac9f9cfbe70287ea989edc5c956b44a.png) -->
+<img src="./ReadmeAssets/홈.gif" alt="GIF 이미지" width="300">
 
 
 
@@ -54,6 +55,55 @@
 
 ## 기능별 화면
 
+### 계좌 등록
+
+<img src="./ReadmeAssets/계좌 등록.gif" alt="GIF 이미지" width="300">
+
+### 관심기업
+
+<img src="./ReadmeAssets/관심기업.gif" alt="GIF 이미지" width="300">
+
+### 끝전 알림
+
+<img src="./ReadmeAssets/끝전 알림.gif" alt="GIF 이미지" width="300">
+
+<!-- ### 토스
+
+<img src="./ReadmeAssets/토스.gif" alt="GIF 이미지" width="300"> -->
+
+### 알림 확인
+
+<img src="./ReadmeAssets/알림 확인.gif" alt="GIF 이미지" width="300">
+
+### 기업 리스트 조회
+
+<img src="./ReadmeAssets/기업 리스트 조회.gif" alt="GIF 이미지" width="300">
+
+### 기업 쪽지 보내
+
+<img src="./ReadmeAssets/기업 쪽지 보내기.gif" alt="GIF 이미지" width="300">
+
+### 후원하기
+
+<img src="./ReadmeAssets/후원하기.gif" alt="GIF 이미지" width="300">
+
+### 후원내역 확인
+
+<img src="./ReadmeAssets/후원내역 확인.gif" alt="GIF 이미지" width="300">
+
+### 후원리스트
+
+<img src="./ReadmeAssets/후원리스트.gif" alt="GIF 이미지" width="300">
+
+### 블록체인 확인
+
+<img src="./ReadmeAssets/블록체인 확인.gif" alt="GIF 이미지" width="300">
+
+### 기업 정산
+
+<img src="./ReadmeAssets/기업 정산.gif" alt="GIF 이미지" width="300">
+
+
 ---
 
 ## 사용한 외부 서비스
@@ -68,13 +118,16 @@
 
 ---
 
-![Architecture](README_assets/c7ce3cfa4da0cea82de18fa00017ff61f2ec5945.png)
+<!-- ![Architecture](README_assets/c7ce3cfa4da0cea82de18fa00017ff61f2ec5945.png) -->
+<img src="./README_assets/c7ce3cfa4da0cea82de18fa00017ff61f2ec5945.png" alt="Architecture" width="800">
 
 ## ERD 다이어그램
 
 ---
 
-![ERD](README_assets/e47495e7471ddf38aec7f0152037683f68f513c0.png)
+<!-- ![ERD](README_assets/e47495e7471ddf38aec7f0152037683f68f513c0.png) -->
+<img src="./README_assets/e47495e7471ddf38aec7f0152037683f68f513c0.png" alt="ERD" width="800">
+
 
 ## 문서 링크
 
@@ -210,6 +263,8 @@ backend
 |   이름   |    역할     | 설명                                                      |
 |------|---------|--------------------------------------------------------|
 | 홍승준 |   백엔드, 블록체인 담당   | geth를 이용한 private network 구축, 솔리디티 크라우드 펀딩 스마트컨트랙트 구현, web3j를 이용하여 spring boot와 private network 통신, 포인트 API                               |
+| 김정훈 |   백엔드 담당   | Redis를 활용한 즐겨찾기 기능,  SSE를 이용한 알림 구현, Spring Security + Jwt + Redis 로그인 구현, 예외 처리(Customized Exception Handler) 설계, Fast API(뉴스 크롤링, openAI)                               |
+
 
 
 ---
