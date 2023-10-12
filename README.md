@@ -17,8 +17,6 @@
 <!-- ![home](README_assets/a3259c9fbac9f9cfbe70287ea989edc5c956b44a.png) -->
 <img src="./ReadmeAssets/홈.gif" alt="GIF 이미지" width="300">
 
-
-
 ## 서비스 특징
 
 ---
@@ -103,7 +101,6 @@
 
 <img src="./ReadmeAssets/기업 정산.gif" alt="GIF 이미지" width="300">
 
-
 ---
 
 ## 사용한 외부 서비스
@@ -128,7 +125,6 @@
 <!-- ![ERD](README_assets/e47495e7471ddf38aec7f0152037683f68f513c0.png) -->
 <img src="./README_assets/e47495e7471ddf38aec7f0152037683f68f513c0.png" alt="ERD" width="800">
 
-
 ## 문서 링크
 
 ---
@@ -149,7 +145,7 @@
 
 > master : 운영 서버로 배포하기 위한 branch
 > develop : 다음 출시 기능을 개발하는 branch
-> 
+>
 > BC: blockchain branch
 > BE: backend branch
 > FE: frontend branch
@@ -197,7 +193,7 @@ ex)[INIT](띄어쓰기) 초기화
 - task : 스토리에서 기술한 내용을 달성하기 위해 수행해야할 기술적인 업무
     - 회원 가입, 아이디 중복체크
 
-[날짜] 이름 
+[날짜] 이름
 
 - 이슈 연결하기
 - 컴포넌트 선택 [ BE | FE ]
@@ -232,14 +228,14 @@ backend
   ├─ config
   ├─ controller
   │  └─ member
-  │     ├─ request 
+  │     ├─ request
   │     |    └─ MemberReq
   |     └─ response
   │          └─ MemberRes
   ├─ service
   │  └─ member
   │     └─ MemberService
-  │     └─ MemberQueryService 
+  │     └─ MemberQueryService
   │        # @ReadOnly 조회때 사용
   ├─ common # dao
   │  ├─ auth
@@ -260,11 +256,14 @@ backend
 ![Team](README_assets/daf0d72f7c4c917be4435ffb7e222953d5e77f95.png)
 
 ## 맡은 역할
-|   이름   |    역할     | 설명                                                      |
-|------|---------|--------------------------------------------------------|
-| 홍승준 |   백엔드, 블록체인 담당   | geth를 이용한 private network 구축, 솔리디티 크라우드 펀딩 스마트컨트랙트 구현, web3j를 이용하여 spring boot와 private network 통신, 포인트 API                               |
-| 김정훈 |   백엔드 담당   | Redis를 활용한 즐겨찾기 기능,  SSE를 이용한 알림 구현, Spring Security + Jwt + Redis 로그인 구현, 예외 처리(Customized Exception Handler) 설계, Fast API(뉴스 크롤링, openAI)                               |
-| 변영채 |   백엔드, 인프라 담당   | 펀딩 관련 CRUD API 구현, 자체 뱅킹 서비스 구현(테스트 은행), 쪽지 API 구현, 기업 마이페이지 API 구현, EC2, Nginx, Docker-Compose를 이용한 배포, S3 연동                               |
-| 김웅서 | 프론트엔드 담당 | 클라이언트 사이드 개발 초기 환경 설정, 공통 컴포넌트 개발, 토스페이먼츠 API를 이용한 결제 기능 구현, 회원가입, 로그인 등 Auth 관련 기능 구현, CSS 애니메이션 구현 |
+
+| 이름   | 역할                      | 설명                                                                                                                                                                                          |
+| ------ | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 홍승준 | 백엔드, 블록체인 담당     | geth를 이용한 private network 구축, 솔리디티 크라우드 펀딩 스마트컨트랙트 구현, web3j를 이용하여 spring boot와 private network 통신, 포인트 API                                               |
+| 김정훈 | 백엔드 담당               | Redis를 활용한 즐겨찾기 기능, SSE를 이용한 알림 구현, Spring Security + Jwt + Redis 로그인 구현, 예외 처리(Customized Exception Handler) 설계, Fast API(뉴스 크롤링, openAI)                  |
+| 변영채 | 백엔드, 인프라 담당       | 펀딩 관련 CRUD API 구현, 자체 뱅킹 서비스 구현(테스트 은행), 쪽지 API 구현, 기업 마이페이지 API 구현, EC2, Nginx, Docker-Compose를 이용한 배포, S3 연동                                       |
+| 김웅서 | 프론트엔드 담당           | 클라이언트 사이드 개발 초기 환경 설정, 공통 컴포넌트 개발, 토스페이먼츠 API를 이용한 결제 기능 구현, 회원가입, 로그인 등 Auth 관련 기능 구현, CSS 애니메이션 구현                             |
 | 박태규 | 프론트엔드, 블록체인 담당 | Geth를 이용한 Private Networks 구축, Web3 API를 활용한 클라이언트와 블록체인 네트워크의 통신, 자체 뱅킹 시스템 구현, Redis를 이용한 즐겨찾기 구현, SSE API와 Toast Library를 이용한 알림 구현 |
+| 장혜원 | 프론트엔드                | 초기 페이지 및 컴포넌트 설정, 펀딩 관련 API 연결 및 쪽지 API, Fast API, 블록체인 데이터 API 연결, 후원 및 기업 관련 디자인 및 CSS 구현                                                        |
+
 ---
