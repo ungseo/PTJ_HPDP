@@ -209,21 +209,21 @@ ex)[INIT](띄어쓰기) 초기화
 
 ```
 frontend
-    ├── docker
-    ├── assets
+  ├── docker
+  ├── assets
   ├── node_modules
   ├── public
   └── src
-            ├── api
+      ├── api
       ├── components
-            ├── interface
+      ├── interface
       ├── pages
       ├── store
       ├── style
-            │        ├─ css
-            │        ├─ fonts
-            │        └─ scss
-            └── types
+      │   ├─ css
+      │   ├─ fonts
+      │   └─ scss
+      └── types
 ```
 
 ```
@@ -265,6 +265,6 @@ backend
 | 홍승준 |   백엔드, 블록체인 담당   | geth를 이용한 private network 구축, 솔리디티 크라우드 펀딩 스마트컨트랙트 구현, web3j를 이용하여 spring boot와 private network 통신, 포인트 API                               |
 | 김정훈 |   백엔드 담당   | Redis를 활용한 즐겨찾기 기능,  SSE를 이용한 알림 구현, Spring Security + Jwt + Redis 로그인 구현, 예외 처리(Customized Exception Handler) 설계, Fast API(뉴스 크롤링, openAI)                               |
 | 변영채 |   백엔드, 인프라 담당   | 펀딩 관련 CRUD API 구현, 자체 뱅킹 서비스 구현(테스트 은행), 쪽지 API 구현, 기업 마이페이지 API 구현, EC2, Nginx, Docker-Compose를 이용한 배포, S3 연동                               |
-
-
+| 김웅서 | 프론트엔드 | 클라이언트 사이드 개발 초기 환경 설정, 공통 컴포넌트 개발, 토스페이먼츠 API를 이용한 결제 기능 구현, Auth 관련 기능(회원가입, 로그인) 구현, CSS 애니메이션 구현 |
+| 박태규 | 프론트엔드, 블록체인 담당 | Geth를 이용한 Private Networks 구축, Web3 API를 활용한 클라이언트와 블록체인 네트워크의 통신, 자체 뱅킹 시스템 구현, SSE API를 이용한 알림 구현 |
 ---
