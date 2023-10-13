@@ -8,7 +8,7 @@
 
 ---
 
-**일상에서 생기는 잔돈으로 소셜벤처에 후원해주세요!** ❤ **[UCC보러가기](https://youtu.be/pNRrlDQ1Il0)** ❤
+**소셜 벤처에 후원해주세요!** ❤ **[UCC보러가기](https://youtu.be/pNRrlDQ1Il0)** ❤
 
 한푼두푼(HPDP)은 크라우드 펀딩을 활용한 소셜 벤처 자금 후원 서비스 플랫폼입니다.
 
@@ -21,13 +21,11 @@
 
 ---
 
-1. 끝전을 활용한 소셜 벤처 크라우드 펀딩 플랫폼
+1. 계좌에서 발생하는 1,000원 미만 끝전이 매일 오후 10시에 자동으로 이체되어 포인트로 누적됩니다.
 
-2. 매일 10시, 당신의 잔돈(1000원 이하)이 포인트로 쌓입니다.
+2. 누적된 포인트로 관심 있는 프로젝트를 후원합니다.
 
-3. 쌓인 포인트로 원하는 프로젝트를 후원하세요!
-
-4. 한푼두푼만의 블록체인 코인으로 후원금액이 전달되는 과정을 투명하게 관리합니다.
+3. 가격 변동 위험 없는 자체 블록체인 토큰으로 후원 금액이 소셜 벤처에 전달되는 과정을 투명하게 관리합니다.
 
 ## 주요 기능
 
@@ -37,19 +35,19 @@
 
 - 자체 뱅킹 서비스를 구현하여 매일 오후 10시 끝전 자동이체 기능을 제공합니다.
 
-- 끝전으로 인한 후원의 심리적 장벽을 낮추고 부담없이 포인트를 모을 수 있도록 사용자의 참여를 유도합니다.
+- 끝전을 부담 없이 후원할 수 포인트를 모을 수 있도록 사용자의 참여를 유도합니다.
 
 #### 스마트 컨트랙트와 블록체인을 이용한 한푼두푼 코인
 
 - 스마트 컨트랙트를 이용하여 크라우드 펀딩 로직을 구현했습니다.
 
-- 프라이빗 네트워크를 구축하여 HPDP만의 토큰을 발행하여 원화와 토큰의 1:1 환전을 가능하게해 가격 변동성을 제거하였습니다.
+- 프라이빗 네트워크를 구축하고 자체 토큰을 발행하여 원화와 토큰의 환율이 1:1로 고정되어 가격 변동 위험을 제거했습니다.
 
-#### OpenAI를 이용한 기업 정보제공
+#### OpenAI API를 활용한 기업 정보 제공
 
-- OpenAI(ChatGPT)를 활용해 소셜벤처에 대한 요약 정보를 제공합니다.
+- OpenAI(ChatGPT) API를 활용해 소셜 벤처에 대한 요약 정보를 제공합니다.
 
-- 후원자에게는 해당 기업에 대한 정보와 후원에 대한 신뢰를, 소셜벤처에게는 기업에 대한 정보를 전달하고 홍보효과를 줄 수 있습니다.
+- 후원 주체는 대상 기업의 정보를 확인하고 소셜 벤처는 홍보 효과를 얻을 수 있습니다.
 
 ## 기능별 화면
 
@@ -57,11 +55,7 @@
 
 <img src="./ReadmeAssets/계좌 등록.gif" alt="GIF 이미지" width="300">
 
-### 관심기업
-
-<img src="./ReadmeAssets/관심기업.gif" alt="GIF 이미지" width="300">
-
-### 끝전 알림
+### 끝전 이체
 
 <img src="./ReadmeAssets/끝전 알림.gif" alt="GIF 이미지" width="300">
 
@@ -73,27 +67,31 @@
 
 <img src="./ReadmeAssets/알림 확인.gif" alt="GIF 이미지" width="300">
 
-### 기업 리스트 조회
-
-<img src="./ReadmeAssets/기업 리스트 조회.gif" alt="GIF 이미지" width="300">
-
-### 기업 쪽지 보내
-
-<img src="./ReadmeAssets/기업 쪽지 보내기.gif" alt="GIF 이미지" width="300">
-
-### 후원하기
-
-<img src="./ReadmeAssets/후원하기.gif" alt="GIF 이미지" width="300">
-
-### 후원내역 확인
-
-<img src="./ReadmeAssets/후원내역 확인.gif" alt="GIF 이미지" width="300">
-
-### 후원리스트
+### 후원 목록
 
 <img src="./ReadmeAssets/후원리스트.gif" alt="GIF 이미지" width="300">
 
-### 블록체인 확인
+### 후원 진행
+
+<img src="./ReadmeAssets/후원하기.gif" alt="GIF 이미지" width="300">
+
+### 후원 내역
+
+<img src="./ReadmeAssets/후원내역 확인.gif" alt="GIF 이미지" width="300">
+
+### 기업 목록
+
+<img src="./ReadmeAssets/기업 리스트 조회.gif" alt="GIF 이미지" width="300">
+
+### 관심 기업
+
+<img src="./ReadmeAssets/관심기업.gif" alt="GIF 이미지" width="300">
+
+### 쪽지 작성
+
+<img src="./ReadmeAssets/기업 쪽지 보내기.gif" alt="GIF 이미지" width="300">
+
+### 블록체인 정보
 
 <img src="./ReadmeAssets/블록체인 확인.gif" alt="GIF 이미지" width="300">
 
@@ -107,7 +105,7 @@
 
 ---
 
-- OpenAI(ChatGPT)
+- OpenAI(ChatGPT) API
 
 - Web3 API
 
@@ -129,11 +127,11 @@
 
 ---
 
-- [팀노션]([Notion – The all-in-one workspace for your notes, tasks, wikis, and databases.](https://nonstop-basil-8e5.notion.site/fintech-d8bbd29d3ca24a36aef3a09bdabd5e28))
+- [팀 노션]([Notion – The all-in-one workspace for your notes, tasks, wikis, and databases.](https://nonstop-basil-8e5.notion.site/fintech-d8bbd29d3ca24a36aef3a09bdabd5e28))
 
-- [API명세서](https://nonstop-basil-8e5.notion.site/API-dc66a4b230534c7c8091f42aa53ec28f)
+- [API 명세서](https://nonstop-basil-8e5.notion.site/API-dc66a4b230534c7c8091f42aa53ec28f)
 
-- [기능명세서](https://nonstop-basil-8e5.notion.site/986107c1b0e146edaa73ebf37f1298be)
+- [기능 명세서](https://nonstop-basil-8e5.notion.site/986107c1b0e146edaa73ebf37f1298be)
 
 ## Git-flow
 
@@ -143,40 +141,44 @@
 
 - branch 규칙
 
-> master : 운영 서버로 배포하기 위한 branch
-> develop : 다음 출시 기능을 개발하는 branch
+> master : 서버를 배포하는 branch
 >
-> BC: blockchain branch
-> BE: backend branch
-> FE: frontend branch
-> feature : 세부 기능을 개발하는 branch, branch 이름은 각 기능명으로 작성
+> develop : 기능을 개발하는 branch
+>
+> feature : 세부 기능을 개발하는 branch
 
 - feature branch 이름 규칙
 
-> feature/[FE/BE/BC]/[기능명]
-> ex) feature/BE/member
-> ex) feature/FE/webrtc
+> feature/[BC/BE/FE]/[기능]
+>
+> ex) feature/BC/private-network
+>
+> BC: blockchain
+>
+> BE: backend
+>
+> FE: frontend
+
 
 ## commit conventions
 
 ```javascript
-[커밋타입] - 작업내용_한눈에_알아보게_적기_최대한_자세하게
-ex)[INIT](띄어쓰기) 초기화
-- INIT: 초기화 (이건 쓸일 거의 없어여 -> 맨처음에 ㄱㄱ)
-- FEAT: 새로운 기능을 추가할 경우
-- MODIFY: 코드를 수정한 경우
-- DESIGN or STYLE: 기능에 영향을 주지 않는 커밋, 코드 순서, CSS등의 포맷에 관한 커밋
-- FIX: 버그를 고친 경우
+[타입] 작업 내용(최대한 자세히) ex)[INIT] 초기화
+- INIT: 초기화
+- FEAT: 신규 기능 추가
+- MODIFY: 기존 코드 수정
+- DESIGN or STYLE: 코드 순서, CSS 등 개발된 기능에 영향을 미치지 않는 코드
+- FIX: 버그 수정
 - REFACTOR: 프로덕션 코드 리팩토링
 - TEST: 테스트 코드 작성
-- DOCS: main 문서를 수정한 경우, readme, log 등
+- DOCS: readme, log 등 main 문서 수정
 - REVIEW: 코드 리뷰 반영
-- BUILD: 빌드 변경
+- BUILD: 빌드
 - BACKUP: 백업
-- COMMENT : 주석
-- FILE: 파일 삭제, 추가, 수정을 수행하는 경우
-- MERGE: 충돌 시 머지, develop 브랜치에 풀리퀘 등
-- CHORE: 위에 해당되지 않는 나머지 (기타 등등)
+- COMMENT : 주석 추가, 수정, 삭제
+- FILE: 파일 추가, 수정, 삭제
+- MERGE: 병합
+- CHORE: 기타
 ```
 
 ## JIRA 규칙
@@ -257,11 +259,11 @@ backend
 
 ## 맡은 역할
 
-| 이름   | 역할                      | 설명                                                                                                                                                                                          |
-| ------ | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 홍승준 | 백엔드, 블록체인 담당     | Geth를 이용한 Private Networks 구축, Web3 API를 활용한 서버와 블록체인 네트워크의 통신, Solidity를 이용한 크라우드 펀딩 스마트 컨트랙트 구현, 포인트 API 구현                                              |
-| 김정훈 | 백엔드 담당               | Redis를 활용한 즐겨찾기 기능, SSE를 이용한 알림 구현, Spring Security + Jwt + Redis 로그인 구현, 예외 처리(Customized Exception Handler) 설계, Fast API(뉴스 크롤링, openAI)                  |
-| 변영채 | 백엔드, 인프라 담당       | 펀딩 관련 CRUD API 구현, 자체 뱅킹 서비스 구현(테스트 은행), 쪽지 API 구현, 기업 마이페이지 API 구현, EC2, Nginx, Docker-Compose를 이용한 배포, S3 연동                                       |
-| 김웅서 | 프론트엔드 담당           | 공통 컴포넌트 개발, 회원가입, 로그인 등 Auth 관련 기능 구현, Axios Interceptors와 Refresh Token을 이용한 JWT 토큰 관리, 토스페이먼츠 API를 이용한 결제 기능 구현, CSS 애니메이션 구현 |
-| 박태규 | 프론트엔드, 블록체인 담당 | Geth를 이용한 Private Networks 구축, Web3 API를 활용한 클라이언트와 블록체인 네트워크의 통신, 자체 뱅킹 시스템 구현, Redis를 이용한 관심 기업 등록/삭제 구현, SSE API와 Toast Library를 이용한 알림 구현 |
-| 장혜원 | 프론트엔드 담당              | 초기 페이지 및 컴포넌트 설정, 펀딩 관련 API 연결 및 쪽지 API, Fast API, 블록체인 데이터 API 연결, 후원 및 기업 관련 디자인 및 CSS 구현                                                        |
+| 이름 | 역할 | 설명 |
+| - | - | - |
+| 홍승준 | 백엔드, 블록체인 담당 | Geth를 활용한 Private Networks 구축, Web3 API를 활용한 서버와 블록체인 네트워크의 통신, Solidity를 활용한 크라우드 펀딩 스마트 컨트랙트 구현, 포인트 API 구현 |
+| 김정훈 | 백엔드 담당 | Redis를 활용한 관심 기업 등록/삭제 기능, SSE API를 활용한 알림 구현, Spring Security + JWT + Redis 로그인 구현, 예외 처리(Customized Exception Handler) 설계, Fast API(뉴스 크롤링, openAI) |
+| 변영채 | 백엔드, 인프라 담당 | 펀딩 관련 CRUD API 구현, 자체 뱅킹 시스템 구현, 쪽지 API 구현, 기업 프로필 페이지 API 구현, EC2, Nginx, Docker-Compose를 활용한 배포, S3 연동 |
+| 김웅서 | 프론트엔드 담당 | 공통 컴포넌트 개발, Auth 관련 기능 구현, Axios Interceptors와 Refresh Token을 이용한 JWT 관리, 토스페이먼츠 API를 활용한 결제 기능 구현, CSS 애니메이션 구현 |
+| 박태규 | 프론트엔드, 블록체인 담당 | Geth를 활용한 Private Networks 구축, Web3 API를 활용한 클라이언트와 블록체인 네트워크의 통신, 자체 뱅킹 서비스 구현, Redis를 활용한 관심 기업 등록/삭제 구현, SSE API와 Toast Library를 활용한 알림 구현 |
+| 장혜원 | 프론트엔드 담당 | 초기 페이지 및 컴포넌트 설정, 펀딩 관련 API 연결 및 쪽지 API, Fast API, 블록체인 데이터 API 연결, 후원 및 기업 관련 디자인 및 CSS 구현 |
